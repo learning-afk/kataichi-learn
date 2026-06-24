@@ -36,11 +36,11 @@ body{
 }
 
 /* Header */
-.logo-area{text-align:center;margin-bottom:32px}
-.logo-area .brand{font-size:11px;font-weight:600;color:var(--pri);letter-spacing:3px;text-transform:uppercase;margin-bottom:10px}
-.logo-area .title{font-size:26px;font-weight:800;color:var(--t1);letter-spacing:1px}
-.logo-area .title .accent{color:var(--pri)}
-.logo-area .sub{font-size:13px;color:var(--t3);margin-top:10px;line-height:1.7}
+.logo-area{text-align:center;margin-bottom:28px}
+.logo-area .logo-img{height:44px;width:auto;margin-bottom:12px}
+.logo-area .title{font-size:22px;font-weight:800;color:var(--t1);letter-spacing:1px}
+.logo-area .title .accent{color:var(--pri);display:none}
+.logo-area .sub{font-size:13px;color:var(--t3);margin-top:6px;line-height:1.7}
 
 /* 表单 */
 .form-group{margin-bottom:18px}
@@ -114,11 +114,12 @@ body{
 
 @media(max-width:480px){
   .card{padding:32px 24px 28px}
-  .logo-area .title{font-size:22px}
+  .logo-area .logo-img{height:36px}
+  .logo-area .title{font-size:20px}
 }
 </style>
 <script>
-var __LOGIN_BUILD__ = '20260624v2';
+var __LOGIN_BUILD__ = '20260624v3';
 </script>
 </head>
 <body>
@@ -129,8 +130,8 @@ var __LOGIN_BUILD__ = '20260624v2';
   <div class="card">
 
     <div class="logo-area">
-      <div class="brand">Kataichi · Training Center</div>
-      <div class="title">学员<span class="accent">信息</span></div>
+      <img class="logo-img" src="logo.png" alt="卡泰驰 CARtech">
+      <div class="title">学员<span class="accent">信息登记</span></div>
       <div class="sub">请填写您的基本信息<br>便于培训中心为您记录学习进度</div>
     </div>
 

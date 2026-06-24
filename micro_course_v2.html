@@ -47,7 +47,8 @@ body{
 }
 .topbar-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
 .topbar-left{display:flex;align-items:center;gap:10px}
-.topbar h1{font-size:18px;font-weight:700;display:flex;align-items:center;gap:8px;color:var(--text)}
+.topbar-logo{height:32px;width:auto;flex-shrink:0}
+.topbar h1{font-size:17px;font-weight:700;display:flex;align-items:center;gap:8px;color:var(--text)}
 .topbar-accent{display:inline-block;width:3px;height:16px;background:var(--primary);border-radius:2px;flex-shrink:0}
 .topbar .badge{
   font-size:10px;background:var(--primary);color:#fff;
@@ -363,6 +364,7 @@ body{
 /* ── responsive ── */
 @media(max-width:768px){
   .topbar{padding:10px 14px}
+  .topbar-logo{height:26px}
   .topbar h1{font-size:16px}
   .tab-btn{padding:12px 16px;font-size:13px}
   .main{padding:14px}
@@ -378,7 +380,7 @@ body{
 </style>
 <script>
 // 防缓存：检测版本，过期则强制刷新
-var __BUILD__='20260624v4';
+var __BUILD__='20260624v5';
 var __cached__=localStorage.getItem('_mc_build');
 if(__cached__&&__cached__!==__BUILD__){
   localStorage.setItem('_mc_build',__BUILD__);
@@ -396,7 +398,8 @@ if(__cached__&&__cached__!==__BUILD__){
 <div class="topbar">
   <div class="topbar-inner">
     <div class="topbar-left">
-      <h1><span class="topbar-accent"></span>7天入职学习地图</h1>
+      <img class="topbar-logo" src="logo.png" alt="卡泰驰 CARtech">
+      <h1>7天入职学习地图</h1>
     </div>
     <div class="topbar-right">
       <a href="portal.html">← 返回门户</a>

@@ -33,8 +33,8 @@ body{
 .portal{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:60px 24px 40px}
 
 /* ═══════════ HEADER ═══════════ */
-.header{text-align:center;margin-bottom:48px}
-.header-brand{font-size:12px;font-weight:600;color:var(--pri);letter-spacing:4px;text-transform:uppercase;margin-bottom:14px}
+.header{text-align:center;margin-bottom:44px}
+.header-logo{height:52px;width:auto;margin-bottom:18px}
 .header-title{font-size:42px;font-weight:900;color:var(--t1);letter-spacing:1px;line-height:1.2}
 .header-title .accent{color:var(--pri)}
 .header-desc{font-size:14px;color:var(--t3);margin-top:16px;letter-spacing:.5px;line-height:1.8;max-width:520px;margin-left:auto;margin-right:auto}
@@ -186,6 +186,7 @@ body{
 @media(max-width:768px){
   .portal{padding:40px 16px 32px}
   .header{margin-bottom:36px}
+  .header-logo{height:40px}
   .header-title{font-size:30px;letter-spacing:0}
   .header-desc{font-size:13px}
   .modules{grid-template-columns:1fr;gap:20px}
@@ -197,7 +198,7 @@ body{
 }
 </style>
 <script>
-var __P_BUILD__='20260624v3';
+var __P_BUILD__='20260624v4';
 var __p_cached__=localStorage.getItem('_portal_build');
 if(__p_cached__&&__p_cached__!==__P_BUILD__){
   localStorage.setItem('_portal_build',__P_BUILD__);
@@ -213,7 +214,7 @@ if(__p_cached__&&__p_cached__!==__P_BUILD__){
 <div class="portal">
 
   <header class="header">
-    <p class="header-brand">Kataichi · Training Center</p>
+    <img class="header-logo" src="logo.png" alt="卡泰驰 CARtech">
     <h1 class="header-title">卡泰驰<span class="accent">培训中心</span></h1>
     <p class="header-desc">打造二手车终端门店标准化学习体系<br>碎片化学习 &middot; 随时查阅 &middot; 精准考核 &middot; 持续成长</p>
     <div class="header-divider"></div>
