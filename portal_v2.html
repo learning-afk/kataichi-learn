@@ -331,6 +331,42 @@ if(__p_cached__&&__p_cached__!==__P_BUILD__){
 </head>
 <body>
 
+<!-- 微信浏览器引导 -->
+<div id="wxGuide" style="display:none;position:fixed;inset:0;z-index:9999;background:#060b14;padding:60px 24px 40px;text-align:center;flex-direction:column;align-items:center;justify-content:center">
+  <div style="width:72px;height:72px;background:linear-gradient(135deg,#d4af37,#f0c95a);border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 24px;box-shadow:0 8px 32px rgba(212,175,55,.25)">📱</div>
+  <h2 style="font-size:22px;font-weight:700;margin-bottom:10px;color:#fff">请在浏览器中打开</h2>
+  <p style="font-size:14px;color:rgba(255,255,255,.5);margin-bottom:30px;line-height:1.6">微信内无法直接访问学习平台<br>请按以下步骤操作</p>
+  <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:20px 16px;margin-bottom:28px;text-align:left;width:100%;max-width:340px">
+    <div style="display:flex;align-items:flex-start;gap:12px;padding:10px 0;font-size:14px;color:rgba(255,255,255,.7)"><span style="flex-shrink:0;width:24px;height:24px;background:rgba(212,175,55,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;color:#d4af37;font-weight:700">1</span><span>点击右上角 <b style="color:#d4af37">···</b> 按钮</span></div>
+    <div style="display:flex;align-items:flex-start;gap:12px;padding:10px 0;font-size:14px;color:rgba(255,255,255,.7);border-top:1px solid rgba(255,255,255,.06)"><span style="flex-shrink:0;width:24px;height:24px;background:rgba(212,175,55,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;color:#d4af37;font-weight:700">2</span><span>选择 <b style="color:#d4af37">在浏览器中打开</b></span></div>
+    <div style="display:flex;align-items:flex-start;gap:12px;padding:10px 0;font-size:14px;color:rgba(255,255,255,.7);border-top:1px solid rgba(255,255,255,.06)"><span style="flex-shrink:0;width:24px;height:24px;background:rgba(212,175,55,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;color:#d4af37;font-weight:700">3</span><span>在浏览器中开始学习</span></div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:12px;width:100%;max-width:340px">
+    <button onclick="wxCopyLink()" style="display:block;width:100%;padding:14px 0;border-radius:12px;font-size:15px;font-weight:600;background:linear-gradient(135deg,#d4af37,#b8962e);color:#060b14;border:none;cursor:pointer;box-shadow:0 4px 16px rgba(212,175,55,.3)">📋 复制链接到浏览器</button>
+    <button onclick="wxSkipGuide()" style="display:block;width:100%;padding:14px 0;border-radius:12px;font-size:15px;font-weight:600;background:transparent;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.6);cursor:pointer">仍要继续访问</button>
+  </div>
+</div>
+<div id="wxToast" style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.85);color:#fff;padding:14px 28px;border-radius:10px;font-size:14px;z-index:99999;display:none;pointer-events:none"></div>
+<script>
+(function(){
+  if(navigator.userAgent.toLowerCase().indexOf('micromessenger')===-1)return;
+  document.getElementById('wxGuide').style.display='flex';
+  var s=document.createElement('style');s.textContent='header,.container,footer,.bg-glow{display:none!important}';
+  document.head.appendChild(s);
+  window.wxCopyLink=function(){
+    var url='https://mayuan0314.github.io/kataichi-learn/';
+    var copy=function(u){
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(u).then(function(){showWxToast2('链接已复制，请粘贴到浏览器打开')}).catch(function(){showWxToast2('复制失败')});return}
+      var ta=document.createElement('textarea');ta.value=u;ta.style.position='fixed';ta.style.left='-9999px';document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');showWxToast2('链接已复制，请粘贴到浏览器打开')}catch(e){showWxToast2('复制失败，请手动输入网址')}
+      document.body.removeChild(ta);
+    };copy(url);
+  };
+  window.wxSkipGuide=function(){document.getElementById('wxGuide').style.display='none';document.querySelector('header').style.display='';document.querySelector('.container').style.display='';document.querySelector('footer').style.display=''};
+  function showWxToast2(m){var t=document.getElementById('wxToast');t.textContent=m;t.style.display='block';setTimeout(function(){t.style.display='none'},2000)}
+})();
+</script>
+
 <div class="bg-glow">
   <div class="orb orb-a"></div>
   <div class="orb orb-b"></div>

@@ -2,43 +2,126 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <title>卡泰驰培训中心</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#060b14;display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
-.loader{text-align:center}
-.loader img{width:80px;height:80px;margin-bottom:20px}
-.loader p{color:rgba(255,255,255,.6);font-size:14px}
-.spinner{width:36px;height:36px;border:3px solid rgba(255,255,255,.1);border-top-color:#d4af37;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px}
+body{background:#060b14;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;color:#e2e8f0}
+
+/* ══ 微信引导页 ══ */
+.wx-guide{display:none;min-height:100vh;padding:60px 24px 40px;text-align:center;flex-direction:column;align-items:center;justify-content:center}
+.wx-guide .icon{width:72px;height:72px;background:linear-gradient(135deg,#d4af37,#f0c95a);border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 24px;box-shadow:0 8px 32px rgba(212,175,55,.25)}
+.wx-guide h2{font-size:22px;font-weight:700;margin-bottom:10px;color:#fff}
+.wx-guide .sub{font-size:14px;color:rgba(255,255,255,.5);margin-bottom:30px;line-height:1.6}
+.wx-guide .steps{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:20px 16px;margin-bottom:28px;text-align:left;width:100%;max-width:340px}
+.wx-guide .steps .step{display:flex;align-items:flex-start;gap:12px;padding:10px 0;font-size:14px;color:rgba(255,255,255,.7)}
+.wx-guide .steps .step+.step{border-top:1px solid rgba(255,255,255,.06)}
+.wx-guide .steps .step .n{flex-shrink:0;width:24px;height:24px;background:rgba(212,175,55,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;color:#d4af37;font-weight:700}
+.wx-guide .steps .step .txt{line-height:1.5}
+.wx-guide .btn-wrap{display:flex;flex-direction:column;gap:12px;width:100%;max-width:340px}
+.wx-guide .btn{display:block;width:100%;padding:14px 0;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;border:none;text-align:center;text-decoration:none;transition:all .2s}
+.wx-guide .btn-pri{background:linear-gradient(135deg,#d4af37,#b8962e);color:#060b14;box-shadow:0 4px 16px rgba(212,175,55,.3)}
+.wx-guide .btn-pri:active{transform:scale(.97)}
+.wx-guide .btn-out{background:transparent;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.6)}
+.wx-guide .btn-out:active{background:rgba(255,255,255,.05)}
+.wx-guide .toast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.85);color:#fff;padding:14px 28px;border-radius:10px;font-size:14px;z-index:999;display:none;pointer-events:none}
+
+/* ══ 正常加载页 ══ */
+.loader{display:flex;min-height:100vh;align-items:center;justify-content:center;text-align:center}
+.loader .spinner{width:36px;height:36px;border:3px solid rgba(255,255,255,.1);border-top-color:#d4af37;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px}
+.loader p{color:rgba(255,255,255,.5);font-size:14px}
 @keyframes spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
-<div class="loader">
+
+<!-- 微信浏览器引导页 -->
+<div class="wx-guide" id="wxGuide">
+  <div class="icon">📱</div>
+  <h2>请在浏览器中打开</h2>
+  <p class="sub">微信内无法直接访问学习平台<br>请按以下步骤操作</p>
+  <div class="steps">
+    <div class="step"><span class="n">1</span><span class="txt">点击右上角 <b style="color:#d4af37">···</b> 按钮</span></div>
+    <div class="step"><span class="n">2</span><span class="txt">选择 <b style="color:#d4af37">在浏览器中打开</b></span></div>
+    <div class="step"><span class="n">3</span><span class="txt">在浏览器中完成学员信息填写</span></div>
+  </div>
+  <div class="btn-wrap">
+    <button class="btn btn-pri" onclick="copyLink()">📋 复制链接到浏览器</button>
+    <button class="btn btn-out" onclick="wxContinue()">仍要继续访问</button>
+  </div>
+</div>
+
+<!-- 正常加载动画 -->
+<div class="loader" id="loader">
   <div class="spinner"></div>
   <p>正在进入卡泰驰培训中心...</p>
 </div>
+
+<!-- Toast 提示 -->
+<div class="toast" id="toast"></div>
+
 <script>
-(function(){
+// 判断是否在微信浏览器中
+function isWechat(){
+  var ua=navigator.userAgent.toLowerCase();
+  return ua.indexOf('micromessenger')!==-1;
+}
+
+// Toast 提示
+function showToast(msg){
+  var t=document.getElementById('toast');
+  t.textContent=msg;t.style.display='block';
+  setTimeout(function(){t.style.display='none'},2000);
+}
+
+// 复制链接
+function copyLink(){
+  var url='https://mayuan0314.github.io/kataichi-learn/';
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(url).then(function(){showToast('链接已复制，请粘贴到浏览器打开')}).catch(function(){showToast('复制失败，请手动输入网址')});
+  }else{
+    // 兼容旧设备
+    var ta=document.createElement('textarea');
+    ta.value=url;ta.style.position='fixed';ta.style.left='-9999px';
+    document.body.appendChild(ta);ta.select();
+    try{document.execCommand('copy');showToast('链接已复制，请粘贴到浏览器打开')}catch(e){showToast('复制失败，请手动输入网址')}
+    document.body.removeChild(ta);
+  }
+}
+
+// 强制继续（跳过引导，但微信仍会拦截）
+function wxContinue(){
+  document.getElementById('wxGuide').style.display='none';
+  document.getElementById('loader').style.display='flex';
+  doRedirect();
+}
+
+// 正常跳转逻辑
+function doRedirect(){
   try{
     var u=JSON.parse(localStorage.getItem('kataichi_user'));
     if(u&&u.name&&u.store&&u.position){
-      // 已完整登记 → 更新活跃时间，直接进入
       u.lastActive=new Date().toISOString();
       localStorage.setItem('kataichi_user',JSON.stringify(u));
       location.replace('portal_v2.html');
     }else{
-      // 未登记 → 跳转登录页
       location.replace('login.html');
     }
   }catch(e){
     location.replace('login.html');
   }
-})();
+}
+
+// 入口
+if(isWechat()){
+  document.getElementById('loader').style.display='none';
+  document.getElementById('wxGuide').style.display='flex';
+}else{
+  doRedirect();
+}
 </script>
 </body>
 </html>
