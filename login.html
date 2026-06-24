@@ -166,7 +166,7 @@ var __LOGIN_BUILD__ = '20260624v1';
   document.head.appendChild(s);
   // 复制链接
   window.wxCopyLink=function(){
-    var url='https://mayuan0314.github.io/kataichi-learn/';
+    var url='https://learning-afk.github.io/kataichi-learn/';
     var copy=function(u){
       if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(u).then(function(){showWxToast('链接已复制，请粘贴到浏览器打开')}).catch(function(){showWxToast('复制失败')});return}
       var ta=document.createElement('textarea');ta.value=u;ta.style.position='fixed';ta.style.left='-9999px';document.body.appendChild(ta);ta.select();

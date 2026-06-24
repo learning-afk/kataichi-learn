@@ -79,7 +79,7 @@ function showToast(msg){
 
 // 复制链接
 function copyLink(){
-  var url='https://mayuan0314.github.io/kataichi-learn/';
+  var url='https://learning-afk.github.io/kataichi-learn/';
   if(navigator.clipboard&&navigator.clipboard.writeText){
     navigator.clipboard.writeText(url).then(function(){showToast('链接已复制，请粘贴到浏览器打开')}).catch(function(){showToast('复制失败，请手动输入网址')});
   }else{
