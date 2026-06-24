@@ -39,18 +39,10 @@ body{
    HEADER
    ══════════════════════════════════════ */
 .header{text-align:center;margin-bottom:56px;}
-.header-logo{
-  display:inline-block;margin-bottom:32px;
-}
-.header-logo img{
-  height:68px;width:auto;display:block;
-  filter:drop-shadow(0 2px 8px rgba(245,166,35,.12));
-}
-
 .header-brand{
-  font-size:13px;font-weight:600;color:#d4af37;
-  letter-spacing:5px;text-transform:uppercase;
-  margin-bottom:12px;
+  font-size:13px;font-weight:600;color:#F5A623;
+  letter-spacing:4px;text-transform:uppercase;
+  margin-bottom:14px;
 }
 .header-title{
   font-size:46px;font-weight:900;color:#f8fafc;
@@ -275,8 +267,7 @@ body{
 @media(max-width:768px){
   .portal{padding:40px 16px 32px;}
   .header{margin-bottom:40px;}
-  .header-logo img{height:54px;}
-  .header-title{font-size:32px;letter-spacing:2px;}
+  .header-title{font-size:32px;letter-spacing:1px;}
   .header-desc{font-size:13px;}
   .modules{grid-template-columns:1fr;gap:20px;}
   .module-card{padding:40px 28px 36px;}
@@ -310,9 +301,6 @@ if(__p_cached__&&__p_cached__!==__P_BUILD__){
 
   <!-- ═══════════ HEADER ═══════════ -->
   <header class="header">
-    <div class="header-logo">
-      <img src="logo.png" alt="卡泰驰 CARtech">
-    </div>
     <p class="header-brand">Kataichi · Training Center</p>
     <h1 class="header-title">
       卡泰驰<span class="accent">培训中心</span>
