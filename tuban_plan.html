@@ -73,10 +73,9 @@
 }
 </style></head><body>
 <div class="topbar">
-  <button class="topbar-back" onclick="location.href='portal_v2.html'">← 返回首页</button>
   <img src="logo.png" class="topbar-logo" alt="卡泰驰">
   <span class="topbar-title">门店晨会途伴计划</span>
-  <span class="topbar-progress" id="topProgress">0/30</span>
+  <button class="topbar-back" onclick="location.href='portal_v2.html'">← 返回首页</button>
 </div>
 <div class="container">
   <div class="header">
@@ -337,7 +336,7 @@ var key='kataichi_tuban_checked';
 try{var s=localStorage.getItem(key);if(s)checked=JSON.parse(s)}catch(e){}
 function save(){try{localStorage.setItem(key,JSON.stringify(checked))}catch(e){}}
 function count(){var n=0;document.querySelectorAll('.kb-check-input').forEach(function(c){if(c.checked)n++});return n}
-function updateTop(){var n=count();document.getElementById('topProgress').textContent=n+'/30'}
+function updateTop(){/* removed per user request */}
 document.querySelectorAll('.kb-card').forEach(function(card,i){
   var lb=document.createElement('label');
   lb.className='kb-check-label';
