@@ -11,1373 +11,441 @@
 *{margin:0;padding:0;box-sizing:border-box}
 
 :root{
-  --bg:#F5F6FA;
-  --card:#FFFFFF;
-  --primary:#F5A623;
-  --primary-dark:#E69500;
-  --gold:#F5A623;
-  --pri-lt:#FFF3E0;
-  --text:#1A1A2E;
-  --text2:#4b5563;
-  --text3:#666680;
-  --muted:#999AAA;
-  --border:#E8E8EF;
-  --success:#4CAF50;
-  --warning:#f59e0b;
-  --danger:#F44336;
-  --radius:14px;
-  --shadow:0 1px 3px rgba(0,0,0,.04),0 1px 2px rgba(0,0,0,.03);
-  --shadow-md:0 4px 16px rgba(0,0,0,.08);
-  --shadow-lg:0 8px 28px rgba(0,0,0,.1);
+  --bg:#F5F6FA; --card:#FFF; --pri:#F5A623; --pri-dk:#E69500;
+  --m2:#0D9488; --m2-lt:#E6FFFA;
+  --text:#1A1A2E; --t2:#4b5563; --t3:#666680; --muted:#999AAA;
+  --bd:#E8E8EF; --suc:#4CAF50; --err:#F44336;
+  --rs:14px; --sh:0 1px 3px rgba(0,0,0,.04),0 1px 2px rgba(0,0,0,.03);
+  --sh-md:0 4px 16px rgba(0,0,0,.08);
 }
 
 body{
-  font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei','Noto Sans SC',sans-serif;
+  font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;
   background:var(--bg);color:var(--text);line-height:1.6;
-  min-height:100vh;padding-bottom:80px;
+  min-height:100vh;padding-bottom:40px;
   -webkit-tap-highlight-color:transparent;
 }
 
-/* ── topbar ── */
-.topbar{
-  background:var(--card);color:var(--text);
-  padding:14px 20px;position:sticky;top:0;z-index:100;
-  box-shadow:0 1px 4px rgba(0,0,0,.06);
-  border-bottom:3px solid var(--primary);
-}
-.topbar-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+/* topbar */
+.topbar{background:var(--card);padding:12px 20px;position:sticky;top:0;z-index:100;box-shadow:0 1px 4px rgba(0,0,0,.06);border-bottom:3px solid var(--m2)}
+.topbar-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
 .topbar-left{display:flex;align-items:center;gap:10px}
-.topbar-logo{height:32px;width:auto;flex-shrink:0}
-.topbar h1{font-size:17px;font-weight:700;display:flex;align-items:center;gap:8px;color:var(--text)}
-.topbar-accent{display:inline-block;width:3px;height:16px;background:var(--primary);border-radius:2px;flex-shrink:0}
-.topbar .badge{
-  font-size:10px;background:var(--primary);color:#fff;
-  padding:2px 10px;border-radius:10px;font-weight:700;
-}
-.topbar .sub{font-size:11px;color:var(--text3);display:block}
-.topbar-right{font-size:12px;color:var(--text3)}
-.topbar-right a{color:var(--text3);text-decoration:none;transition:color .2s}
-.topbar-right a:hover{color:var(--primary)}
+.topbar-logo{height:30px;width:auto}
+.topbar h1{font-size:17px;font-weight:700;color:var(--text)}
+.topbar-right{font-size:12px;color:var(--t3)}
+.topbar-right a{color:var(--t3);text-decoration:none;transition:color .2s}
+.topbar-right a:hover{color:var(--m2)}
 
-/* ── tabs ── */
-.tabs{
-  background:var(--card);border-bottom:1px solid var(--border);
-  position:sticky;top:52px;z-index:99;overflow-x:auto;
-  -webkit-overflow-scrolling:touch;scrollbar-width:none;
-}
-.tabs::-webkit-scrollbar{display:none}
-.tabs-inner{
-  max-width:1200px;margin:0 auto;display:flex;gap:0;white-space:nowrap;
-}
-.tab-btn{
-  padding:14px 24px;border:none;background:none;font-size:14px;font-weight:600;
-  color:var(--text3);cursor:pointer;border-bottom:3px solid transparent;
-  transition:all .2s;display:flex;align-items:center;gap:6px;flex-shrink:0;
-}
-.tab-btn:hover{color:var(--text)}
-.tab-btn.active{color:var(--primary);border-bottom-color:var(--primary)}
+/* main container */
+.main{max-width:960px;margin:0 auto;padding:20px}
 
-/* ── main ── */
-.main{max-width:1200px;margin:0 auto;padding:20px}
+/* hero */
+.hero{background:linear-gradient(135deg,rgba(13,148,136,.06),rgba(13,148,136,.02));border:1px solid rgba(13,148,136,.15);border-radius:var(--rs);padding:24px;margin-bottom:24px;display:flex;align-items:center;gap:20px}
+.hero-icon{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--m2),#14b8a6);display:flex;align-items:center;justify-content:center;font-size:26px;color:#fff;flex-shrink:0}
+.hero-info{flex:1}
+.hero h2{font-size:17px;font-weight:700;margin-bottom:4px}
+.hero-stats{display:flex;gap:24px;flex-wrap:wrap}
+.hero-stat{font-size:12px;color:var(--t3)}
+.hero-stat .val{font-weight:800;color:var(--m2);font-size:20px}
 
-/* ── banner ── */
-.banner{
-  background:linear-gradient(135deg,rgba(99,102,241,.08),rgba(99,102,241,.02));
-  border:1px solid rgba(99,102,241,.15);border-radius:var(--radius);
-  padding:24px;margin-bottom:24px;display:flex;align-items:center;gap:20px;
-}
-.banner .avatar{
-  width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--primary),#818cf8);
-  display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;color:#fff;
-}
-.banner .info{flex:1}
-.banner h2{font-size:17px;font-weight:700;margin-bottom:4px}
-.banner .stats-row{display:flex;gap:20px;flex-wrap:wrap}
-.banner .stat-item{font-size:12px;color:var(--text3)}
-.banner .stat-item .val{font-weight:700;color:var(--primary);font-size:18px}
+/* position filter */
+.pos-filter{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.pos-chip{padding:8px 18px;border-radius:20px;border:1.5px solid var(--bd);background:var(--card);font-size:13px;font-weight:600;color:var(--t3);cursor:pointer;transition:all .2s;white-space:nowrap;user-select:none}
+.pos-chip:hover{border-color:var(--m2);color:var(--m2)}
+.pos-chip.active{background:var(--m2);color:#fff;border-color:var(--m2)}
 
-/* ── section header ── */
-.section-header{
-  display:flex;align-items:center;gap:12px;margin:28px 0 14px;
-}
-.section-header .icon{
-  width:40px;height:40px;border-radius:12px;
-  display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;
-}
-.section-header.required .icon{background:rgba(244,67,54,.1);color:#F44336}
-.section-header.professional .icon{background:var(--pri-lt);color:var(--primary)}
-.section-header .title{font-size:17px;font-weight:700}
-.section-header .sub{font-size:12px;color:var(--text3);display:block;margin-top:1px}
+/* day cards */
+.day-card{background:var(--card);border-radius:var(--rs);margin-bottom:12px;overflow:hidden;border:1px solid var(--bd);box-shadow:var(--sh)}
+.day-header{padding:14px 18px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:background .2s}
+.day-header:hover{background:#fafbfc}
+.day-num{width:40px;height:40px;border-radius:12px;background:var(--m2-lt);color:var(--m2);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;flex-shrink:0}
+.day-num.done{background:var(--suc);color:#fff}
+.day-info{flex:1;min-width:0}
+.day-info h3{font-size:15px;font-weight:700}
+.day-info .day-desc{font-size:12px;color:var(--t3);margin-top:2px}
+.day-arrow{font-size:14px;color:var(--t3);transition:transform .25s;flex-shrink:0}
+.day-card.open .day-arrow{transform:rotate(180deg)}
+.day-check{font-size:11px;font-weight:600;padding:3px 8px;border-radius:10px;flex-shrink:0}
+.day-check.ok{background:rgba(76,175,80,.1);color:var(--suc)}
+.day-check.ing{background:rgba(13,148,136,.08);color:var(--m2)}
 
-/* ── course grid ── */
-.course-grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
-  gap:16px;margin-bottom:16px;
-}
+/* day body */
+.day-body{display:none;border-top:1px solid var(--bd)}
+.day-card.open .day-body{display:block}
+.course-list{padding:8px 0}
+.course-item{display:flex;align-items:center;gap:12px;padding:12px 18px;border-bottom:1px solid #f5f5f5;transition:background .15s}
+.course-item:last-child{border-bottom:none}
+.course-item:hover{background:#fafdfc}
+.ci-check{position:relative;flex-shrink:0}
+.ci-check input{position:absolute;opacity:0;width:0;height:0}
+.ci-check-box{width:22px;height:22px;border-radius:6px;border:2px solid #d1d5db;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s}
+.ci-check input:checked+.ci-check-box{background:var(--suc);border-color:var(--suc)}
+.ci-check input:checked+.ci-check-box::after{content:'✓';color:#fff;font-size:13px;font-weight:700;line-height:1}
+.ci-icon{font-size:20px;flex-shrink:0}
+.ci-info{flex:1;min-width:0}
+.ci-info .ci-title{font-size:14px;font-weight:600}
+.ci-info .ci-meta{font-size:11px;color:var(--muted);margin-top:2px}
+.ci-tag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:8px;flex-shrink:0}
+.ci-tag.study{background:#eef2ff;color:#4F6EF7}
+.ci-tag.online{background:var(--m2-lt);color:var(--m2)}
+.ci-tag.shadow{background:#fff7ed;color:#F97316}
 
-/* ── position group ── */
-.position-group{margin-bottom:8px}
-.position-header{
-  display:flex;align-items:center;gap:10px;
-  margin:20px 0 14px;padding:10px 16px;
-  background:var(--pri-lt);border-radius:0 10px 10px 0;
-  border-left:4px solid var(--primary);
-}
-.position-header .pos-dot{
-  width:8px;height:8px;border-radius:50%;background:var(--primary);flex-shrink:0;
-}
-.position-header .pos-name{font-size:15px;font-weight:700;color:var(--text)}
-.position-header .pos-count{
-  font-size:12px;color:var(--primary);font-weight:600;
-  background:rgba(99,102,241,.1);padding:3px 10px;border-radius:10px;
-  margin-left:auto;
-}
+/* empty */
+.empty{text-align:center;padding:60px 20px;color:var(--muted)}
+.empty .emoji{font-size:48px;margin-bottom:12px}
+.empty p{font-size:14px}
 
-/* ── position filter ── */
-.position-filter{
-  display:flex;gap:8px;flex-wrap:wrap;margin:0 0 16px;
-}
-.position-filter .pf-chip{
-  padding:7px 16px;border-radius:20px;border:1.5px solid var(--border);
-  background:var(--card);font-size:13px;font-weight:600;color:var(--text3);
-  cursor:pointer;transition:all .2s;white-space:nowrap;
-  -webkit-tap-highlight-color:transparent;user-select:none;
-}
-.position-filter .pf-chip:hover{border-color:var(--primary);color:var(--primary)}
-.position-filter .pf-chip.active{
-  background:var(--primary);color:#fff;border-color:var(--primary);
-}
-.position-filter .pf-chip .count{
-  font-size:11px;opacity:.7;margin-left:2px;
-}
-
-/* ── course card ── */
-.course-card{
-  background:var(--card);border-radius:var(--radius);
-  overflow:hidden;cursor:pointer;
-  transition:all .25s;box-shadow:var(--shadow);
-  border:1px solid var(--border);
-}
-.course-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
-.course-card:active{transform:scale(.98)}
-
-.cover{
-  height:120px;display:flex;align-items:center;justify-content:center;
-  position:relative;overflow:hidden;
-}
-.cover.cover-red{background:linear-gradient(135deg,#fecaca,#fca5a5)}
-.cover.cover-blue{background:linear-gradient(135deg,#bfdbfe,#93c5fd)}
-.cover.cover-indigo{background:linear-gradient(135deg,#c7d2fe,#a5b4fc)}
-.cover.cover-teal{background:linear-gradient(135deg,#99f6e4,#5eead4)}
-.cover.cover-amber{background:linear-gradient(135deg,#fde68a,#fcd34d)}
-.cover.cover-slate{background:linear-gradient(135deg,#e2e8f0,#cbd5e1)}
-.cover.cover-purple{background:linear-gradient(135deg,#e9d5ff,#c4b5fd)}
-.cover.cover-green{background:linear-gradient(135deg,#bbf7d0,#86efac)}
-.cover .duration{
-  position:absolute;bottom:8px;right:8px;
-  background:rgba(0,0,0,.55);color:#fff;font-size:10px;
-  padding:3px 8px;border-radius:6px;font-weight:600;
-}
-.cover .badge-status{
-  position:absolute;top:8px;right:8px;
-  font-size:10px;font-weight:700;padding:3px 10px;border-radius:10px;
-}
-.cover .badge-done{background:var(--success);color:#fff}
-.cover .badge-new{background:var(--danger);color:#fff}
-
-.course-body{padding:14px 16px 16px}
-.course-body .cat{
-  font-size:11px;color:var(--primary);font-weight:600;
-  margin-bottom:4px;display:flex;align-items:center;gap:6px;
-}
-.course-body .cat .dot{width:6px;height:6px;border-radius:50%;background:var(--primary);flex-shrink:0}
-.course-body h3{font-size:15px;font-weight:700;margin-bottom:4px;line-height:1.3}
-.course-body .desc{font-size:12px;color:var(--text3);margin-bottom:10px;line-height:1.5}
-.course-body .meta-row{
-  display:flex;align-items:center;justify-content:space-between;gap:8px;
-}
-.course-body .meta{font-size:11px;color:var(--muted)}
-.course-body .progress-wrap{display:flex;align-items:center;gap:6px;font-size:12px}
-.course-body .progress-bar{
-  width:60px;height:6px;background:#e5e7eb;border-radius:3px;overflow:hidden;
-}
-.course-body .progress-fill{
-  height:100%;background:var(--success);border-radius:3px;transition:width .4s;
-}
-.course-body .progress-pct{font-weight:700;color:var(--success)}
-
-/* ── empty state ── */
-.empty-state{
-  text-align:center;padding:48px 20px;color:var(--muted);
-}
-.empty-state .icon{font-size:48px;margin-bottom:12px}
-.empty-state p{font-size:14px}
-
-/* ── bottom nav ── */
-.bottom-nav{
-  position:fixed;bottom:0;left:0;right:0;z-index:100;
-  background:var(--card);border-top:1px solid var(--border);
-  padding:8px 0 env(safe-area-inset-bottom,12px);
-  display:flex;justify-content:space-around;
-}
-.bottom-nav .nav-item{
-  display:flex;flex-direction:column;align-items:center;gap:3px;
-  cursor:pointer;padding:4px 16px;border:none;background:none;
-  font-size:11px;color:var(--text3);transition:color .2s;
-}
-.bottom-nav .nav-item svg{width:22px;height:22px}
-.bottom-nav .nav-item.active{color:var(--primary)}
-
-/* ── modal ── */
-.modal-overlay{
-  position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.5);
-  display:flex;align-items:flex-end;justify-content:center;
-}
-.modal{
-  background:var(--card);border-radius:20px 20px 0 0;
-  width:100%;max-width:600px;max-height:85vh;overflow-y:auto;
-  padding:28px 24px 24px;animation:slideUp .3s;
-}
-@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
-.modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
-.modal-header h3{font-size:18px;font-weight:700}
-.modal-close{
-  width:32px;height:32px;border-radius:50%;border:none;
-  background:var(--bg);font-size:18px;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;color:var(--text3);
-}
-.modal .section-list{display:flex;flex-direction:column;gap:10px}
-.modal .section-item{
-  display:flex;align-items:center;gap:12px;padding:12px 14px;
-  background:var(--bg);border-radius:10px;transition:background .2s;
-}
-.modal .section-item .idx{
-  width:28px;height:28px;border-radius:50%;background:var(--primary);
-  color:#fff;display:flex;align-items:center;justify-content:center;
-  font-size:12px;font-weight:700;flex-shrink:0;
-}
-.modal .section-item .label{flex:1;font-size:14px}
-.modal .section-item .btn-sm{
-  font-size:11px;padding:6px 14px;border-radius:20px;border:none;
-  cursor:pointer;font-weight:600;transition:all .2s;
-}
-.modal .section-item .btn-complete{
-  background:rgba(22,163,74,.1);color:var(--success);
-}
-.modal .section-item .btn-complete:hover{background:var(--success);color:#fff}
-.modal .section-item .btn-done{
-  background:rgba(22,163,74,.15);color:var(--success);opacity:.6;cursor:default;
-}
-.modal-actions{display:flex;gap:12px;margin-top:20px}
-.modal-actions button{
-  flex:1;padding:12px;border-radius:12px;border:none;font-size:14px;
-  font-weight:700;cursor:pointer;transition:all .2s;
-}
-
-/* ── 学习明星排行榜 ── */
-.stars-banner{
-  background:linear-gradient(135deg,#fef3c7,#fde68a,#fcd34d);
-  border-radius:var(--radius);padding:20px;margin-bottom:20px;
-  text-align:center;position:relative;overflow:hidden;
-}
-.stars-banner::after{
-  content:'';position:absolute;top:-30px;right:-30px;
-  width:100px;height:100px;background:rgba(255,255,255,.25);border-radius:50%;
-}
-.stars-banner h2{font-size:20px;font-weight:900;color:#92400e;margin-bottom:4px}
-.stars-banner .sub{font-size:12px;color:#a16207}
-.stars-banner .my-rank{
-  margin-top:12px;display:inline-flex;align-items:center;gap:8px;
-  background:rgba(255,255,255,.7);padding:8px 18px;border-radius:20px;
-  font-size:13px;font-weight:700;color:#92400e;
-}
-.stars-banner .my-rank .rn{font-size:28px;font-weight:900}
-
-.rank-table{width:100%;border-collapse:collapse;font-size:13px}
-.rank-table td{padding:12px 10px;border-bottom:1px solid var(--border);vertical-align:middle}
-.rank-table .rank-num{
-  width:36px;height:36px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-weight:900;font-size:14px;flex-shrink:0;
-}
-.rank-1{background:#fef3c7;color:#b45309;font-size:20px !important}
-.rank-2{background:#f1f5f9;color:#64748b;font-size:18px !important}
-.rank-3{background:#fef2f2;color:#b45309;font-size:17px !important}
-.rank-other{background:var(--bg);color:var(--text3)}
-.rank-name{font-weight:700}
-.rank-dept{font-size:11px;color:var(--text3)}
-.rank-score{font-weight:900;color:var(--primary);text-align:right}
-.rank-streak{font-weight:700;color:#f59e0b;text-align:right;font-size:12px}
-.rank-badge-icon{font-size:18px}
-
-.store-rank-card{
-  background:var(--card);border-radius:var(--radius);padding:14px 16px;
-  display:flex;align-items:center;gap:12px;margin-bottom:8px;
-  border:1px solid var(--border);transition:all .2s;
-}
-.store-rank-card:hover{box-shadow:var(--shadow-md)}
-.store-rank-card .sri{
-  width:40px;height:40px;border-radius:12px;display:flex;align-items:center;
-  justify-content:center;font-size:18px;font-weight:900;flex-shrink:0;
-}
-.store-rank-card .sri-1{background:#fef3c7;color:#b45309}
-.store-rank-card .sri-2{background:#f1f5f9;color:#64748b}
-.store-rank-card .sri-3{background:#e9d5ff;color:#7c3aed}
-.store-rank-card .srd{flex:1;min-width:0}
-.store-rank-card .srd .srn{font-size:14px;font-weight:700}
-.store-rank-card .srd .srm{font-size:11px;color:var(--text3)}
-.store-rank-card .srs{font-weight:900;color:var(--success);font-size:14px;white-space:nowrap}
-
-.medal-row{
-  display:flex;justify-content:center;align-items:flex-end;gap:12px;
-  padding:20px 0 16px;
-}
-.medal-item{
-  text-align:center;display:flex;flex-direction:column;align-items:center;gap:4px;
-}
-.medal-item .micon{font-size:36px}
-.medal-item .mname{font-size:13px;font-weight:700}
-.medal-item .mdept{font-size:10px;color:var(--text3)}
-.medal-item .mscore{font-size:11px;color:var(--primary);font-weight:700}
-.medal-first .micon{font-size:48px}
-.medal-first .mname{font-size:15px}
-.btn-primary{background:var(--primary);color:#fff}
-.btn-primary:hover{background:var(--primary-dark)}
-.btn-secondary{background:var(--bg);color:var(--text3)}
-.btn-secondary:hover{background:var(--border)}
-
-/* ── video section ── */
-.video-section{margin-top:16px}
-.video-card{
-  background:var(--bg);border-radius:12px;padding:16px;margin-bottom:10px;
-}
-.video-card .vid-title{font-size:14px;font-weight:600;margin-bottom:4px}
-.video-card .vid-dur{font-size:11px;color:var(--muted)}
-.video-card .vid-play{
-  display:inline-flex;align-items:center;gap:6px;margin-top:8px;
-  padding:6px 16px;background:var(--primary);color:#fff;
-  border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;
-  border:none;transition:opacity .2s;
-}
-.video-card .vid-play:hover{opacity:.9}
-
-/* ── responsive ── */
+/* responsive */
 @media(max-width:768px){
   .topbar{padding:10px 14px}
   .topbar-logo{height:26px}
-  .topbar h1{font-size:16px}
-  .tab-btn{padding:12px 16px;font-size:13px}
+  .topbar h1{font-size:15px}
   .main{padding:14px}
-  .banner{padding:18px;gap:14px}
-  .banner h2{font-size:15px}
-  .banner .stat-item .val{font-size:16px}
-  .course-grid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
-  .cover{height:100px}
-  .modal{max-height:90vh}
+  .hero{padding:18px;gap:14px}
+  .hero h2{font-size:15px}
+  .hero-stat .val{font-size:16px}
+  .hero-stats{gap:16px}
+  .day-header{padding:12px 14px;gap:10px}
+  .day-num{width:34px;height:34px;font-size:16px}
+  .day-info h3{font-size:14px}
+  .course-item{padding:10px 14px;gap:8px}
 }
-
-.hidden{display:none!important}
 </style>
 <script>
-// 防缓存：检测版本，过期则强制刷新
-var __BUILD__='20260624v5';
+var __BUILD__='20260625v6';
 var __cached__=localStorage.getItem('_mc_build');
 if(__cached__&&__cached__!==__BUILD__){
   localStorage.setItem('_mc_build',__BUILD__);
-  var url=location.href.split('?')[0]+'?v='+Date.now();
-  location.replace(url);
-}else{
-  localStorage.setItem('_mc_build',__BUILD__);
-}
+  location.replace(location.href.split('?')[0]+'?v='+Date.now());
+}else{localStorage.setItem('_mc_build',__BUILD__)}
 </script>
 </head>
 <body>
 
-
-<!-- topbar -->
 <div class="topbar">
   <div class="topbar-inner">
     <div class="topbar-left">
-      <img class="topbar-logo" src="logo.png" alt="卡泰驰 CARtech">
+      <img class="topbar-logo" src="logo.png" alt="卡泰驰">
       <h1>7天入职学习地图</h1>
     </div>
-    <div class="topbar-right">
-      <a href="portal_v2.html">← 返回首页</a>
-    </div>
+    <div class="topbar-right"><a href="portal_v2.html">← 返回首页</a></div>
   </div>
 </div>
 
-<!-- tabs -->
-<div class="tabs">
-  <div class="tabs-inner">
-    <button class="tab-btn active" onclick="switchTab('roadmap')">🗺️ 学习地图</button>
-    <button class="tab-btn" onclick="switchTab('stars')">⭐ 学习明星</button>
-  </div>
-</div>
-
-<!-- main -->
 <div class="main">
-
-  <!-- banner -->
-  <div class="banner">
-    <div class="avatar">👤</div>
-    <div class="info">
-      <h2>新人入职7天 · 按岗按天学习</h2>
-      <div class="stats-row">
-        <div class="stat-item">已完成 <span class="val" id="statDone">0</span> 门</div>
-        <div class="stat-item">连续 <span class="val" id="statDays">0</span> 天</div>
-        <div class="stat-item">总微课 <span class="val">34</span> 门</div>
-        <div class="stat-item">完成率 <span class="val" id="statRate">0%</span></div>
+  <!-- hero -->
+  <div class="hero">
+    <div class="hero-icon">🗺️</div>
+    <div class="hero-info">
+      <h2>新人入职7天 · 按岗按天进阶学习</h2>
+      <div class="hero-stats">
+        <div class="hero-stat">已完成 <span class="val" id="statDone">0</span> 项</div>
+        <div class="hero-stat">完成率 <span class="val" id="statRate">0%</span></div>
       </div>
     </div>
   </div>
 
-  <!-- 学习地图（默认） -->
-  <div id="tab-roadmap">
-    <div class="section-header" style="margin-top:0">
-      <div class="icon" style="background:var(--pri-lt);color:var(--primary)">🗺️</div>
-      <div>
-        <span class="title">新人入职7天学习地图</span>
-        <span class="sub">按岗位 · 按天序 · 线上线下结合</span>
-      </div>
-    </div>
-    <!-- 概述 -->
-    <div class="roadmap-overview" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px">
-      <div style="flex:1;min-width:100px;background:var(--card);border-radius:12px;padding:14px;text-align:center;border:1px solid var(--border)">
-        <div style="font-size:24px;margin-bottom:4px">📅</div>
-        <div style="font-size:13px;font-weight:700">7天周期</div>
-        <div style="font-size:11px;color:var(--text3)">Day1-2通用+Day3-7专精</div>
-      </div>
-      <div style="flex:1;min-width:100px;background:var(--card);border-radius:12px;padding:14px;text-align:center;border:1px solid var(--border)">
-        <div style="font-size:24px;margin-bottom:4px">👥</div>
-        <div style="font-size:13px;font-weight:700">6大岗位</div>
-        <div style="font-size:11px;color:var(--text3)">销售·营销·检测·金融·维修·店长</div>
-      </div>
-      <div style="flex:1;min-width:100px;background:var(--card);border-radius:12px;padding:14px;text-align:center;border:1px solid var(--border)">
-        <div style="font-size:24px;margin-bottom:4px">🎯</div>
-        <div style="font-size:13px;font-weight:700">在线+实操</div>
-        <div style="font-size:11px;color:var(--text3)">微课学理论+师傅带实操</div>
-      </div>
-      <div style="flex:1;min-width:100px;background:var(--card);border-radius:12px;padding:14px;text-align:center;border:1px solid var(--border)">
-        <div style="font-size:24px;margin-bottom:4px">🏅</div>
-        <div style="font-size:13px;font-weight:700">每日通关</div>
-        <div style="font-size:11px;color:var(--text3)">理论≥70分+师傅B+</div>
-      </div>
-    </div>
-    <!-- 岗位选择 -->
-    <div class="position-filter" id="roadmapPosFilter"></div>
-    <!-- 每日课程 -->
-    <div id="roadmapDays"></div>
-  </div>
+  <!-- position filter -->
+  <div class="pos-filter" id="posFilter"></div>
 
-  <!-- 学习明星 -->
-  <div id="tab-stars" class="hidden">
-    <div id="starsContent"></div>
-  </div>
-
-</div>
-
-<!-- bottom nav -->
-<div class="bottom-nav">
-  <button class="nav-item active" onclick="switchTab('roadmap')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="12" cy="12" r="10"/>
-      <polyline points="12,6 12,12 16,14"/>
-    </svg>
-    学习地图
-  </button>
-  <button class="nav-item" onclick="switchTab('stars')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/>
-    </svg>
-    明星榜
-  </button>
-  <button class="nav-item" onclick="showMyProgress()">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-      <circle cx="12" cy="7" r="4"/>
-    </svg>
-    我的
-  </button>
-</div>
-
-<!-- course detail modal -->
-<div class="modal-overlay hidden" id="modalOverlay" onclick="closeModal(event)">
-  <div class="modal" onclick="event.stopPropagation()" id="modalBody"></div>
+  <!-- day cards -->
+  <div id="dayCards"></div>
 </div>
 
 <script>
-// ── 课程数据 ──
-var COURSES=[
-  // 企业文化必修课（4门）
-  {id:1,cat:'required',title:'品牌文化',desc:'了解卡泰驰品牌历史、价值观、愿景与使命，建立品牌认同感，做品牌文化的践行者与传播者。',icon:'🏛️',cover:'cover-red',sections:['品牌起源与发展历程','企业愿景与核心价值观','品牌标识与VI规范','品牌故事与文化传承'],dur:'12min',pos:'',videos:[{title:'卡泰驰品牌故事',dur:'6:30'},{title:'企业文化核心价值观',dur:'5:15'}]},
-  {id:2,cat:'required',title:'行业法规',desc:'掌握二手车行业法律法规、消费者权益保护、合同规范及合规经营要点，确保业务合规运营。',icon:'⚖️',cover:'cover-slate',sections:['二手车行业法规概述','消费者权益保护法解读','交易合同规范与风险防范','合规经营典型案例分析'],dur:'18min',pos:'',videos:[{title:'二手车法规要点解读',dur:'10:20'},{title:'合规经营实操指南',dur:'7:45'}]},
-  {id:3,cat:'required',title:'服务标准',desc:'学习卡泰驰标准服务流程，涵盖接待礼仪、需求分析、车辆讲解及售后服务规范，提升客户体验。',icon:'🤝',cover:'cover-blue',sections:['服务礼仪与职业形象','客户接待标准流程','需求分析与沟通技巧','售后服务与客户关怀'],dur:'16min',pos:'',videos:[{title:'标准接待流程演示',dur:'8:15'},{title:'客户服务技巧提升',dur:'7:30'}]},
-  {id:4,cat:'required',title:'信息安全',desc:'强化信息安全意识，掌握客户隐私保护、数据安全管理及系统操作规范，防范信息泄露风险。',icon:'🔒',cover:'cover-indigo',sections:['信息安全基本概念','客户隐私保护条例','数据分级与安全操作规范','信息安全应急响应流程'],dur:'14min',pos:'',videos:[{title:'信息安全意识培训',dur:'7:10'},{title:'客户数据保护实操',dur:'6:40'}]},
+// ── 课程数据（精简版：7天×6岗位） ──
+var POSITIONS = ['销售顾问','数字化营销师','检测评估师','金融专员','维修技师','店长/储备干部'];
 
-  // 岗位专业课（12门）
-  {id:5,cat:'professional',title:'客户接待与需求分析',desc:'掌握标准客户接待流程，运用SPIN提问法精准挖掘客户购车需求。',icon:'🚗',cover:'cover-blue',sections:['第一印象：迎宾礼仪与破冰','SPIN需求挖掘技巧','试驾安排与体验引导','客户信息建档与跟进'],dur:'22min',pos:'销售顾问',videos:[{title:'金牌销售接待全流程',dur:'12:30'},{title:'SPIN提问实战演练',dur:'9:15'}]},
-  {id:6,cat:'professional',title:'车辆展示与试驾体验',desc:'学习六方位绕车讲解法，策划沉浸式试驾体验，激发购买欲望。',icon:'🚙',cover:'cover-teal',sections:['六方位绕车讲解法','车辆核心卖点提炼','试驾路线规划与安全','试驾后成交促成'],dur:'20min',pos:'销售顾问',videos:[{title:'六方位绕车标准话术',dur:'11:00'},{title:'试驾转化技巧',dur:'8:45'}]},
-  {id:7,cat:'professional',title:'谈判技巧与成交策略',desc:'学习价格谈判心理学、异议处理五步法及高效促成签约技巧。',icon:'💼',cover:'cover-purple',sections:['谈判心理学基础','价格异议处理策略','竞品对比攻防话术','促成签约的黄金时机'],dur:'24min',pos:'销售顾问',videos:[{title:'价格谈判实战技巧',dur:'13:20'},{title:'异议处理五步法',dur:'10:30'}]},
-  {id:17,cat:'professional',title:'二手车价值评估与报价策略',desc:'掌握车辆残值评估方法、市场行情分析及灵活报价技巧，提升单车毛利。',icon:'📈',cover:'cover-green',sections:['二手车残值评估模型','市场行情数据采集与分析','报价策略与话术设计','竞品报价对比与应对'],dur:'22min',pos:'销售顾问',videos:[{title:'二手车精准估价法',dur:'12:00'},{title:'报价谈判博弈技巧',dur:'9:45'}]},
-  {id:18,cat:'professional',title:'客户关系维护与转介绍',desc:'学习老客户维系方法、满意度回访技巧及MGM转介绍裂变策略，提升复购率。',icon:'🔄',cover:'cover-teal',sections:['老客户分级管理','售后回访与满意度提升','MGM转介绍激励机制','客户全生命周期价值挖掘'],dur:'18min',pos:'销售顾问',videos:[{title:'老客户维系三板斧',dur:'9:30'},{title:'转介绍裂变实战',dur:'8:15'}]},
-  {id:8,cat:'professional',title:'线上获客渠道与线索管理',desc:'掌握抖音、视频号等线上平台获客技巧，建立高效线索分级跟进机制。',icon:'📱',cover:'cover-indigo',sections:['主流平台获客矩阵搭建','短视频内容策划与引流','线索分级与分配规则','私域流量池运营'],dur:'20min',pos:'数字化营销师',videos:[{title:'抖音汽车获客指南',dur:'11:00'},{title:'线索管理SOP',dur:'8:50'}]},
-  {id:9,cat:'professional',title:'短视频与直播内容营销',desc:'学习汽车类短视频拍摄剪辑、直播脚本策划及直播间互动转化技巧。',icon:'🎬',cover:'cover-amber',sections:['汽车短视频拍摄技巧','剪辑软件快速上手','直播脚本与话术设计','直播间互动与留资'],dur:'26min',pos:'数字化营销师',videos:[{title:'手机拍出好车视频',dur:'14:15'},{title:'直播卖车全流程',dur:'11:40'}]},
-  {id:19,cat:'professional',title:'数据分析与投放优化',desc:'掌握广告投放数据分析方法、ROI优化策略及A/B测试模型，提升获客效率。',icon:'📊',cover:'cover-blue',sections:['广告数据指标体系','投放ROI分析与优化','A/B测试方法论','数据驱动决策实战'],dur:'20min',pos:'数字化营销师',videos:[{title:'投放数据分析入门',dur:'10:30'},{title:'ROI优化实操案例',dur:'9:15'}]},
-  {id:20,cat:'professional',title:'社群运营与粉丝裂变',desc:'学习微信社群管理、用户分层运营及粉丝增长裂变活动策划方法。',icon:'💬',cover:'cover-indigo',sections:['社群搭建与分层管理','日常运营内容规划','粉丝裂变活动设计','社群转化与成交'],dur:'18min',pos:'数字化营销师',videos:[{title:'社群运营SOP',dur:'9:00'},{title:'裂变活动策划指南',dur:'8:45'}]},
-  {id:21,cat:'professional',title:'品牌内容策划与传播',desc:'把控品牌调性，规划内容日历，借势热点策划爆款内容，提升品牌影响力。',icon:'✨',cover:'cover-purple',sections:['品牌调性与内容风格','内容日历规划方法','热点借势与话题策划','内容传播效果评估'],dur:'16min',pos:'数字化营销师',videos:[{title:'内容日历从0到1',dur:'8:30'},{title:'热点借势实战技巧',dur:'7:15'}]},
-  {id:10,cat:'professional',title:'车辆检测标准流程',desc:'系统学习二手车九大类412项检测标准，掌握车身结构、动力总成、底盘悬架、电气系统等核心检测要点。',icon:'🔍',cover:'cover-slate',sections:['检测工具与仪器使用','车身结构与覆盖件检测','内饰装潢与电子设备检测','底盘悬架与动力总成检测'],dur:'30min',pos:'检测评估师',videos:[{title:'412项检测流程详解',dur:'16:00'},{title:'底盘检测实操要点',dur:'13:45'}]},
-  {id:11,cat:'professional',title:'事故车鉴定与评估技巧',desc:'快速识别事故车、泡水车、火烧车特征，掌握精准评估定价方法。',icon:'📋',cover:'cover-red',sections:['事故车鉴定核心指标','泡水车与火烧车识别','漆膜仪与结构件检测','车辆估价模型与实战'],dur:'28min',pos:'检测评估师',videos:[{title:'事故车鉴定红宝书',dur:'15:30'},{title:'二手车精准估价法',dur:'12:10'}]},
-  {id:22,cat:'professional',title:'新能源二手车专项检测',desc:'掌握动力电池健康度检测、三电系统评估方法及高压安全操作规范。',icon:'🔋',cover:'cover-green',sections:['动力电池健康度评估','电机与电控系统检测','充电系统功能验证','新能源专属检测工具使用'],dur:'24min',pos:'检测评估师',videos:[{title:'电池健康度检测实操',dur:'13:00'},{title:'三电系统评估要点',dur:'10:45'}]},
-  {id:23,cat:'professional',title:'进口与豪华车专项检测',desc:'熟悉BBA等主流豪华品牌特有检测要点，掌握进口车特殊配置与评估标准。',icon:'👑',cover:'cover-amber',sections:['豪华品牌检测特性','进口车特殊配置识别','高端车型常见问题排查','豪华车残值评估模型'],dur:'22min',pos:'检测评估师',videos:[{title:'豪华品牌检测差异',dur:'11:30'},{title:'进口车评估要点',dur:'10:15'}]},
-  {id:24,cat:'professional',title:'检测报告撰写与客户解读',desc:'学习标准化检测报告模板、专业表述规范及向客户清晰解读检测结果的话术。',icon:'📝',cover:'cover-slate',sections:['检测报告标准模板','关键指标术语解读','报告撰写规范与技巧','客户解读话术实战'],dur:'16min',pos:'检测评估师',videos:[{title:'检测报告撰写指南',dur:'8:30'},{title:'客户解读最佳话术',dur:'7:15'}]},
-  {id:12,cat:'professional',title:'金融产品推荐与匹配',desc:'熟悉卡泰驰金融产品矩阵，根据客户画像精准匹配最优方案。',icon:'💰',cover:'cover-green',sections:['金融产品体系全景','客户信用评估方法','分期方案计算与对比','金融成交话术技巧'],dur:'18min',pos:'金融专员',videos:[{title:'金融产品快速匹配',dur:'9:30'},{title:'分期方案推荐实战',dur:'8:15'}]},
-  {id:25,cat:'professional',title:'二手车分期方案设计',desc:'掌握灵活分期方案设计方法、利率计算对比工具及不同客户群体的定制化推荐。',icon:'🧮',cover:'cover-blue',sections:['分期付款模式全景','利率计算与方案对比','不同预算客户方案定制','分期方案合规要点'],dur:'20min',pos:'金融专员',videos:[{title:'分期方案计算实操',dur:'10:45'},{title:'定制化推荐技巧',dur:'9:00'}]},
-  {id:26,cat:'professional',title:'保险产品推荐与理赔指导',desc:'学习车险种类解读、保险组合推荐策略及客户理赔全流程指导服务。',icon:'🛡️',cover:'cover-teal',sections:['车险种类与保障范围','保险组合推荐策略','理赔流程与材料准备','保险异议处理话术'],dur:'18min',pos:'金融专员',videos:[{title:'车险推荐黄金法则',dur:'9:15'},{title:'理赔指导全流程',dur:'8:30'}]},
-  {id:27,cat:'professional',title:'金融风控与合规操作',desc:'掌握贷款审批风控要点、反欺诈识别方法及金融合规操作红线。',icon:'🔐',cover:'cover-red',sections:['贷款审批风控模型','反欺诈识别技巧','金融合规操作红线','贷后管理规范'],dur:'22min',pos:'金融专员',videos:[{title:'风控审核实战技巧',dur:'12:00'},{title:'合规操作避坑指南',dur:'9:45'}]},
-  {id:28,cat:'professional',title:'客户金融需求深度挖掘',desc:'运用客户画像分析、需求探询话术，精准识别隐性与显性金融需求。',icon:'🎯',cover:'cover-indigo',sections:['客户画像与需求分类','SPIN话术金融版','隐性需求挖掘技巧','金融方案呈现与成交'],dur:'16min',pos:'金融专员',videos:[{title:'需求挖掘黄金话术',dur:'8:30'},{title:'金融方案呈现技巧',dur:'7:15'}]},
-  {id:13,cat:'professional',title:'车辆故障诊断与标准维修流程',desc:'学习常见车辆故障诊断逻辑、标准维修工艺流程及质检规范。',icon:'🔧',cover:'cover-blue',sections:['电控系统故障诊断','发动机常见故障排查','底盘与制动系统维修','维修质检与交车流程'],dur:'32min',pos:'维修技师',videos:[{title:'故障诊断万能思路',dur:'17:00'},{title:'标准维修工艺实操',dur:'14:45'}]},
-  {id:14,cat:'professional',title:'维修质量管控与客户沟通',desc:'掌握维修质量三级检查制度，学习向客户清晰解释维修方案与费用。',icon:'✅',cover:'cover-teal',sections:['三级质检流程规范','维修工时与配件管理','客户维修方案汇报','投诉预防与处理'],dur:'22min',pos:'维修技师',videos:[{title:'质量管控三步法',dur:'12:00'},{title:'客户沟通最优话术',dur:'9:45'}]},
-  {id:29,cat:'professional',title:'新能源车维修技术',desc:'系统学习纯电/混动车型三电系统维修、高压安全操作规范及常见故障排除。',icon:'⚡',cover:'cover-green',sections:['高压安全操作规范','动力电池维修基础','电机与电控系统维修','充电系统故障诊断'],dur:'28min',pos:'维修技师',videos:[{title:'高压安全操作必知',dur:'14:30'},{title:'三电系统维修入门',dur:'13:15'}]},
-  {id:30,cat:'professional',title:'钣金喷漆工艺标准',desc:'掌握钣金修复流程标准、喷漆配色工艺及漆面质量检验规范。',icon:'🎨',cover:'cover-purple',sections:['钣金修复工艺流程','喷漆前处理与遮蔽','颜色调配与喷涂技术','漆面质量检验标准'],dur:'24min',pos:'维修技师',videos:[{title:'钣金修复标准流程',dur:'12:45'},{title:'喷漆工艺实战',dur:'11:00'}]},
-  {id:31,cat:'professional',title:'维修工具与设备规范使用',desc:'学习专业维修工具操作规范、设备维护保养及新型诊断设备使用技巧。',icon:'🛠️',cover:'cover-slate',sections:['常用维修工具操作规范','诊断设备功能详解','举升机与专用工具安全','设备日常维护与校准'],dur:'18min',pos:'维修技师',videos:[{title:'诊断设备使用指南',dur:'9:30'},{title:'工具安全操作规范',dur:'8:15'}]},
-  {id:15,cat:'professional',title:'门店运营管理与KPI达成',desc:'学习门店日常运营管理方法，掌握进销存、人效、客户满意度等核心KPI。',icon:'📊',cover:'cover-purple',sections:['门店日周月管理节奏','KPI指标体系与追踪','库存周转与资金管理','客户满意度提升策略'],dur:'26min',pos:'店长/储备干部',videos:[{title:'门店KPI管理三板斧',dur:'14:00'},{title:'客户满意度提升秘诀',dur:'11:30'}]},
-  {id:16,cat:'professional',title:'团队建设与人才培养',desc:'学习招聘面试技巧、新人带教方法、团队激励与绩效面谈能力。',icon:'👥',cover:'cover-amber',sections:['高效招聘与面试技巧','新人90天带教计划','团队激励与文化建设','绩效面谈与目标对齐'],dur:'24min',pos:'店长/储备干部',videos:[{title:'高效招聘实战指南',dur:'13:00'},{title:'新人带教全流程',dur:'10:45'}]},
-  {id:32,cat:'professional',title:'财务管理与成本控制',desc:'掌握门店P&L分析、成本结构拆解及降本增效实战方法，提升门店利润。',icon:'💵',cover:'cover-green',sections:['门店P&L利润表解读','成本结构分析与优化','库存资金占用管理','降本增效行动方案'],dur:'22min',pos:'店长/储备干部',videos:[{title:'门店利润表速读',dur:'11:30'},{title:'降本增效实战案例',dur:'10:15'}]},
-  {id:33,cat:'professional',title:'销售过程管理与复盘',desc:'建立销售漏斗监控机制、晨夕会标准化运营及销售数据复盘方法。',icon:'📋',cover:'cover-indigo',sections:['销售漏斗搭建与监控','晨会夕会标准流程','销售数据复盘方法论','战败分析改进行动'],dur:'20min',pos:'店长/储备干部',videos:[{title:'销售漏斗管理实操',dur:'10:30'},{title:'晨夕会运营指南',dur:'9:15'}]},
-  {id:34,cat:'professional',title:'客户体验管理与NPS提升',desc:'绘制客户旅程地图、建立NPS监测体系并设计客户体验优化闭环。',icon:'🌟',cover:'cover-purple',sections:['客户旅程地图绘制','NPS指标体系搭建','低分回访与改进闭环','标杆门店体验案例'],dur:'18min',pos:'店长/储备干部',videos:[{title:'NPS驱动门店改进',dur:'9:30'},{title:'客户旅程优化实战',dur:'8:15'}]},
+var ROADMAP_COMMON = [
+  {day:1,title:'品牌认知与企业融入',
+    items:[
+      {t:'study',h:'入职手续与企业概览',d:'HR入职办理、企业组织架构介绍（海尔→卡泰驰→区域门店）'},
+      {t:'online',h:'行业法规与合规红线',d:'《二手车流通管理办法》核心条款、消费者权益保护'},
+      {t:'online',h:'信息安全与行为规范',d:'客户隐私保护规范、员工行为准则'}
+    ]},
+  {day:2,title:'业务认知与工具入门',
+    items:[
+      {t:'online',h:'品牌文化与服务标准',d:'卡泰驰核心价值观、标准服务流程、接待礼仪'},
+      {t:'study',h:'SOP知识体系导入',d:'门店11大SOP业务模块全景图认知'},
+      {t:'study',h:'核心系统工具操作',d:'CRM系统、企业微信、OA审批、评估工具实操'}
+    ]}
 ];
 
-var POSITIONS=['销售顾问','数字化营销师','检测评估师','金融专员','维修技师','店长/储备干部'];
-var COVERS=['cover-red','cover-blue','cover-indigo','cover-teal','cover-amber','cover-slate','cover-purple','cover-green'];
-
-// ── localStorage ──
-var STORAGE_KEY='kataichi_micro_progress';
-
-function getProgress(){
-  try{return JSON.parse(localStorage.getItem(STORAGE_KEY))||{}}catch(e){return{}}
-}
-function saveProgress(p){
-  localStorage.setItem(STORAGE_KEY,JSON.stringify(p));
-  // 记录学习日期
-  var today=new Date().toISOString().slice(0,10);
-  var days=JSON.parse(localStorage.getItem('kataichi_days')||'[]');
-  if(days.indexOf(today)===-1){days.push(today);days.sort();localStorage.setItem('kataichi_days',JSON.stringify(days))}
-}
-
-function getConsecutiveDays(){
-  var days=JSON.parse(localStorage.getItem('kataichi_days')||'[]');
-  if(!days.length)return 0;
-  var today=new Date();var count=0;
-  for(var i=days.length-1;i>=0;i--){
-    var d=new Date(days[i]);
-    var diff=Math.floor((today-d)/86400000);
-    if(diff===count)count++;else break;
-  }
-  return count;
-}
-
-// ── 渲染 ──
-function courseCard(c,p){
-  p=p||0;
-  var badge='';
-  if(p>=100)badge='<span class="badge-status badge-done">已完成</span>';
-  else badge='<span class="badge-status badge-new">新课</span>';
-  var catLabel=c.cat==='required'?'企业文化必修课':'专业课 · '+c.pos;
-  return '<div class="course-card" onclick="openCourse('+c.id+')">'+
-    '<div class="cover '+c.cover+'">'+
-      '<span style="font-size:44px">'+c.icon+'</span>'+
-      '<span class="duration">'+c.dur+'</span>'+badge+
-    '</div>'+
-    '<div class="course-body">'+
-      '<div class="cat"><span class="dot"></span>'+catLabel+' · '+c.sections.length+'节</div>'+
-      '<h3>'+c.title+'</h3>'+
-      '<p class="desc">'+c.desc+'</p>'+
-      '<div class="meta-row">'+
-        '<span class="meta">📖 '+c.sections.length+'个章节</span>'+
-        '<div class="progress-wrap">'+
-          '<div class="progress-bar"><div class="progress-fill" style="width:'+p+'%"></div></div>'+
-          '<span class="progress-pct">'+p+'%</span>'+
-        '</div>'+
-      '</div>'+
-    '</div>'+
-  '</div>';
-}
-
-function renderAll(){
-  updateStats();
-  // 如果当前在学习地图页，刷新进度显示
-  if(currentTab==='roadmap')renderRoadmapDays();
-  if(currentTab==='my')showMyProgress();
-}
-
-function updateStats(){
-  var progress=getProgress();
-  var total=COURSES.length;
-  var completed=0;
-  COURSES.forEach(function(c){if((progress[c.id]||0)>=100)completed++});
-  document.getElementById('statDone').textContent=completed;
-  document.getElementById('statDays').textContent=getConsecutiveDays();
-  document.getElementById('statRate').textContent=total?Math.round(completed/total*100)+'%':'0%';
-}
-
-// ── 当前页签 ──
-var currentTab='roadmap';
-
-// ── 学习地图数据（对照onboarding_roadmap.html课程体系）──
-// 结构：common(Day1-2通用) + 各岗位day3-7每日任务详情
-// t: study=理论学习 online=在线微课 shadow=跟岗实操 practice=实操演练
-var ROADMAP_COMMON=[
-  {day:1,title:'品牌认知与企业融入',desc:'适用：全岗位 · 8课时',
-    tasks:[
-      {t:'study',h:'入职手续与企业概览',d:'HR入职办理、企业组织架构介绍（海尔→卡泰驰→区域门店）、系统账号开通',hh:'2课时'},
-      {t:'study',h:'品牌文化深度认知',d:'海尔发展史、"真诚到永远"品牌基因、卡泰驰使命愿景核心价值观、生态布局',hh:'3课时',b:'含200字心得'},
-      {t:'online',h:'行业法规与合规红线',d:'《二手车流通管理办法》《机动车登记规定》核心条款、消费者权益保护、数据安全',hh:'2课时',cids:[2]},
-      {t:'online',h:'信息安全与行为规范',d:'客户隐私保护规范、员工行为准则、安全消防培训与应急演练',hh:'1课时',cids:[4]}
-    ],
-    cp:'品牌认知心得撰写(≥200字)+合规知识小测≥80分。带教师傅签字确认'
-  },
-  {day:2,title:'业务认知与工具入门',desc:'适用：全岗位 · 8课时',
-    tasks:[
-      {t:'online',h:'品牌文化复习巩固',d:'重温卡泰驰核心价值观与品牌故事，建立品牌认同感',hh:'1课时',cids:[1]},
-      {t:'online',h:'服务标准学习',d:'标准服务流程、接待礼仪、需求分析及售后服务规范',hh:'2课时',cids:[3]},
-      {t:'study',h:'SOP知识体系导入',d:'了解门店11大SOP业务模块全景图：车源→获客→转化→交付→售后→风控',hh:'2课时'},
-      {t:'study',h:'核心系统工具操作',d:'CRM系统、企业微信、OA审批、车300/精真估等核心工具实操',hh:'2课时'},
-      {t:'study',h:'九大类412项检测标准认知',d:'了解卡泰驰九大类412项检测认证体系与"一个认证报告、两个引领标准、五大服务承诺"',hh:'1课时'}
-    ],
-    cp:'系统工具操作通过+九大类412项检测标准认知确认。师傅签字'
-  }
-];
-
-var ROADMAP={
+var ROADMAP = {
   '销售顾问':[
-    {day:3,title:'产品知识体系搭建',desc:'8课时',
-      tasks:[
-        {t:'study',h:'主力车型库认知',d:'门店在售车辆品牌/车型/配置梯度/年款差异、燃油vs新能源参数解读',hh:'3课时'},
-        {t:'study',h:'二手车价值评估基础',d:'品牌/车龄/里程/车况/配置对残值的影响、行情查询工具使用',hh:'2课时'},
-        {t:'online',h:'微课：品牌文化+服务标准',d:'完成必修课"品牌文化"与"服务标准"学习及课后测验',hh:'1课时',cids:[1,3]},
-        {t:'shadow',h:'展厅车辆静态学习',d:'随师傅逐一认识展厅车辆，记录每车3个核心卖点与1个常见疑问',hh:'2课时'}
-      ],
-      cp:'展厅10台车辆信息抽查≥80%（品牌/车型/年款/排量/核心卖点）。微课学习确认'
-    },
-    {day:4,title:'客户接待与需求分析',desc:'8课时',
-      tasks:[
-        {t:'study',h:'展厅接待标准流程',d:'仪容仪表规范、展厅迎宾动线、客户进店30秒第一印象管理、到店类型识别',hh:'2课时'},
-        {t:'study',h:'需求探询方法论',d:'SPIN提问法（现状-困难-暗示-需求-效益）、客户画像构建四要素、开放vs封闭提问',hh:'2课时'},
-        {t:'online',h:'微课：行业法规+信息安全',d:'完成必修课"行业法规"与"信息安全"学习及课后测验',hh:'1课时',cids:[2,4]},
-        {t:'shadow',h:'客户接待跟岗实操',d:'跟随师傅观摩≥3组完整接待流程，记录师傅提问话术与应对技巧，模拟演练',hh:'3课时'}
-      ],
-      cp:'独立完成1组客户接待模拟演练（需求探询+客户画像）。师傅评分≥70分'
-    },
-    {day:5,title:'车辆展示与试驾体验',desc:'8课时',
-      tasks:[
-        {t:'study',h:'六方位绕车讲解法',d:'车头→右侧→车尾→左侧→驾驶舱→发动机舱标准流程、FABE法则运用',hh:'2课时'},
-        {t:'study',h:'试乘试驾标准化',d:'试驾前准备(路线/证件/安全告知)、试驾中引导(体验亮点/性能展示)、试驾后反馈',hh:'2课时'},
-        {t:'online',h:'微课：客户接待+试驾体验',d:'完成"客户接待与需求分析"与"车辆展示与试驾体验"专业课学习',hh:'2课时',cids:[5,6]},
-        {t:'practice',h:'绕车讲解实战演练',d:'独立完成2台不同车型完整绕车讲解，师傅点评纠偏，同组互评互学',hh:'2课时'}
-      ],
-      cp:'随机抽取1台车，限时15分钟完成六方位绕车讲解。师傅评分≥70分'
-    },
-    {day:6,title:'异议处理与成交促成',desc:'8课时',
-      tasks:[
-        {t:'study',h:'价格谈判与报价策略',d:'价格构成透明化、三明治报价法（价值铺垫→报总价→拆分）、阶梯让步与条件交换',hh:'2课时'},
-        {t:'study',h:'十大高频异议应对',d:'"事故车""竞品更便宜""带朋友看"等场景应对、限时优惠/假定成交/二选一法',hh:'2课时'},
-        {t:'online',h:'微课：谈判技巧+价值评估',d:'完成"谈判技巧与成交策略"与"二手车价值评估与报价策略"专业课学习',hh:'1课时',cids:[7,17]},
-        {t:'practice',h:'异议处理角色对抗',d:'师傅扮演挑剔客户抽取异议场景，学员现场应对并尝试促成，每组演练后复盘',hh:'3课时'}
-      ],
-      cp:'随机抽取2个异议场景各5分钟内应对。师傅评分≥75分'
-    },
-    {day:7,title:'合同签署与交付仪式',desc:'8课时',
-      tasks:[
-        {t:'study',h:'合同签署与风险告知',d:'《二手车买卖合同》核心条款逐条解读、瑕疵告知义务与客户知情权保障',hh:'2课时'},
-        {t:'study',h:'车辆交付全流程',d:'PDI整备终检确认、随车文件清点、交车仪式标准化流程（合影/送车/注意事项）',hh:'2课时'},
-        {t:'online',h:'微课：客户关系维护',d:'完成"客户关系维护与转介绍"专业课学习',hh:'1课时',cids:[18]},
-        {t:'practice',h:'全流程通关模拟',d:'接待→需求探询→绕车→试驾→异议处理→成交→交付完整流程演练',hh:'3课时'}
-      ],
-      cp:'全流程模拟通关（Mystery Shopping形式）。师傅评分≥75分。理论累计通过。学习护照全部签章'
-    }
+    {day:3,title:'产品知识体系搭建',items:[
+      {t:'study',h:'主力车型库认知',d:'在售车辆品牌/车型/配置/年款差异解读'},
+      {t:'online',h:'微课：品牌文化+服务标准',d:'完成必修课学习及课后测验'},
+      {t:'shadow',h:'展厅车辆静态学习',d:'随师傅逐一认识展厅车辆，记录核心卖点'}
+    ]},
+    {day:4,title:'客户接待与需求分析',items:[
+      {t:'study',h:'展厅接待标准流程',d:'仪容仪表规范、迎宾动线、第一印象管理'},
+      {t:'study',h:'需求探询方法论',d:'SPIN提问法、客户画像构建、开放vs封闭提问'},
+      {t:'shadow',h:'客户接待跟岗实操',d:'跟随师傅观摩≥3组完整接待流程'}
+    ]},
+    {day:5,title:'车辆展示与试驾体验',items:[
+      {t:'study',h:'六方位绕车讲解法',d:'车头→右侧→车尾→左侧→驾驶舱→发动机舱'},
+      {t:'study',h:'试乘试驾标准化',d:'试驾准备/安全告知/体验引导/试驾后反馈'},
+      {t:'online',h:'微课：客户接待+试驾体验',d:'完成专业课学习'}
+    ]},
+    {day:6,title:'异议处理与成交促成',items:[
+      {t:'study',h:'价格谈判与报价策略',d:'三明治报价法、阶梯让步与条件交换'},
+      {t:'study',h:'十大高频异议应对',d:'事故车/竞品/价格等场景应对话术'},
+      {t:'online',h:'微课：谈判技巧+价值评估',d:'完成专业课学习'}
+    ]},
+    {day:7,title:'合同签署与交付仪式',items:[
+      {t:'study',h:'合同签署与风险告知',d:'《二手车买卖合同》核心条款解读、瑕疵告知义务'},
+      {t:'study',h:'车辆交付全流程',d:'PDI整备确认、随车文件清点、交车仪式'},
+      {t:'online',h:'微课：客户关系维护',d:'完成专业课学习'}
+    ]}
   ],
   '数字化营销师':[
-    {day:3,title:'平台矩阵与工具搭建',desc:'8课时',
-      tasks:[
-        {t:'study',h:'主流平台获客矩阵认知',d:'抖音/视频号/小红书/懂车帝等平台特性、账号矩阵搭建策略',hh:'3课时'},
-        {t:'study',h:'线索分级与分配机制',d:'线索分级标准（H/A/B/C）、分配规则与时效要求、CRM线索管理',hh:'2课时'},
-        {t:'online',h:'微课：品牌文化+服务标准',d:'完成必修课"品牌文化"与"服务标准"学习及课后测验',hh:'1课时',cids:[1,3]},
-        {t:'shadow',h:'账号后台实操跟岗',d:'随师傅操作各平台企业号后台，了解发布流程与数据看板',hh:'2课时'}
-      ],
-      cp:'独立完成1条测试内容发布各平台。账号后台操作熟练度确认'
-    },
-    {day:4,title:'短视频内容创作',desc:'8课时',
-      tasks:[
-        {t:'study',h:'汽车短视频拍摄技巧',d:'手机拍摄参数设置、构图法则（三分法/引导线）、车辆拍摄最佳角度与光线',hh:'2课时'},
-        {t:'study',h:'剪辑软件快速上手',d:'剪映/快影基础操作、BGM选择、字幕添加、封面设计',hh:'2课时'},
-        {t:'online',h:'微课：行业法规+信息安全',d:'完成必修课"行业法规"与"信息安全"学习及课后测验',hh:'1课时',cids:[2,4]},
-        {t:'practice',h:'短视频拍摄实战',d:'独立拍摄+剪辑1条完整汽车短视频，师傅点评并提出修改意见',hh:'3课时'}
-      ],
-      cp:'产出1条合格短视频（≥30秒，含车辆外观+内饰+核心卖点）。师傅评分≥70分'
-    },
-    {day:5,title:'线索管理与转化',desc:'8课时',
-      tasks:[
-        {t:'study',h:'私域流量池运营',d:'企业微信客户标签管理、朋友圈内容规划、社群分层运营策略',hh:'2课时'},
-        {t:'study',h:'数据分析与优化',d:'曝光量/点击率/转化率核心指标、A/B测试方法论',hh:'2课时'},
-        {t:'online',h:'微课：线上获客+内容营销',d:'完成"线上获客渠道与线索管理"与"短视频与直播内容营销"专业课学习',hh:'2课时',cids:[8,9]},
-        {t:'shadow',h:'线索跟进跟岗',d:'随师傅完成≥5条真实线索的电话/微信跟进，记录话术要点',hh:'2课时'}
-      ],
-      cp:'独立完成3条线索的有效跟进（含1通电话）。师傅评分≥70分'
-    },
-    {day:6,title:'直播实战入门',desc:'8课时',
-      tasks:[
-        {t:'study',h:'直播脚本与话术设计',d:'开场暖场→车型介绍→互动问答→留资引导完整脚本框架',hh:'2课时'},
-        {t:'study',h:'直播间互动转化',d:'弹幕控评技巧、福袋/抽奖设置、留资钩子设计',hh:'2课时'},
-        {t:'online',h:'微课：数据分析+社群运营',d:'完成"数据分析与投放优化"与"社群运营与粉丝裂变"专业课学习',hh:'1课时',cids:[19,20]},
-        {t:'practice',h:'模拟直播演练',d:'完成1场≥15分钟模拟直播（手机实操），师傅/同事扮演观众互动',hh:'3课时'}
-      ],
-      cp:'完成1场≥15分钟模拟直播演练。师傅评分≥70分'
-    },
-    {day:7,title:'数据复盘与周报总结',desc:'8课时',
-      tasks:[
-        {t:'study',h:'周度数据复盘方法',d:'曝光→点击→留资→到店→成交漏斗分析、各渠道投产比ROI计算',hh:'2课时'},
-        {t:'study',h:'投放效果评估',d:'CPM/CPC/CPL核心指标解读、素材A/B测试结果分析、优化方向提炼',hh:'2课时'},
-        {t:'online',h:'微课：品牌内容策划',d:'完成"品牌内容策划与传播"专业课学习',hh:'1课时',cids:[21]},
-        {t:'practice',h:'周报撰写与汇报',d:'独立撰写本周获客数据周报（含漏斗数据、亮点、改进计划），向店长汇报',hh:'3课时'}
-      ],
-      cp:'提交完整周报（含数据漏斗+改进计划）。店长评分≥75分。学习护照签章'
-    }
+    {day:3,title:'平台矩阵与工具搭建',items:[
+      {t:'study',h:'主流平台获客矩阵',d:'抖音/视频号/小红书/懂车帝平台特性'},
+      {t:'study',h:'线索分级与分配机制',d:'H/A/B/C分级标准、分配规则与时效要求'},
+      {t:'shadow',h:'账号后台实操跟岗',d:'随师傅操作各平台企业号后台'}
+    ]},
+    {day:4,title:'短视频内容创作',items:[
+      {t:'study',h:'汽车短视频拍摄技巧',d:'手机拍摄参数、构图法则、最佳角度与光线'},
+      {t:'study',h:'剪辑软件快速上手',d:'剪映基础操作、BGM选择、字幕与封面设计'},
+      {t:'online',h:'微课：品牌文化+服务标准',d:'完成必修课学习及课后测验'}
+    ]},
+    {day:5,title:'线索管理与转化',items:[
+      {t:'study',h:'私域流量池运营',d:'企业微信标签管理、朋友圈规划、社群运营'},
+      {t:'online',h:'微课：线上获客+内容营销',d:'完成专业课学习'},
+      {t:'shadow',h:'线索跟进跟岗',d:'随师傅完成≥5条真实线索跟进'}
+    ]},
+    {day:6,title:'直播实战入门',items:[
+      {t:'study',h:'直播脚本与话术设计',d:'开场→车型介绍→互动问答→留资引导'},
+      {t:'study',h:'直播间互动转化',d:'弹幕控评、福袋/抽奖、留资钩子设计'},
+      {t:'online',h:'微课：数据分析+社群运营',d:'完成专业课学习'}
+    ]},
+    {day:7,title:'数据复盘与周报总结',items:[
+      {t:'study',h:'周度数据复盘方法',d:'漏斗分析、渠道投产比ROI计算'},
+      {t:'online',h:'微课：品牌内容策划',d:'完成专业课学习'},
+      {t:'practice',h:'周报撰写与汇报',d:'独立撰写本周数据周报，向店长汇报'}
+    ]}
   ],
   '检测评估师':[
-    {day:3,title:'检测工具与设备认知',desc:'8课时',
-      tasks:[
-        {t:'study',h:'检测工具与仪器使用',d:'漆膜仪/内窥镜/OBD诊断仪/举升机/胎纹尺等专业工具介绍与操作规范',hh:'3课时'},
-        {t:'study',h:'九大类412项检测标准体系',d:'外观/内饰/底盘/动力总成/电气/空调/路试/随车附件/认证报告九大类标准认知',hh:'2课时'},
-        {t:'online',h:'微课：品牌文化+服务标准',d:'完成必修课"品牌文化"与"服务标准"学习及课后测验',hh:'1课时',cids:[1,3]},
-        {t:'shadow',h:'检测工具实操跟岗',d:'随师傅使用漆膜仪/OBD诊断仪等工具对展厅车辆进行基础检测',hh:'2课时'}
-      ],
-      cp:'独立使用漆膜仪/OBD诊断仪完成1台车辆基础检测。师傅确认操作规范'
-    },
-    {day:4,title:'标准检测流程实操',desc:'8课时',
-      tasks:[
-        {t:'study',h:'车身结构与覆盖件检测',d:'车身结构件vs覆盖件区分、钣金修复痕迹识别、漆膜仪读数判读标准',hh:'2课时'},
-        {t:'study',h:'内饰装潢与电子设备检测',d:'座椅/方向盘磨损等级判定、空调/音响/导航/天窗等功能项逐一检测',hh:'2课时'},
-        {t:'online',h:'微课：行业法规+信息安全',d:'完成必修课"行业法规"与"信息安全"学习及课后测验',hh:'1课时',cids:[2,4]},
-        {t:'shadow',h:'底盘悬架与动力总成检测跟岗',d:'随师傅完成举升机操作、底盘/悬架/发动机/变速箱目视检测流程',hh:'3课时'}
-      ],
-      cp:'独立完成1台车车身+内饰+电子设备检测记录。师傅核对确认'
-    },
-    {day:5,title:'事故车与特殊车况鉴定',desc:'8课时',
-      tasks:[
-        {t:'study',h:'事故车鉴定核心指标',d:'结构件损伤/焊点异常/螺栓拆卸痕迹/安全气囊更换等事故车判定标准',hh:'2课时'},
-        {t:'study',h:'泡水车与火烧车识别',d:'泡水车特征（泥沙/锈迹/霉味/线束异常）、火烧车（漆面/胶条/线束熔化）',hh:'2课时'},
-        {t:'online',h:'微课：车辆检测+事故车鉴定',d:'完成"车辆检测标准流程"与"事故车鉴定与评估技巧"专业课学习',hh:'2课时',cids:[10,11]},
-        {t:'practice',h:'事故车鉴定实战',d:'对≥2台已知事故车进行独立鉴定，对照维修记录验证判断准确性',hh:'2课时'}
-      ],
-      cp:'独立鉴定1台事故车/泡水车（不事先告知），准确率≥80%。师傅评分≥75分'
-    },
-    {day:6,title:'评估报告撰写与价格评估',desc:'8课时',
-      tasks:[
-        {t:'study',h:'检测报告标准模板',d:'外观/内饰/底盘/动力/电气/路试六大板块检测数据填写规范与术语标准化',hh:'2课时'},
-        {t:'study',h:'车辆估价模型与实战',d:'品牌/车龄/里程/车况/配置/地区六大因子估价法、市场价格对标',hh:'2课时'},
-        {t:'online',h:'微课：新能源检测+豪华车检测',d:'完成"新能源二手车专项检测"与"进口与豪华车专项检测"专业课学习',hh:'1课时',cids:[22,23]},
-        {t:'practice',h:'检测报告撰写实战',d:'独立完成1台车辆的完整检测报告（含检测数据+估价结论+整备建议）',hh:'3课时'}
-      ],
-      cp:'提交1份完整检测报告（含估价）。师傅评分≥75分'
-    },
-    {day:7,title:'综合考核与认证准备',desc:'8课时',
-      tasks:[
-        {t:'study',h:'新能源专项检测复习',d:'动力电池健康度评估(SOH)、三电系统（电机/电控/电池）检测要点',hh:'2课时'},
-        {t:'study',h:'客户解读话术实战',d:'如何向客户清晰解读检测结果、异常项专业表述、认证报告价值传递',hh:'2课时'},
-        {t:'online',h:'微课：检测报告撰写',d:'完成"检测报告撰写与客户解读"专业课学习',hh:'1课时',cids:[24]},
-        {t:'practice',h:'全流程检测考核',d:'限时45分钟完成1台车辆完整检测→报告撰写→模拟客户解读全流程',hh:'3课时'}
-      ],
-      cp:'限时45分钟完成全流程检测考核。师傅评分≥75分。学习护照全部签章'
-    }
+    {day:3,title:'检测工具与设备认知',items:[
+      {t:'study',h:'检测工具与仪器使用',d:'漆膜仪/OBD诊断仪/举升机等操作规范'},
+      {t:'study',h:'九大类412项检测标准',d:'外观/内饰/底盘/动力总成等九大类认知'},
+      {t:'shadow',h:'检测工具实操跟岗',d:'随师傅对展厅车辆进行基础检测'}
+    ]},
+    {day:4,title:'标准检测流程实操',items:[
+      {t:'study',h:'车身结构与覆盖件检测',d:'结构件vs覆盖件区分、漆膜仪读数判读'},
+      {t:'study',h:'内饰与电子设备检测',d:'座椅/方向盘磨损判定、功能项逐一检测'},
+      {t:'shadow',h:'底盘与动力总成检测跟岗',d:'举升机操作、底盘/悬架目视检测'}
+    ]},
+    {day:5,title:'事故车与特殊车况鉴定',items:[
+      {t:'study',h:'事故车鉴定核心指标',d:'结构件损伤/焊点异常/螺栓拆卸痕迹判定'},
+      {t:'study',h:'泡水车与火烧车识别',d:'泥沙/锈迹/霉味/线束异常等特征识别'},
+      {t:'online',h:'微课：车辆检测+事故车鉴定',d:'完成专业课学习'}
+    ]},
+    {day:6,title:'评估报告撰写与价格评估',items:[
+      {t:'study',h:'检测报告标准模板',d:'六大板块检测数据填写规范与术语标准化'},
+      {t:'study',h:'车辆估价模型与实战',d:'六大因子估价法、市场价格对标'},
+      {t:'online',h:'微课：新能源检测+豪华车检测',d:'完成专业课学习'}
+    ]},
+    {day:7,title:'综合考核与认证准备',items:[
+      {t:'study',h:'新能源专项检测复习',d:'动力电池健康度、三电系统检测要点'},
+      {t:'online',h:'微课：检测报告撰写',d:'完成专业课学习'},
+      {t:'practice',h:'全流程检测考核',d:'限时45min完成完整检测→报告→解读全流程'}
+    ]}
   ],
   '金融专员':[
-    {day:3,title:'金融产品矩阵认知',desc:'8课时',
-      tasks:[
-        {t:'study',h:'金融产品体系全景',d:'卡泰驰金融产品矩阵：分期/融资租赁/保险/延保/GAP险等产品线',hh:'3课时'},
-        {t:'study',h:'客户信用评估方法',d:'征信报告解读、收入负债比计算、审批红线与风控规则',hh:'2课时'},
-        {t:'online',h:'微课：品牌文化+服务标准',d:'完成必修课"品牌文化"与"服务标准"学习及课后测验',hh:'1课时',cids:[1,3]},
-        {t:'shadow',h:'金融系统操作跟岗',d:'随师傅操作金融审批系统，了解申请→审核→放款完整流程',hh:'2课时'}
-      ],
-      cp:'独立完成1笔模拟金融申请流程（含征信解读）。师傅确认操作规范'
-    },
-    {day:4,title:'方案设计与报价测算',desc:'8课时',
-      tasks:[
-        {t:'study',h:'分期方案计算与对比',d:'等额本息/等额本金/气球贷方案对比、利率计算器使用、月供测算',hh:'3课时'},
-        {t:'study',h:'不同预算客户方案定制',d:'首付30%/50%/全款不同场景、新能源专属金融方案、置换+分期组合',hh:'2课时'},
-        {t:'online',h:'微课：行业法规+信息安全',d:'完成必修课"行业法规"与"信息安全"学习及课后测验',hh:'1课时',cids:[2,4]},
-        {t:'shadow',h:'方案推荐跟岗',d:'跟随师傅完成≥3组真实客户金融方案推荐，记录客户反应与话术',hh:'2课时'}
-      ],
-      cp:'独立完成2份不同预算客户的分期方案测算。师傅评分≥70分'
-    },
-    {day:5,title:'保险与增值业务',desc:'8课时',
-      tasks:[
-        {t:'study',h:'车险种类与保障范围',d:'交强险/车损险/三者险/不计免赔/盗抢险等险种解读与适用场景',hh:'2课时'},
-        {t:'study',h:'保险组合推荐策略',d:'不同车型/车龄/客户需求的最佳险种组合方案设计',hh:'2课时'},
-        {t:'online',h:'微课：金融产品+分期方案',d:'完成"金融产品推荐与匹配"与"二手车分期方案设计"专业课学习',hh:'2课时',cids:[12,25]},
-        {t:'practice',h:'保险+金融综合方案设计',d:'独立为模拟客户设计"分期+保险+延保"完整方案并模拟讲解',hh:'2课时'}
-      ],
-      cp:'独立完成1份"分期+保险+延保"综合方案设计及讲解。师傅评分≥70分'
-    },
-    {day:6,title:'风控合规与审批流程',desc:'8课时',
-      tasks:[
-        {t:'study',h:'贷款审批风控模型',d:'收入验证/负债核查/资产核验/反欺诈交叉验证等风控要点',hh:'2课时'},
-        {t:'study',h:'反欺诈识别技巧',d:'虚假资料/身份冒用/车辆套现等常见欺诈模式识别与防范',hh:'2课时'},
-        {t:'online',h:'微课：保险推荐+风控合规',d:'完成"保险产品推荐与理赔指导"与"金融风控与合规操作"专业课学习',hh:'2课时',cids:[26,27]},
-        {t:'practice',h:'风控案例实战分析',d:'分析≥5个真实风控案例（含通过/拒绝/欺诈），判断并说明理由',hh:'2课时'}
-      ],
-      cp:'完成5个风控案例判断，准确率≥80%。师傅评分≥75分'
-    },
-    {day:7,title:'综合演练与总结',desc:'8课时',
-      tasks:[
-        {t:'study',h:'客户金融需求深度挖掘',d:'SPIN话术金融版、客户画像与需求分类、隐性需求挖掘技巧',hh:'2课时'},
-        {t:'study',h:'贷后管理规范',d:'还款提醒/逾期催收/提前还款处理/合同变更等贷后操作规范',hh:'2课时'},
-        {t:'online',h:'微课：金融需求挖掘',d:'完成"客户金融需求深度挖掘"专业课学习',hh:'1课时',cids:[28]},
-        {t:'practice',h:'全流程金融方案通关',d:'完整模拟：需求探询→方案设计→产品推荐→签约办理→贷后说明全流程',hh:'3课时'}
-      ],
-      cp:'全流程金融方案通关考核。师傅评分≥75分。学习护照全部签章'
-    }
+    {day:3,title:'金融产品矩阵认知',items:[
+      {t:'study',h:'金融产品体系全景',d:'卡泰驰金融矩阵：分期/融资租赁/保险/延保等'},
+      {t:'study',h:'客户信用评估方法',d:'征信报告解读、收入负债比计算'},
+      {t:'online',h:'微课：品牌文化+服务标准',d:'完成必修课学习及课后测验'}
+    ]},
+    {day:4,title:'分期方案设计',items:[
+      {t:'study',h:'分期付款模式全景',d:'等额本息/先息后本/气球贷等方案对比'},
+      {t:'study',h:'利率计算与方案对比',d:'不同期限利率计算、方案优劣势分析'},
+      {t:'shadow',h:'金融方案推荐跟岗',d:'随师傅参与≥2组客户金融方案推荐'}
+    ]},
+    {day:5,title:'保险与延保产品',items:[
+      {t:'study',h:'车险种类与保障范围',d:'交强险/车损险/三者险/不计免赔等详解'},
+      {t:'study',h:'保险组合推荐策略',d:'不同客户群体的定制化保险方案'},
+      {t:'online',h:'微课：金融产品+分期设计',d:'完成专业课学习'}
+    ]},
+    {day:6,title:'金融风控与合规',items:[
+      {t:'study',h:'贷款审批风控要点',d:'风控模型、反欺诈识别技巧'},
+      {t:'study',h:'金融合规操作红线',d:'监管合规要点、贷后管理规范'},
+      {t:'online',h:'微课：保险推荐+需求挖掘',d:'完成专业课学习'}
+    ]},
+    {day:7,title:'综合实战与考核',items:[
+      {t:'study',h:'客户金融需求深度挖掘',d:'SPIN话术金融版、隐性需求识别'},
+      {t:'online',h:'微课：金融风控',d:'完成专业课学习'},
+      {t:'practice',h:'全流程金融方案考核',d:'独立完成1位客户完整金融方案设计+讲解'}
+    ]}
   ],
   '维修技师':[
-    {day:3,title:'车间安全与工具认知',desc:'8课时',
-      tasks:[
-        {t:'study',h:'维修工具与设备操作规范',d:'常用维修工具（扳手/套筒/扭矩扳手等）规格识别与安全使用',hh:'3课时'},
-        {t:'study',h:'诊断设备功能详解',d:'OBD诊断仪/万用表/示波器/空调检测仪等设备功能与操作入门',hh:'2课时'},
-        {t:'online',h:'微课：品牌文化+服务标准',d:'完成必修课"品牌文化"与"服务标准"学习及课后测验',hh:'1课时',cids:[1,3]},
-        {t:'shadow',h:'车间安全规范跟岗',d:'随师傅熟悉车间布局、举升机/气动工具安全操作、危废处理流程',hh:'2课时'}
-      ],
-      cp:'安全操作规范考核≥80分。工具识别通过率100%'
-    },
-    {day:4,title:'标准诊断与保养流程',desc:'8课时',
-      tasks:[
-        {t:'study',h:'故障诊断逻辑框架',d:'客户描述→故障重现→系统扫描→数据流分析→部件测试→确诊六步法',hh:'2课时'},
-        {t:'study',h:'标准维修工艺流程',d:'接车检查→故障诊断→维修方案→配件领用→维修操作→质检→交车',hh:'2课时'},
-        {t:'online',h:'微课：行业法规+信息安全',d:'完成必修课"行业法规"与"信息安全"学习及课后测验',hh:'1课时',cids:[2,4]},
-        {t:'shadow',h:'保养流程跟岗',d:'随师傅完成≥2台车辆的常规保养全流程（机油/机滤/空滤/空调滤）',hh:'3课时'}
-      ],
-      cp:'独立完成1台车辆常规保养（师傅在一旁监督）。操作规范通过'
-    },
-    {day:5,title:'常见故障诊断与维修',desc:'8课时',
-      tasks:[
-        {t:'study',h:'电控系统故障诊断',d:'OBD故障码读取与解析、传感器/执行器检测方法、CAN总线基础',hh:'2课时'},
-        {t:'study',h:'发动机与底盘常见故障',d:'发动机抖动/异响/漏油、制动异响/跑偏/ABS故障等诊断思路',hh:'2课时'},
-        {t:'online',h:'微课：故障诊断+工具使用',d:'完成"车辆故障诊断与标准维修流程"与"维修工具与设备规范使用"专业课学习',hh:'2课时',cids:[13,31]},
-        {t:'practice',h:'故障诊断实战',d:'对≥3台已知故障车辆进行独立诊断，记录诊断过程与判断依据',hh:'2课时'}
-      ],
-      cp:'独立完成1台未知故障车辆诊断，准确率≥70%。师傅评分≥70分'
-    },
-    {day:6,title:'维修质量管控与客户沟通',desc:'8课时',
-      tasks:[
-        {t:'study',h:'三级质检流程规范',d:'自检（技师）→互检（组长）→终检（质检员）三级制度与检查标准',hh:'2课时'},
-        {t:'study',h:'维修方案客户汇报',d:'维修项目/更换配件/工时费用/保修政策向客户清晰说明的话术规范',hh:'2课时'},
-        {t:'online',h:'微课：质量管控+新能源维修',d:'完成"维修质量管控与客户沟通"与"新能源车维修技术"专业课学习',hh:'2课时',cids:[14,29]},
-        {t:'practice',h:'客户沟通模拟演练',d:'师傅扮演客户，学员汇报维修方案并解答质疑，完成费用说明与交车',hh:'2课时'}
-      ],
-      cp:'独立完成1组客户维修方案汇报模拟。师傅评分≥75分'
-    },
-    {day:7,title:'综合实操考核',desc:'8课时',
-      tasks:[
-        {t:'study',h:'钣金喷漆工艺标准',d:'钣金修复工艺流程、喷漆前处理与遮蔽、颜色调配与漆面质量检验',hh:'2课时'},
-        {t:'study',h:'高压安全操作规范',d:'纯电/混动车型高压系统安全断电/验电/上电流程、绝缘工具使用',hh:'2课时'},
-        {t:'online',h:'微课：钣金喷漆工艺',d:'完成"钣金喷漆工艺标准"专业课学习',hh:'1课时',cids:[30]},
-        {t:'practice',h:'综合技能考核',d:'故障诊断→维修操作→质检→客户交车全流程实战考核',hh:'3课时'}
-      ],
-      cp:'综合技能考核（诊断+维修+质检+交车）。师傅评分≥75分。学习护照全部签章'
-    }
+    {day:3,title:'维修工具与设备规范',items:[
+      {t:'study',h:'常用维修工具操作规范',d:'扳手/扭力工具/举升机安全操作'},
+      {t:'study',h:'诊断设备功能详解',d:'OBD诊断仪/万用表/示波器等功能学习'},
+      {t:'shadow',h:'维修车间跟岗',d:'随师傅观摩日常维修作业流程'}
+    ]},
+    {day:4,title:'车辆故障诊断基础',items:[
+      {t:'study',h:'电控系统故障诊断',d:'故障码读取分析、传感器检测方法'},
+      {t:'study',h:'发动机常见故障排查',d:'启动困难/抖动/异响/油耗高等故障分析'},
+      {t:'online',h:'微课：品牌文化+服务标准',d:'完成必修课学习及课后测验'}
+    ]},
+    {day:5,title:'标准维修与质检',items:[
+      {t:'study',h:'标准维修工艺流程',d:'拆卸→检测→更换→装配→质检全流程'},
+      {t:'study',h:'维修质检与交车流程',d:'三级质检规范、交车前最终确认'},
+      {t:'online',h:'微课：故障诊断+质量管理',d:'完成专业课学习'}
+    ]},
+    {day:6,title:'新能源与钣喷专项',items:[
+      {t:'study',h:'高压安全操作规范',d:'纯电/混动车型高压断电、绝缘防护'},
+      {t:'study',h:'钣金修复与喷漆工艺',d:'钣金修复流程、喷漆前处理与喷涂'},
+      {t:'online',h:'微课：新能源维修+钣喷工艺',d:'完成专业课学习'}
+    ]},
+    {day:7,title:'综合考核与独立上岗',items:[
+      {t:'study',h:'维修工具与设备规范使用',d:'专业工具操作规范与维护保养'},
+      {t:'online',h:'微课：维修工具规范',d:'完成专业课学习'},
+      {t:'practice',h:'独立维修考核',d:'限时完成1项真实维修任务，师傅评分'}
+    ]}
   ],
   '店长/储备干部':[
-    {day:3,title:'门店运营全景认知',desc:'8课时',
-      tasks:[
-        {t:'study',h:'门店日周月管理节奏',d:'晨会→日间巡检→夕会复盘日节奏、周例会→周报、月度经营分析会',hh:'3课时'},
-        {t:'study',h:'KPI指标体系与追踪',d:'进销存/人效/客单价/转化率/毛利率/NPS等核心KPI定义与追踪方法',hh:'2课时'},
-        {t:'online',h:'微课：品牌文化+服务标准',d:'完成必修课"品牌文化"与"服务标准"学习及课后测验',hh:'1课时',cids:[1,3]},
-        {t:'shadow',h:'店长日常管理跟岗',d:'随店长参与晨会/巡检/夕会，记录管理要点与决策逻辑',hh:'2课时'}
-      ],
-      cp:'撰写1份门店日常管理观察笔记（≥500字）。店长评分≥70分'
-    },
-    {day:4,title:'销售过程与团队管理',desc:'8课时',
-      tasks:[
-        {t:'study',h:'高效招聘与面试技巧',d:'岗位画像设计、行为面试法(STAR)、销售岗核心能力评估模型',hh:'2课时'},
-        {t:'study',h:'新人90天带教计划',d:'带教节奏设计、每日/每周/每月里程碑、带教效果评估标准',hh:'2课时'},
-        {t:'online',h:'微课：行业法规+信息安全',d:'完成必修课"行业法规"与"信息安全"学习及课后测验',hh:'1课时',cids:[2,4]},
-        {t:'shadow',h:'团队绩效面谈跟岗',d:'随店长参与≥2组员工绩效面谈，记录面谈框架与关键话术',hh:'3课时'}
-      ],
-      cp:'设计1份90天新人带教计划草案。店长评分≥70分'
-    },
-    {day:5,title:'财务管理与成本控制',desc:'8课时',
-      tasks:[
-        {t:'study',h:'门店P&L利润表解读',d:'收入/成本/费用/利润结构拆解、毛利率/净利率/T/O率等财务指标',hh:'2课时'},
-        {t:'study',h:'成本结构分析与优化',d:'固定成本(租金/人工)vs变动成本(整备/广宣)、降本增效行动方案',hh:'2课时'},
-        {t:'online',h:'微课：门店运营+团队建设',d:'完成"门店运营管理与KPI达成"与"团队建设与人才培养"专业课学习',hh:'2课时',cids:[15,16]},
-        {t:'practice',h:'门店经营数据分析',d:'基于真实门店月度数据完成P&L分析，输出降本增效建议',hh:'2课时'}
-      ],
-      cp:'完成1份门店月度经营分析简报（含P&L解读+改善建议）。店长评分≥75分'
-    },
-    {day:6,title:'客户体验与危机应对',desc:'8课时',
-      tasks:[
-        {t:'study',h:'NPS指标监测与改进',d:'NPS调研设计/数据采集/低分回访/改进闭环、客户旅程地图绘制',hh:'2课时'},
-        {t:'study',h:'客户投诉与危机处理',d:'投诉分级响应机制、安抚→调查→方案→跟进四步法、舆情监控',hh:'2课时'},
-        {t:'online',h:'微课：财务管理+销售管理',d:'完成"财务管理与成本控制"与"销售过程管理与复盘"专业课学习',hh:'2课时',cids:[32,33]},
-        {t:'practice',h:'危机处理情景模拟',d:'模拟客户投诉升级/媒体介入/政府检查等危机场景，完成应对方案',hh:'2课时'}
-      ],
-      cp:'独立完成1个危机场景模拟应对。店长评分≥75分'
-    },
-    {day:7,title:'经营方案与总结答辩',desc:'8课时',
-      tasks:[
-        {t:'study',h:'客户体验管理体系',d:'NPS提升→服务流程优化→员工培训→客户回访全链路体验管理闭环',hh:'2课时'},
-        {t:'study',h:'门店经营复盘方法论',d:'Gap分析（目标vs实际）、根因分析（5Why/鱼骨图）、行动计划制定',hh:'2课时'},
-        {t:'online',h:'微课：客户体验管理',d:'完成"客户体验管理与NPS提升"专业课学习',hh:'1课时',cids:[34]},
-        {t:'practice',h:'7天学习总结答辩',d:'准备10分钟经营改善方案PPT，向店长/区域经理汇报答辩',hh:'3课时'}
-      ],
-      cp:'完成经营改善方案答辩（≥10分钟）。店长/区域经理评分≥75分。学习护照全部签章'
-    }
+    {day:3,title:'门店运营管理基础',items:[
+      {t:'study',h:'门店日周月管理节奏',d:'早会/夕会/周例会/月总结标准化运营'},
+      {t:'study',h:'KPI指标体系与追踪',d:'进销存/人效/客户满意度等核心KPI'},
+      {t:'online',h:'微课：品牌文化+服务标准',d:'完成必修课学习及课后测验'}
+    ]},
+    {day:4,title:'团队建设与人才培养',items:[
+      {t:'study',h:'高效招聘与面试技巧',d:'岗位画像、行为面试法、候选人评估'},
+      {t:'study',h:'新人90天带教计划',d:'分阶段带教内容设计、通关考核机制'},
+      {t:'shadow',h:'带教师傅经验交流',d:'参与老店长带教经验分享会'}
+    ]},
+    {day:5,title:'财务管理与成本控制',items:[
+      {t:'study',h:'门店P&L利润表解读',d:'收入/成本/费用/利润结构分析'},
+      {t:'study',h:'成本结构分析与优化',d:'采购成本/人力成本/运营费用三大管控'},
+      {t:'online',h:'微课：门店运营+KPI达成',d:'完成专业课学习'}
+    ]},
+    {day:6,title:'销售过程管理',items:[
+      {t:'study',h:'销售漏斗搭建与监控',d:'线索到成交各阶段转化率分析'},
+      {t:'study',h:'销售数据复盘方法论',d:'战败分析、改进计划制定與PDCA闭环'},
+      {t:'online',h:'微课：团队建设+客户体验',d:'完成专业课学习'}
+    ]},
+    {day:7,title:'客户体验与综合考核',items:[
+      {t:'study',h:'客户旅程地图绘制',d:'全触点客户体验设计、NPS监测体系'},
+      {t:'online',h:'微课：财务与销售管理',d:'完成专业课学习'},
+      {t:'practice',h:'门店运营方案汇报',d:'独立完成1份门店运营优化方案，向区域汇报'}
+    ]}
   ]
 };
 
-var roadmapPos='销售顾问';
+// ── localStorage ──
+var STORAGE_KEY = 'kataichi_micro_v2';
+function loadProg() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {} } catch(e) { return {} } }
+function saveProg(p) { localStorage.setItem(STORAGE_KEY, JSON.stringify(p)) }
 
-function renderRoadmapFilter(){
-  var chips='';
-  POSITIONS.forEach(function(pos){
-    chips+='<span class="pf-chip'+(roadmapPos===pos?' active':'')+'" onclick="filterRoadmapPosition(\''+pos+'\')">'+pos+'</span>';
+// ── state ──
+var curPos = '';
+
+// ── build position filter ──
+function buildPosFilter() {
+  var container = document.getElementById('posFilter');
+  POSITIONS.forEach(function(pos) {
+    var chip = document.createElement('span');
+    chip.className = 'pos-chip'; chip.textContent = pos;
+    chip.onclick = function() { setPosition(pos) };
+    container.appendChild(chip);
   });
-  document.getElementById('roadmapPosFilter').innerHTML=chips;
 }
 
-function filterRoadmapPosition(pos){
-  roadmapPos=pos;
-  renderRoadmapFilter();
-  renderRoadmapDays();
+function setPosition(pos) {
+  curPos = pos;
+  var chips = document.querySelectorAll('.pos-chip');
+  chips.forEach(function(c) { c.classList.toggle('active', c.textContent === pos) });
+  renderDays();
 }
 
-// ── 任务类型配置 ──
-var TASK_TYPES={
-  study:  {label:'理论学习', icon:'📚', bg:'rgba(99,102,241,.08)', color:'#6366f1', border:'rgba(99,102,241,.2)'},
-  online: {label:'在线微课', icon:'🎬', bg:'rgba(22,163,74,.08)',  color:'#16a34a', border:'rgba(22,163,74,.2)'},
-  shadow: {label:'跟岗实操', icon:'👨‍🏫', bg:'rgba(245,158,11,.08)',  color:'#d97706', border:'rgba(245,158,11,.2)'},
-  practice:{label:'实操演练', icon:'🎯', bg:'rgba(244,67,54,.08)',  color:'#F44336', border:'rgba(244,67,54,.2)'}
-};
+// ── render day cards ──
+function renderDays() {
+  var container = document.getElementById('dayCards');
+  if (!curPos) { container.innerHTML = '<div class="empty"><div class="emoji">👆</div><p>请先选择你的岗位</p></div>'; updateStats(); return; }
 
-function renderRoadmapDays(){
-  var progress=getProgress();
-  var posDays=ROADMAP[roadmapPos]||[];
+  var prog = loadProg();
+  var prefix = curPos + '__';
+  var allDays = ROADMAP_COMMON.concat(ROADMAP[curPos] || []);
+  var totalItems = 0, doneItems = 0;
 
-  var html='';
+  var html = '';
+  allDays.forEach(function(day, di) {
+    var dayKey = prefix + 'day' + day.day;
+    var dayDone = prog[dayKey];
+    var itemsHtml = '';
+    var dayDoneCount = 0;
 
-  // ── 全局7天概览时间线 ──
-  html+='<div style="display:flex;gap:6px;overflow-x:auto;padding:8px 0 16px;-webkit-overflow-scrolling:touch;scrollbar-width:none">'+
-    '<div style="flex-shrink:0;padding:8px 14px;border-radius:20px;font-size:12px;font-weight:700;background:var(--primary);color:#fff">🗺️ '+roadmapPos+'</div>';
-  [1,2,3,4,5,6,7].forEach(function(d){
-    var label=d<=2?'通用':'专精';
-    var isActive=d>=3;
-    html+='<div style="flex-shrink:0;padding:8px 14px;border-radius:20px;font-size:12px;font-weight:600;background:'+(isActive?'rgba(99,102,241,.1)':'var(--bg)')+';color:'+(isActive?'var(--primary)':'var(--text3)')+';border:1px solid '+(isActive?'rgba(99,102,241,.2)':'var(--border)')+'">Day '+d+' · '+label+'</div>';
-  });
-  html+='</div>';
-
-  // ── Day 1-2 通用导入 ──
-  html+='<div style="font-size:14px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px">'+
-    '<span style="background:#fef3c7;color:#92400e;padding:4px 12px;border-radius:6px;font-size:11px">Day 1-2 · 全岗位通用</span>'+
-    '品牌认知与企业融入'+
-  '</div>';
-
-  ROADMAP_COMMON.forEach(function(d){
-    html+=renderDayBlock(d,progress);
-  });
-
-  // ── Day 3-7 岗位专精 ──
-  html+='<div style="font-size:14px;font-weight:700;margin:20px 0 12px;display:flex;align-items:center;gap:8px">'+
-    '<span style="background:var(--primary);color:#fff;padding:4px 12px;border-radius:6px;font-size:11px">Day 3-7 · '+roadmapPos+'专精</span>'+
-    '每日进阶 · 逐步深入'+
-  '</div>';
-
-  posDays.forEach(function(d){
-    html+=renderDayBlock(d,progress);
-  });
-
-  // ── 汇总表 ──
-  html+='<div style="background:var(--card);border-radius:var(--radius);padding:16px;margin-top:16px;border:1px solid var(--border)">'+
-    '<div style="font-size:14px;font-weight:700;margin-bottom:10px">📊 '+roadmapPos+' · 7天学习汇总</div>'+
-    '<div style="overflow-x:auto;-webkit-overflow-scrolling:touch"><table style="width:100%;border-collapse:collapse;font-size:11px">'+
-    '<tr style="background:var(--bg);font-weight:600;color:var(--text3)">'+
-      '<td style="padding:6px 8px;text-align:center">天数</td><td style="padding:6px 8px">主题</td><td style="padding:6px 8px;text-align:center">理论</td><td style="padding:6px 8px;text-align:center">在线微课</td><td style="padding:6px 8px;text-align:center">跟岗</td><td style="padding:6px 8px;text-align:center">实操</td></tr>';
-  ROADMAP_COMMON.concat(posDays).forEach(function(d){
-    var counts={study:0,online:0,shadow:0,practice:0};
-    d.tasks.forEach(function(t){counts[t.t]=(counts[t.t]||0)+1});
-    html+='<tr style="border-bottom:1px solid var(--border)">'+
-      '<td style="padding:8px;text-align:center;font-weight:700">Day '+d.day+'</td>'+
-      '<td style="padding:8px;font-weight:600">'+d.title+'</td>'+
-      '<td style="padding:8px;text-align:center;color:var(--primary)">'+(counts.study||'-')+'</td>'+
-      '<td style="padding:8px;text-align:center;color:var(--success)">'+(counts.online||'-')+'</td>'+
-      '<td style="padding:8px;text-align:center;color:#d97706">'+(counts.shadow||'-')+'</td>'+
-      '<td style="padding:8px;text-align:center;color:var(--danger)">'+(counts.practice||'-')+'</td>'+
-    '</tr>';
-  });
-  html+='</table></div></div>';
-
-  // ── 进阶路径 ──
-  html+='<div style="background:linear-gradient(135deg,rgba(212,175,55,.08),rgba(212,175,55,.02));border:1px solid rgba(212,175,55,.2);border-radius:var(--radius);padding:16px;margin-top:12px;display:flex;align-items:center;gap:12px">'+
-    '<span style="font-size:28px">🎓</span>'+
-    '<div style="font-size:13px;color:var(--text2)">'+
-      '<strong>进阶路径：</strong>入职7天上手 → 1个月独立上岗 → 3个月L1认证 → 6-12个月L2 → 18+个月L3金牌专家'+
-    '</div>'+
-  '</div>';
-
-  document.getElementById('roadmapDays').innerHTML=html;
-}
-
-function renderDayBlock(d,progress){
-  var allTasks=d.tasks.length;
-  var onlineDone=0;var onlineTotal=0;
-  d.tasks.forEach(function(t){
-    if(t.cids){
-      onlineTotal+=t.cids.length;
-      t.cids.forEach(function(cid){if((progress[cid]||0)>=100)onlineDone++});
-    }
-  });
-  var dayDone=onlineTotal>0?Math.round(onlineDone/onlineTotal*100):0;
-
-  var html='<div style="background:var(--card);border-radius:var(--radius);margin-bottom:14px;overflow:hidden;border:1px solid '+(dayDone>=100?'#16a34a':'var(--border)')+'">'+
-    // 日标题栏
-    '<div style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:'+(dayDone>=100?'rgba(22,163,74,.06)':'rgba(99,102,241,.04)')+';border-bottom:1px solid var(--border)">'+
-      '<div style="width:42px;height:42px;border-radius:12px;background:'+(dayDone>=100?'#16a34a':'var(--primary)')+';color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;flex-shrink:0">'+d.day+'</div>'+
-      '<div style="flex:1;min-width:0">'+
-        '<div style="font-size:15px;font-weight:700">Day '+d.day+' — '+d.title+'</div>'+
-        '<div style="font-size:11px;color:var(--text3)">'+d.desc+'</div>'+
-      '</div>'+
-      (onlineTotal>0?'<div style="font-size:11px;color:'+(dayDone>=100?'var(--success)':'var(--text3)')+';text-align:right;white-space:nowrap">'+
-        '🎬 微课 '+onlineDone+'/'+onlineTotal+
-      '</div>':'')+
-    '</div>'+
-    // 任务列表
-    '<div style="padding:8px 12px 12px">';
-  d.tasks.forEach(function(t){
-    var tt=TASK_TYPES[t.t]||TASK_TYPES.study;
-    var onlineStatus='';
-    if(t.cids){
-      var cDone=t.cids.filter(function(cid){return (progress[cid]||0)>=100}).length;
-      var cStatus=cDone===t.cids.length?'✅':'⏳';
-      onlineStatus='<span style="font-size:10px;color:'+(cDone===t.cids.length?'var(--success)':'var(--text3)')+';margin-left:4px">'+cStatus+cDone+'/'+t.cids.length+'</span>';
-    }
-    html+='<div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;margin:4px 0;border-radius:10px;background:'+tt.bg+';border:1px solid '+tt.border+'">'+
-      '<span style="font-size:16px;flex-shrink:0;margin-top:1px">'+tt.icon+'</span>'+
-      '<div style="flex:1;min-width:0">'+
-        '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">'+
-          '<span style="font-size:13px;font-weight:700">'+t.h+'</span>'+
-          '<span style="font-size:10px;padding:2px 8px;border-radius:10px;background:'+tt.bg+';color:'+tt.color+';font-weight:600;border:1px solid '+tt.border+'">'+tt.label+'</span>'+
-          (t.b?'<span style="font-size:9px;padding:2px 6px;border-radius:8px;background:#fef3c7;color:#92400e;font-weight:600">'+t.b+'</span>':'')+
-          onlineStatus+
-        '</div>'+
-        '<div style="font-size:11px;color:var(--text3);margin-top:3px;line-height:1.5">'+t.d+'</div>'+
-        // 在线微课课程卡片
-        (t.cids?'<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">'+t.cids.map(function(cid){
-          var c=COURSES.find(function(x){return x.id===cid});
-          if(!c)return'';
-          var cp=progress[c.id]||0;
-          var cd=cp>=100;
-          return '<button type="button" style="display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:14px;font-size:11px;font-weight:600;cursor:pointer;background:'+(cd?'rgba(22,163,74,.1)':'var(--bg)')+';color:'+(cd?'var(--success)':'var(--primary)')+';border:1px solid '+(cd?'rgba(22,163,74,.2)':'var(--border)')+'" onclick="event.stopPropagation();openCourse('+cid+')">'+c.icon+' '+c.title+(cd?' ✓':'')+'</button>';
-        }).join('')+'</div>':'')+
-      '</div>'+
-      '<span style="font-size:10px;color:var(--muted);white-space:nowrap;flex-shrink:0">'+t.hh+'</span>'+
-    '</div>';
-  });
-  // 通关考核
-  if(d.cp){
-    html+='<div style="display:flex;align-items:flex-start;gap:8px;padding:10px 12px;margin:8px 4px 4px;border-radius:10px;background:rgba(212,175,55,.06);border:1px dashed rgba(212,175,55,.3)">'+
-      '<span style="font-size:14px;flex-shrink:0">🏁</span>'+
-      '<div style="font-size:11px;color:#92400e;line-height:1.5"><strong>通关考核：</strong>'+d.cp+'</div>'+
-    '</div>';
-  }
-  html+='</div></div>';
-  return html;
-}
-
-// ── 学习明星榜 ──
-// 模拟学员数据（用于排行榜展示）
-var MOCK_LEARNERS=[
-  {name:'张明远',dept:'销售顾问',store:'旗舰店A',completions:32,streak:45,score:9800,avatar:'👨‍💼'},
-  {name:'李婷',dept:'数字化营销师',store:'旗舰店A',completions:28,streak:38,score:8500,avatar:'👩‍💻'},
-  {name:'王建国',dept:'检测评估师',store:'城市店B',completions:26,streak:30,score:7800,avatar:'👨‍🔧'},
-  {name:'赵晓丽',dept:'金融专员',store:'旗舰店A',completions:24,streak:42,score:9200,avatar:'👩‍💼'},
-  {name:'陈伟',dept:'维修技师',store:'城市店C',completions:22,streak:21,score:6600,avatar:'👨‍🔧'},
-  {name:'刘芳',dept:'店长/储备干部',store:'旗舰店A',completions:30,streak:36,score:9100,avatar:'👩‍💼'},
-  {name:'杨帆',dept:'销售顾问',store:'城市店B',completions:18,streak:15,score:5200,avatar:'👨‍💼'},
-  {name:'周敏',dept:'数字化营销师',store:'城市店C',completions:20,streak:28,score:6100,avatar:'👩‍💻'},
-  {name:'吴强',dept:'金融专员',store:'城市店B',completions:16,streak:18,score:4800,avatar:'👨‍💼'},
-  {name:'孙丽华',dept:'检测评估师',store:'旗舰店A',completions:19,streak:25,score:5700,avatar:'👩‍🔧'},
-];
-
-var MOCK_STORES=[
-  {name:'旗舰店A',members:'24人',completionRate:'82%',avgScore:'8,750分',trend:'up'},
-  {name:'城市店B',members:'18人',completionRate:'68%',avgScore:'5,890分',trend:'up'},
-  {name:'城市店C',members:'15人',completionRate:'61%',avgScore:'5,230分',trend:'down'},
-  {name:'社区店D',members:'10人',completionRate:'55%',avgScore:'4,120分',trend:'flat'},
-  {name:'社区店E',members:'8人',completionRate:'48%',avgScore:'3,650分',trend:'up'},
-];
-
-function renderStarsTab(){
-  var progress=getProgress();
-  var myCompleted=COURSES.filter(function(c){return (progress[c.id]||0)>=100}).length;
-  var myStreak=getConsecutiveDays();
-  var myScore=myCompleted*300+myStreak*50;
-
-  // 合并我和模拟学员，按完成度排序
-  var allLearners=MOCK_LEARNERS.slice().map(function(l){
-    return {name:l.name,dept:l.dept,store:l.store,completions:l.completions,streak:l.streak,score:l.score,avatar:l.avatar,isMe:false};
-  });
-  allLearners.push({name:'我',dept:'学习进行中',store:'我的门店',completions:myCompleted,streak:myStreak,score:myScore,avatar:'🙋',isMe:true});
-  allLearners.sort(function(a,b){return b.score-a.score});
-  var myRank=allLearners.findIndex(function(l){return l.isMe})+1;
-
-  // ── 顶部Banner ──
-  var h='<div class="stars-banner">'+
-    '<h2>⭐ 学习明星榜</h2>'+
-    '<div class="sub">卡泰驰培训中心 · 学习力排名</div>';
-  if(myRank){
-    h+='<div class="my-rank">🏆 你的排名：<span class="rn">#'+myRank+'</span> 积分：'+myScore+'</div>';
-  }
-  h+='</div>';
-
-  // ── 三甲领奖台 ──
-  var top3=allLearners.slice(0,3);
-  var orders=[1,0,2]; // 第二、第一、第三的显示顺序
-  h+='<div class="panel" style="margin-bottom:16px"><div class="medal-row">';
-  orders.forEach(function(idx){
-    var l=top3[idx];
-    if(!l)return;
-    var medalIcon=idx===0?'🥇':idx===1?'🥈':'🥉';
-    var sizeClass=idx===0?'medal-first':'';
-    h+='<div class="medal-item '+sizeClass+'">'+
-      '<div class="micon">'+medalIcon+'</div>'+
-      '<div class="micon" style="font-size:'+(idx===0?'28px':'22px')+'">'+l.avatar+'</div>'+
-      '<div class="mname">'+l.name+(l.isMe?' (你)':'')+'</div>'+
-      '<div class="mdept">'+l.dept+'</div>'+
-      '<div class="mscore">'+l.score+'分 · '+l.completions+'门</div>'+
-    '</div>';
-  });
-  h+='</div></div>';
-
-  // ── 完整排行榜表格 ──
-  h+='<div class="panel" style="margin-bottom:16px">'+
-    '<div class="section-header" style="margin-top:0"><div class="icon" style="background:rgba(245,158,11,.1);color:#f59e0b">🏆</div><div><span class="title">学习明星排行榜</span></div></div>'+
-    '<div style="overflow-x:auto;-webkit-overflow-scrolling:touch"><table class="rank-table"><tbody>';
-  allLearners.forEach(function(l,i){
-    var rank=i+1;
-    var rankClass=rank===1?'rank-1':rank===2?'rank-2':rank===3?'rank-3':'rank-other';
-    var rankDisplay=rank<=3?['🥇','🥈','🥉'][rank-1]:rank;
-    var highlight=l.isMe?' style="background:#eef2ff;border-radius:8px"':'';
-    h+='<tr'+highlight+'>'+
-      '<td style="width:48px"><div class="rank-num '+rankClass+'">'+rankDisplay+'</div></td>'+
-      '<td><span style="font-size:20px">'+l.avatar+'</span></td>'+
-      '<td><div class="rank-name">'+l.name+(l.isMe?' <span style="color:var(--primary);font-size:11px">(你)</span>':'')+'</div><div class="rank-dept">'+l.dept+' · '+l.store+'</div></td>'+
-      '<td class="rank-score">'+l.score+'<span style="font-size:10px;color:var(--text3)">分</span></td>'+
-      '<td class="rank-streak">🔥 '+l.streak+'天</td>'+
-      '<td style="font-size:12px;color:var(--success)">'+l.completions+'门</td>'+
-    '</tr>';
-  });
-  h+='</tbody></table></div></div>';
-
-  // ── 门店/部门排名 ──
-  h+='<div class="panel">'+
-    '<div class="section-header" style="margin-top:0"><div class="icon" style="background:rgba(99,102,241,.1);color:var(--primary)">🏪</div><div><span class="title">门店学习排名</span></div></div>';
-  MOCK_STORES.forEach(function(s,i){
-    var rank=i+1;
-    var iconClass=rank<=3?'sri-'+rank:'';
-    var trendIcon=s.trend==='up'?'📈':s.trend==='down'?'📉':'➡️';
-    h+='<div class="store-rank-card">'+
-      '<div class="sri '+iconClass+'">'+(rank<=3?['🥇','🥈','🥉'][rank-1]:rank)+'</div>'+
-      '<div class="srd"><div class="srn">'+s.name+'</div><div class="srm">'+s.members+' · 平均积分 '+s.avgScore+'</div></div>'+
-      '<div class="srs">'+s.completionRate+' <span style="font-size:12px">'+trendIcon+'</span></div>'+
-    '</div>';
-  });
-  h+='</div>';
-
-  document.getElementById('starsContent').innerHTML=h;
-}
-function switchTab(tab){
-  currentTab=tab;
-  ['roadmap','stars'].forEach(function(t){
-    var el=document.getElementById('tab-'+t);
-    if(t===tab)el.classList.remove('hidden');else el.classList.add('hidden');
-  });
-  var btns=document.querySelectorAll('.tab-btn');
-  btns.forEach(function(b){
-    var txt=b.textContent.trim();
-    if((tab==='roadmap'&&txt.includes('学习地图'))||
-       (tab==='stars'&&txt.includes('学习明星')))b.classList.add('active');
-    else b.classList.remove('active');
-  });
-  // 底部导航
-  var nis=document.querySelectorAll('.bottom-nav .nav-item');
-  nis.forEach(function(n,i){
-    var idxs={roadmap:0,stars:1};
-    if(i===idxs[tab])n.classList.add('active');else n.classList.remove('active');
-  });
-  if(tab==='roadmap'){renderRoadmapFilter();renderRoadmapDays();}
-  if(tab==='stars')renderStarsTab();
-  updateStats();
-}
-
-// ── 我的进度页面 ──
-function showMyProgress(){
-  currentTab='my';
-  document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active')});
-  ['roadmap','stars'].forEach(function(t){
-    document.getElementById('tab-'+t).classList.add('hidden');
-  });
-  var nis=document.querySelectorAll('.bottom-nav .nav-item');
-  nis.forEach(function(n,i){if(i===2)n.classList.add('active');else n.classList.remove('active')});
-
-  var progress=getProgress();
-  var completed=COURSES.filter(function(c){return (progress[c.id]||0)>=100});
-  var inProgress=COURSES.filter(function(c){var p=progress[c.id]||0;return p>0&&p<100});
-  var notStarted=COURSES.filter(function(c){return !progress[c.id]});
-
-  document.getElementById('tab-roadmap').innerHTML=
-    '<div class="section-header required"><div class="icon">📊</div><div><span class="title">我的学习</span></div></div>'+
-    '<div class="section-header required"><div class="icon">📊</div><div><span class="title">我的学习</span></div></div>'+
-    '<div class="banner" style="margin-bottom:16px">'+
-      '<div class="avatar" style="background:linear-gradient(135deg,#16a34a,#22c55e)">✅</div>'+
-      '<div class="info">'+
-        '<h2>学习概览</h2>'+
-        '<div class="stats-row">'+
-          '<div class="stat-item">已完成 <span class="val">'+completed.length+'</span> 门</div>'+
-          '<div class="stat-item">进行中 <span class="val" style="color:#f59e0b">'+inProgress.length+'</span> 门</div>'+
-          '<div class="stat-item">未开始 <span class="val" style="color:#9ca3af">'+notStarted.length+'</span> 门</div>'+
-        '</div>'+
-      '</div>'+
-    '</div>'+
-    (completed.length?'<div class="section-header"><div class="icon" style="background:rgba(22,163,74,.1);color:#16a34a">✅</div><div><span class="title">已完成</span></div></div><div class="course-grid">'+completed.map(function(c){return courseCard(c,100)}).join('')+'</div>':'')+
-    (inProgress.length?'<div class="section-header"><div class="icon" style="background:rgba(245,158,11,.1);color:#f59e0b">⏳</div><div><span class="title">进行中</span></div></div><div class="course-grid">'+inProgress.map(function(c){return courseCard(c,progress[c.id]||0)}).join('')+'</div>':'')+
-    (notStarted.length?'<div class="section-header"><div class="icon" style="background:rgba(156,163,175,.1);color:#9ca3af">📋</div><div><span class="title">待学习</span></div></div><div class="course-grid">'+notStarted.map(function(c){return courseCard(c,0)}).join('')+'</div>':'')+
-    '<div style="height:60px"></div>';
-}
-
-// ── 课程详情弹窗 ──
-function openCourse(id){
-  var c=COURSES.find(function(x){return x.id===id});
-  if(!c)return;
-  var progress=getProgress();
-  var p=progress[c.id]||0;
-  var sectionsDone=progress[c.id+'_sections']||[];
-  var html='<div class="modal-header">'+
-    '<h3>'+c.icon+' '+c.title+'</h3>'+
-    '<button class="modal-close" onclick="document.getElementById(\'modalOverlay\').classList.add(\'hidden\')">✕</button>'+
-  '</div>'+
-  '<p style="color:var(--text3);font-size:13px;margin-bottom:16px">'+c.desc+'</p>'+
-  '<div style="font-size:14px;font-weight:700;margin-bottom:10px">📚 课程章节（'+c.sections.length+'节）</div>'+
-  '<div class="section-list">';
-  c.sections.forEach(function(s,i){
-    var done=sectionsDone.indexOf(i)>-1;
-    html+='<div class="section-item">'+
-      '<div class="idx" style="'+(done?'background:#16a34a':'')+'">'+(i+1)+'</div>'+
-      '<div class="label">'+s+'</div>'+
-      '<button class="btn-sm '+(done?'btn-done':'btn-complete')+'" onclick="event.stopPropagation();toggleSection('+c.id+','+i+')">'+(done?'✓ 已学':'标记完成')+'</button>'+
-    '</div>';
-  });
-  html+='</div>';
-  // 视频区占位（先显示，后异步加载）
-  html+='<div id="videosSection_'+c.id+'"><div style="text-align:center;padding:16px;color:var(--text3);font-size:12px">⏳ 加载视频...</div></div>';
-  html+='<div class="modal-actions">'+
-    '<button class="btn-secondary" onclick="resetCourse('+c.id+')">🔄 重新学习</button>'+
-    '<button class="btn-primary" onclick="markComplete('+c.id+')">✅ 全部标记完成</button>'+
-  '</div>';
-  document.getElementById('modalBody').innerHTML=html;
-  document.getElementById('modalOverlay').classList.remove('hidden');
-  // 异步加载视频
-  loadCourseVideos(c);
-}
-
-var API_BASE='http://localhost:3000';
-function loadCourseVideos(c){
-  // 先显示内置视频
-  var builtinHtml='';
-  if(c.videos&&c.videos.length){
-    builtinHtml='<div style="font-size:14px;font-weight:700;margin:16px 0 10px">🎬 参考视频</div>';
-    c.videos.forEach(function(v){
-      builtinHtml+='<div class="video-card"><div class="vid-title">'+v.title+'</div><div class="vid-dur">⏱ '+v.dur+'</div></div>';
+    day.items.forEach(function(item, ii) {
+      var itemKey = dayKey + '_' + ii;
+      var checked = prog[itemKey] ? ' checked' : '';
+      if (checked) dayDoneCount++;
+      totalItems++; if (checked) doneItems++;
+      var tagClass = item.t === 'online' ? 'online' : (item.t === 'shadow' ? 'shadow' : 'study');
+      var tagText = item.t === 'online' ? '在线' : (item.t === 'shadow' ? '跟岗' : '学习');
+      var iconMap = {study:'📖', online:'🎬', shadow:'👀', practice:'🎯'};
+      itemsHtml += '<label class="course-item">' +
+        '<span class="ci-check"><input type="checkbox"' + checked + ' onchange="toggleItem(\'' + itemKey + '\')"><span class="ci-check-box"></span></span>' +
+        '<span class="ci-icon">' + (iconMap[item.t] || '📌') + '</span>' +
+        '<span class="ci-info"><span class="ci-title">' + item.h + '</span><span class="ci-meta">' + item.d + '</span></span>' +
+        '<span class="ci-tag ' + tagClass + '">' + tagText + '</span>' +
+        '</label>';
     });
-  }
-  // 尝试从API获取已上传视频
-  try{
-    var xhr=new XMLHttpRequest();
-    xhr.open('GET',API_BASE+'/api/courses/'+c.id+'/videos',true);
-    xhr.timeout=5000;
-    xhr.onload=function(){
-      var section=document.getElementById('videosSection_'+c.id);
-      if(!section)return;
-      try{var j=JSON.parse(xhr.responseText);var linked=j.data||[]}catch(e){var linked=[]}
-      var html='';
-      if(linked.length){
-        html+='<div style="font-size:14px;font-weight:700;margin:16px 0 10px">🎬 课程视频（'+linked.length+'个）</div>';
-        linked.forEach(function(m){
-          var v=m.video||{};
-          var secLabel=m.section!=null?' · 章节'+(m.section+1):'';
-          html+='<div class="video-card">'+
-            '<div class="vid-title">▶ '+(v.originalName||'未命名视频')+secLabel+'</div>'+
-            '<div class="vid-dur">'+(v.size?(v.size/1024/1024).toFixed(1)+'MB':'')+'</div>'+
-            '<a href="'+API_BASE+v.url+'" target="_blank" class="vid-play">▶ 播放视频</a>'+
-          '</div>';
-        });
-      }
-      if(!linked.length&&!c.videos)html='<div style="text-align:center;padding:12px;color:var(--muted);font-size:12px">暂无视频资源</div>';
-      else if(!linked.length&&c.videos)html='';
-      section.innerHTML=html+(linked.length?builtinHtml:'');
-    };
-    xhr.onerror=function(){
-      var section=document.getElementById('videosSection_'+c.id);
-      if(section)section.innerHTML=builtinHtml||'<div style="text-align:center;padding:12px;color:var(--muted);font-size:12px">视频服务未连接</div>';
-    };
-    xhr.ontimeout=xhr.onerror;
-    xhr.send();
-  }catch(e){
-    var section=document.getElementById('videosSection_'+c.id);
-    if(section)section.innerHTML=builtinHtml||'';
-  }
+
+    var allDone = dayDoneCount === day.items.length;
+    html += '<div class="day-card' + (allDone ? ' open' : '') + '" data-day="' + day.day + '">' +
+      '<div class="day-header" onclick="toggleDay(this)">' +
+        '<div class="day-num' + (allDone ? ' done' : '') + '">' + day.day + '</div>' +
+        '<div class="day-info"><h3>' + day.title + '</h3><div class="day-desc">' + day.items.length + '项任务</div></div>' +
+        '<span class="day-check ' + (allDone ? 'ok' : 'ing') + '">' + (allDone ? '已完成' : dayDoneCount + '/' + day.items.length) + '</span>' +
+        '<span class="day-arrow">▼</span>' +
+      '</div>' +
+      '<div class="day-body"><div class="course-list">' + itemsHtml + '</div></div>' +
+    '</div>';
+  });
+
+  container.innerHTML = html;
+  updateStats(totalItems, doneItems);
 }
 
-function toggleSection(courseId,idx){
-  var progress=getProgress();
-  var key=courseId+'_sections';
-  var arr=progress[key]||[];
-  var pos=arr.indexOf(idx);
-  if(pos>-1)arr.splice(pos,1);else arr.push(idx);
-  progress[key]=arr;
-  // 计算进度
-  var c=COURSES.find(function(x){return x.id===courseId});
-  progress[courseId]=c?Math.round(arr.length/c.sections.length*100):0;
-  saveProgress(progress);
-  renderAll();
-  openCourse(courseId);
+function toggleDay(header) {
+  var card = header.parentElement;
+  card.classList.toggle('open');
 }
 
-function markComplete(courseId){
-  var progress=getProgress();
-  var c=COURSES.find(function(x){return x.id===courseId});
-  progress[courseId]=100;
-  progress[courseId+'_sections']=c.sections.map(function(_,i){return i});
-  saveProgress(progress);
-  renderAll();
-  openCourse(courseId);
+function toggleItem(key) {
+  var prog = loadProg();
+  prog[key] = !prog[key];
+  saveProg(prog);
+  renderDays();
+  // re-expand the day card that was toggled
+  var parts = key.split('__');
+  var dayNum = parts[1].replace('day','');
+  setTimeout(function() {
+    var cards = document.querySelectorAll('.day-card');
+    cards.forEach(function(c) {
+      if (c.dataset.day === dayNum) c.classList.add('open');
+    });
+  }, 50);
 }
 
-function resetCourse(courseId){
-  var progress=getProgress();
-  progress[courseId]=0;
-  progress[courseId+'_sections']=[];
-  saveProgress(progress);
-  renderAll();
-  openCourse(courseId);
-}
-
-function closeModal(e){
-  if(e.target===document.getElementById('modalOverlay')){
-    document.getElementById('modalOverlay').classList.add('hidden');
-    renderAll();
+// ── stats ──
+function updateStats(t, d) {
+  if (typeof t === 'number') {
+    document.getElementById('statDone').textContent = d;
+    document.getElementById('statRate').textContent = t ? Math.round(d / t * 100) + '%' : '0%';
+  } else {
+    document.getElementById('statDone').textContent = '0';
+    document.getElementById('statRate').textContent = '0%';
   }
 }
 
-// ── 初始化 ──
-switchTab('roadmap');
+// ── init ──
+buildPosFilter();
+renderDays();
 </script>
 </body>
 </html>
