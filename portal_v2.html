@@ -12,6 +12,7 @@
   --pri:#F5A623;--pri-lt:#FFF3E0;--pri-dk:#E69500;
   --m1:#4F6EF7;--m1-lt:#EEF0FF;
   --m2:#0D9488;--m2-lt:#E6FFFA;
+  --m4:#7C3AED;--m4-lt:#F3EEFF;
   --suc:#4CAF50;--err:#F44336;
   --bg:#F5F6FA;--card:#FFFFFF;
   --t1:#1A1A2E;--t2:#666680;--t3:#999AAA;
@@ -27,7 +28,7 @@ body{
 }
 
 /* ── 顶部装饰条 ── */
-.top-bar{height:4px;background:linear-gradient(90deg,#4F6EF7,var(--pri),#0D9488);position:fixed;top:0;left:0;right:0;z-index:10}
+.top-bar{height:4px;background:linear-gradient(90deg,#4F6EF7,var(--pri),#0D9488,#7C3AED);position:fixed;top:0;left:0;right:0;z-index:10}
 
 /* ── 主容器 ── */
 .portal{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:60px 24px 40px}
@@ -59,6 +60,7 @@ body{
 .module-card:nth-child(1)::after{background:var(--m1)}
 .module-card:nth-child(2)::after{background:var(--m2)}
 .module-card:nth-child(3)::after{background:#F97316}
+.module-card:nth-child(4)::after{background:var(--m4)}
 .module-card:hover{transform:translateY(-4px);box-shadow:var(--sh-hover);border-color:transparent}
 .module-card:hover::after{left:8px;right:8px}
 .module-card:active{transform:scale(.985)}
@@ -72,6 +74,7 @@ body{
 .module-card:nth-child(1) .card-icon{background:var(--m1-lt);color:var(--m1)}
 .module-card:nth-child(2) .card-icon{background:var(--m2-lt);color:var(--m2)}
 .module-card:nth-child(3) .card-icon{background:#FFF7ED;color:#F97316}
+.module-card:nth-child(4) .card-icon{background:var(--m4-lt);color:var(--m4)}
 .card-icon svg{width:26px;height:26px}
 
 /* Badge */
@@ -88,10 +91,12 @@ body{
 .module-card:nth-child(1) .card-title .hl{color:var(--m1)}
 .module-card:nth-child(2) .card-title .hl{color:var(--m2)}
 .module-card:nth-child(3) .card-title .hl{color:#F97316}
+.module-card:nth-child(4) .card-title .hl{color:var(--m4)}
 .card-slogan{font-size:12px;font-weight:600;letter-spacing:1px;margin-top:-8px;margin-bottom:12px;position:relative;z-index:1}
 .module-card:nth-child(1) .card-slogan{color:var(--m1)}
 .module-card:nth-child(2) .card-slogan{color:var(--m2)}
 .module-card:nth-child(3) .card-slogan{color:#F97316}
+.module-card:nth-child(4) .card-slogan{color:var(--m4)}
 .card-desc{font-size:13px;color:var(--t3);line-height:1.7;margin-bottom:28px;position:relative;z-index:1}
 
 /* 特性列表 */
@@ -101,6 +106,7 @@ body{
 .module-card:nth-child(1) .card-features li::before{background:var(--m1)}
 .module-card:nth-child(2) .card-features li::before{background:var(--m2)}
 .module-card:nth-child(3) .card-features li::before{background:#F97316}
+.module-card:nth-child(4) .card-features li::before{background:var(--m4)}
 
 /* 按钮 */
 .card-cta{
@@ -130,6 +136,8 @@ body{
 .card-btn-blue:active{background:#3d5ce5}
 .card-btn-orange{background:#F97316;color:#fff;box-shadow:0 4px 16px rgba(249,115,22,.35)}
 .card-btn-orange:active{background:#ea580c}
+.card-btn-purple{background:var(--m4);color:#fff;box-shadow:0 4px 16px rgba(124,58,237,.35)}
+.card-btn-purple:active{background:#6d28d9}
 
 @media(max-width:768px){
   .card-actions{gap:8px}.card-btn{padding:11px 0;font-size:13px}
@@ -209,7 +217,7 @@ body{
 }
 </style>
 <script>
-var __P_BUILD__='20260625v6';
+var __P_BUILD__='20260625v7';
 var __p_cached__=localStorage.getItem('_portal_build');
 if(__p_cached__&&__p_cached__!==__P_BUILD__){
   localStorage.setItem('_portal_build',__P_BUILD__);
@@ -317,6 +325,31 @@ if(__p_cached__&&__p_cached__!==__P_BUILD__){
       </ul>
       <button class="card-btn card-btn-orange" style="width:100%" onclick="event.stopPropagation();goModule('tuban_plan.html')">
         进入学习
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="module-card">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+      </div>
+      <div class="card-badge">MODULE 04</div>
+      <h2 class="card-title">线下<span class="hl">集训营</span></h2>
+      <p class="card-slogan">实战淬炼，名师带教</p>
+      <p class="card-desc">定期举办线下集中特训，分岗位小班制教学，名师现场带教实战演练，理论与实操考核一体化，结业认证持续跟踪辅导。</p>
+      <ul class="card-features">
+        <li>店长/销售/技师分岗特训</li>
+        <li>名师现场带教实战演练</li>
+        <li>理论+实操+考核一体化</li>
+        <li>结业认证持续跟踪辅导</li>
+      </ul>
+      <button class="card-btn card-btn-purple" style="width:100%" onclick="event.stopPropagation();goModule('camp.html')">
+        查看详情
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M5 12h14M12 5l7 7-7 7"/>
         </svg>
