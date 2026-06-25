@@ -1,421 +1,352 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>门店晨会途伴计划 · 卡泰驰培训中心</title>
-<style>
-:root{
-  --pri:#F5A623;--pri2:#FFB84D;--pri-lt:#FFF3E0;
-  --blue:#4F6EF7;--cyan:#0D9488;--suc:#4CAF50;
-  --bg:#F5F6FA;--card:#FFFFFF;
-  --t1:#1A1A2E;--t2:#666680;--t3:#999AAA;
-  --bd:#E8E8EF;--sh:0 2px 16px rgba(0,0,0,.06);
-  --r:12px;--rs:8px;
+<style>:root{--pri:#F5A623;--bg:#F5F6FA;--card:#FFFFFF;--text:#1A1A2E;--t3:#6B7280;--blue:#4F6EF7;--cyan:#0D9488;--suc:#4CAF50;--danger:#F44336;--m4:#E85D75;--m5:#8B5CF6}
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.topbar{position:sticky;top:0;z-index:100;background:var(--card);padding:10px 16px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 4px rgba(0,0,0,.06);border-bottom:3px solid var(--pri)}
+.topbar-back{width:32px;height:32px;border-radius:8px;border:none;background:#f3f4f6;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;color:#666}
+.topbar-back:hover{background:#e5e7eb}
+.topbar-logo{height:26px;width:auto}
+.topbar-title{font-size:16px;font-weight:700;flex:1}
+.topbar-progress{font-size:12px;color:var(--t3);background:#fff3e0;padding:4px 10px;border-radius:12px;font-weight:600;color:var(--pri)}
+.container{max-width:800px;margin:0 auto;padding:18px 16px 40px}
+.header{text-align:center;margin-bottom:28px}
+.header-tag{display:inline-block;font-size:11px;font-weight:600;color:var(--pri);letter-spacing:3px;text-transform:uppercase;background:#fff3e0;padding:4px 14px;border-radius:20px;margin-bottom:12px}
+.header h1{font-size:30px;font-weight:900;color:var(--text);line-height:1.3}
+.header h1 .accent{color:var(--pri)}
+.header .sub{font-size:13px;color:var(--t3);margin-top:8px;line-height:1.6}
+.stats-row{display:flex;justify-content:center;gap:24px;margin-top:18px}
+.stat-item{text-align:center}
+.stat-num{font-size:28px;font-weight:800;color:var(--pri)}
+.stat-label{font-size:11px;color:var(--t3);margin-top:2px}
+.module-wrap{margin-bottom:16px}
+.module-bar{background:var(--card);border-radius:12px;padding:16px 18px;cursor:pointer;box-shadow:0 2px 12px rgba(0,0,0,.04);transition:box-shadow .2s;display:flex;align-items:center;gap:14px;border-left:4px solid transparent}
+.module-bar:hover{box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.module-bar.m1{border-left-color:var(--blue)}.module-bar.m2{border-left-color:var(--cyan)}.module-bar.m3{border-left-color:var(--pri)}
+.module-bar.m4{border-left-color:var(--m4)}.module-bar.m5{border-left-color:var(--suc)}.module-bar.m6{border-left-color:var(--m5)}
+.module-bar .mod-icon{font-size:28px;flex-shrink:0}
+.module-bar .mod-main{flex:1;min-width:0}
+.module-bar .mod-num{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--t3);margin-bottom:3px}
+.module-bar .mod-title{font-size:17px;font-weight:700}
+.module-bar .mod-tags{font-size:11px;color:var(--t3);margin-top:2px}
+.module-bar .mod-arrow{font-size:14px;color:#ccc;transition:transform .3s}
+.module-bar.open .mod-arrow{transform:rotate(90deg)}
+.module-body{display:none;background:var(--card);margin-top:2px;border-radius:0 0 12px 12px;padding:4px 18px 16px}
+.module-body.open{display:block}
+.kb-card{background:#fafbfc;border-radius:10px;padding:16px;margin-top:12px;border:1px solid #eef0f4}
+.kb-card-head{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.kb-card-num{font-size:11px;font-weight:700;color:var(--pri);background:#fff3e0;padding:2px 8px;border-radius:6px;flex-shrink:0}
+.kb-card-title{font-size:14px;font-weight:700;color:var(--text)}
+.kb-card-time{font-size:11px;color:var(--t3);margin-left:auto;flex-shrink:0}
+.kb-insight{font-size:13px;color:#555;line-height:1.7;margin-bottom:10px;padding:8px 12px;background:#fffbe6;border-radius:8px}
+.kb-section{margin-bottom:8px}
+.kb-section h4{font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px}
+.kb-section p,.kb-section ul{font-size:12px;color:#666;line-height:1.7}
+.kb-section ul{padding-left:16px}
+.kb-section ul li{margin-bottom:2px}
+.kb-scene{background:#f0f4ff;padding:10px 12px;border-radius:8px;margin-top:8px;font-size:12px;line-height:1.7}
+.kb-scene b{color:var(--blue)}
+.kb-practice{background:#f0fdf4;padding:10px 12px;border-radius:8px;margin-top:6px;font-size:12px;line-height:1.7}
+.kb-practice b{color:var(--suc)}
+.kb-source{font-size:10px;color:var(--t3);margin-top:8px;text-align:right}
+.kb-check-label{display:flex;align-items:center;gap:6px;margin-top:8px;font-size:12px;color:var(--t3);cursor:pointer;user-select:none}
+.kb-check-label input{display:none}
+.kb-check-box{width:16px;height:16px;border-radius:4px;border:2px solid #d1d5db;display:flex;align-items:center;justify-content:center;font-size:10px;transition:all .2s}
+.kb-check-label input:checked+.kb-check-box{background:var(--suc);border-color:var(--suc);color:#fff}
+.kb-check-label input:checked+.kb-check-box::after{content:'✓'}
+.mmt-section{background:var(--card);border-radius:12px;padding:24px 20px;margin-top:28px;box-shadow:0 2px 12px rgba(0,0,0,.04)}
+.mmt-section h2{font-size:16px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.mmt-section .mmt-desc{font-size:12px;color:var(--t3);line-height:1.7;margin-bottom:18px}
+.mmt-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.mmt-step{text-align:center}
+.mmt-step .step-num{width:32px;height:32px;border-radius:50%;background:var(--pri);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;margin-bottom:6px}
+.mmt-step .step-name{font-size:11px;font-weight:600;color:var(--text)}
+.mmt-step .step-time{font-size:10px;color:var(--t3);margin-top:2px}
+.brand{text-align:center;font-size:10px;color:var(--t3);padding:24px 0 8px}
+@media(max-width:600px){
+  .header h1{font-size:24px}
+  .mmt-steps{grid-template-columns:repeat(2,1fr)}
+  .module-bar{padding:12px 14px}
+  .module-bar .mod-icon{font-size:22px}
+  .module-bar .mod-title{font-size:15px}
+  .module-body{padding:4px 10px 12px}
 }
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--t1);min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-
-/* 顶部装饰条 */
-.top-deco{height:4px;background:linear-gradient(90deg,var(--blue),var(--pri),var(--cyan));position:fixed;top:0;left:0;right:0;z-index:100}
-
-/* ── Topbar ── */
-.topbar{background:var(--card);border-bottom:1px solid var(--bd);padding:10px 16px;position:sticky;top:4px;z-index:99;box-shadow:0 1px 4px rgba(0,0,0,.04)}
-.topbar-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:12px}
-.topbar-back{display:flex;align-items:center;gap:4px;color:var(--t2);text-decoration:none;font-size:13px;font-weight:600;white-space:nowrap}
-.topbar-back:hover{color:var(--pri)}
-.topbar-sep{width:1px;height:20px;background:var(--bd)}
-.topbar-logo{height:28px;width:auto;flex-shrink:0}
-.topbar-title{font-size:16px;font-weight:700;color:var(--t1)}
-.topbar-badge{background:var(--pri-lt);color:var(--pri);font-size:10px;font-weight:700;padding:2px 10px;border-radius:20px;white-space:nowrap;margin-left:auto}
-
-/* ── Hero ── */
-.hero{padding:48px 20px 40px;text-align:center}
-.hero-badge{display:inline-block;background:var(--blue);color:#fff;font-size:11px;font-weight:700;letter-spacing:3px;padding:6px 18px;border-radius:20px;margin-bottom:20px}
-.hero h1{font-size:40px;font-weight:900;color:var(--t1);letter-spacing:2px;margin-bottom:10px}
-.hero h1 .accent{color:var(--pri)}
-.hero .subtitle{font-size:15px;color:var(--t2);max-width:500px;margin:0 auto 32px;line-height:1.7}
-
-/* ── Stats Row ── */
-.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:860px;margin:0 auto 40px;padding:0 20px}
-.stat-card{background:var(--card);border-radius:var(--r);padding:20px 16px;text-align:center;box-shadow:var(--sh);border:1px solid var(--bd)}
-.stat-card .num{font-size:32px;font-weight:900;color:var(--pri);line-height:1}
-.stat-card .num.blue{color:var(--blue)}
-.stat-card .num.cyan{color:var(--cyan)}
-.stat-card .num.green{color:var(--suc)}
-.stat-card .label{font-size:12px;color:var(--t3);margin-top:6px}
-.stat-card .unit{font-size:14px;color:var(--t2);font-weight:400}
-
-/* ── Main Content ── */
-.main{max-width:1100px;margin:0 auto;padding:0 20px 60px}
-
-/* ── Section Title ── */
-.section-title{text-align:center;margin-bottom:28px}
-.section-title h2{font-size:24px;font-weight:800;color:var(--t1);margin-bottom:6px}
-.section-title p{font-size:13px;color:var(--t3);max-width:500px;margin:0 auto;line-height:1.6}
-
-/* ── Module Grid ── */
-.module-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;margin-bottom:48px}
-.module-card{background:var(--card);border-radius:var(--r);padding:24px;box-shadow:var(--sh);border:1px solid var(--bd);cursor:pointer;transition:all .25s;position:relative;overflow:hidden}
-.module-card:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,.1)}
-.module-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
-.module-card.m1::before{background:var(--blue)}
-.module-card.m2::before{background:var(--cyan)}
-.module-card.m3::before{background:var(--pri)}
-.module-card.m4::before{background:#E85D75}
-.module-card.m5::before{background:#8B5CF6}
-.module-card.m6::before{background:var(--suc)}
-.module-card.expanded{box-shadow:0 8px 32px rgba(0,0,0,.12);border-color:var(--pri)}
-.module-header{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px}
-.module-num{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:#fff;flex-shrink:0}
-.module-card.m1 .module-num{background:var(--blue)}
-.module-card.m2 .module-num{background:var(--cyan)}
-.module-card.m3 .module-num{background:var(--pri)}
-.module-card.m4 .module-num{background:#E85D75}
-.module-card.m5 .module-num{background:#8B5CF6}
-.module-card.m6 .module-num{background:var(--suc)}
-.module-info h3{font-size:17px;font-weight:700;color:var(--t1);margin-bottom:4px}
-.module-info .meta{font-size:11px;color:var(--t3)}
-.module-body{display:none;margin-top:16px;padding-top:16px;border-top:1px solid var(--bd)}
-.module-card.expanded .module-body{display:block}
-.module-body .kb-list{list-style:none;display:flex;flex-direction:column;gap:8px}
-.module-body .kb-list li{display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--bg);border-radius:var(--rs);font-size:13px;color:var(--t1);transition:all .2s}
-.module-body .kb-list li:hover{background:var(--pri-lt)}
-.kb-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
-.module-body .kb-list li .kb-check{width:18px;height:18px;border:2px solid var(--bd);border-radius:50%;flex-shrink:0;cursor:pointer;transition:all .25s;display:flex;align-items:center;justify-content:center;font-size:10px;color:transparent}
-.module-body .kb-list li .kb-check.checked{background:var(--suc);border-color:var(--suc);color:#fff}
-.module-body .kb-list li.completed{opacity:.6}
-.module-body .kb-list li.completed .kb-dot{background:var(--suc)!important}
-
-/* ── MMT Section ── */
-.mmt-section{background:var(--card);border-radius:var(--r);padding:28px;box-shadow:var(--sh);border:1px solid var(--bd);margin-top:48px}
-.mmt-section h2{font-size:20px;font-weight:800;color:var(--t1);margin-bottom:6px;display:flex;align-items:center;gap:8px}
-.mmt-section h2 .icon{font-size:22px}
-.mmt-section .mmt-desc{font-size:13px;color:var(--t3);margin-bottom:20px;line-height:1.6}
-.mmt-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
-.mmt-step{background:var(--bg);border-radius:var(--rs);padding:16px;display:flex;gap:12px}
-.mmt-step .step-num{width:28px;height:28px;background:var(--pri);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0}
-.mmt-step .step-info h4{font-size:14px;font-weight:700;color:var(--t1);margin-bottom:4px}
-.mmt-step .step-info p{font-size:12px;color:var(--t3);line-height:1.5}
-
-/* ── Progress Bar ── */
-.progress-wrap{max-width:860px;margin:0 auto 40px;padding:0 20px}
-.progress-bar{height:8px;background:var(--bd);border-radius:4px;overflow:hidden;margin-bottom:8px}
-.progress-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--pri));border-radius:4px;transition:width .5s ease;width:0%}
-.progress-info{display:flex;justify-content:space-between;font-size:11px;color:var(--t3)}
-
-/* ── Footer ── */
-.footer{text-align:center;padding:32px 20px;border-top:1px solid var(--bd);margin-top:48px}
-.footer .brand{font-size:11px;color:var(--t3);letter-spacing:2px}
-
-/* ── Mobile ── */
-@media(max-width:768px){
-  .hero h1{font-size:30px;letter-spacing:0}
-  .hero .subtitle{font-size:13px}
-  .stats-row{grid-template-columns:repeat(2,1fr);gap:10px}
-  .stat-card{padding:16px 12px}
-  .stat-card .num{font-size:26px}
-  .module-grid{grid-template-columns:1fr}
-  .mmt-steps{grid-template-columns:1fr}
-}
-@media(max-width:480px){
-  .topbar{padding:8px 12px}
-  .topbar-title{font-size:14px}
-  .hero{padding:36px 16px 28px}
-  .hero h1{font-size:26px}
-  .section-title h2{font-size:20px}
-  .module-card{padding:20px}
-}
-</style>
-</head>
-<body>
-<div class="top-deco"></div>
-
-<!-- Topbar -->
+</style></head><body>
 <div class="topbar">
-  <div class="topbar-inner">
-    <a class="topbar-back" href="portal_v2.html">← 返回首页</a>
-    <div class="topbar-sep"></div>
-    <img class="topbar-logo" src="logo.png" alt="卡泰驰">
-    <span class="topbar-title">门店晨会途伴计划</span>
-    <span class="topbar-badge">早会培训</span>
+  <button class="topbar-back" onclick="history.back()">←</button>
+  <img src="logo.png" class="topbar-logo" alt="卡泰驰">
+  <span class="topbar-title">门店晨会途伴计划</span>
+  <span class="topbar-progress" id="topProgress">0/30</span>
+</div>
+<div class="container">
+  <div class="header">
+    <div class="header-tag">Store Morning Meeting · Training</div>
+    <h1>门店晨会<span class="accent">途伴计划</span></h1>
+    <p class="sub">一页纸知识卡片 · 完整版<br>30张卡片 · 6大模块 · 5-8分钟/张 · 全员适用</p>
+    <div class="stats-row">
+      <div class="stat-item"><div class="stat-num">30</div><div class="stat-label">知识卡片</div></div>
+      <div class="stat-item"><div class="stat-num">6</div><div class="stat-label">大模块</div></div>
+      <div class="stat-item"><div class="stat-num">5-8</div><div class="stat-label">分钟/张</div></div>
+      <div class="stat-item"><div class="stat-num">全员</div><div class="stat-label">适用岗位</div></div>
+    </div>
+  </div>
+
+<!-- ============ MODULE 1: 车辆管理 (Cards 1-6) ============ -->
+<div class="module-wrap">
+  <div class="module-bar m1" onclick="toggleModule(this)" data-module="1">
+    <div class="mod-icon">🚗</div><div class="mod-main"><div class="mod-num">第一模块 · 卡泰驰SOP手册</div><div class="mod-title">车辆管理</div><div class="mod-tags">车源采购准入 · 车辆检测 · 整备入库 · 定价策略 · 卡片#1—#6</div></div><div class="mod-arrow">▶</div>
+  </div>
+  <div class="module-body"><div class="kb-card">
+    <div class="kb-card-head"><span class="kb-card-num">卡片#1</span><span class="kb-card-title">采购准入标准：五项准入与四类红线</span><span class="kb-card-time">⏱5分钟</span></div>
+    <div class="kb-insight">💡 采购准入是卡泰驰车源质量的"第一道关卡"——车龄、里程、证件、排放、保险/年检五项必须全部达标，否则一票否决。</div>
+    <div class="kb-section"><h4>✅ 五项准入标准</h4><ul><li>车龄≤8年，普通品牌从严</li><li>里程≤10万km</li><li>三证齐全（大绿本+行驶证+车主身份证）</li><li>保险年检在有效期内</li><li>排放符合迁入地标准</li></ul></div>
+    <div class="kb-scene"><b>🎯 场景：</b>车主："我这车才开了5年，就是公里数多了点（12万），能不能通融一下？"<br><b>应对：</b>"感谢您对卡泰驰的信任。根据公司标准化流程，10万公里是我们的准入线，超出的话认证检测标准和后续质保承诺都无法覆盖。建议您可以到其他车商询价，或者等下次换车时里程符合条件的车我们优先收。"（坚持底线，但给出口路）</div>
+    <div class="kb-practice"><b>📋 今日练习：</b>默写四类严禁采购车辆类型，然后在早会上向大家口述一遍，其他人补充。</div>
+  </div><div class="kb-card">
+    <div class="kb-card-head"><span class="kb-card-num">卡片#2</span><span class="kb-card-title">初检与查证四步法</span><span class="kb-card-time">⏱6分钟</span></div>
+    <div class="kb-insight">💡 初检=用专业工具做"三非"排查，查证=用系统数据做"背景调查"——两个维度交叉验证，才能堵住事故车流入卡泰驰网络的漏洞。</div>
+    <div class="kb-section"><h4>✅ 四步法</h4><ul><li>现场排查：查博士/维真完成"三非"检测</li><li>系统核验：车信盟查询维保/出险/过户记录</li><li>证件核查：核验原件真伪</li><li>价格评估：对比同车型市场行情，出具报告</li></ul></div>
+    <div class="kb-scene"><b>🎯 场景：</b>车主："我这车绝对没事故，不用查了吧，赶紧过户就行。"<br><b>应对：</b>"先生，不是不信任您，这是我们卡泰驰对所有车源的标准流程，每台车都要过检测关，这也是对下一位买家的承诺。我们检测很快，大约30分钟，您可以在休息区喝杯茶。"</div>
+    <div class="kb-practice"><b>📋 今日练习：</b>打开查博士/维真APP，模拟操作一次"三非"检测下单流程，记录从下单到出报告的完整步骤。</div>
+  </div><div class="kb-card">
+    <div class="kb-card-head"><span class="kb-card-num">卡片#3</span><span class="kb-card-title">采购合同与签约流程</span><span class="kb-card-time">⏱6分钟</span></div>
+    <div class="kb-insight">💡 四种采购方式对应四种合同，签错合同=给自己埋雷。记住：直采签采购合同，寄售签委托合同，置换签置换合同，合作收车签合作协议。</div>
+    <div class="kb-section"><h4>✅ 签约三步</h4><ul><li>MMC系统录入审批（评估师→采购经理→店长三级审批，30万以上驻店经理加签）</li><li>按类型签制式合同（直采/寄售/置换/合作）</li><li>MMC线上财务付款（严禁线下付款！）</li></ul></div>
+    <div class="kb-scene"><b>🎯 场景：</b>车主："我自己来卖就行，不用签什么合同那么麻烦。"<br><b>应对：</b>"先生，签合同是保护您的利益——委托销售合同明确了您的底价和我们能帮您卖的最低价格，不会低于这个价成交。而且合同规定了服务费比例和结算时间，白纸黑字双方都放心。"</div>
+    <div class="kb-practice"><b>📋 今日练习：</b>拿出四份合同模板，在不看标题的情况下，通过阅读关键条款判断每份合同的适用场景。</div>
+  </div><div class="kb-card">
+    <div class="kb-card-head"><span class="kb-card-num">卡片#4</span><span class="kb-card-title">定价三步法</span><span class="kb-card-time">⏱6分钟</span></div>
+    <div class="kb-insight">💡 定价不是拍脑袋——三大依据（成本+市场+车况）缺一不可。定价偏高=库存积压，定价偏低=利润流失。</div>
+    <div class="kb-section"><h4>✅ 定价三步</h4><ul><li>成本核算：采购价+整备成本+资金占用+预期利润</li><li>市场对标：MMC全国/区域成交价+主流平台报价+本地行情</li><li>确认发布：核价团队+销售经理双人确认，MMC同步全渠道</li></ul></div>
+    <div class="kb-scene"><b>🎯 场景：</b>客户："这车网上挂的26万，你们怎么标28万？"<br><b>应对：</b>"您看的是同款车，但我们这台多了全景天窗+座椅通风，而且通过了卡泰驰认证检测带延保。网上那台过户3次、里程多了2万公里。要不我帮您对比一下两台车的差异？"</div>
+    <div class="kb-practice"><b>📋 今日练习：</b>打开MMC系统选一台在厅库存，用"成本+市场+车况"三大依据重新评估其当前定价是否合理，给出调整建议。</div>
+  </div><div class="kb-card">
+    <div class="kb-card-head"><span class="kb-card-num">卡片#5</span><span class="kb-card-title">整备标准流程</span><span class="kb-card-time">⏱6分钟</span></div>
+    <div class="kb-insight">💡 整备不是"洗洗就能卖"——漆面修复+内饰清洁+机油更换+故障维修是标配。整备质量直接决定客户第一眼印象，是二手车"增值"而非"翻新"的关键环节。</div>
+    <div class="kb-section"><h4>✅ 整备五步</h4><ul><li>依据检测报告制定施工方案</li><li>漆面修复+内饰深度清洁</li><li>机油更换+故障维修</li><li>全程留档（工单+旧件+施工照片）</li><li>整备验收→状态改"在厅"</li></ul></div>
+    <div class="kb-scene"><b>🎯 场景：</b>销售："这车整备花这么多钱？利润都被整备吃掉了。"<br><b>应对：</b>"这台整备花了3000，但整备后客户看车到成交只用了2天。没整备可能挂3个月卖不掉，资金成本算下来不止3000。"</div>
+    <div class="kb-practice"><b>📋 今日练习：</b>找到店里一台正在整备的车，全程跟一遍：看施工方案→拍施工前后照片→和整备经理对一遍验收要点。</div>
+  </div><div class="kb-card">
+    <div class="kb-card-head"><span class="kb-card-num">卡片#6</span><span class="kb-card-title">发布全流程</span><span class="kb-card-time">⏱5分钟</span></div>
+    <div class="kb-insight">💡 信息准确+照片标准+全渠道同步才是"让车被看到"的前提。上架4小时内全渠道可见，售出立即下架——慢一小时就多一个投诉隐患。</div>
+    <div class="kb-section"><h4>✅ 发布流程</h4><ul><li>按标准拍27张照片（外观≥12/内饰≥8/细节≥7）</li><li>MMC录入信息核验（里程误差≤100公里）</li><li>全渠道同步发布（卡泰驰商城/汽车之家/懂车帝/瓜子/抖音/视频号/小红书）</li><li>售出立即全渠道下架</li></ul></div>
+    <div class="kb-scene"><b>🎯 场景：</b>客户来电："我在你们网上看到一台XX车，现在过来看还有吗？"（实际已售未下架）<br><b>应对：</b>"非常抱歉，这台车今天上午刚被客户定走了。不过我们昨天刚收了一台同款，车况更好、里程更少，价格差不多。我先把照片和检测报告发给您。"</div>
+    <div class="kb-practice"><b>📋 今日练习：</b>打开汽车之家/懂车帝搜索"卡泰驰"，随机抽查5台在售车辆，检查：照片是否带Logo？价格是否与MMC一致？是否有已售未下架？</div>
+  </div></div></div>
+
+<!-- ============ MODULE 2: 库存管理 (Cards 7-9) ============ -->
+<div class="module-wrap">
+  <div class="module-bar m2" onclick="toggleModule(this)" data-module="2">
+    <div class="mod-icon">📦</div><div class="mod-main"><div class="mod-num">第二模块 · 卡泰驰SOP手册</div><div class="mod-title">库存管理</div><div class="mod-tags">库存盘点 · 车辆周转 · 周期预警 · 调拨管理 · 卡片#7—#9</div></div><div class="mod-arrow">▶</div>
+  </div>
+  <div class="module-body"><div class="kb-card">
+    <div class="kb-card-head"><span class="kb-card-num">卡片#7</span><span class="kb-card-title">盘点标准流程</span><span class="kb-card-time">⏱5分钟</span></div>
+    <div class="kb-insight">💡 盘点=月底必做的"车辆体检"——每月2次，100%通过MMC系统操作，VIN码扫描+全景照片缺一不可。账实不符=管理事故。</div>
+    <div class="kb-section"><h4>✅ 盘点四步</h4><ul><li>MMC系统生成盘点任务</li><li>现场扫描VIN码+拍照（覆盖展厅/库房/在途/转场/外出/寄售）</li><li>差异报告3日内核查（不在店车辆由保管人拍照+留存运单/协议）</li><li>闭环处理：盘盈补录/盘亏上报</li></ul></div>
+    <div class="kb-scene"><b>🎯 场景：</b>盘点发现一台车实车不在展厅，系统显示"在厅"——立即上报店长→核查去向→找到后补拍照修正状态→如去向不明启动遗失追责→3个工作日内闭环。</div>
+    <div class="kb-practice"><b>📋 今日练习：</b>打开MMC系统-库存模块，核对当前库存数量与展厅实车数量是否一致，逐一检查每台车的系统状态是否正确。</div>
+  </div><div class="kb-card">
+    <div class="kb-card-head"><span class="kb-card-num">卡片#8</span><span class="kb-card-title">超期管理三阶段</span><span class="kb-card-time">⏱6分钟</span></div>
+    <div class="kb-insight">💡 库存时间=贬值速度。新能源超30天即超期，燃油车15-30天触发盘价。管控目标：超期库存金额占比≤25%。</div>
+    <div class="kb-section"><h4>✅ 三阶段处置</h4><ul><li>触发盘价：主动调价，加大推广</li><li>优先零售：调价后优先面向个人客户销售（利润最高）</li><li>达到斩仓周期：批售/拍卖止损（跨店调拨→同行批发→拍卖平台）</li></ul></div>
+    <div class="kb-scene"><b>🎯 场景：</b>销售经理："这车才挂了35天，再等等。"（已超期）<br><b>应对：</b>"库存45天已超期。再等一个月资金成本多花近千元，而且市场上又多了几台竞品。建议先降3000试试市场反应，同时作为本周重点推荐车。"</div>
+    <div class="kb-practice"><b>📋 今日练习：</b>导出MMC系统库存数据，按"价格区间+库龄"排序，标黄盘价触发车辆、标红超期车辆，带着清单参加管理层对单会。</div>
+  </div><div class="kb-card">
+    <div class="kb-card-head"><span class="kb-card-num">卡片#9</span><span class="kb-card-title">跨店交易全流程</span><span class="kb-card-time">⏱6分钟</span></div>
+    <div class="kb-insight">💡 卡泰驰MMC云仓=全国车源共享池。你店里的车可以卖给其他门店，你也能从云仓采购其他门店的车。调拨价、定金比例、发车规则是三条硬杠杠。</div>
+    <div class="kb-section"><h4>✅ 跨店交易流程</h4><ul><li>设置调拨价→上架云仓（寄售车除外，超期自动按采购价×1.02调价）</li><li>对方门店下单+付定金（48小时内）</li><li>发车物流配送</li><li>收验确认结算</li></ul></div>
+    <div class="kb-scene"><b>🎯 场景：</b>兄弟门店："云仓看到你那台XX车，便宜3000行不行？都是自己人。"<br><b>应对：</b>"哥们，调拨价已经是按规则来的了。这车零售价XX万，调拨价已经是系统自动算的最低价。你要觉得零售有空间可以按这个价拿了你们自己零售。或者等这车超期触发自动调价后再看。"</div>
+    <div class="kb-practice"><b>📋 今日练习：</b>打开MMC云仓，随机浏览3家兄弟门店的云仓车源，重点关注调拨价是否合理、库存时长是否超期。如有感兴趣的车型，记录信息试着走一次下单流程。</div>
+  </div></div></div>
+
+<!-- ============ MODULE 3: 销售转化 (Cards 10-16) ============ -->
+<div class="module-wrap">
+  <div class="module-bar m3" onclick="toggleModule(this)" data-module="3">
+    <div class="mod-icon">🤝</div><div class="mod-main"><div class="mod-num">第三模块 · 卡泰驰SOP手册</div><div class="mod-title">销售转化</div><div class="mod-tags">客户邀约 · 到店接待 · 试驾体验 · 谈判成交 · 卡片#10—#16</div></div><div class="mod-arrow">▶</div>
+  </div>
+  <div class="module-body"><div class="kb-card">
+    <div class="kb-card-head"><span class="kb-card-num">卡片#10</span><span class="kb-card-title">邀约六步法</span><span class="kb-card-time">⏱7分钟</span></div>
+    <div class="kb-insight">💡 每一次邀约沟通的核心目标：建立信任→激发兴趣→锁定时间→成功邀约。记住"备、启、探、荐、锁、跟"六步法——禁止毫无准备就联系客户。</div>
+    <div class="kb-section"><h4>✅ 六步法</h4><ul><li><b>备</b>：CRM查客户+准备1-3台匹配车源+熟记卖点</li><li><b>启</b>：自报家门+确认对方方便</li><li><b>探</b>：需求+痛点+意向分级</li><li><b>荐</b>：精准推荐+价值塑造</li><li><b>锁</b>：二选一锁定到店（"周六上午10点还是周日下午2点？"）</li><li><b>跟</b>：微信确认+提前提醒</li></ul></div>
+    <div class="kb-scene"><b>🎯 场景：</b>客户："我先看看，有时间再过去。"<br><b>应对：</b>"完全理解。我加您微信，把这台车的检测报告和实拍视频发给您先了解。这台车最近咨询的人比较多，如果期间有其他人看上了我第一时间通知您。对了您主要是家用还是商务用？我帮您多留意几台。"</div>
+    <div class="kb-practice"><b>📋 今日练习：</b>从CRM系统随机抽取3条未跟进线索，按照六步法每人打一个真实邀约电话（免提），旁听同事逐项打分。</div>
+  </div><div class="kb-card">
+    <div class="kb-card-head"><span class="kb-card-num">卡片#11</span><span class="kb-card-title">展厅接待五步法</span><span class="kb-card-time">⏱6分钟</span></div>
+    <div class="kb-insight">💡 客户到店的前30秒决定了对门店的第一印象。从迎客→递名片→引导入座→需求探寻→车辆介绍，每一步都有标准。</div>
+    <div class="kb-section"><h4>✅ 五步法</h4><ul><li>30秒内主动迎客：微笑+递名片+"我是销售顾问XX"</li><li>引导入座：洽谈区+饮品服务</li><li>需求探寻：开放提问了解预算/用途/偏好</li><li>车辆介绍：匹配车源+绕车讲解</li><li>试驾邀约或下次跟进（离店当天发跟进微信）</li></ul></div>
+    <div class="kb-scene"><b>🎯 场景：</b>客户："我随便看看，不用管我。"<br><b>应对：</b>"没问题，您随意看。我叫小李，这是我的名片。看到感兴趣的车随时叫我，我可以帮您查检测报告和价格。要不要先喝杯水？"（保持距离但不失联）</div>
+    <div class="kb-practice"><b>📋 今日练习：</b>两人一组角色扮演：一人扮客户进店说"随便看看"，另一人按五步法接待。从"30秒迎客/递名片/引导入座/需求探寻"四项打分。</div>
+  </div><div class="kb-card">
+    <div class="kb-card-head"><span class="kb-card-num">卡片#12</span><span class="kb-card-title">FAB三步展示法</span><span class="kb-card-time">⏱5分钟</span></div>
+    <div class="kb-insight">💡 客户买的不只是一台车，是"这台车能带给我什么"。Feature（特性）→ Advantage（优势）→ Benefit（利益）。不要只报参数，要告诉客户"这对您意味着什么"。</div>
+    <div class="kb-section"><h4>✅ FAB范例</h4><ul><li><b>全景天窗：</b>F="带全景天窗" → A="同级别很多是小天窗" → B="周末带家人郊游，后排也能看天空，孩子特别喜欢"</li><li><b>2.0T：</b>F="2.0T涡轮增压" → A="比2.0L自吸动力强30%" → B="高速超车更从容，满载爬坡不吃力"</li></ul></div>
+    <div class="kb-scene"><b>🎯 场景：</b>客户："这车油耗高不高？"<br><b>应对：</b>F="工信部油耗7.2L"→ A="同级别SUV普遍8-9L"→ B="您一个月正常开油费大概五六百，比同级每月省一百多，一年就是一千多。而且这台刚做完保养，油耗表现会更理想。"</div>
+    <div class="kb-practice"><b>📋 今日练习：</b>在展厅任选一台车，用FAB法写出3个核心卖点的话术，向同事讲一遍，让同事扮演客户问"这对我有什么好处？"看你能不能自然用B来回答。</div>
+  </div><div class="kb-card">
+    <div class="kb-card-head"><span class="kb-card-num">卡片#13</span><span class="kb-card-title">试驾标准流程</span><span class="kb-card-time">⏱5分钟</span></div>
+    <div class="kb-insight">💡 试驾是成交的"临门一脚"——客户坐进驾驶舱的那一刻，感性决策就开始了。试驾后趁热打铁促成交。</div>
+    <div class="kb-section"><h4>✅ 试驾四步</h4><ul><li>试驾前：复印驾驶证+签试驾协议</li><li>路线介绍：先由销售开一段边开边讲</li><li>客户驾驶：引导体验关键功能（加速/底盘/转向/隔音）</li><li>试驾后趁热打铁进入报价</li></ul></div>
+    <div class="kb-scene"><b>🎯 场景：</b>客户试驾后："车是不错，但我还想再对比一下其他家的。"<br><b>应对：</b>"完全可以理解。您主要想对比哪几款车？我帮您客观分析各款优缺点，有些信息在外面不一定能看到，比如我们的检测报告会告诉你真实车况，其他家不一定有这个透明度。"</div>
+    <div class="kb-practice"><b>📋 今日练习：</b>选一台试驾车辆，开车走一遍标准路线，车内录音记录说的每句话，回来后和同事分析哪些话术有效、哪些可以删减。</div>
+  </div><div class="kb-card">
+    <div class="kb-card-head"><span class="kb-card-num">卡片#14</span><span class="kb-card-title">报价谈判四步法</span><span class="kb-card-time">⏱7分钟</span></div>
+    <div class="kb-insight">💡 客户还价不是终点，而是谈判的起点。三层策略：先守价值、再谈差异、最后给台阶。永远不要在价格上第一个让步。</div>
+    <div class="kb-section"><h4>✅ 四步法</h4><ul><li><b>价值回顾：</b>"这台车为什么适合您"——不谈价先谈值</li><li><b>差异对比：</b>"和网上挂价差在哪"——配置/检测/延保</li><li><b>捕捉信号：</b>"如果价格合适今天定吗？"</li><li><b>申请优惠：</b>"我帮您争取一下"——每次让步绑定条件</li></ul></div>
+    <div class="kb-scene"><b>🎯 场景：</b>客户："网上XX家同款才25万，你们贵了2万。"<br><b>应对：</b>① "那台车的检测报告您看了吗？我们有卡泰驰官方认证检测" ② "看配置——那台少了全景天窗和真皮座椅，光这两个配置差价不止2万" ③ "更重要的是我们送延保" ④ "如果算上这些，您觉得多少钱合适？"</div>
+    <div class="kb-practice"><b>📋 今日练习：</b>同桌模拟谈判：一人扮客户说"网上才25万你们太贵了"，另一人按四步法应对。要求全程不主动降价，用价值差异化解价格异议。</div>
+  </div><div class="kb-card">
+    <div class="kb-card-head"><span class="kb-card-num">卡片#15</span><span class="kb-card-title">签订标准流程</span><span class="kb-card-time">⏱5分钟</span></div>
+    <div class="kb-insight">💡 合同是法律文件——车辆信息/价格/付款方式/交付时间/质保条款五项必须逐条确认。客户每签一个字都应该是"安心的确认"而非"埋雷的开始"。</div>
+    <div class="kb-section"><h4>✅ 签约四步</h4><ul><li>条款预审：信息核对（品牌/VIN码/里程/上牌日期/过户次数）</li><li>逐条讲解：客户确认（总价/定金/尾款/付款方式/附加项目）</li><li>电子签署+系统留档</li><li>收款确认+交付排期</li></ul></div>
+    <div class="kb-scene"><b>🎯 场景：</b>客户："合同这么长，我就签了不看了。"<br><b>应对：</b>"王先生，我带您只看几个关键点——车的信息、价格、交付时间和质保，5分钟就过完。花这几分钟让您心里踏实，我心里也踏实。"</div>
+    <div class="kb-practice"><b>📋 今日练习：</b>打印一份空白电子合同（脱敏版本），用5分钟向新人逐条讲解"必核五项"内容，新人在旁做笔记并提问。</div>
+  </div><div class="kb-card">
+    <div class="kb-card-head"><span class="kb-card-num">卡片#16</span><span class="kb-card-title">交付五步法</span><span class="kb-card-time">⏱6分钟</span></div>
+    <div class="kb-insight">💡 交车是销售的"峰终时刻"——客户在最后15分钟的体验决定了整个购车满意度。车干净+资料齐+功能教+送出门=完美交付。</div>
+    <div class="kb-section"><h4>✅ 交付五步</h4><ul><li>车辆整备：清洗+整备验收</li><li>文件交接：大绿本+合同+2把钥匙+临牌+保险单</li><li>功能讲解：座椅/空调/导航/加油口/后备箱</li><li>合影留念+送客出门（油箱加满/满电交付惊喜感）</li><li>售后提醒：保养/延保/回访时间</li></ul></div>
+    <div class="kb-scene"><b>🎯 场景：</b>交车时客户发现副驾门有个小划痕。<br><b>应对：</b>① "王先生您眼睛真尖" ② 拍照+呼叫整备同事现场评估 ③ "这个应该是运输过程中的轻微痕迹，我马上安排处理，半小时就好" ④ 处理完毕后再次请客户确认并记录在交车确认单上。</div>
+    <div class="kb-practice"><b>📋 今日练习：</b>拿一台即将交付的车，在不看清单的情况下按五步法走一遍交车流程，由同事检查是否有遗漏项。</div>
+  </div></div></div>
+
+<!-- ============ MODULE 4: 售后服务 (Cards 17-20) ============ -->
+<div class="module-wrap">
+  <div class="module-bar m4" onclick="toggleModule(this)" data-module="4">
+    <div class="mod-icon">🔧</div><div class="mod-main"><div class="mod-num">第四模块 · 卡泰驰SOP手册</div><div class="mod-title">售后服务</div><div class="mod-tags">交车流程 · 质保服务 · 客户回访 · 投诉处理 · 卡片#17—#20</div></div><div class="mod-arrow">▶</div>
+  </div>
+  <div class="module-body"><div class="kb-card">
+    <div class="kb-card-head"><span class="kb-card-num">卡片#17</span><span class="kb-card-title">接车标准流程</span><span class="kb-card-time">⏱6分钟</span></div>
+    <div class="kb-insight">💡 售后接车=第二次销售机会。从客户进门到施工完成，每一次售后体验都是"是否再来/是否推荐朋友"的决定性因素。</div>
+    <div class="kb-section"><h4>✅ 接车四步</h4><ul><li>用户接待：确认预约/需求</li><li>环车预检：记录车况+铺三件套（座椅套+方向盘套+脚垫纸），从左前→左后→右后→右前顺时针</li><li>确认施工项目：预估费用+时间</li><li>双签确认：录入系统+派工（里程/油量客户在场共同确认）</li></ul></div>
+    <div class="kb-scene"><b>🎯 场景：</b>客户："我赶时间，不用检查了，直接帮我换个机油就行。"<br><b>应对：</b>"理解您赶时间。我用2分钟快速帮您核对车况外观——主要是为了保护您，如果交车时有划痕说不清楚对您对我都不好。2分钟就好，您看？"</div>
+    <div class="kb-practice"><b>📋 今日练习：</b>早会后找一位同事模拟接车：从"您好欢迎光临"到"接车单双签"完整走一遍，计时不超过5分钟，然后交换角色。</div>
+  </div><div class="kb-card">
+    <div class="kb-card-head"><span class="kb-card-num">卡片#18</span><span class="kb-card-title">作业标准流程</span><span class="kb-card-time">⏱6分钟</span></div>
+    <div class="kb-insight">💡 "保养即体检"——每台车必须经过"派工→施工→自检→组长检"四步。保养标配：机油+机滤+31项安全检查。旧件留存备客户查看，异常发现必须写进工单拍照上传MMC。</div>
+    <div class="kb-section"><h4>✅ 施工四步</h4><ul><li>派工接单：确认施工项目+所需备件+预计工时</li><li>施工作业：按工单逐项操作，保养标配机油+机滤+31项安全检查</li><li>技师自检：逐项打钩+拍照留档，旧件留存</li><li>组长复检：确认完工+异常标注</li></ul></div>
+    <div class="kb-scene"><b>🎯 场景：</b>客户："保养不就是换个机油吗？查出这么多问题，你们是不是想多收钱？"<br><b>应对：</b>"除了换机油机滤我们还做了31项免费安全检查。您看——前刹车片还剩3mm，低于安全标准5mm。旧件我留着了您可以看磨损情况。这个不强制，但建议尽快更换，安全第一。"</div>
+    <div class="kb-practice"><b>📋 今日练习：</b>默写31项安全检查清单，看看能写出多少项。重点标出哪些是必须上报客户的"异常项"、哪些是正常项。</div>
+  </div><div class="kb-card">
+    <div class="kb-card-head"><span class="kb-card-num">卡片#19</span><span class="kb-card-title">质检三大节点</span><span class="kb-card-time">⏱5分钟</span></div>
+    <div class="kb-insight">💡 质检不是"最后看一眼"——过程检（施工中关键步骤）、完工检（所有项目完成后全面检查）、终检（交车前最后确认），任何一节点不过关=不可交付。</div>
+    <div class="kb-section"><h4>✅ 三节点检查重点</h4><ul><li><b>过程检：</b>机油排放时间/机滤密封圈抹油/扭矩扳手规范</li><li><b>完工检：</b>所有项目复核/试车确认/故障码清除/油位确认</li><li><b>终检：</b>车辆清洁/车内物品归位/三件套移除/无遗漏工具</li></ul></div>
+    <div class="kb-scene"><b>🎯 场景：</b>交车后客户来电："你们换的机滤好像在漏油！"<br><b>应对：</b>① "您别急，安全第一，请先停车到安全位置" ② "我马上安排技师和拖车过来" ③ 到现场确认→如果是安装问题当场道歉并解决→回店后质检回溯找漏检节点。</div>
+    <div class="kb-practice"><b>📋 今日练习：</b>拿一台刚做完保养的车，走一遍"终检"流程——自己当"客户"验收：检查是否清洁/是否有工具遗漏/能否正常启动/故障灯是否熄灭。</div>
+  </div><div class="kb-card">
+    <div class="kb-card-head"><span class="kb-card-num">卡片#20</span><span class="kb-card-title">回访闭环四步</span><span class="kb-card-time">⏱5分钟</span></div>
+    <div class="kb-insight">💡 售后回访不是"打个电话问满不满意"——48小时内回访是黄金窗口，目的是"发现问题→立即补救→防止差评→争取转介绍"。</div>
+    <div class="kb-section"><h4>✅ 回访闭环</h4><ul><li>48h内电话回访（"整体服务1-10分您打几分？"）</li><li>记录评分+发现问题</li><li>问题升级：24h内补救（评分9-10顺势提转介绍）</li><li>回访确认+闭环归档</li></ul></div>
+    <div class="kb-scene"><b>🎯 场景：</b>客户："还行吧，就是等的时间有点长，等了两个小时。"（6分）<br><b>应对：</b>"非常抱歉让您等这么久。我查一下哪一环节耽误了时间，内部改进。为表示歉意，下次来保养我们免费送一次全车精洗，您方便时提前告诉我帮您预留工位。"</div>
+    <div class="kb-practice"><b>📋 今日练习：</b>从售后系统调出昨天和前天的交车/保养记录，每人打3个真实回访电话（免提），用标准话术完成回访。不满意的立即上报店长。</div>
+  </div></div></div>
+
+<!-- ============ MODULE 5: 金融延保 (Cards 21-24) ============ -->
+<div class="module-wrap">
+  <div class="module-bar m5" onclick="toggleModule(this)" data-module="5">
+    <div class="mod-icon">💰</div><div class="mod-main"><div class="mod-num">第五模块 · 卡泰驰SOP手册</div><div class="mod-title">金融延保</div><div class="mod-tags">金融方案 · 保险推荐 · 延保产品 · 分期管理 · 卡片#21—#24</div></div><div class="mod-arrow">▶</div>
+  </div>
+  <div class="module-body"><div class="kb-card">
+    <div class="kb-card-head"><span class="kb-card-num">卡片#21</span><span class="kb-card-title">金融推荐三步法</span><span class="kb-card-time">⏱5分钟</span></div>
+    <div class="kb-insight">💡 金融不是"顺便问一下要不要贷款"——是帮客户用更少的月供开走更好的车。在客户认可车辆之后、报价之前插入金融推荐是最佳时机。</div>
+    <div class="kb-section"><h4>✅ 三步法</h4><ul><li>需求匹配："您是全款还是按揭？"</li><li>方案呈现："首付XX，月供XX——把多出来的钱留着做理财，收益可能比利息还高"</li><li>利益转化：客户预算紧张时用金融帮他"够到"更好的车</li></ul></div>
+    <div class="kb-scene"><b>🎯 场景：</b>客户："我不贷款，全款买。"<br><b>应对：</b>"没问题，全款更省心。不过您知道吗——我们现在有个延保+保险的组合方案，跟全款不冲突，可以在您用车过程中帮您省维修钱。要不要了解一下？"</div>
+    <div class="kb-practice"><b>📋 今日练习：</b>拿到标准的金融方案利率表，随机选一台展厅车辆的标价，口算出3种首付比例对应的月供金额（不依赖计算器），锻炼对数字的敏感度。</div>
+  </div><div class="kb-card">
+    <div class="kb-card-head"><span class="kb-card-num">卡片#22</span><span class="kb-card-title">延保销售时机链</span><span class="kb-card-time">⏱6分钟</span></div>
+    <div class="kb-insight">💡 延保=给客户一个"不怕车坏"的安心。卡泰驰延保核心：1年3万公里三大系统质保+30天整车保修+三非车终身回购+全国300+门店通用。</div>
+    <div class="kb-section"><h4>✅ 延保销售时机</h4><ul><li>报价时植入延保概念</li><li>签约时展示延保方案（"一天几块钱，万一发动机出问题就是几万维修费"）</li><li>交车时交付延保凭证</li><li>延保快到期时续保提醒</li></ul></div>
+    <div class="kb-scene"><b>🎯 场景：</b>客户："二手车还买什么延保，坏了就修呗。"<br><b>应对：</b>"二手车虽然经过检测认证但毕竟是用过的车。而且延保最有用的是——如果是三大件出问题维修费轻轻松松上万，延保一年也就一千多块。就跟买保险一样，买的是安心。而且这个延保还能转让，以后卖车也是加分项。"</div>
+    <div class="kb-practice"><b>📋 今日练习：</b>熟背卡泰驰延保三大核心承诺（三非终身回购/30天整车保修/1年3万公里三大系统），不看资料向同事口述，同事追问三个"除外情况"你来回答。</div>
+  </div><div class="kb-card">
+    <div class="kb-card-head"><span class="kb-card-num">卡片#23</span><span class="kb-card-title">延保权益转让三步</span><span class="kb-card-time">⏱5分钟</span></div>
+    <div class="kb-insight">💡 延保随车不随人！车辆过户后延保可转让给新车主——这是二手车交易中很少有的"保值功能"，卖车时"带延保"就能比别人多卖一两千块。</div>
+    <div class="kb-section"><h4>✅ 转让流程</h4><ul><li>原车主申请：提交转让材料（原延保凭证+过户凭证）</li><li>新车主确认：信息核验</li><li>总部审核→权益变更生效（必须在延保有效期内+过户后规定时间内办理）</li></ul></div>
+    <div class="kb-scene"><b>🎯 场景：</b>客户："我买延保，万一明年就换车了呢？不就浪费了？"<br><b>应对：</b>"不会浪费！延保跟着车走，卖车的时候延保可以转让给下一位车主。不仅自己开的时候有保障，卖车时'带延保'这三个字就能让您的车比别人多卖一两千块。花钱买的保障不仅自己用，卖车时还体现在车价里。"</div>
+    <div class="kb-practice"><b>📋 今日练习：</b>查看门店已售车中带延保的车辆列表，标记延保剩余时间<3个月的车辆，主动联系车主告知剩余权益并提供续保或转让协助。</div>
+  </div><div class="kb-card">
+    <div class="kb-card-head"><span class="kb-card-num">卡片#24</span><span class="kb-card-title">车险服务流程</span><span class="kb-card-time">⏱5分钟</span></div>
+    <div class="kb-insight">💡 车险=交车必备+续保商机。交车时必须确认保险在生效状态；续保提前30天联系，对比多家方案帮客户省钱。每一次保险服务都是"被需要的触点"。</div>
+    <div class="kb-section"><h4>✅ 保险服务四步</h4><ul><li>购车时推荐保险方案（交强险+车船税必买，商业险推荐三者100万+车损+不计免赔）</li><li>出单：系统录入+保单交付</li><li>出险：协助理赔报案（全程协助从报案到定损到修车）</li><li>续保：到期前30天提醒，提供2-3家报价让客户选择</li></ul></div>
+    <div class="kb-scene"><b>🎯 场景：</b>客户："保险我自己买，网上便宜。"<br><b>应对：</b>"网上买确实方便。不过有个区别——您在我们这买保险，出险理赔时我们全程协助一条龙，您不用自己跑。而且合作保险公司针对卡泰驰客户有专属服务通道理赔更快。要不我帮您算一下报价，您跟网上对比一下？差不太多的话建议还是走我们这更方便。"</div>
+    <div class="kb-practice"><b>📋 今日练习：</b>从系统导出未来30天内保险到期的客户名单，按到期日排序。每人给2个客户发续保提醒微信（先发标准话术模板），记录客户反馈。</div>
+  </div></div></div>
+
+<!-- ============ MODULE 6: 新媒体·合规·客户关系 (Cards 25-30) ============ -->
+<div class="module-wrap">
+  <div class="module-bar m6" onclick="toggleModule(this)" data-module="6">
+    <div class="mod-icon">📱</div><div class="mod-main"><div class="mod-num">第六模块 · 卡泰驰SOP手册</div><div class="mod-title">新媒体运营 · 合规 · 客户关系</div><div class="mod-tags">新媒体获客 · 合规红线 · 客户维系 · 销售心态 · 卡片#25—#30</div></div><div class="mod-arrow">▶</div>
+  </div>
+  <div class="module-body"><div class="kb-card">
+    <div class="kb-card-head"><span class="kb-card-num">卡片#25</span><span class="kb-card-title">短视频制作五步</span><span class="kb-card-time">⏱6分钟</span></div>
+    <div class="kb-insight">💡 一条好的二手车短视频=精准选题+前3秒钩子+实车展示+价格锚点+引导互动。前3秒决定用户是否划走。</div>
+    <div class="kb-section"><h4>✅ 制作五步</h4><ul><li>选题策划：热点车型/价格反差（"20万的BBA现在只要8万？"）</li><li>脚本撰写：前3秒钩子+卖点</li><li>实车拍摄：多角度+动态镜头（横屏拍，外观一圈→内饰）</li><li>剪辑发布：封面+字幕+BGM（剪映一键成片）</li><li>数据复盘：完播率+互动+转化</li></ul></div>
+    <div class="kb-scene"><b>🎯 场景：</b>销售："我不会拍视频，也不懂剪辑。"<br><b>应对：</b>"不需要你会剪辑——手机拍就行。公式：打开手机→横屏拍→先拍外观一圈→再拍内饰→最后讲3个卖点+报价格→结束。文案我帮你写，剪映一键成片10分钟搞定。今天先试一条，不行我帮你调。"</div>
+    <div class="kb-practice"><b>📋 今日练习：</b>选展厅里最具"价格反差"的一台车，按公式拍摄一条60秒短视频：前3秒报价格钩子→外观一圈→内饰→3个卖点→"私信我了解更多"。</div>
+  </div><div class="kb-card">
+    <div class="kb-card-head"><span class="kb-card-num">卡片#26</span><span class="kb-card-title">直播全流程</span><span class="kb-card-time">⏱7分钟</span></div>
+    <div class="kb-insight">💡 直播=实时看车+即时互动+当场留资。每15分钟互动引导一次，每台车结尾引导私信留资。固定直播排期：每周≥3场，每场≥1小时。</div>
+    <div class="kb-section"><h4>✅ 直播三阶段</h4><ul><li>开播前：选3-5台车（1台引流款+2台主力款+1台高端款）+脚本+设备测试</li><li>直播中：讲车5-8分钟/台+每15分钟互动引导（"想看内饰扣1/想知道价格扣2"）+引流私信</li><li>下播复盘：数据分析（观看人数/平均停留/新增粉丝/留资数）+当天追线索</li></ul></div>
+    <div class="kb-scene"><b>🎯 场景：</b>直播间观众反复问价："这车多少钱？最低多少？"<br><b>应对：</b>"兄弟，价格我最后说，先带你看车况。看完车况你觉得值了，我再说价格就不贵了。注意看这内饰——座椅几乎没有磨损，方向盘也没有包浆…（讲价值）…好了现在告诉你价格，这台XX万，你对比同车龄同里程在网上挂多少？我们至少便宜了XX。"</div>
+    <div class="kb-practice"><b>📋 今日练习：</b>模拟一场5分钟"微直播"：选一台车，架好手机，完整走一遍"讲车→互动→报价→引导私信"流程。回看录像找3个改进点。</div>
+  </div><div class="kb-card">
+    <div class="kb-card-head"><span class="kb-card-num">卡片#27</span><span class="kb-card-title">小红书运营四步法</span><span class="kb-card-time">⏱6分钟</span></div>
+    <div class="kb-insight">💡 小红书用户=高意向购车人群（女性占比高，决策影响力强）。内容公式=封面美图+实用干货+真实体验+引导互动。不要发广告体，要发"闺蜜推荐"体。</div>
+    <div class="kb-section"><h4>✅ 运营要点</h4><ul><li>选题：购车攻略/避坑指南/车型对比（"女生第一台二手车怎么选？这5款闭眼入""月薪5000也能养的3款二手车"）</li><li>标题≤20字，数字+情绪词（"绝了""闭眼入""看完哭了"）</li><li>9张图：1封面+3外观+3内饰+2细节</li><li>标签：#二手车推荐 #XX品牌 #女生买车等3-5个</li></ul></div>
+    <div class="kb-scene"><b>🎯 场景：</b>评论："在哪看车？多少钱？"（高意向线索）<br><b>应对：</b>不要在评论区报价！回："姐妹/兄弟，这台车具体价格和车况我私信发你。我们店在XX，随时可以来看实车。"私信发车辆链接+检测报告+门店定位→最后问"方便的话留个电话？"</div>
+    <div class="kb-practice"><b>📋 今日练习：</b>任选门店一台车，写一篇300字小红书笔记文案+选9张配图。要求：有实用干货（如"这台车的3个优点和1个缺点"）、有真实感（不用广告腔）。发布到门店小红书账号。</div>
+  </div><div class="kb-card">
+    <div class="kb-card-head"><span class="kb-card-num">卡片#28</span><span class="kb-card-title">十大舞弊红线</span><span class="kb-card-time">⏱6分钟</span></div>
+    <div class="kb-insight">💡 十条舞弊红线=十道高压线，碰一条=开除+追责+可能移送司法。早会每天念一条，30天轮一遍，让红线意识刻进每个人的日常操作里。</div>
+    <div class="kb-section"><h4>🛑 十大红线速览</h4><ul><li>采购舞弊：虚高采购价吃回扣/收售事故车/伪造检测报告</li><li>销售舞弊：飞单/截留车款/阴阳合同/私收定金</li><li>资产舞弊：虚报盘亏/私售配件/公车私用</li><li>资金舞弊：挪用公款/账外资金/小金库</li><li>人力舞弊：吃空饷/虚假考勤/冒领提成</li><li>法务舞弊：私刻公章/仿冒签名/篡改合同</li><li>信息舞弊：泄露客户隐私/倒卖客户信息</li></ul></div>
+    <div class="kb-scene"><b>🎯 场景：</b>同事私下说："这车客户给的现金，不入系统了，我们俩分了，没人知道。"<br><b>应对：</b>坚决拒绝："这是销售舞弊，碰了就是高压线，不仅开除还可能吃官司。为这点钱不值得。你要是缺钱我借你，但这个事不能做。"如果对方执意为之，你有义务通过举报渠道向总部合规部门反映。</div>
+    <div class="kb-practice"><b>📋 今日练习：</b>店长带领全员每人念一条红线+用自己的话解释"这条为什么不能碰"。念完发"十大红线"卡片贴到每位员工工位上。</div>
+  </div><div class="kb-card">
+    <div class="kb-card-head"><span class="kb-card-num">卡片#29</span><span class="kb-card-title">异议处理五步法</span><span class="kb-card-time">⏱6分钟</span></div>
+    <div class="kb-insight">💡 70%的投诉客户在问题得到妥善解决后会成为更忠诚的回头客。五步法：听→歉→问→解→跟。全程不争论、不推诿、不拖延。</div>
+    <div class="kb-section"><h4>✅ 五步法</h4><ul><li><b>听：</b>倾听不打断，眼神接触+点头</li><li><b>歉：</b>道歉并理解——"换成是我遇到这种情况也会不高兴"</li><li><b>问：</b>确认核心诉求</li><li><b>解：</b>15分钟内给出初步方案，"我马上帮您协调"</li><li><b>跟：</b>24h内确认满意度，维修完当天主动回访</li></ul></div>
+    <div class="kb-scene"><b>🎯 场景：</b>客户拍桌子："你们卖的问题车！买回去第三天发动机灯就亮了！"<br><b>应对：</b>①（听）不打断 ②（歉）"王先生非常抱歉，您先坐喝口水，我马上帮您处理" ③（问）"故障灯是哪个标志？我安排技师立即检查" ④（解）"我们有30天整车保修，如果是车辆本身问题维修全免，我再帮您申请一次免费保养补偿" ⑤（跟）维修完当天主动回访。</div>
+    <div class="kb-practice"><b>📋 今日练习：</b>两人一组角色扮演：一人扮生气客户拍桌子投诉，另一人按"听→歉→问→解→跟"五步法应对。旁观者打分。</div>
+  </div><div class="kb-card">
+    <div class="kb-card-head"><span class="kb-card-num">卡片#30</span><span class="kb-card-title">每日五件必修课</span><span class="kb-card-time">⏱5分钟</span></div>
+    <div class="kb-insight">💡 "成交的信念，胜过一切销售技巧。"——这句话印在销售转化SOP的开篇。每天早会结束前对自己说：今天我要帮客户找到适合他们的车。</div>
+    <div class="kb-section"><h4>✅ 每日五件事</h4><ul><li>早会学习1张知识卡片</li><li>邀约跟进：CRM清零未跟进线索</li><li>内容输出：发1条短视频/1篇笔记</li><li>客户服务：接待/试驾/回访</li><li>夕会复盘：今日数据+明日计划</li></ul></div>
+    <div class="kb-section"><h4>⭐ 三句成交信念</h4><ul><li>"每一个到店客户都是带着需求来的，我的任务是帮ta找到最适合的车"</li><li>"被拒绝100次没关系，第101次可能就成交了"</li><li>"我不只是卖车，我是在帮客户解决出行需求——这是有价值的工作"</li></ul></div>
+    <div class="kb-practice"><b>📋 今日练习：</b>在今天的夕会上，每人用一句话总结"今天最有成就感的一件事"和"今天最需要改进的一件事"。然后对着团队大声说："明天我要比今天做得更好！"</div>
+  </div></div></div>
+
+<!-- ========== 早会执行指南 ========== -->
+<div class="mmt-section">
+  <h2>☀️ 门店早会执行指南</h2>
+  <p class="mmt-desc">门店晨会途伴计划设计为每日早会使用，建议各门店按以下流程组织，确保培训效果落地</p>
+  <div class="mmt-steps">
+    <div class="mmt-step"><div class="step-num">1</div><div class="step-name">开场</div><div class="step-time">~1分钟</div></div>
+    <div class="mmt-step"><div class="step-num">2</div><div class="step-name">学习</div><div class="step-time">5-8分钟</div></div>
+    <div class="mmt-step"><div class="step-num">3</div><div class="step-name">讨论</div><div class="step-time">~3分钟</div></div>
+    <div class="mmt-step"><div class="step-num">4</div><div class="step-name">行动计划</div><div class="step-time">~2分钟</div></div>
   </div>
 </div>
 
-<!-- Hero -->
-<div class="hero">
-  <div class="hero-badge">MORNING MEETING</div>
-  <h1>门店晨会<span class="accent">途伴计划</span></h1>
-  <p class="subtitle">二手车门店全员早会培训体系，每天5-8分钟，系统化提升团队专业能力与服务水平</p>
-</div>
-
-<!-- Stats -->
-<div class="stats-row" id="statsRow">
-  <div class="stat-card">
-    <div class="num blue">30</div>
-    <div class="label">知识卡片</div>
-  </div>
-  <div class="stat-card">
-    <div class="num">5-8</div>
-    <div class="unit">分钟/张</div>
-    <div class="label">早会学习时长</div>
-  </div>
-  <div class="stat-card">
-    <div class="num cyan">6</div>
-    <div class="label">学习模块</div>
-  </div>
-  <div class="stat-card">
-    <div class="num green">全员</div>
-    <div class="label">适用各岗位</div>
-  </div>
-</div>
-
-<!-- Progress -->
-<div class="progress-wrap">
-  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-  <div class="progress-info"><span id="progressLabel">今日学习进度 0/30</span><span id="progressPct">0%</span></div>
-</div>
-
-<!-- Modules -->
-<div class="main">
-  <div class="section-title">
-    <h2>六大学习模块</h2>
-    <p>覆盖二手车门店全业务链路，共30张知识卡片，点击展开查看卡片清单</p>
-  </div>
-
-  <div class="module-grid" id="moduleGrid">
-    <!-- Module 1 -->
-    <div class="module-card m1" data-module="1">
-      <div class="module-header">
-        <div class="module-num">01</div>
-        <div class="module-info">
-          <h3>车源采购与库存管理</h3>
-          <div class="meta">5张卡片 · 预计25min</div>
-        </div>
-      </div>
-      <div class="module-body">
-        <ul class="kb-list">
-          <li data-kb="1-1"><span class="kb-check"></span><span class="kb-dot" style="background:var(--blue)"></span>车源渠道开发与维护策略</li>
-          <li data-kb="1-2"><span class="kb-check"></span><span class="kb-dot" style="background:var(--blue)"></span>车辆检测评估标准化流程</li>
-          <li data-kb="1-3"><span class="kb-check"></span><span class="kb-dot" style="background:var(--blue)"></span>库存结构优化与动态调拨</li>
-          <li data-kb="1-4"><span class="kb-check"></span><span class="kb-dot" style="background:var(--blue)"></span>采购成本控制与议价技巧</li>
-          <li data-kb="1-5"><span class="kb-check"></span><span class="kb-dot" style="background:var(--blue)"></span>车辆整备与入库标准</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Module 2 -->
-    <div class="module-card m2" data-module="2">
-      <div class="module-header">
-        <div class="module-num">02</div>
-        <div class="module-info">
-          <h3>销售转化</h3>
-          <div class="meta">5张卡片 · 预计25min</div>
-        </div>
-      </div>
-      <div class="module-body">
-        <ul class="kb-list">
-          <li data-kb="2-1"><span class="kb-check"></span><span class="kb-dot" style="background:var(--cyan)"></span>客户需求分析与精准匹配</li>
-          <li data-kb="2-2"><span class="kb-check"></span><span class="kb-dot" style="background:var(--cyan)"></span>到店接待与试驾体验设计</li>
-          <li data-kb="2-3"><span class="kb-check"></span><span class="kb-dot" style="background:var(--cyan)"></span>价格谈判与成交促成策略</li>
-          <li data-kb="2-4"><span class="kb-check"></span><span class="kb-dot" style="background:var(--cyan)"></span>客户分级与精细化运营</li>
-          <li data-kb="2-5"><span class="kb-check"></span><span class="kb-dot" style="background:var(--cyan)"></span>战败分析与流失挽回</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Module 3 -->
-    <div class="module-card m3" data-module="3">
-      <div class="module-header">
-        <div class="module-num">03</div>
-        <div class="module-info">
-          <h3>售后服务与金融延保</h3>
-          <div class="meta">5张卡片 · 预计25min</div>
-        </div>
-      </div>
-      <div class="module-body">
-        <ul class="kb-list">
-          <li data-kb="3-1"><span class="kb-check"></span><span class="kb-dot" style="background:var(--pri)"></span>售后服务接待标准流程</li>
-          <li data-kb="3-2"><span class="kb-check"></span><span class="kb-dot" style="background:var(--pri)"></span>常见故障诊断与维修方案</li>
-          <li data-kb="3-3"><span class="kb-check"></span><span class="kb-dot" style="background:var(--pri)"></span>客户回访与满意度管理</li>
-          <li data-kb="3-4"><span class="kb-check"></span><span class="kb-dot" style="background:var(--pri)"></span>延保产品销售策略与话术</li>
-          <li data-kb="3-5"><span class="kb-check"></span><span class="kb-dot" style="background:var(--pri)"></span>金融分期方案与推荐技巧</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Module 4 -->
-    <div class="module-card m5" data-module="4">
-      <div class="module-header">
-        <div class="module-num">04</div>
-        <div class="module-info">
-          <h3>新媒体运营</h3>
-          <div class="meta">5张卡片 · 预计25min</div>
-        </div>
-      </div>
-      <div class="module-body">
-        <ul class="kb-list">
-          <li data-kb="4-1"><span class="kb-check"></span><span class="kb-dot" style="background:#8B5CF6"></span>抖音/快手短视频内容创作</li>
-          <li data-kb="4-2"><span class="kb-check"></span><span class="kb-dot" style="background:#8B5CF6"></span>直播带车话术与节奏把控</li>
-          <li data-kb="4-3"><span class="kb-check"></span><span class="kb-dot" style="background:#8B5CF6"></span>微信私域流量池搭建</li>
-          <li data-kb="4-4"><span class="kb-check"></span><span class="kb-dot" style="background:#8B5CF6"></span>朋友圈与社群运营技巧</li>
-          <li data-kb="4-5"><span class="kb-check"></span><span class="kb-dot" style="background:#8B5CF6"></span>线上线索跟进与转化</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Module 5 -->
-    <div class="module-card m6" data-module="5">
-      <div class="module-header">
-        <div class="module-num">05</div>
-        <div class="module-info">
-          <h3>合规风控</h3>
-          <div class="meta">5张卡片 · 预计25min</div>
-        </div>
-      </div>
-      <div class="module-body">
-        <ul class="kb-list">
-          <li data-kb="5-1"><span class="kb-check"></span><span class="kb-dot" style="background:var(--suc)"></span>二手车交易法律法规基础</li>
-          <li data-kb="5-2"><span class="kb-check"></span><span class="kb-dot" style="background:var(--suc)"></span>合同签订与风险防范要点</li>
-          <li data-kb="5-3"><span class="kb-check"></span><span class="kb-dot" style="background:var(--suc)"></span>车辆过户合规操作流程</li>
-          <li data-kb="5-4"><span class="kb-check"></span><span class="kb-dot" style="background:var(--suc)"></span>客户信息保护与隐私合规</li>
-          <li data-kb="5-5"><span class="kb-check"></span><span class="kb-dot" style="background:var(--suc)"></span>纠纷处理与品牌声誉管理</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Module 6 -->
-    <div class="module-card m4" data-module="6">
-      <div class="module-header">
-        <div class="module-num">06</div>
-        <div class="module-info">
-          <h3>客户关系全链路SOP</h3>
-          <div class="meta">5张卡片 · 预计25min</div>
-        </div>
-      </div>
-      <div class="module-body">
-        <ul class="kb-list">
-          <li data-kb="6-1"><span class="kb-check"></span><span class="kb-dot" style="background:#E85D75"></span>客户接待标准化流程</li>
-          <li data-kb="6-2"><span class="kb-check"></span><span class="kb-dot" style="background:#E85D75"></span>客户分级与精细化运营</li>
-          <li data-kb="6-3"><span class="kb-check"></span><span class="kb-dot" style="background:#E85D75"></span>客户生命周期价值管理</li>
-          <li data-kb="6-4"><span class="kb-check"></span><span class="kb-dot" style="background:#E85D75"></span>老客户转介绍激励体系</li>
-          <li data-kb="6-5"><span class="kb-check"></span><span class="kb-dot" style="background:#E85D75"></span>投诉处理与危机应对</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- MMT Section -->
-  <div class="mmt-section">
-    <h2><span class="icon">☀️</span> 门店早会执行指南</h2>
-    <p class="mmt-desc">门店晨会途伴计划设计为每日早会使用，建议各门店按以下流程组织，确保培训效果落地</p>
-    <div class="mmt-steps">
-      <div class="mmt-step">
-        <div class="step-num">1</div>
-        <div class="step-info">
-          <h4>晨会开场（1min）</h4>
-          <p>店长主持，明确今日学习卡片主题，激发团队学习兴趣</p>
-        </div>
-      </div>
-      <div class="mmt-step">
-        <div class="step-num">2</div>
-        <div class="step-info">
-          <h4>知识卡片学习（5-8min）</h4>
-          <p>全员阅读当日卡片内容，店长重点讲解关键要点与实际案例</p>
-        </div>
-      </div>
-      <div class="mmt-step">
-        <div class="step-num">3</div>
-        <div class="step-info">
-          <h4>互动讨论（3min）</h4>
-          <p>团队成员分享心得体会，结合门店实际场景展开讨论</p>
-        </div>
-      </div>
-      <div class="mmt-step">
-        <div class="step-num">4</div>
-        <div class="step-info">
-          <h4>行动计划（2min）</h4>
-          <p>每人输出1条今日改进行动，店长确认并跟踪执行情况</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-<div class="footer">
-  <div class="brand">卡泰驰二手车生态平台 · 门店晨会途伴计划 · 内部培训资料</div>
+<div class="brand">卡泰驰汽车生态平台 · 门店晨会途伴计划 · 内部培训资料</div>
 </div>
 
 <script>
-var __TUBAN_BUILD__ = '20260625v2';
-
+var __TUBAN_BUILD__='20260625v3';
 (function(){
-  var cached = localStorage.getItem('_tuban_build');
-  if(cached && cached !== __TUBAN_BUILD__) {
-    localStorage.setItem('_tuban_build', __TUBAN_BUILD__);
-    localStorage.removeItem('_tuban_progress');
-  }
-  if(!cached) localStorage.setItem('_tuban_build', __TUBAN_BUILD__);
-})();
-
-// Module expand/collapse
-document.getElementById('moduleGrid').addEventListener('click', function(e){
-  var card = e.target.closest('.module-card');
-  if(!card) return;
-  card.classList.toggle('expanded');
+var checked={};
+var key='kataichi_tuban_checked';
+try{var s=localStorage.getItem(key);if(s)checked=JSON.parse(s)}catch(e){}
+function save(){try{localStorage.setItem(key,JSON.stringify(checked))}catch(e){}}
+function count(){var n=0;document.querySelectorAll('.kb-check-input').forEach(function(c){if(c.checked)n++});return n}
+function updateTop(){var n=count();document.getElementById('topProgress').textContent=n+'/30'}
+document.querySelectorAll('.kb-card').forEach(function(card,i){
+  var lb=document.createElement('label');
+  lb.className='kb-check-label';
+  lb.innerHTML='<input type="checkbox" class="kb-check-input" data-id="'+i+'"'+(checked[i]?' checked':'')+'><span class="kb-check-box"></span> 已学习完成';
+  card.appendChild(lb);
+  lb.querySelector('input').addEventListener('change',function(){checked[this.dataset.id]=this.checked;save();updateTop()});
 });
-
-// Knowledge card check/uncheck
-document.getElementById('moduleGrid').addEventListener('click', function(e){
-  var check = e.target.closest('.kb-check');
-  if(!check) return;
-  var li = check.parentElement;
-  check.classList.toggle('checked');
-  li.classList.toggle('completed');
-  saveProgress();
-});
-
-// Save & load progress
-function saveProgress(){
-  var checked = document.querySelectorAll('.kb-check.checked');
-  var items = [];
-  checked.forEach(function(c){ items.push(c.parentElement.dataset.kb); });
-  localStorage.setItem('_tuban_progress', JSON.stringify(items));
-  updateProgress();
-}
-
-function loadProgress(){
-  try{
-    var data = JSON.parse(localStorage.getItem('_tuban_progress')) || [];
-    data.forEach(function(id){
-      var el = document.querySelector('[data-kb="'+id+'"] .kb-check');
-      if(el){ el.classList.add('checked'); el.parentElement.classList.add('completed'); }
-    });
-  }catch(e){}
-  updateProgress();
-}
-
-function updateProgress(){
-  var total = document.querySelectorAll('.kb-check').length;
-  var done = document.querySelectorAll('.kb-check.checked').length;
-  var pct = total ? Math.round(done/total*100) : 0;
-  document.getElementById('progressFill').style.width = pct+'%';
-  document.getElementById('progressLabel').textContent = '今日学习进度 '+done+'/'+total;
-  document.getElementById('progressPct').textContent = pct+'%';
-}
-
-// Daily reset check
-(function(){
-  var today = new Date().toISOString().slice(0,10);
-  var last = localStorage.getItem('_tuban_date');
-  if(last !== today){
-    localStorage.setItem('_tuban_date', today);
-    // Don't reset progress, just note the date
-  }
+updateTop();
 })();
-
-loadProgress();
-</script>
-</body>
-</html>
+function toggleModule(bar){
+  bar.classList.toggle('open');
+  bar.nextElementSibling.classList.toggle('open');
+}
+</script></body></html>
