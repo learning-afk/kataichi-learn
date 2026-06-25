@@ -2,26 +2,27 @@
 <title>门店晨会途伴计划 · 卡泰驰培训中心</title>
 <style>:root{--pri:#F5A623;--bg:#F5F6FA;--card:#FFFFFF;--text:#1A1A2E;--t3:#6B7280;--blue:#4F6EF7;--cyan:#0D9488;--suc:#4CAF50;--danger:#F44336;--m4:#E85D75;--m5:#8B5CF6}
 *{margin:0;padding:0;box-sizing:border-box}body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
-.topbar{position:sticky;top:0;z-index:100;background:var(--card);padding:10px 16px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 4px rgba(0,0,0,.06);border-bottom:3px solid var(--pri)}
+.topbar{position:sticky;top:0;z-index:100;background:var(--card);padding:10px 16px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 4px rgba(0,0,0,.06);border-bottom:3px solid #F97316}
 .topbar-back{width:32px;height:32px;border-radius:8px;border:none;background:#f3f4f6;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;color:#666}
 .topbar-back:hover{background:#e5e7eb}
 .topbar-logo{height:26px;width:auto}
 .topbar-title{font-size:16px;font-weight:700;flex:1}
-.topbar-progress{font-size:12px;color:var(--t3);background:#fff3e0;padding:4px 10px;border-radius:12px;font-weight:600;color:var(--pri)}
+.topbar-progress{font-size:12px;color:#F97316;background:#fff7ed;padding:4px 10px;border-radius:12px;font-weight:600}
 .container{max-width:800px;margin:0 auto;padding:18px 16px 40px}
 .header{text-align:center;margin-bottom:28px}
-.header-tag{display:inline-block;font-size:11px;font-weight:600;color:var(--pri);letter-spacing:3px;text-transform:uppercase;background:#fff3e0;padding:4px 14px;border-radius:20px;margin-bottom:12px}
+.header-tag{display:inline-block;font-size:11px;font-weight:600;color:#F97316;letter-spacing:3px;text-transform:uppercase;background:#fff7ed;padding:4px 14px;border-radius:20px;margin-bottom:12px}
 .header h1{font-size:30px;font-weight:900;color:var(--text);line-height:1.3}
-.header h1 .accent{color:var(--pri)}
-.header .sub{font-size:13px;color:var(--t3);margin-top:8px;line-height:1.6}
+.header h1 .accent{color:#F97316}
+.slogan{font-size:13px;color:#F97316;font-weight:600;letter-spacing:1px;margin-top:4px}
+.header .sub{font-size:13px;color:var(--t3);margin-top:6px;line-height:1.6}
 .stats-row{display:flex;justify-content:center;gap:24px;margin-top:18px}
 .stat-item{text-align:center}
-.stat-num{font-size:28px;font-weight:800;color:var(--pri)}
+.stat-num{font-size:28px;font-weight:800;color:#F97316}
 .stat-label{font-size:11px;color:var(--t3);margin-top:2px}
 .module-wrap{margin-bottom:16px}
 .module-bar{background:var(--card);border-radius:12px;padding:16px 18px;cursor:pointer;box-shadow:0 2px 12px rgba(0,0,0,.04);transition:box-shadow .2s;display:flex;align-items:center;gap:14px;border-left:4px solid transparent}
 .module-bar:hover{box-shadow:0 4px 16px rgba(0,0,0,.08)}
-.module-bar.m1{border-left-color:var(--blue)}.module-bar.m2{border-left-color:var(--cyan)}.module-bar.m3{border-left-color:var(--pri)}
+.module-bar.m1{border-left-color:var(--blue)}.module-bar.m2{border-left-color:var(--cyan)}.module-bar.m3{border-left-color:#F97316}
 .module-bar.m4{border-left-color:var(--m4)}.module-bar.m5{border-left-color:var(--suc)}.module-bar.m6{border-left-color:var(--m5)}
 .module-bar .mod-icon{font-size:28px;flex-shrink:0}
 .module-bar .mod-main{flex:1;min-width:0}
@@ -34,10 +35,10 @@
 .module-body.open{display:block}
 .kb-card{background:#fafbfc;border-radius:10px;padding:16px;margin-top:12px;border:1px solid #eef0f4}
 .kb-card-head{display:flex;align-items:center;gap:8px;margin-bottom:10px}
-.kb-card-num{font-size:11px;font-weight:700;color:var(--pri);background:#fff3e0;padding:2px 8px;border-radius:6px;flex-shrink:0}
+.kb-card-num{font-size:11px;font-weight:700;color:#F97316;background:#fff7ed;padding:2px 8px;border-radius:6px;flex-shrink:0}
 .kb-card-title{font-size:14px;font-weight:700;color:var(--text)}
 .kb-card-time{font-size:11px;color:var(--t3);margin-left:auto;flex-shrink:0}
-.kb-insight{font-size:13px;color:#555;line-height:1.7;margin-bottom:10px;padding:8px 12px;background:#fffbe6;border-radius:8px}
+.kb-insight{font-size:13px;color:#555;line-height:1.7;margin-bottom:10px;padding:8px 12px;background:#fff7ed;border-radius:8px}
 .kb-section{margin-bottom:8px}
 .kb-section h4{font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px}
 .kb-section p,.kb-section ul{font-size:12px;color:#666;line-height:1.7}
@@ -58,7 +59,7 @@
 .mmt-section .mmt-desc{font-size:12px;color:var(--t3);line-height:1.7;margin-bottom:18px}
 .mmt-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 .mmt-step{text-align:center}
-.mmt-step .step-num{width:32px;height:32px;border-radius:50%;background:var(--pri);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;margin-bottom:6px}
+.mmt-step .step-num{width:32px;height:32px;border-radius:50%;background:#F97316;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;margin-bottom:6px}
 .mmt-step .step-name{font-size:11px;font-weight:600;color:var(--text)}
 .mmt-step .step-time{font-size:10px;color:var(--t3);margin-top:2px}
 .brand{text-align:center;font-size:10px;color:var(--t3);padding:24px 0 8px}
@@ -81,6 +82,7 @@
   <div class="header">
     <div class="header-tag">Store Morning Meeting · Training</div>
     <h1>门店晨会<span class="accent">途伴计划</span></h1>
+    <p class="slogan">途伴同行，每日一卡，步步进阶</p>
     <p class="sub">一页纸知识卡片 · 完整版<br>30张卡片 · 6大模块 · 5-8分钟/张 · 全员适用</p>
     <div class="stats-row">
       <div class="stat-item"><div class="stat-num">30</div><div class="stat-label">知识卡片</div></div>
@@ -328,7 +330,7 @@
 </div>
 
 <script>
-var __TUBAN_BUILD__='20260625v3';
+var __TUBAN_BUILD__='20260625v4';
 (function(){
 var checked={};
 var key='kataichi_tuban_checked';

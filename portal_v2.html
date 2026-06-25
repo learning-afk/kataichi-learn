@@ -59,6 +59,7 @@ body{
 }
 .module-card:nth-child(1)::after{background:var(--m1)}
 .module-card:nth-child(2)::after{background:var(--m2)}
+.module-card:nth-child(3)::after{background:#F97316}
 .module-card:hover{transform:translateY(-4px);box-shadow:var(--sh-hover);border-color:transparent}
 .module-card:hover::after{left:8px;right:8px}
 .module-card:active{transform:scale(.985)}
@@ -71,7 +72,7 @@ body{
 }
 .module-card:nth-child(1) .card-icon{background:var(--m1-lt);color:var(--m1)}
 .module-card:nth-child(2) .card-icon{background:var(--m2-lt);color:var(--m2)}
-.module-card:nth-child(3) .card-icon{background:#EEF2FF;color:#4F6EF7}
+.module-card:nth-child(3) .card-icon{background:#FFF7ED;color:#F97316}
 .card-icon svg{width:26px;height:26px}
 
 /* Badge */
@@ -87,6 +88,8 @@ body{
 .card-title{font-size:26px;font-weight:800;color:var(--t1);line-height:1.2;margin-bottom:12px;position:relative;z-index:1}
 .module-card:nth-child(1) .card-title .hl{color:var(--m1)}
 .module-card:nth-child(2) .card-title .hl{color:var(--m2)}
+.module-card:nth-child(3) .card-title .hl{color:#F97316}
+.card-slogan{font-size:12px;color:#F97316;font-weight:600;letter-spacing:1px;margin-top:-8px;margin-bottom:12px;position:relative;z-index:1}
 .card-desc{font-size:13px;color:var(--t3);line-height:1.7;margin-bottom:28px;position:relative;z-index:1}
 
 /* 特性列表 */
@@ -95,6 +98,7 @@ body{
 .card-features li::before{content:'';width:5px;height:5px;border-radius:50%;flex-shrink:0}
 .module-card:nth-child(1) .card-features li::before{background:var(--m1)}
 .module-card:nth-child(2) .card-features li::before{background:var(--m2)}
+.module-card:nth-child(3) .card-features li::before{background:#F97316}
 
 /* 按钮 */
 .card-cta{
@@ -122,6 +126,8 @@ body{
 .card-btn-teal:active{background:#0b8075}
 .card-btn-blue{background:var(--m1);color:#fff;box-shadow:0 4px 16px rgba(79,110,247,.3)}
 .card-btn-blue:active{background:#3d5ce5}
+.card-btn-orange{background:#F97316;color:#fff;box-shadow:0 4px 16px rgba(249,115,22,.35)}
+.card-btn-orange:active{background:#ea580c}
 
 @media(max-width:768px){
   .card-actions{gap:8px}.card-btn{padding:11px 0;font-size:13px}
@@ -201,7 +207,7 @@ body{
 }
 </style>
 <script>
-var __P_BUILD__='20260625v1';
+var __P_BUILD__='20260625v5';
 var __p_cached__=localStorage.getItem('_portal_build');
 if(__p_cached__&&__p_cached__!==__P_BUILD__){
   localStorage.setItem('_portal_build',__P_BUILD__);
@@ -297,6 +303,7 @@ if(__p_cached__&&__p_cached__!==__P_BUILD__){
       </div>
       <div class="card-badge">MODULE 03</div>
       <h2 class="card-title">门店晨会<span class="hl">途伴计划</span></h2>
+      <p class="card-slogan">途伴同行，每日一卡，步步进阶</p>
       <p class="card-desc">门店全员早会培训体系，覆盖6大业务模块30张知识卡片，每天5-8分钟碎片化学习，持续提升团队专业能力。</p>
       <ul class="card-features">
         <li>6大模块覆盖全业务链路</li>
@@ -304,7 +311,7 @@ if(__p_cached__&&__p_cached__!==__P_BUILD__){
         <li>每日早会5-8分钟轻松执行</li>
         <li>全员适用各岗位学习成长</li>
       </ul>
-      <button class="card-btn card-btn-blue" style="width:100%" onclick="event.stopPropagation();goModule('tuban_plan.html')">
+      <button class="card-btn card-btn-orange" style="width:100%" onclick="event.stopPropagation();goModule('tuban_plan.html')">
         进入学习
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M5 12h14M12 5l7 7-7 7"/>
