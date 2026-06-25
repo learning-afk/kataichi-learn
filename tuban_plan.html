@@ -3,7 +3,7 @@
 <style>:root{--pri:#F5A623;--bg:#F5F6FA;--card:#FFFFFF;--text:#1A1A2E;--t3:#6B7280;--blue:#4F6EF7;--cyan:#0D9488;--suc:#4CAF50;--danger:#F44336;--m4:#E85D75;--m5:#8B5CF6}
 *{margin:0;padding:0;box-sizing:border-box}body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
 .topbar{position:sticky;top:0;z-index:100;background:var(--card);padding:10px 16px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 4px rgba(0,0,0,.06);border-bottom:3px solid #F97316}
-.topbar-back{width:32px;height:32px;border-radius:8px;border:none;background:#f3f4f6;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;color:#666}
+.topbar-back{height:32px;border-radius:8px;border:none;background:#f3f4f6;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;font-size:13px;color:#666;padding:0 10px;white-space:nowrap}
 .topbar-back:hover{background:#e5e7eb}
 .topbar-logo{height:26px;width:auto}
 .topbar-title{font-size:16px;font-weight:700;flex:1}
@@ -73,7 +73,7 @@
 }
 </style></head><body>
 <div class="topbar">
-  <button class="topbar-back" onclick="history.back()">←</button>
+  <button class="topbar-back" onclick="location.href='portal_v2.html'">← 返回首页</button>
   <img src="logo.png" class="topbar-logo" alt="卡泰驰">
   <span class="topbar-title">门店晨会途伴计划</span>
   <span class="topbar-progress" id="topProgress">0/30</span>
