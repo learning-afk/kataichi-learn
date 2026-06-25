@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>途伴计划 · 卡泰驰培训中心</title>
+<style>
+:root{
+  --pri:#F5A623;--pri2:#FFB84D;--pri-lt:#FFF3E0;
+  --blue:#4F6EF7;--cyan:#0D9488;--suc:#4CAF50;
+  --bg:#F5F6FA;--card:#FFFFFF;
+  --t1:#1A1A2E;--t2:#666680;--t3:#999AAA;
+  --bd:#E8E8EF;--sh:0 2px 16px rgba(0,0,0,.06);
+  --r:12px;--rs:8px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--t1);min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* 顶部装饰条 */
+.top-deco{height:4px;background:linear-gradient(90deg,var(--blue),var(--pri),var(--cyan));position:fixed;top:0;left:0;right:0;z-index:100}
+
+/* ── Topbar ── */
+.topbar{background:var(--card);border-bottom:1px solid var(--bd);padding:10px 16px;position:sticky;top:4px;z-index:99;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.topbar-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:12px}
+.topbar-back{display:flex;align-items:center;gap:4px;color:var(--t2);text-decoration:none;font-size:13px;font-weight:600;white-space:nowrap}
+.topbar-back:hover{color:var(--pri)}
+.topbar-sep{width:1px;height:20px;background:var(--bd)}
+.topbar-logo{height:28px;width:auto;flex-shrink:0}
+.topbar-title{font-size:16px;font-weight:700;color:var(--t1)}
+.topbar-badge{background:var(--pri-lt);color:var(--pri);font-size:10px;font-weight:700;padding:2px 10px;border-radius:20px;white-space:nowrap;margin-left:auto}
+
+/* ── Hero ── */
+.hero{padding:48px 20px 40px;text-align:center}
+.hero-badge{display:inline-block;background:var(--blue);color:#fff;font-size:11px;font-weight:700;letter-spacing:3px;padding:6px 18px;border-radius:20px;margin-bottom:20px}
+.hero h1{font-size:40px;font-weight:900;color:var(--t1);letter-spacing:2px;margin-bottom:10px}
+.hero h1 .accent{color:var(--pri)}
+.hero .subtitle{font-size:15px;color:var(--t2);max-width:500px;margin:0 auto 32px;line-height:1.7}
+
+/* ── Stats Row ── */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:860px;margin:0 auto 40px;padding:0 20px}
+.stat-card{background:var(--card);border-radius:var(--r);padding:20px 16px;text-align:center;box-shadow:var(--sh);border:1px solid var(--bd)}
+.stat-card .num{font-size:32px;font-weight:900;color:var(--pri);line-height:1}
+.stat-card .num.blue{color:var(--blue)}
+.stat-card .num.cyan{color:var(--cyan)}
+.stat-card .num.green{color:var(--suc)}
+.stat-card .label{font-size:12px;color:var(--t3);margin-top:6px}
+.stat-card .unit{font-size:14px;color:var(--t2);font-weight:400}
+
+/* ── Main Content ── */
+.main{max-width:1100px;margin:0 auto;padding:0 20px 60px}
+
+/* ── Section Title ── */
+.section-title{text-align:center;margin-bottom:28px}
+.section-title h2{font-size:24px;font-weight:800;color:var(--t1);margin-bottom:6px}
+.section-title p{font-size:13px;color:var(--t3);max-width:500px;margin:0 auto;line-height:1.6}
+
+/* ── Module Grid ── */
+.module-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;margin-bottom:48px}
+.module-card{background:var(--card);border-radius:var(--r);padding:24px;box-shadow:var(--sh);border:1px solid var(--bd);cursor:pointer;transition:all .25s;position:relative;overflow:hidden}
+.module-card:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,.1)}
+.module-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
+.module-card.m1::before{background:var(--blue)}
+.module-card.m2::before{background:var(--cyan)}
+.module-card.m3::before{background:var(--pri)}
+.module-card.m4::before{background:#E85D75}
+.module-card.m5::before{background:#8B5CF6}
+.module-card.m6::before{background:var(--suc)}
+.module-card.expanded{box-shadow:0 8px 32px rgba(0,0,0,.12);border-color:var(--pri)}
+.module-header{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px}
+.module-num{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:#fff;flex-shrink:0}
+.module-card.m1 .module-num{background:var(--blue)}
+.module-card.m2 .module-num{background:var(--cyan)}
+.module-card.m3 .module-num{background:var(--pri)}
+.module-card.m4 .module-num{background:#E85D75}
+.module-card.m5 .module-num{background:#8B5CF6}
+.module-card.m6 .module-num{background:var(--suc)}
+.module-info h3{font-size:17px;font-weight:700;color:var(--t1);margin-bottom:4px}
+.module-info .meta{font-size:11px;color:var(--t3)}
+.module-body{display:none;margin-top:16px;padding-top:16px;border-top:1px solid var(--bd)}
+.module-card.expanded .module-body{display:block}
+.module-body .kb-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.module-body .kb-list li{display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--bg);border-radius:var(--rs);font-size:13px;color:var(--t1);transition:all .2s}
+.module-body .kb-list li:hover{background:var(--pri-lt)}
+.kb-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.module-body .kb-list li .kb-check{width:18px;height:18px;border:2px solid var(--bd);border-radius:50%;flex-shrink:0;cursor:pointer;transition:all .25s;display:flex;align-items:center;justify-content:center;font-size:10px;color:transparent}
+.module-body .kb-list li .kb-check.checked{background:var(--suc);border-color:var(--suc);color:#fff}
+.module-body .kb-list li.completed{opacity:.6}
+.module-body .kb-list li.completed .kb-dot{background:var(--suc)!important}
+
+/* ── MMT Section ── */
+.mmt-section{background:var(--card);border-radius:var(--r);padding:28px;box-shadow:var(--sh);border:1px solid var(--bd);margin-top:48px}
+.mmt-section h2{font-size:20px;font-weight:800;color:var(--t1);margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.mmt-section h2 .icon{font-size:22px}
+.mmt-section .mmt-desc{font-size:13px;color:var(--t3);margin-bottom:20px;line-height:1.6}
+.mmt-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.mmt-step{background:var(--bg);border-radius:var(--rs);padding:16px;display:flex;gap:12px}
+.mmt-step .step-num{width:28px;height:28px;background:var(--pri);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0}
+.mmt-step .step-info h4{font-size:14px;font-weight:700;color:var(--t1);margin-bottom:4px}
+.mmt-step .step-info p{font-size:12px;color:var(--t3);line-height:1.5}
+
+/* ── Progress Bar ── */
+.progress-wrap{max-width:860px;margin:0 auto 40px;padding:0 20px}
+.progress-bar{height:8px;background:var(--bd);border-radius:4px;overflow:hidden;margin-bottom:8px}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--pri));border-radius:4px;transition:width .5s ease;width:0%}
+.progress-info{display:flex;justify-content:space-between;font-size:11px;color:var(--t3)}
+
+/* ── Footer ── */
+.footer{text-align:center;padding:32px 20px;border-top:1px solid var(--bd);margin-top:48px}
+.footer .brand{font-size:11px;color:var(--t3);letter-spacing:2px}
+
+/* ── Mobile ── */
+@media(max-width:768px){
+  .hero h1{font-size:30px;letter-spacing:0}
+  .hero .subtitle{font-size:13px}
+  .stats-row{grid-template-columns:repeat(2,1fr);gap:10px}
+  .stat-card{padding:16px 12px}
+  .stat-card .num{font-size:26px}
+  .module-grid{grid-template-columns:1fr}
+  .mmt-steps{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .topbar{padding:8px 12px}
+  .topbar-title{font-size:14px}
+  .hero{padding:36px 16px 28px}
+  .hero h1{font-size:26px}
+  .section-title h2{font-size:20px}
+  .module-card{padding:20px}
+}
+</style>
+</head>
+<body>
+<div class="top-deco"></div>
+
+<!-- Topbar -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <a class="topbar-back" href="portal_v2.html">← 返回首页</a>
+    <div class="topbar-sep"></div>
+    <img class="topbar-logo" src="logo.png" alt="卡泰驰">
+    <span class="topbar-title">途伴计划</span>
+    <span class="topbar-badge">早会培训</span>
+  </div>
+</div>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">TU BAN JI HUA</div>
+  <h1>途伴<span class="accent">计划</span></h1>
+  <p class="subtitle">二手车门店全员早会培训体系，每天5-8分钟，系统化提升团队专业能力与服务水平</p>
+</div>
+
+<!-- Stats -->
+<div class="stats-row" id="statsRow">
+  <div class="stat-card">
+    <div class="num blue">36</div>
+    <div class="label">知识卡片</div>
+  </div>
+  <div class="stat-card">
+    <div class="num">5-8</div>
+    <div class="unit">分钟/张</div>
+    <div class="label">早会学习时长</div>
+  </div>
+  <div class="stat-card">
+    <div class="num cyan">6</div>
+    <div class="label">学习模块</div>
+  </div>
+  <div class="stat-card">
+    <div class="num green">全员</div>
+    <div class="label">适用各岗位</div>
+  </div>
+</div>
+
+<!-- Progress -->
+<div class="progress-wrap">
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="progress-info"><span id="progressLabel">今日学习进度 0/36</span><span id="progressPct">0%</span></div>
+</div>
+
+<!-- Modules -->
+<div class="main">
+  <div class="section-title">
+    <h2>六大学习模块</h2>
+    <p>覆盖二手车门店全业务链路，点击展开查看知识卡片清单</p>
+  </div>
+
+  <div class="module-grid" id="moduleGrid">
+    <!-- Module 1 -->
+    <div class="module-card m1" data-module="1">
+      <div class="module-header">
+        <div class="module-num">01</div>
+        <div class="module-info">
+          <h3>车源采购与库存管理</h3>
+          <div class="meta">6张卡片 · 预计30min</div>
+        </div>
+      </div>
+      <div class="module-body">
+        <ul class="kb-list">
+          <li data-kb="1-1"><span class="kb-check"></span><span class="kb-dot" style="background:var(--blue)"></span>车源渠道开发与维护策略</li>
+          <li data-kb="1-2"><span class="kb-check"></span><span class="kb-dot" style="background:var(--blue)"></span>车辆检测评估标准化流程</li>
+          <li data-kb="1-3"><span class="kb-check"></span><span class="kb-dot" style="background:var(--blue)"></span>库存结构优化与动态调拨</li>
+          <li data-kb="1-4"><span class="kb-check"></span><span class="kb-dot" style="background:var(--blue)"></span>采购成本控制与议价技巧</li>
+          <li data-kb="1-5"><span class="kb-check"></span><span class="kb-dot" style="background:var(--blue)"></span>车辆整备与入库标准</li>
+          <li data-kb="1-6"><span class="kb-check"></span><span class="kb-dot" style="background:var(--blue)"></span>库存周转率提升方法</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Module 2 -->
+    <div class="module-card m2" data-module="2">
+      <div class="module-header">
+        <div class="module-num">02</div>
+        <div class="module-info">
+          <h3>销售转化与客户运营</h3>
+          <div class="meta">6张卡片 · 预计30min</div>
+        </div>
+      </div>
+      <div class="module-body">
+        <ul class="kb-list">
+          <li data-kb="2-1"><span class="kb-check"></span><span class="kb-dot" style="background:var(--cyan)"></span>客户需求分析与精准匹配</li>
+          <li data-kb="2-2"><span class="kb-check"></span><span class="kb-dot" style="background:var(--cyan)"></span>到店接待与试驾体验设计</li>
+          <li data-kb="2-3"><span class="kb-check"></span><span class="kb-dot" style="background:var(--cyan)"></span>价格谈判与成交促成策略</li>
+          <li data-kb="2-4"><span class="kb-check"></span><span class="kb-dot" style="background:var(--cyan)"></span>客户分级与精细化运营</li>
+          <li data-kb="2-5"><span class="kb-check"></span><span class="kb-dot" style="background:var(--cyan)"></span>战败分析与流失挽回</li>
+          <li data-kb="2-6"><span class="kb-check"></span><span class="kb-dot" style="background:var(--cyan)"></span>二手车销售全流程SOP</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Module 3 -->
+    <div class="module-card m3" data-module="3">
+      <div class="module-header">
+        <div class="module-num">03</div>
+        <div class="module-info">
+          <h3>售后服务与客户维系</h3>
+          <div class="meta">6张卡片 · 预计30min</div>
+        </div>
+      </div>
+      <div class="module-body">
+        <ul class="kb-list">
+          <li data-kb="3-1"><span class="kb-check"></span><span class="kb-dot" style="background:var(--pri)"></span>售后服务接待标准流程</li>
+          <li data-kb="3-2"><span class="kb-check"></span><span class="kb-dot" style="background:var(--pri)"></span>常见故障诊断与维修方案</li>
+          <li data-kb="3-3"><span class="kb-check"></span><span class="kb-dot" style="background:var(--pri)"></span>客户回访与满意度管理</li>
+          <li data-kb="3-4"><span class="kb-check"></span><span class="kb-dot" style="background:var(--pri)"></span>投诉处理与危机应对</li>
+          <li data-kb="3-5"><span class="kb-check"></span><span class="kb-dot" style="background:var(--pri)"></span>老客户转介绍激励体系</li>
+          <li data-kb="3-6"><span class="kb-check"></span><span class="kb-dot" style="background:var(--pri)"></span>客户生命周期价值管理</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Module 4 -->
+    <div class="module-card m4" data-module="4">
+      <div class="module-header">
+        <div class="module-num">04</div>
+        <div class="module-info">
+          <h3>金融延保与增值服务</h3>
+          <div class="meta">6张卡片 · 预计30min</div>
+        </div>
+      </div>
+      <div class="module-body">
+        <ul class="kb-list">
+          <li data-kb="4-1"><span class="kb-check"></span><span class="kb-dot" style="background:#E85D75"></span>二手车金融产品体系介绍</li>
+          <li data-kb="4-2"><span class="kb-check"></span><span class="kb-dot" style="background:#E85D75"></span>分期方案设计与推荐技巧</li>
+          <li data-kb="4-3"><span class="kb-check"></span><span class="kb-dot" style="background:#E85D75"></span>延保产品销售话术</li>
+          <li data-kb="4-4"><span class="kb-check"></span><span class="kb-dot" style="background:#E85D75"></span>保险推荐与理赔协助</li>
+          <li data-kb="4-5"><span class="kb-check"></span><span class="kb-dot" style="background:#E85D75"></span>精品附件与改装服务</li>
+          <li data-kb="4-6"><span class="kb-check"></span><span class="kb-dot" style="background:#E85D75"></span>增值服务组合包装策略</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Module 5 -->
+    <div class="module-card m5" data-module="5">
+      <div class="module-header">
+        <div class="module-num">05</div>
+        <div class="module-info">
+          <h3>新媒体运营与获客</h3>
+          <div class="meta">6张卡片 · 预计30min</div>
+        </div>
+      </div>
+      <div class="module-body">
+        <ul class="kb-list">
+          <li data-kb="5-1"><span class="kb-check"></span><span class="kb-dot" style="background:#8B5CF6"></span>抖音/快手短视频内容创作</li>
+          <li data-kb="5-2"><span class="kb-check"></span><span class="kb-dot" style="background:#8B5CF6"></span>直播带车话术与节奏把控</li>
+          <li data-kb="5-3"><span class="kb-check"></span><span class="kb-dot" style="background:#8B5CF6"></span>微信私域流量池搭建</li>
+          <li data-kb="5-4"><span class="kb-check"></span><span class="kb-dot" style="background:#8B5CF6"></span>朋友圈与社群运营技巧</li>
+          <li data-kb="5-5"><span class="kb-check"></span><span class="kb-dot" style="background:#8B5CF6"></span>线上线索跟进与转化</li>
+          <li data-kb="5-6"><span class="kb-check"></span><span class="kb-dot" style="background:#8B5CF6"></span>新媒体数据复盘与优化</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Module 6 -->
+    <div class="module-card m6" data-module="6">
+      <div class="module-header">
+        <div class="module-num">06</div>
+        <div class="module-info">
+          <h3>合规风控与客户关系SOP</h3>
+          <div class="meta">6张卡片 · 预计30min</div>
+        </div>
+      </div>
+      <div class="module-body">
+        <ul class="kb-list">
+          <li data-kb="6-1"><span class="kb-check"></span><span class="kb-dot" style="background:var(--suc)"></span>二手车交易法律法规基础</li>
+          <li data-kb="6-2"><span class="kb-check"></span><span class="kb-dot" style="background:var(--suc)"></span>合同签订与风险防范要点</li>
+          <li data-kb="6-3"><span class="kb-check"></span><span class="kb-dot" style="background:var(--suc)"></span>车辆过户合规操作流程</li>
+          <li data-kb="6-4"><span class="kb-check"></span><span class="kb-dot" style="background:var(--suc)"></span>客户信息保护与隐私合规</li>
+          <li data-kb="6-5"><span class="kb-check"></span><span class="kb-dot" style="background:var(--suc)"></span>客户关系全链路SOP</li>
+          <li data-kb="6-6"><span class="kb-check"></span><span class="kb-dot" style="background:var(--suc)"></span>纠纷处理与品牌声誉管理</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- MMT Section -->
+  <div class="mmt-section">
+    <h2><span class="icon">☀️</span> 门店早会执行指南</h2>
+    <p class="mmt-desc">途伴计划设计为每日早会使用，建议各门店按以下流程组织，确保培训效果落地</p>
+    <div class="mmt-steps">
+      <div class="mmt-step">
+        <div class="step-num">1</div>
+        <div class="step-info">
+          <h4>晨会开场（1min）</h4>
+          <p>店长主持，明确今日学习卡片主题，激发团队学习兴趣</p>
+        </div>
+      </div>
+      <div class="mmt-step">
+        <div class="step-num">2</div>
+        <div class="step-info">
+          <h4>知识卡片学习（5-8min）</h4>
+          <p>全员阅读当日卡片内容，店长重点讲解关键要点与实际案例</p>
+        </div>
+      </div>
+      <div class="mmt-step">
+        <div class="step-num">3</div>
+        <div class="step-info">
+          <h4>互动讨论（3min）</h4>
+          <p>团队成员分享心得体会，结合门店实际场景展开讨论</p>
+        </div>
+      </div>
+      <div class="mmt-step">
+        <div class="step-num">4</div>
+        <div class="step-info">
+          <h4>行动计划（2min）</h4>
+          <p>每人输出1条今日改进行动，店长确认并跟踪执行情况</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <div class="brand">卡泰驰二手车生态平台 · 途伴计划 · 内部培训资料</div>
+</div>
+
+<script>
+var __TUBAN_BUILD__ = '20260625v1';
+
+(function(){
+  var cached = localStorage.getItem('_tuban_build');
+  if(cached && cached !== __TUBAN_BUILD__) {
+    localStorage.setItem('_tuban_build', __TUBAN_BUILD__);
+    localStorage.removeItem('_tuban_progress');
+  }
+  if(!cached) localStorage.setItem('_tuban_build', __TUBAN_BUILD__);
+})();
+
+// Module expand/collapse
+document.getElementById('moduleGrid').addEventListener('click', function(e){
+  var card = e.target.closest('.module-card');
+  if(!card) return;
+  card.classList.toggle('expanded');
+});
+
+// Knowledge card check/uncheck
+document.getElementById('moduleGrid').addEventListener('click', function(e){
+  var check = e.target.closest('.kb-check');
+  if(!check) return;
+  var li = check.parentElement;
+  check.classList.toggle('checked');
+  li.classList.toggle('completed');
+  saveProgress();
+});
+
+// Save & load progress
+function saveProgress(){
+  var checked = document.querySelectorAll('.kb-check.checked');
+  var items = [];
+  checked.forEach(function(c){ items.push(c.parentElement.dataset.kb); });
+  localStorage.setItem('_tuban_progress', JSON.stringify(items));
+  updateProgress();
+}
+
+function loadProgress(){
+  try{
+    var data = JSON.parse(localStorage.getItem('_tuban_progress')) || [];
+    data.forEach(function(id){
+      var el = document.querySelector('[data-kb="'+id+'"] .kb-check');
+      if(el){ el.classList.add('checked'); el.parentElement.classList.add('completed'); }
+    });
+  }catch(e){}
+  updateProgress();
+}
+
+function updateProgress(){
+  var total = document.querySelectorAll('.kb-check').length;
+  var done = document.querySelectorAll('.kb-check.checked').length;
+  var pct = total ? Math.round(done/total*100) : 0;
+  document.getElementById('progressFill').style.width = pct+'%';
+  document.getElementById('progressLabel').textContent = '今日学习进度 '+done+'/'+total;
+  document.getElementById('progressPct').textContent = pct+'%';
+}
+
+// Daily reset check
+(function(){
+  var today = new Date().toISOString().slice(0,10);
+  var last = localStorage.getItem('_tuban_date');
+  if(last !== today){
+    localStorage.setItem('_tuban_date', today);
+    // Don't reset progress, just note the date
+  }
+})();
+
+loadProgress();
+</script>
+</body>
+</html>
