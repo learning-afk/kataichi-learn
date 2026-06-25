@@ -154,7 +154,7 @@ var __LOGIN_BUILD__ = '20260624v3';
           <option value="">请选择门店</option>
         </select>
       </div>
-      <input type="text" id="storeCustom" placeholder="或手动输入门店名称" maxlength="50" style="margin-top:8px;display:none">
+      <input type="text" id="storeCustom" placeholder="或输入加盟店名称" maxlength="50" style="margin-top:8px;display:none">
       <div class="err-msg" id="errStore">请选择或输入门店</div>
     </div>
 
@@ -185,10 +185,13 @@ var __LOGIN_BUILD__ = '20260624v3';
 
 <script>
 var STORES=[
-  '北京朝阳门店','北京海淀门店','上海浦东门店','上海徐汇门店',
-  '广州天河门店','深圳福田门店','深圳南山门店','成都武侯门店',
-  '杭州西湖门店','南京鼓楼门店','武汉洪山门店','重庆渝北门店',
-  '长沙岳麓门店','郑州金水门店','西安雁塔门店'
+  '北京中驰','常州德富','成都鑫迪克','东莞运隆','鄂尔多斯禾之安',
+  '佛山御豪','贵阳车柏乐','哈尔滨鹏之飞','邯郸宝众','合肥琪琪',
+  '华中美驰','济南鸿诚','昆明小文','兰州金耀','临沂钧立',
+  '南昌优之联','南宁零零柒','青岛东豪','青岛恒程致远','厦门中恒',
+  '山西东泰','深圳中百','沈阳悦众','石家庄荣恒','太原胤泽',
+  '天津车探','潍坊中汇','西安大诚行','徐州金欧','长沙辉哥',
+  '重庆上越'
 ];
 
 function initStores(){
@@ -198,7 +201,7 @@ function initStores(){
     opt.value=s;opt.textContent=s;sel.appendChild(opt);
   });
   var opt2=document.createElement('option');
-  opt2.value='__custom__';opt2.textContent='✏️ 手动输入...';sel.appendChild(opt2);
+  opt2.value='__custom__';opt2.textContent='✏️ 加盟店手动输入...';sel.appendChild(opt2);
   sel.addEventListener('change',function(){
     var custom=document.getElementById('storeCustom');
     if(this.value==='__custom__'){custom.style.display='block';custom.focus()}
