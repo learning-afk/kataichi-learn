@@ -138,6 +138,7 @@ body{
 .card-btn-orange:active{background:#ea580c}
 .card-btn-purple{background:var(--m4);color:#fff;box-shadow:0 4px 16px rgba(124,58,237,.35)}
 .card-btn-purple:active{background:#6d28d9}
+.card-btn-disabled{background:#D1D5DB;color:#9CA3AF;cursor:not-allowed;box-shadow:none;pointer-events:none}
 
 @media(max-width:768px){
   .card-actions{gap:8px}.card-btn{padding:11px 0;font-size:13px}
@@ -348,8 +349,8 @@ if(__p_cached__&&__p_cached__!==__P_BUILD__){
         <li>理论+实操+考核一体化</li>
         <li>结业认证持续跟踪辅导</li>
       </ul>
-      <button class="card-btn card-btn-purple" style="width:100%" onclick="event.stopPropagation();goModule('camp.html')">
-        查看详情
+      <button class="card-btn card-btn-disabled" style="width:100%">
+        暂未开放
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M5 12h14M12 5l7 7-7 7"/>
         </svg>
