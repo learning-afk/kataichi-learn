@@ -853,7 +853,7 @@ function renderCampTab(){
       '<div class="panel-hd" style="justify-content:space-between;flex-wrap:wrap;gap:8px">'+
         '<span>🏕️ 集训营内容管理</span>'+
         '<div style="display:flex;gap:8px;flex-wrap:wrap">'+
-          '<a href="camp.html" target="_blank" class="btn btn-out btn-sm">👁 预览</a>'+
+          '<button class="btn btn-out btn-sm" onclick="previewCamp()">👁 预览前台</button>'+
           (hasServer?'<button class="btn btn-out btn-sm" style="border-color:var(--m2);color:var(--m2)" onclick="syncCampToCloud()">🔄 同步到前端</button>':'')+
           '<button class="btn btn-pri btn-sm" style="background:var(--m4)" onclick="openCampEditor(null)">+ 发布新培训</button>'+
         '</div>'+
@@ -1049,6 +1049,23 @@ function extractFirstImage(html){
   return m?m[1]:'';
 }
 
+// ── 预览前台（先同步再打开） ──
+async function previewCamp(){
+  if(hasServer){
+    toast('正在同步内容到前台...','');
+    try{ await doSyncPush(); }catch(e){}
+    // 同步完成，打开 camp.html（带时间戳刷新缓存）
+    setTimeout(function(){
+      window.open('camp.html?t='+Date.now(),'_blank');
+      toast('已同步并打开预览','ok');
+    },500);
+  }else{
+    // 云端模式：直接打开 camp.html（数据在 localStorage）
+    window.open('camp.html?t='+Date.now(),'_blank');
+    toast('⚠️ 云端模式：预览内容为本浏览器 localStorage 中数据','warn');
+  }
+}
+
 // ── 一键同步到前端 camp-data.json ──
 async function syncCampToCloud(){
   if(!hasServer){ toast('仅服务端模式支持同步','err'); return; }
@@ -1125,7 +1142,7 @@ async function saveCampArticle(){
       // 自动同步 + 推送 camp-data.json
       doSyncPush();
 
-      toast(isNew?'发布成功（已同步）':'修改已保存（已同步）','ok');
+      toast(isNew?'发布成功 ✅ 已同步至前台（camp-data.json → GitHub → CloudStudio）':'修改已保存 ✅ 已同步至前台','ok');
       closeCampEditor();
       renderCampTab();
     }catch(e){
