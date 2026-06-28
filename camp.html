@@ -424,6 +424,7 @@ body{
   <div class="stat-item"><div class="stat-num" id="statTotal">0</div><div class="stat-lbl">累计期数</div></div>
   <div class="stat-item"><div class="stat-num" id="statPeople">0</div><div class="stat-lbl">参训人次</div></div>
   <div class="stat-item"><div class="stat-num" id="statDays">0</div><div class="stat-lbl">培训天数</div></div>
+  <div class="stat-item" style="border-left:1px solid var(--g200);padding-left:16px"><div class="stat-num" style="font-size:11px;color:var(--g400)" id="statSynced">--</div><div class="stat-lbl" style="font-size:10px">数据同步</div></div>
 </div>
 
 <!-- 主体 -->
@@ -568,9 +569,16 @@ function showSyncBar() {
 var _articlesCache = null;
 
 function loadArticles(callback) {
-  // 主数据源：camp-data.json（管理后台 sync 后自动更新的静态文件）
-  // CloudStudio 和 localhost 均可用，不受服务端限制
-  fetch('camp-data.json?t=' + Date.now())
+  // 先获取元数据（版本号用于缓存刷新）
+  fetch('camp-meta.json?t=' + Date.now())
+    .then(function(r) { return r.ok ? r.json() : null; })
+    .catch(function(){ return null; })
+    .then(function(meta) {
+      var version = meta ? meta.version : Date.now();
+      // 主数据源：camp-data.json（管理后台 sync 后自动更新的静态文件）
+      // 使用版本号强制刷新缓存
+      return fetch('camp-data.json?v=' + version);
+    })
     .then(function(r) { if (!r.ok) throw new Error('no static'); return r.json(); })
     .then(function(data) {
       // camp-data.json 为权威数据源：有数据用数据，无数据清空
@@ -590,6 +598,19 @@ function loadArticles(callback) {
       var local = getLocalArticles();
       _articlesCache = (local && local.length > 0) ? local : [];
       callback();
+    });
+}
+
+// 读取本地元数据（页面初始化时已获取，缓存复用）
+var __campMetaCache = null;
+function getCampMeta(cb) {
+  if (__campMetaCache) { cb(__campMetaCache); return; }
+  fetch('camp-meta.json?t=' + Date.now())
+    .then(function(r) { return r.ok ? r.json() : null; })
+    .catch(function(){ return null; })
+    .then(function(meta) {
+      __campMetaCache = meta || { version: 0, syncedAt: '', count: 0 };
+      cb(__campMetaCache);
     });
 }
 
@@ -634,6 +655,18 @@ function renderList() {
   document.getElementById('statTotal').textContent = all.length;
   document.getElementById('statPeople').textContent = all.length ? totalPeople : '-';
   document.getElementById('statDays').textContent = all.length ? totalDays : '-';
+  // 显示数据同步时间
+  getCampMeta(function(meta){
+    var synEl = document.getElementById('statSynced');
+    if (synEl && meta.syncedAt) {
+      var d = new Date(meta.syncedAt);
+      var hh = String(d.getHours()).padStart(2,'0');
+      var mm = String(d.getMinutes()).padStart(2,'0');
+      var ss = String(d.getSeconds()).padStart(2,'0');
+      synEl.textContent = hh + ':' + mm + ':' + ss;
+      synEl.title = '数据版本: ' + meta.version + '\n同步时间: ' + meta.syncedAt;
+    }
+  });
 
   var el = document.getElementById('articleList');
   if (!list.length) {
