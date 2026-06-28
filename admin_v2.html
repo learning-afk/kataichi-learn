@@ -927,12 +927,46 @@ function _buildCampEditorModal(article){
         '<div style="color:#fff;font-size:16px;font-weight:800">'+(article===null?'✍️ 发布新培训':'✏️ 编辑培训')+'</div>'+
         '<button onclick="closeCampEditor()" style="background:rgba(255,255,255,.2);border:none;color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:18px;line-height:32px">×</button>'+
       '</div>'+
-      // 内容
+            // 内容
       '<div style="padding:22px;display:flex;flex-direction:column;gap:16px">'+
+        // ── 快速导入（HTML文件上传/拖拽）──
+        '<div>'+
+          '<label style="font-size:12px;font-weight:700;color:var(--g600);display:flex;align-items:center;gap:5px;margin-bottom:8px">'+
+            '📥 <span>快速导入</span> <span style="font-weight:400;color:var(--g400)">（支持上传HTML文件或粘贴内容）</span>'+
+          '</label>'+
+          '<div id="camp_quick_import" onclick="document.getElementById(\'camp_html_file\').click()" '+
+            "style=\"border:2px dashed var(--m4);border-radius:12px;padding:36px 20px;text-align:center;background:#F8F7FF;cursor:pointer;transition:all .2s\" "+
+            "ondragover=\"event.preventDefault();this.style.borderColor=\'#7C3AED\';this.style.background=\'#F3EEFF\'\" "+
+            "ondragleave=\"this.style.borderColor=\'var(--m4)\';this.style.background=\'#F8F7FF\'\" "+
+            "ondrop=\"handleCampHtmlDrop(event)\">'+
+            '<div style="font-size:40px;margin-bottom:8px">📄</div>'+
+            '<div style="color:#7C3AED;font-size:14px;font-weight:700;margin-bottom:4px">点击上传HTML文件，或拖拽文件到此处</div>'+
+            '<div style="color:var(--g400);font-size:12px">支持 nanchang-article.html 等公众号文章格式</div>'+
+            '<input id="camp_html_file" type="file" accept=".html,.htm" style="display:none" onchange="handleCampHtmlFile(this)">'+
+          '</div>'+
+        '</div>'+
+
         // 标题
         '<div>'+
           '<label style="font-size:12px;font-weight:700;color:var(--g600);display:block;margin-bottom:6px">培训标题 <span style="color:var(--err)">*</span></label>'+
-          '<input id="camp_title" type="text" placeholder="例：2024年Q2销售精英集训营" value="'+escHtml(article?article.title:'')+'\" style="width:100%;padding:10px 13px;border:1.5px solid var(--g200);border-radius:8px;font-size:14px;outline:none;font-family:inherit">'+
+          '<input id="camp_title" type="text" placeholder="输入培训标题，如：'+'"' + '\''+"聚力南昌·权益深耕'+'"' + '\'' + '"'+'"分享会（南昌站）" value='+escHtml(article?article.title:'')+'\" style="width:100%;padding:10px 13px;border:1.5px solid var(--g200);border-radius:8px;font-size:14px;outline:none;font-family:inherit">'+
+        '</div>'+
+
+        // 封面图片（可选）
+        '<div>'+
+          '<label style="font-size:12px;font-weight:700;color:var(--g600);display:block;margin-bottom:6px">'+
+            '封面图片 <span style="font-weight:400;color:var(--g400)">（留空则自动取正文第一张）</span>'+
+          '</label>'+
+          '<div id="camp_cover_area" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">'+
+            (article&&article.cover ? '<img id="camp_cover_preview" src="'+escHtml(article.cover)+'" style="width:120px;height:68px;object-fit:cover;border-radius:8px;border:1px solid var(--g200)" onerror="this.style.display=\'none'\'">' : '')+
+            '<div style="display:flex;align-items:center;gap:8px">'+
+              '<input id="camp_cover_file" type="file" accept="image/*" style="display:none" onchange="handleCampCoverUpload(this)">'+
+              (hasServer ? '<button type="button" class="btn btn-out btn-sm" onclick="document.getElementById(\'camp_cover_file\').click()">选择文件</button>' : '<button type="button" class="btn btn-out btn-sm" disabled style="opacity:.5;cursor:not-allowed" title="需启动本地服务">选择文件</button>')+
+              '<span id="camp_cover_name" style="font-size:12px;color:var(--g400)">' + (article&&article.cover?'已选择':'未选择任意文件') + '</span>'+
+              (article&&article.cover?'<button type="button" class="btn btn-err btn-sm" onclick="clearCampCover()">✕ 移除</button>':'')+
+            '</div>'+
+          '</div>'+
+          '<input id="camp_cover" type="hidden" value="'+escHtml(article?article.cover||'':'')+'">'+
         '</div>'+
         // 摘要
         '<div>'+
@@ -961,10 +995,33 @@ function _buildCampEditorModal(article){
             '图文正文 '+
             '<span style="font-weight:400;color:var(--g400)">（支持HTML格式，Ctrl+V 粘贴后自动保留图文格式。正文中第一张图片将自动作为封面图）</span>'+
           '</label>'+
+          // 富文本工具栏
+          '<div id="camp_editor_toolbar" style="display:flex;flex-wrap:wrap;gap:4px;padding:8px 10px;background:#FAFAFC;border:1.5px solid var(--g200);border-radius:8px 8px 0 0;border-bottom:none;align-items:center">'+
+            '<select onchange="campInsertTag(this.value);this.selectedIndex=0" style="padding:4px 6px;border:1px solid var(--g200);border-radius:5px;font-size:12px;background:#fff"><option value="">标题</option><option value="h2">H2 标题</option><option value="h3">H3 小标题</option><option value="h4">H4 子标题</option></select>'+
+            '<div style="width:1px;height:18px;background:var(--g200)"></div>'+
+            '<button type="button" onclick=\'campFormat("bold")\' title="加粗" style="width:28px;height:28px;border:1px solid var(--g200);border-radius:5px;background:#fff;font-weight:700;font-size:14px;cursor:pointer">B</button>'+
+            '<button type="button" onclick=\'campFormat("italic")\' title="斜体" style="width:28px;height:28px;border:1px solid var(--g200);border-radius:5px;background:#fff;font-style:italic;font-size:14px;cursor:pointer">I</button>'+
+            '<button type="button" onclick=\'campFormat("underline")\' title="下划线" style="width:28px;height:28px;border:1px solid var(--g200);border-radius:5px;background:#fff;text-decoration:underline;font-size:14px;cursor:pointer">U</button>'+
+            '<button type="button" onclick=\'campFormat("strikeThrough")\' title="删除线" style="width:28px;height:28px;border:1px solid var(--g200);border-radius:5px;background:#fff;text-decoration:line-through;font-size:14px;cursor:pointer">S</button>'+
+            '<div style="width:1px;height:18px;background:var(--g200)"></div>'+
+            '<input type="color" id="camp_color_picker" value="#1A1A2E" onchange="campFormatColor(this.value)" title="文字颜色" style="width:28px;height:28px;border:1px solid var(--g200);border-radius:5px;cursor:pointer;padding:2px">'+
+            '<input type="color" id="camp_bgcolor_picker" value="#FFFFFF" onchange="campFormatBgColor(this.value)" title="背景高亮色" style="width:28px;height:28px;border:1px solid var(--g200);border-radius:5px;cursor:pointer;padding:2px">'+
+            '<div style="width:1px;height:18px;background:var(--g200)"></div>'+
+            '<button type="button" onclick=\'campAlign("left")\' title="左对齐" style="width:28px;height:28px;border:1px solid var(--g200);border-radius:5px;background:#fff;cursor:pointer;font-size:14px">☰</button>'+
+            '<button type="button" onclick=\'campAlign("center")\' title="居中" style="width:28px;height:28px;border:1px solid var(--g200);border-radius:5px;background:#fff;cursor:pointer;font-size:14px">≡</button>'+
+            '<button type="button" onclick=\'campAlign("right")\' title="右对齐" style="width:28px;height:28px;border:1px solid var(--g200);border-radius:5px;background:#fff;cursor:pointer;font-size:14px">☷</button>'+
+            '<div style="width:1px;height:18px;background:var(--g200)"></div>'+
+            '<button type="button" onclick=\'campInsertTag("<ul><li>列表项</li></ul>")\' title="无序列表" style="padding:3px 10px;border:1px solid var(--g200);border-radius:5px;background:#fff;font-size:12px;cursor:pointer">• 列表</button>'+
+            '<button type="button" onclick=\'campInsertTag("<ol><li>有序项</li></ol>")\' title="有序列表" style="padding:3px 10px;border:1px solid var(--g200);border-radius:5px;background:#fff;font-size:12px;cursor:pointer">1.列表</button>'+
+            '<div style="width:1px;height:18px;background:var(--g200)"></div>'+
+            '<button type="button" onclick=\'campClearFormat()\' title="清除格式" style="padding:3px 8px;border:1px solid var(--g200);border-radius:5px;background:#fff;font-size:11px;color:var(--err);cursor:pointer">✨ 清除</button>'+
+            '<button type="button" onclick=\'campInsertTag("<a href=\\\"\\\" target=\\\"_blank\\\">链接文本</a>")\' title="插入链接" style="padding:3px 8px;border:1px solid var(--g200);border-radius:5px;background:#fff;font-size:12px;cursor:pointer">🔗 链接</button>'+
+            '<button type="button" onclick=\'campInsertImage()\' title="插入图片" style="padding:3px 8px;border:1px solid var(--g200);border-radius:5px;background:#fff;font-size:12px;cursor:pointer">🖼 图片</button>'+
+          '</div>'+
           '<div style="display:grid;grid-template-columns:1fr 280px;gap:12px">'+
             '<textarea id="camp_content" rows="20" '+
               'placeholder="&lt;h2&gt;培训概况&lt;/h2&gt;\n&lt;p&gt;本次集训营...&lt;/p&gt;\n\n&lt;h2&gt;培训亮点&lt;/h2&gt;\n&lt;ul&gt;&lt;li&gt;...&lt;/li&gt;&lt;/ul&gt;" '+
-              'style="width:100%;padding:12px;border:1.5px solid var(--g200);border-radius:8px;font-size:12px;outline:none;font-family:Consolas,monospace;resize:vertical;line-height:1.6">'+
+              'style="width:100%;padding:12px;border:1.5px solid var(--g200);border-radius:0 0 8px 8px;font-size:12px;outline:none;font-family:Consolas,monospace;resize:vertical;line-height:1.6">'+
             '</textarea>'+
             '<div style="background:var(--g50);border:1px solid var(--g200);border-radius:8px;padding:14px;font-size:11px;color:var(--g500);line-height:2.2;overflow-y:auto">'+
               '<b style="color:var(--g700);font-size:12px">📋 HTML速查</b><br>'+
@@ -988,6 +1045,13 @@ function _buildCampEditorModal(article){
               '</div>'+
             '</div>'+
           '</div>'+
+        '</div>'+
+        // 使用提示
+        '<div style="font-size:12px;color:var(--g400);line-height:1.7;display:flex;flex-wrap:wrap;gap:6px;align-items:flex-start">'+
+          '<span>💡 使用方法：① 从 135编辑器/秀米/微信公众号 复制全文</span>'+
+          '<span>② 回到这里按 <kbd style="background:#eee;padding:1px 5px;border-radius:3px;font-size:11px;border:1px solid #ccc">Ctrl+V</kbd> 粘贴即可</span>'+
+          '<span>📎 支持保留：文字样式、颜色、图片、排版布局等全部格式</span>'+
+          '<span style="color:#7C3AED;font-weight:600;cursor:pointer" onclick=\'document.getElementById("camp_html_file").click()\'>📤 也可使用上方「上传HTML文件」快速导入</span>'+
         '</div>'+
         // 置顶
         '<div style="display:flex;align-items:center;gap:10px">'+
@@ -1041,6 +1105,152 @@ function normalizeContentUrls(content){
   r=r.replace(/<\/?html[^>]*>|<\/?head[^>]*>|<\/?body[^>]*>/gi,'');
   r=r.replace(/src="(?!http|https|\/)(uploads\/covers\/)/gi,'src="/$1');
   return r;
+}
+
+// ── 快速导入：HTML文件上传 ──
+function handleCampHtmlFile(input){
+  var file=input.files&&input.files[0];
+  if(!file) return;
+  if(!file.name.match(/\.html?$/i)){ toast('请选择HTML文件','err'); return; }
+  var reader=new FileReader();
+  reader.onload=function(e){
+    try{
+      var parser=new DOMParser();
+      var doc=parser.parseFromString(e.target.result,'text/html');
+      // 提取文章主体内容（优先 .article-content / body 内的 HTML）
+      var articleEl=doc.querySelector('.article-content')||doc.body;
+      var html=articleEl.innerHTML.trim();
+      // 如果有标题且当前标题为空，自动填入
+      var h1=articleEl.querySelector('h1')||doc.querySelector('h1');
+      var titleInput=document.getElementById('camp_title');
+      if(h1&&titleInput&&(!titleInput.value||!titleInput.value.trim())){
+        titleInput.value=h1.textContent.trim();
+      }
+      // 填入正文
+      var ta=document.getElementById('camp_content');
+      if(ta){ta.value=html; toast('HTML内容已导入，共 '+(html.length)+' 字符','ok')}
+    }catch(err){
+      toast('HTML解析失败: '+err.message,'err');
+    }
+  };
+  reader.readAsText(file);
+  input.value=''; // 允许重复选择同一文件
+}
+
+// ── 快速导入：拖拽文件 ──
+function handleCampHtmlDrop(event){
+  event.preventDefault();
+  var file=event.dataTransfer.files&&event.dataTransfer.files[0];
+  if(!file) return;
+  if(!file.name.match(/\.html?$/i)){ toast('请拖拽HTML文件','err'); return; }
+  // 模拟 input 触发
+  var fakeInput={files:[file]};
+  handleCampHtmlFile(fakeInput);
+}
+
+// ── 封面图片上传 ──
+function handleCampCoverUpload(input){
+  var file=input.files&&input.files[0];
+  if(!file) return;
+
+  // 云端模式不支持
+  if(!hasServer){
+    toast('⚠️ 需启动本地服务才能上传封面图片','warn');input.value='';return;
+  }
+
+  var area=document.getElementById('camp_cover_area');
+  if(!area){toast('页面错误','err');return}
+  var nameSpan=document.getElementById('camp_cover_name');
+
+  if(nameSpan) nameSpan.textContent='⏳ 上传中...';
+
+  var form=new FormData();
+  form.append('cover',file);
+
+  fetch(API+'/api/camp/upload-image',{method:'POST',body:form})
+    .then(function(r){if(!r.ok) throw new Error('HTTP '+r.status);return r.json()})
+    .then(function(data){
+      if(!data.ok) throw new Error(data.msg||'上传失败');
+      var url=data.url;
+      document.getElementById('camp_cover').value=url;
+      var area=document.getElementById('camp_cover_area');
+      if(area){
+        // 更新预览和按钮
+        var prev=document.getElementById('camp_cover_preview');
+        if(prev) prev.remove();
+        var ph=document.createElement('img');
+        ph.id='camp_cover_preview';
+        ph.src=url;
+        ph.style.cssText='width:120px;height:68px;object-fit:cover;border-radius:8px;border:1px solid var(--g200)';
+        ph.onerror=function(){this.style.display='none'};
+        area.insertBefore(ph,area.firstChild);
+        // 更新名称
+        if(nameSpan) nameSpan.textContent='已选择';
+        // 添加移除按钮
+        var rmBtn=document.querySelector('#camp_cover_area button.btn-err');
+        if(!rmBtn){
+          rmBtn=document.createElement('button');
+          rmBtn.type='button';rmBtn.className='btn btn-err btn-sm';
+          rmBtn.onclick=clearCampCover;rmBtn.textContent='✕ 移除';
+          nameSpan.parentNode.insertBefore(rmBtn,nameSpan.nextSibling);
+        }
+      }
+      toast('封面上传成功','ok');
+    })
+    .catch(function(e){
+      if(nameSpan) nameSpan.textContent='上传失败';
+      toast('封面上传失败: '+e.message,'err');
+    });
+}
+
+function clearCampCover(){
+  document.getElementById('camp_cover').value='';
+  var preview=document.getElementById('camp_cover_preview');
+  if(preview) preview.remove();
+  var nameSpan=document.getElementById('camp_cover_name');
+  if(nameSpan) nameSpan.textContent='未选择任意文件';
+  var rmBtn=document.querySelector('#camp_cover_area button.btn-err');
+  if(rmBtn) rmBtn.remove();
+}
+
+// ── 富文本工具栏函数（在 textarea 光标位置插入 HTML 标签）──
+function _campTA(){ return document.getElementById('camp_content'); }
+function _campInsert(html){
+  var ta=_campTA(); if(!ta) return;
+  var start=ta.selectionStart,end=ta.selectionEnd;
+  var before=ta.value.substring(0,start), sel=ta.value.substring(start,end), after=ta.value.substring(end);
+  ta.value=before+html.replace('{}',sel)+after;
+  // 重置光标位置
+  var newPos=start+html.length;
+  ta.setSelectionRange(newPos,newPos);
+  ta.focus();
+}
+
+function campInsertTag(tag){
+  if(!tag) return;
+  // 标题类：包裹选中文字或光标处插入
+  if(/^h[2-4]$/.test(tag)){
+    _campInsert('<'+tag+'>{}</'+tag+'>');
+  }else{
+    _campInsert(tag);
+  }
+}
+function campFormat(cmd){ document.execCommand?_campInsert('<'+cmd+'>{}</'+cmd+'>'):toast('请在编辑器中使用','err'); }
+function campAlign(dir){
+  var aligns={left:'text-align:left',center:'text-align:center',right:'text-align:right'};
+  _campInsert('<div style="'+(aligns[dir]||'')+'">{}</div>');
+}
+function campFormatColor(c){ _campInsert('<span style="color:'+c+'">{}</span>'); }
+function campFormatBgColor(c){ _campInsert('<span style="background:'+c+';padding:0 3px">{}</span>'); }
+function campClearFormat(){
+  var ta=_campTA(); if(!ta) return;
+  // 简单提示
+  toast('💡 清除格式：请手动删除多余标签，或使用 Ctrl+A 后重新粘贴纯文本内容','ok');
+}
+function campInsertImage(){
+  var url=prompt('请输入图片URL（如 uploads/covers/xxx.jpg）：','');
+  if(!url) return;
+  _campInsert('<img src="'+url+'" style="max-width:100%;border-radius:8px">');
 }
 
 function extractFirstImage(html){
@@ -1106,7 +1316,9 @@ async function saveCampArticle(){
   var location=(document.getElementById('camp_location').value||'').trim();
   var people=document.getElementById('camp_people').value;
   var content=normalizeContentUrls(document.getElementById('camp_content').value||'');
-  var cover=extractFirstImage(content);
+  // 封面：用户上传优先，否则从正文首图提取
+  var manualCover=(document.getElementById('camp_cover').value||'').trim();
+  var cover=manualCover || extractFirstImage(content);
   var top=document.getElementById('camp_top').checked;
 
   var payload={
