@@ -852,8 +852,9 @@ function renderCampTab(){
     var h='<div class="panel">'+
       '<div class="panel-hd" style="justify-content:space-between;flex-wrap:wrap;gap:8px">'+
         '<span>🏕️ 集训营内容管理</span>'+
-        '<div style="display:flex;gap:8px">'+
+        '<div style="display:flex;gap:8px;flex-wrap:wrap">'+
           '<a href="camp.html" target="_blank" class="btn btn-out btn-sm">👁 预览</a>'+
+          (hasServer?'<button class="btn btn-out btn-sm" style="border-color:var(--m2);color:var(--m2)" onclick="syncCampToCloud()">🔄 同步到前端</button>':'')+
           '<button class="btn btn-pri btn-sm" style="background:var(--m4)" onclick="openCampEditor(null)">+ 发布新培训</button>'+
         '</div>'+
       '</div>'+
@@ -1109,6 +1110,30 @@ function clearCampCover(){
   }
 }
 
+// ── 一键同步到前端 camp-data.json ──
+async function syncCampToCloud(){
+  if(!hasServer){ toast('仅服务端模式支持同步','err'); return; }
+  toast('正在同步...','');
+  try{
+    // 先同步 localStorage
+    var r1=await fetch(API+'/api/camp/articles?_t='+Date.now());
+    var j1=await r1.json();
+    if(j1&&j1.ok&&Array.isArray(j1.data)){
+      localStorage.setItem('kataichi_camp_articles',JSON.stringify(j1.data));
+    }
+    // 导出 camp-data.json
+    var r2=await fetch(API+'/api/camp/sync',{method:'POST'});
+    var j2=await r2.json();
+    if(j2.ok){
+      toast('✅ 已同步 '+j2.count+' 篇文章到 camp-data.json，请 git push 推送','ok');
+    }else{
+      toast('同步失败: '+(j2.msg||'未知错误'),'err');
+    }
+  }catch(e){
+    toast('同步失败: 服务端不可达','err');
+  }
+}
+
 async function saveCampArticle(){
   var title=(document.getElementById('camp_title').value||'').trim();
   if(!title){toast('请填写培训标题','err');document.getElementById('camp_title').focus();return}
@@ -1139,7 +1164,24 @@ async function saveCampArticle(){
       var r=await fetch(url,{method,headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
       var j=await r.json();
       if(!j.ok) throw new Error(j.msg||'保存失败');
-      toast(isNew?'发布成功':'修改已保存','ok');
+
+      // 同步到 localStorage（云端模式 camp.html 优先读取）
+      try{
+        var localList=[];
+        try{localList=JSON.parse(localStorage.getItem('kataichi_camp_articles')||'[]')}catch(e){}
+        if(isNew){
+          localList.unshift(Object.assign({id:j.id||Date.now(),createdAt:new Date().toISOString()},payload));
+        }else{
+          var idx2=localList.findIndex(function(a){return a.id===_editingCampId});
+          if(idx2>=0) localList[idx2]=Object.assign({},localList[idx2],payload,{updatedAt:new Date().toISOString()});
+        }
+        localStorage.setItem('kataichi_camp_articles',JSON.stringify(localList));
+      }catch(e){}
+
+      // 自动同步 camp-data.json（推送到前端静态文件）
+      try{ await fetch(API+'/api/camp/sync',{method:'POST'}); }catch(e){}
+
+      toast(isNew?'发布成功（已同步）':'修改已保存（已同步）','ok');
       closeCampEditor();
       renderCampTab();
     }catch(e){toast('保存失败: '+e.message,'err')}
@@ -1168,7 +1210,18 @@ async function deleteCampArticle(id){
       var r=await fetch(API+'/api/camp/articles/'+id,{method:'DELETE'});
       var j=await r.json();
       if(!j.ok) throw new Error(j.msg||'删除失败');
-      toast('已删除','ok');renderCampTab();
+
+      // 同步 localStorage
+      try{
+        var localList=JSON.parse(localStorage.getItem('kataichi_camp_articles')||'[]');
+        localList=localList.filter(function(a){return a.id!==id});
+        localStorage.setItem('kataichi_camp_articles',JSON.stringify(localList));
+      }catch(e){}
+
+      // 自动同步 camp-data.json
+      try{ await fetch(API+'/api/camp/sync',{method:'POST'}); }catch(e){}
+
+      toast('已删除（已同步）','ok');renderCampTab();
     }catch(e){toast('删除失败: '+e.message,'err')}
   }else{
     var list=[];
