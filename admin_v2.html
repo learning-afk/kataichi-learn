@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -10,35 +10,27 @@
   --suc:#4CAF50;--warn:#f59e0b;--err:#F44336;
   --g50:#f9fafb;--g100:#f3f4f6;--g200:#E8E8EF;--g300:#d1d5db;--g400:#999AAA;
   --g500:#6b7280;--g600:#4b5563;--g700:#374151;--g800:#1A1A2E;--g900:#111827;
+  --m1:#4F6EF7;--m2:#0D9488;--m4:#7C3AED;
   --r:12px;--rs:8px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:#F5F6FA;color:var(--g800);min-height:100vh}
 
 /* ── Header ── */
-.header{background:#fff;color:var(--g800);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:8px;position:sticky;top:0;z-index:100;border-bottom:3px solid var(--pri);box-shadow:0 1px 4px rgba(0,0,0,.04)}
-.hl{display:flex;align-items:center;gap:8px;min-width:0}
-.hl .admin-logo{height:26px;width:auto;flex-shrink:0}
-.hl h1{font-size:16px;font-weight:700;white-space:nowrap}
-.hl .badge{background:var(--pri-lt);padding:2px 8px;border-radius:20px;font-size:10px;color:var(--pri);white-space:nowrap}
-.hr{display:flex;align-items:center;gap:8px;font-size:11px;min-width:0}
-.hr a{color:var(--pri);text-decoration:none;white-space:nowrap}
-.mode-badge{padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;white-space:nowrap}
+.header{background:#fff;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:8px;position:sticky;top:0;z-index:100;border-bottom:3px solid var(--pri);box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.hl{display:flex;align-items:center;gap:8px}
+.hl .admin-logo{height:26px;width:auto}
+.hl h1{font-size:16px;font-weight:700}
+.hl .badge{background:var(--pri-lt);padding:2px 8px;border-radius:20px;font-size:10px;color:var(--pri)}
+.hr{display:flex;align-items:center;gap:8px;font-size:11px}
+.hr a{color:var(--pri);text-decoration:none}
+.mode-badge{padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700}
 .mode-local{background:rgba(76,175,80,.15);color:#388E3C}
 .mode-cloud{background:var(--pri-lt);color:#E69500}
 
-/* ── Mode banner ── */
-.banner{text-align:center;padding:10px 16px;font-size:12px;font-weight:600;display:none}
-.banner.show{display:block}
-.banner-info{background:#FFF3E0;color:#E69500;border-bottom:1px solid #FFE0B2}
-.banner-warn{background:#FFF5F5;color:#D32F2F;border-bottom:1px solid #FFCDD2}
-
 /* ── Tabs ── */
-.tabbar{background:#fff;border-bottom:1px solid var(--g200);display:flex;gap:0;padding:0 12px;position:sticky;top:53px;z-index:99;overflow-x:auto}
-.tabbar button{
-  padding:12px 16px;border:none;background:none;font-size:13px;font-weight:600;color:var(--g400);
-  cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;
-}
+.tabbar{background:#fff;border-bottom:1px solid var(--g200);display:flex;padding:0 12px;position:sticky;top:53px;z-index:99;overflow-x:auto}
+.tabbar button{padding:12px 16px;border:none;background:none;font-size:13px;font-weight:600;color:var(--g400);cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap}
 .tabbar button.active{color:var(--pri);border-bottom-color:var(--pri)}
 
 /* ── Container ── */
@@ -47,429 +39,441 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 .panel-hd{font-size:15px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:6px;color:var(--g800)}
 
 /* ── Buttons ── */
-.btn{padding:9px 16px;border:none;border-radius:var(--rs);font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.btn{padding:9px 16px;border:none;border-radius:var(--rs);font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:5px;white-space:nowrap;transition:opacity .15s}
+.btn:hover{opacity:.85}
 .btn-pri{background:var(--pri);color:#fff}
 .btn-out{background:#fff;border:1.5px solid var(--g200);color:var(--g600)}
 .btn-err{background:#fff;border:1.5px solid #fee2e2;color:var(--err)}
+.btn-suc{background:var(--suc);color:#fff}
 .btn-sm{padding:5px 12px;font-size:12px}
 .btn-xs{padding:3px 8px;font-size:11px;border-radius:6px}
-.btn-block{width:100%;justify-content:center}
 
 /* ── Upload zone ── */
-.upload-zone{
-  border:2px dashed var(--g300);border-radius:var(--r);padding:32px;
-  text-align:center;cursor:pointer;background:var(--g50);
-}
-.upload-zone:hover,.upload-zone.dragover{border-color:var(--pri);background:#eef2ff}
+.upload-zone{border:2px dashed var(--g300);border-radius:var(--r);padding:32px;text-align:center;cursor:pointer;background:var(--g50);transition:all .2s}
+.upload-zone:hover,.upload-zone.dragover{border-color:var(--pri);background:#FFF8EC}
 .upload-zone .ico{font-size:40px;margin-bottom:8px}
 .upload-zone p{font-size:13px;color:var(--g500)}
-.upload-zone .sub{font-size:11px;color:var(--g400)}
+.upload-zone .sub{font-size:11px;color:var(--g400);margin-top:4px}
 .upload-progress{margin-top:12px}
 .upload-progress .bar{height:6px;background:var(--g200);border-radius:3px;overflow:hidden;margin-bottom:4px}
-.upload-progress .fill{height:100%;background:var(--pri);border-radius:3px}
+.upload-progress .fill{height:100%;background:var(--pri);border-radius:3px;transition:width .3s}
 .upload-progress .txt{font-size:11px;color:var(--g500)}
 
 /* ── Table ── */
 .vtable{width:100%;border-collapse:collapse;font-size:12px}
 .vtable th{text-align:left;padding:8px 10px;background:var(--g50);color:var(--g500);font-weight:600;font-size:11px;border-bottom:2px solid var(--g200);white-space:nowrap}
 .vtable td{padding:10px;border-bottom:1px solid var(--g100);vertical-align:middle}
-.vtable tr:hover td{background:#eef2ff}
+.vtable tr:hover td{background:#FFF8EC}
 .vname{font-weight:600;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .vtable-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
-.sel-mini{padding:5px 8px;border:1.5px solid var(--g200);border-radius:6px;font-size:11px;background:#fff;color:var(--g700);max-width:130px;cursor:pointer}
-.sel-mini:focus{border-color:var(--pri);outline:none}
 
-/* ── 自定义课程选择器（替代原生select，避免截断）── */
-.course-picker{flex:1;max-width:200px}
-.course-picker-btn{
-  width:100%;padding:5px 8px;border:1.5px solid var(--g200);border-radius:6px;
-  font-size:11px;background:#fff;color:var(--g700);cursor:pointer;text-align:left;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-  display:flex;align-items:center;justify-content:space-between;gap:4px;
-}
-.course-picker-btn:hover{border-color:var(--pri2)}
-.course-picker-btn.open{border-color:var(--pri);box-shadow:0 0 0 2px rgba(245,166,35,.15)}
-.course-picker-btn .arrow{font-size:8px;color:var(--g400);transition:transform .2s;flex-shrink:0}
-.course-picker-btn.open .arrow{transform:rotate(180deg)}
-/* 下拉渲染到 body 级别，fixed 定位防遮挡 */
-.course-picker-drop{
-  display:none;position:fixed;z-index:9999;
-  width:320px;max-height:460px;overflow-y:auto;
-  overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
-  background:#fff;border:1.5px solid var(--g200);border-radius:var(--r);
-  box-shadow:0 8px 30px rgba(0,0,0,.15);
-}
-.course-picker-drop.show{display:block}
-.course-picker-group{padding:6px 0}
-.course-picker-glabel{padding:4px 14px;font-size:10px;color:var(--g500);font-weight:600;text-transform:uppercase;letter-spacing:.5px}
-.course-picker-opt{
-  padding:6px 14px;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:6px;
-  border-left:3px solid transparent;transition:background .15s;
-}
-.course-picker-opt:hover{background:var(--pri-lt)}
-.course-picker-opt.active{background:#eef2ff;border-left-color:var(--pri);font-weight:600;color:var(--g800)}
-/* 下拉遮罩，点击关闭 */
-.course-picker-backdrop{display:none;position:fixed;inset:0;z-index:9998}
-.course-picker-backdrop.show{display:block}
-.tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600}
-.tag-ok{background:#d1fae5;color:var(--suc)}
-.tag-warn{background:#fef3c7;color:var(--warn)}
-.tag-err{background:#fee2e2;color:var(--err)}
+/* ── Stats ── */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:16px}
+.stat-card{background:#fff;border-radius:var(--r);padding:16px;box-shadow:0 1px 4px rgba(0,0,0,.06);border-top:3px solid transparent}
+.stat-card .si{font-size:20px;margin-bottom:6px}
+.stat-card .sv{font-size:24px;font-weight:900}
+.stat-card .sl{font-size:11px;color:var(--g400);margin-top:2px}
 
-/* ── Course list ── */
+/* ── SOP Progress ── */
+.sop-module{background:var(--g50);border-radius:var(--rs);padding:14px;margin-bottom:10px;border-left:3px solid var(--m1)}
+.sop-module-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.sop-module-title{font-size:13px;font-weight:700;color:var(--g800)}
+.sop-pct{font-size:12px;font-weight:700;color:var(--m1)}
+.sop-bar{height:6px;background:var(--g200);border-radius:3px;overflow:hidden}
+.sop-fill{height:100%;background:var(--m1);border-radius:3px;transition:width .6s ease}
+.sop-cards-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.sop-card-chip{padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600;background:#eef2ff;color:var(--m1)}
+.sop-card-chip.done{background:#d1fae5;color:#065f46}
+.sop-card-chip.inprog{background:#fef3c7;color:#92400e}
+
+/* ── Course list (学习地图Tab) ── */
 .course-list{display:flex;flex-direction:column;gap:6px}
-.course-item{
-  display:flex;align-items:center;gap:10px;padding:12px 14px;
-  border:1.5px solid var(--g200);border-radius:var(--r);cursor:pointer;
-}
-.course-item:hover{border-color:var(--pri2);background:#eef2ff}
-.course-item.selected{border-color:var(--pri);background:#eef2ff}
+.course-item{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1.5px solid var(--g200);border-radius:var(--r);cursor:pointer;transition:all .2s}
+.course-item:hover{border-color:var(--pri2);background:#FFF8EC}
+.course-item.selected{border-color:var(--pri);background:#FFF8EC}
 .course-item .ci{font-size:22px;flex-shrink:0}
-.course-item .ct{flex:1;min-width:0}
+.course-item .ct-info{flex:1;min-width:0}
 .course-item .ctt{font-size:14px;font-weight:700}
 .course-item .ctm{font-size:11px;color:var(--g400)}
 .course-item .cb{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:600;flex-shrink:0}
 .cb-req{background:#fee2e2;color:var(--err)}
-.cb-pro{background:#eef2ff;color:var(--pri)}
+.cb-pro{background:#eef2ff;color:var(--m1)}
 .sec-label{font-size:13px;font-weight:700;color:var(--g700);margin:16px 0 8px;padding-left:8px;border-left:3px solid var(--pri)}
-.mp{background:var(--g50);border-radius:var(--r);padding:16px;margin-top:12px}
-.mph{font-size:14px;font-weight:700;margin-bottom:10px}
-.cv{display:flex;align-items:center;gap:10px;padding:8px 12px;background:#fff;border-radius:var(--rs);border:1px solid var(--g200);margin-bottom:6px}
-.cv .vt{flex:1;font-size:12px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.cv .vs{font-size:10px;color:var(--g400);flex-shrink:0}
-.empty-hint{text-align:center;padding:24px;color:var(--g400);font-size:12px}
-.empty-hint .ico{font-size:36px;margin-bottom:6px}
+.linked-video{display:flex;align-items:center;gap:10px;padding:8px 12px;background:#fff;border-radius:var(--rs);border:1px solid var(--g200);margin-bottom:6px}
+.linked-video .vt{flex:1;font-size:12px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
-/* ── Stats ── */
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
-.stat-card{background:#fff;border-radius:var(--r);padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.05)}
-.stat-card .si{font-size:20px;margin-bottom:6px}
-.stat-card .sv{font-size:24px;font-weight:900;color:var(--g800)}
-.stat-card .sl{font-size:11px;color:var(--g400);margin-top:2px}
+/* ── custom course picker ── */
+.course-picker{flex:1;max-width:200px}
+.course-picker-btn{width:100%;padding:5px 8px;border:1.5px solid var(--g200);border-radius:6px;font-size:11px;background:#fff;color:var(--g700);cursor:pointer;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;justify-content:space-between;gap:4px}
+.course-picker-btn:hover{border-color:var(--pri2)}
+.course-picker-btn.open{border-color:var(--pri)}
+.course-picker-btn .arrow{font-size:8px;color:var(--g400);transition:transform .2s;flex-shrink:0}
+.course-picker-btn.open .arrow{transform:rotate(180deg)}
+.course-picker-drop{display:none;position:fixed;z-index:9999;width:320px;max-height:460px;overflow-y:auto;background:#fff;border:1.5px solid var(--g200);border-radius:var(--r);box-shadow:0 8px 30px rgba(0,0,0,.15)}
+.course-picker-drop.show{display:block}
+.course-picker-backdrop{display:none;position:fixed;inset:0;z-index:9998}
+.course-picker-backdrop.show{display:block}
+.course-picker-group{padding:6px 0}
+.course-picker-glabel{padding:4px 14px;font-size:10px;color:var(--g500);font-weight:600;letter-spacing:.5px}
+.course-picker-opt{padding:6px 14px;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:6px;border-left:3px solid transparent;transition:background .15s}
+.course-picker-opt:hover{background:var(--pri-lt)}
+.course-picker-opt.active{background:#eef2ff;border-left-color:var(--pri);font-weight:600}
+
+/* ── Camp Tab ── */
+.camp-stat-mini{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin-bottom:16px}
+.csm-item{background:var(--g50);border-radius:var(--rs);padding:12px;text-align:center}
+.csm-val{font-size:20px;font-weight:900;color:var(--m4)}
+.csm-label{font-size:11px;color:var(--g500);margin-top:2px}
 
 /* ── Toast ── */
-.toast{
-  position:fixed;top:16px;right:16px;z-index:9999;
-  padding:10px 18px;border-radius:var(--rs);font-size:13px;font-weight:600;
-  color:#fff;animation:si .3s;box-shadow:0 4px 12px rgba(0,0,0,.15);
-}
+.toast{position:fixed;top:16px;right:16px;z-index:9999;padding:10px 18px;border-radius:var(--rs);font-size:13px;font-weight:600;color:#fff;animation:si .3s;box-shadow:0 4px 12px rgba(0,0,0,.15)}
 .toast-ok{background:var(--suc)}
 .toast-err{background:var(--err)}
 .toast-info{background:var(--pri)}
 @keyframes si{from{transform:translateX(120%);opacity:0}to{transform:translateX(0);opacity:1}}
 
-/* ── Modal ── */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;display:flex;align-items:center;justify-content:center}
-.modal{background:#fff;border-radius:var(--r);width:90%;max-width:500px;max-height:80vh;overflow-y:auto;padding:24px}
-.modal h3{font-size:16px;font-weight:700;margin-bottom:14px}
-.mclose{float:right;background:none;border:none;font-size:20px;cursor:pointer;color:var(--g400)}
+.empty-hint{text-align:center;padding:24px;color:var(--g400);font-size:12px}
+.empty-hint .ico{font-size:36px;margin-bottom:6px}
+.tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600}
+.tag-ok{background:#d1fae5;color:var(--suc)}
+.tag-warn{background:#fef3c7;color:var(--warn)}
+.tag-err{background:#fee2e2;color:var(--err)}
+
+/* ── 学习数据：用户表格 ── */
+.user-card{background:linear-gradient(135deg,rgba(79,110,247,.07),rgba(79,110,247,.02));border:1.5px solid #c7d2fe;border-radius:var(--r);padding:16px;margin-bottom:16px}
+.user-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;font-size:13px}
+.user-kv{display:flex;flex-direction:column;gap:2px}
+.user-kv .k{font-size:11px;color:var(--g400)}
+.user-kv .v{font-weight:700;color:var(--g800)}
 
 @media(min-width:768px){
   .header{padding:14px 24px}.tabbar{padding:0 24px}
   .tabbar button{padding:13px 20px;font-size:14px}
   .ct{padding:20px 24px 40px}.panel{padding:24px}
 }
-/* 视频管理表格：移动端下拉更宽 */
 @media(max-width:767px){
-  .sel-mini{max-width:100%!important;font-size:10px;padding:4px 6px}
   .vtable th:nth-child(2),.vtable td:nth-child(2),
   .vtable th:nth-child(3),.vtable td:nth-child(3){display:none}
   .vtable .vname{max-width:100px}
-  .course-picker-drop{width:280px!important;max-height:360px}
+  .course-picker-drop{width:280px!important}
   .course-picker{max-width:140px}
 }
 </style>
 </head>
 <body>
 
-<!-- 快速诊断条 -->
-<div id="diagBar" style="background:#FEF3C7;padding:8px 20px;font-size:12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #FDE68A">
-  <span>💡 封面图片无法上传？<a href="test-upload.html" target="_blank" style="color:#7C3AED;font-weight:600">点此诊断</a></span>
-  <span id="serverQuickStatus" style="color:#92400E">检测中...</span>
-</div>
-
 <script>
-// 文件协议检测：如果从 file:// 直接打开，提示用户通过服务器访问
+// 文件协议检测
 (function(){
   if(window.location.protocol==='file:'){
-    document.write('<div style="background:#F44336;color:white;padding:20px;text-align:center;font-size:16px;line-height:1.8">'
-      +'<div style="font-size:20px;margin-bottom:10px">⚠️ 访问方式错误</div>'
-      +'<div>请先双击运行 <b>start-server.bat</b>，然后在浏览器中访问：</div>'
+    document.write('<div style="background:#F44336;color:white;padding:24px;text-align:center;font-size:15px;line-height:2">'
+      +'<div style="font-size:22px;margin-bottom:8px">⚠️ 访问方式错误</div>'
+      +'<div>请先双击运行 <b>启动服务.bat</b>，然后在浏览器访问：</div>'
       +'<div style="margin:10px 0;font-size:18px;font-weight:bold;color:#FFEB3B">http://localhost:3000/admin_v2.html</div>'
-      +'<div style="font-size:13px;color:rgba(255,255,255,.8)">（不要直接双击打开 HTML 文件）</div>'
       +'</div>');
-    return;
   }
 })();
 </script>
 
-<!-- 服务器状态提示条 -->
-<div id="serverStatus" style="display:none;position:fixed;top:0;left:0;right:0;background:#F44336;color:white;padding:10px 20px;z-index:99999;text-align:center;font-size:13px;box-shadow:0 2px 8px rgba(0,0,0,.3)">
-  <span id="serverStatusText">⚠️ 本地服务未启动，封面图片上传等功能将无法使用。请双击运行 start-server.bat 启动服务。</span>
-  <button onclick="location.reload()" style="margin-left:15px;padding:4px 12px;border:1px solid rgba(255,255,255,.5);background:rgba(255,255,255,.15);color:white;border-radius:4px;cursor:pointer;font-size:12px">刷新重试</button>
-</div>
-
 <!-- Header -->
 <div class="header">
-  <div class="hl"><img class="admin-logo" src="logo.png" alt="卡泰驰 CARtech"><h1>管理后台</h1><span class="badge">卡泰驰 v2.7</span></div>
+  <div class="hl"><img class="admin-logo" src="logo.png" alt="卡泰驰 CARtech"><h1>管理后台</h1><span class="badge">卡泰驰 v3.0</span></div>
   <div class="hr">
-    <span id="modeTag" class="mode-badge">检测中...</span>
+    <span id="modeTag" class="mode-badge mode-cloud">检测中...</span>
     <a href="portal_v2.html">← 返回首页</a>
   </div>
 </div>
 
-<!-- Mode banner -->
-<div class="banner banner-info" id="bannerCloud">
-  📱 云端模式 — 视频上传功能需使用电脑端访问 localhost:3000/admin.html，课程匹配等其他功能可正常使用
-</div>
-<div class="banner banner-info" id="bannerLocal" style="background:#ecfdf5;color:#065f46;border-bottom:1px solid #a7f3d0">
-  🟢 本地服务已连接 — 完整功能可用，支持视频上传和管理
+<!-- 服务器状态条 -->
+<div id="serverBar" style="display:none;background:#FEF3C7;padding:8px 20px;font-size:12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #FDE68A">
+  <span id="serverBarText">🔄 正在检测本地服务...</span>
+  <button onclick="retryDetect()" style="background:var(--pri);color:#fff;border:none;padding:4px 12px;border-radius:6px;font-size:11px;cursor:pointer;font-weight:600">重试</button>
 </div>
 
 <!-- Tabs -->
 <div class="tabbar">
-  <button class="active" onclick="switchTab(0)">📹 视频管理</button>
-  <button onclick="switchTab(1)">🔗 课程匹配</button>
-  <button onclick="switchTab(2)">📊 学习数据</button>
-  <button onclick="switchTab(3)">🏕️ 集训营管理</button>
+  <button class="active" onclick="switchTab(0)">📊 学习数据</button>
+  <button onclick="switchTab(1)">🎬 学习地图</button>
+  <button onclick="switchTab(2)">🏕️ 集训营</button>
 </div>
+
+<!-- 课程选择器portal（body级别，防遮挡） -->
+<div class="course-picker-backdrop" id="cpBackdrop" onclick="closeAllPickers()"></div>
+<div class="course-picker-drop" id="cpDrop"></div>
 
 <!-- Content -->
 <div class="ct" id="content"></div>
 
-<!-- 课程选择下拉（body级别portal，防遮挡） -->
-<div class="course-picker-backdrop" id="cpBackdrop" onclick="closeAllPickers()"></div>
-<div class="course-picker-drop" id="cpDrop"></div>
-
 <script>
-// ══════════════════════════════════════
-// 双模式检测
-// ══════════════════════════════════════
-var API='http://localhost:3000';
-var hasServer=false;
-var isChecking=true;
+// ════════════════════════════════════════
+// 全局配置 & 工具
+// ════════════════════════════════════════
+var API = window.location.origin;
+var hasServer = false;
+var currentTab = 0;
 
-// ── 客户端编码修复（安全网：修复 Windows multer 中文乱码）──
+function escHtml(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;') }
 function safeDecode(str){
-  if(!str)return str;
+  if(!str) return str;
   try{
-    // 检测是否为 Latin-1 误编码的 UTF-8 字符串（高位字节占比高）
-    var hi=0;for(var i=0;i<str.length;i++){var c=str.charCodeAt(i);if(c>127&&c<256)hi++}
+    var hi=0; for(var i=0;i<str.length;i++){var c=str.charCodeAt(i);if(c>127&&c<256)hi++}
     if(hi>str.length*0.2){
-      var fixed='';try{fixed=decodeURIComponent(escape(str))}catch(e2){}
-      if(fixed&&/[\u4e00-\u9fff]/.test(fixed))return fixed;
+      var fixed=''; try{fixed=decodeURIComponent(escape(str))}catch(e2){}
+      if(fixed&&/[\u4e00-\u9fff]/.test(fixed)) return fixed;
     }
   }catch(e){}
   return str;
 }
-
-function escHtml(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;') }
-
-// ── 内嵌课程数据（与7天学习地图100%对齐，共91门）──
-var EMBED_COURSES=[
-  // ▸ 通识必修课 Day1-2（6门）
-  {id:100,cat:'required',title:'入职手续与企业概览', sections:['HR入职办理、企业组织架构介绍（海尔→卡泰驰→区域门店）'], pos:'', icon:'🎬'},
-  {id:2,  cat:'required',title:'行业法规与合规红线', sections:['《二手车流通管理办法》核心条款、消费者权益保护'], pos:'', icon:'🎬'},
-  {id:4,  cat:'required',title:'信息安全与行为规范', sections:['客户隐私保护规范、员工行为准则'], pos:'', icon:'🎬'},
-  {id:1,  cat:'required',title:'品牌文化与服务标准', sections:['卡泰驰核心价值观、标准服务流程、接待礼仪'], pos:'', icon:'🎬'},
-  {id:101,cat:'required',title:'SOP知识体系导入', sections:['门店11大SOP业务模块全景图认知'], pos:'', icon:'🎬'},
-  {id:102,cat:'required',title:'核心系统工具操作', sections:['CRM系统、企业微信、OA审批、评估工具实操'], pos:'', icon:'🎬'},
-  // ▸ 销售顾问专业课 Day3-7（15门）
-  {id:103,cat:'professional',title:'主力车型库认知', sections:['在售车辆品牌/车型/配置/年款差异解读'], pos:'销售顾问', icon:'🎬'},
-  {id:1,  cat:'professional',title:'微课：品牌文化+服务标准', sections:['完成必修课学习及课后测验'], pos:'销售顾问', icon:'🎬'},
-  {id:104,cat:'professional',title:'展厅车辆静态学习', sections:['随师傅逐一认识展厅车辆，记录核心卖点'], pos:'销售顾问', icon:'🎬'},
-  {id:105,cat:'professional',title:'展厅接待标准流程', sections:['仪容仪表规范、迎宾动线、第一印象管理'], pos:'销售顾问', icon:'🎬'},
-  {id:106,cat:'professional',title:'需求探询方法论', sections:['SPIN提问法、客户画像构建、开放vs封闭提问'], pos:'销售顾问', icon:'🎬'},
-  {id:107,cat:'professional',title:'客户接待跟岗实操', sections:['跟随师傅观摩≥3组完整接待流程'], pos:'销售顾问', icon:'🎬'},
-  {id:108,cat:'professional',title:'六方位绕车讲解法', sections:['车头→右侧→车尾→左侧→驾驶舱→发动机舱'], pos:'销售顾问', icon:'🎬'},
-  {id:109,cat:'professional',title:'试乘试驾标准化', sections:['试驾准备/安全告知/体验引导/试驾后反馈'], pos:'销售顾问', icon:'🎬'},
-  {id:5,  cat:'professional',title:'微课：客户接待+试驾体验', sections:['完成专业课学习'], pos:'销售顾问', icon:'🎬'},
-  {id:110,cat:'professional',title:'价格谈判与报价策略', sections:['三明治报价法、阶梯让步与条件交换'], pos:'销售顾问', icon:'🎬'},
-  {id:111,cat:'professional',title:'十大高频异议应对', sections:['事故车/竞品/价格等场景应对话术'], pos:'销售顾问', icon:'🎬'},
-  {id:7,  cat:'professional',title:'微课：谈判技巧+价值评估', sections:['完成专业课学习'], pos:'销售顾问', icon:'🎬'},
-  {id:112,cat:'professional',title:'合同签署与风险告知', sections:['《二手车买卖合同》核心条款解读、瑕疵告知义务'], pos:'销售顾问', icon:'🎬'},
-  {id:113,cat:'professional',title:'车辆交付全流程', sections:['PDI整备确认、随车文件清点、交车仪式'], pos:'销售顾问', icon:'🎬'},
-  {id:18, cat:'professional',title:'微课：客户关系维护', sections:['完成专业课学习'], pos:'销售顾问', icon:'🎬'},
-  // ▸ 数字化营销师专业课 Day3-7（14门）
-  {id:114,cat:'professional',title:'主流平台获客矩阵', sections:['抖音/视频号/小红书/懂车帝平台特性'], pos:'数字化营销师', icon:'🎬'},
-  {id:115,cat:'professional',title:'线索分级与分配机制', sections:['H/A/B/C分级标准、分配规则与时效要求'], pos:'数字化营销师', icon:'🎬'},
-  {id:116,cat:'professional',title:'账号后台实操跟岗', sections:['随师傅操作各平台企业号后台'], pos:'数字化营销师', icon:'🎬'},
-  {id:117,cat:'professional',title:'汽车短视频拍摄技巧', sections:['手机拍摄参数、构图法则、最佳角度与光线'], pos:'数字化营销师', icon:'🎬'},
-  {id:118,cat:'professional',title:'剪辑软件快速上手', sections:['剪映基础操作、BGM选择、字幕与封面设计'], pos:'数字化营销师', icon:'🎬'},
-  {id:1,  cat:'professional',title:'微课：品牌文化+服务标准', sections:['完成必修课学习及课后测验'], pos:'数字化营销师', icon:'🎬'},
-  {id:119,cat:'professional',title:'私域流量池运营', sections:['企业微信标签管理、朋友圈规划、社群运营'], pos:'数字化营销师', icon:'🎬'},
-  {id:8,  cat:'professional',title:'微课：线上获客+内容营销', sections:['完成专业课学习'], pos:'数字化营销师', icon:'🎬'},
-  {id:120,cat:'professional',title:'线索跟进跟岗', sections:['随师傅完成≥5条真实线索跟进'], pos:'数字化营销师', icon:'🎬'},
-  {id:121,cat:'professional',title:'直播脚本与话术设计', sections:['开场→车型介绍→互动问答→留资引导'], pos:'数字化营销师', icon:'🎬'},
-  {id:122,cat:'professional',title:'直播间互动转化', sections:['弹幕控评、福袋/抽奖、留资钩子设计'], pos:'数字化营销师', icon:'🎬'},
-  {id:19, cat:'professional',title:'微课：数据分析+社群运营', sections:['完成专业课学习'], pos:'数字化营销师', icon:'🎬'},
-  {id:123,cat:'professional',title:'周度数据复盘方法', sections:['漏斗分析、渠道投产比ROI计算'], pos:'数字化营销师', icon:'🎬'},
-  {id:21, cat:'professional',title:'微课：品牌内容策划', sections:['完成专业课学习'], pos:'数字化营销师', icon:'🎬'},
-  {id:124,cat:'professional',title:'周报撰写与汇报', sections:['独立撰写本周数据周报，向店长汇报'], pos:'数字化营销师', icon:'🎬'},
-  // ▸ 检测评估师专业课 Day3-7（15门）
-  {id:125,cat:'professional',title:'检测工具与仪器使用', sections:['漆膜仪/OBD诊断仪/举升机等操作规范'], pos:'检测评估师', icon:'🎬'},
-  {id:126,cat:'professional',title:'九大类412项检测标准', sections:['外观/内饰/底盘/动力总成等九大类认知'], pos:'检测评估师', icon:'🎬'},
-  {id:127,cat:'professional',title:'检测工具实操跟岗', sections:['随师傅对展厅车辆进行基础检测'], pos:'检测评估师', icon:'🎬'},
-  {id:128,cat:'professional',title:'车身结构与覆盖件检测', sections:['结构件vs覆盖件区分、漆膜仪读数判读'], pos:'检测评估师', icon:'🎬'},
-  {id:129,cat:'professional',title:'内饰与电子设备检测', sections:['座椅/方向盘磨损判定、功能项逐一检测'], pos:'检测评估师', icon:'🎬'},
-  {id:130,cat:'professional',title:'底盘与动力总成检测跟岗', sections:['举升机操作、底盘/悬架目视检测'], pos:'检测评估师', icon:'🎬'},
-  {id:131,cat:'professional',title:'事故车鉴定核心指标', sections:['结构件损伤/焊点异常/螺栓拆卸痕迹判定'], pos:'检测评估师', icon:'🎬'},
-  {id:132,cat:'professional',title:'泡水车与火烧车识别', sections:['泥沙/锈迹/霉味/线束异常等特征识别'], pos:'检测评估师', icon:'🎬'},
-  {id:10, cat:'professional',title:'微课：车辆检测+事故车鉴定', sections:['完成专业课学习'], pos:'检测评估师', icon:'🎬'},
-  {id:133,cat:'professional',title:'检测报告标准模板', sections:['六大板块检测数据填写规范与术语标准化'], pos:'检测评估师', icon:'🎬'},
-  {id:134,cat:'professional',title:'车辆估价模型与实战', sections:['六大因子估价法、市场价格对标'], pos:'检测评估师', icon:'🎬'},
-  {id:22, cat:'professional',title:'微课：新能源检测+豪华车检测', sections:['完成专业课学习'], pos:'检测评估师', icon:'🎬'},
-  {id:135,cat:'professional',title:'新能源专项检测复习', sections:['动力电池健康度、三电系统检测要点'], pos:'检测评估师', icon:'🎬'},
-  {id:24, cat:'professional',title:'微课：检测报告撰写', sections:['完成专业课学习'], pos:'检测评估师', icon:'🎬'},
-  {id:136,cat:'professional',title:'全流程检测考核', sections:['限时45min完成完整检测→报告→解读全流程'], pos:'检测评估师', icon:'🎬'},
-  // ▸ 金融专员专业课 Day3-7（15门）
-  {id:137,cat:'professional',title:'金融产品体系全景', sections:['卡泰驰金融矩阵：分期/融资租赁/保险/延保等'], pos:'金融专员', icon:'🎬'},
-  {id:138,cat:'professional',title:'客户信用评估方法', sections:['征信报告解读、收入负债比计算'], pos:'金融专员', icon:'🎬'},
-  {id:1,  cat:'professional',title:'微课：品牌文化+服务标准', sections:['完成必修课学习及课后测验'], pos:'金融专员', icon:'🎬'},
-  {id:139,cat:'professional',title:'分期付款模式全景', sections:['等额本息/先息后本/气球贷等方案对比'], pos:'金融专员', icon:'🎬'},
-  {id:140,cat:'professional',title:'利率计算与方案对比', sections:['不同期限利率计算、方案优劣势分析'], pos:'金融专员', icon:'🎬'},
-  {id:141,cat:'professional',title:'金融方案推荐跟岗', sections:['随师傅参与≥2组客户金融方案推荐'], pos:'金融专员', icon:'🎬'},
-  {id:142,cat:'professional',title:'车险种类与保障范围', sections:['交强险/车损险/三者险/不计免赔等详解'], pos:'金融专员', icon:'🎬'},
-  {id:143,cat:'professional',title:'保险组合推荐策略', sections:['不同客户群体的定制化保险方案'], pos:'金融专员', icon:'🎬'},
-  {id:12, cat:'professional',title:'微课：金融产品+分期设计', sections:['完成专业课学习'], pos:'金融专员', icon:'🎬'},
-  {id:144,cat:'professional',title:'贷款审批风控要点', sections:['风控模型、反欺诈识别技巧'], pos:'金融专员', icon:'🎬'},
-  {id:145,cat:'professional',title:'金融合规操作红线', sections:['监管合规要点、贷后管理规范'], pos:'金融专员', icon:'🎬'},
-  {id:26, cat:'professional',title:'微课：保险推荐+需求挖掘', sections:['完成专业课学习'], pos:'金融专员', icon:'🎬'},
-  {id:146,cat:'professional',title:'客户金融需求深度挖掘', sections:['SPIN话术金融版、隐性需求识别'], pos:'金融专员', icon:'🎬'},
-  {id:27, cat:'professional',title:'微课：金融风控', sections:['完成专业课学习'], pos:'金融专员', icon:'🎬'},
-  {id:147,cat:'professional',title:'全流程金融方案考核', sections:['独立完成1位客户完整金融方案设计+讲解'], pos:'金融专员', icon:'🎬'},
-  // ▸ 维修技师专业课 Day3-7（15门）
-  {id:148,cat:'professional',title:'常用维修工具操作规范', sections:['扳手/扭力工具/举升机安全操作'], pos:'维修技师', icon:'🎬'},
-  {id:149,cat:'professional',title:'诊断设备功能详解', sections:['OBD诊断仪/万用表/示波器等功能学习'], pos:'维修技师', icon:'🎬'},
-  {id:150,cat:'professional',title:'维修车间跟岗', sections:['随师傅观摩日常维修作业流程'], pos:'维修技师', icon:'🎬'},
-  {id:151,cat:'professional',title:'电控系统故障诊断', sections:['故障码读取分析、传感器检测方法'], pos:'维修技师', icon:'🎬'},
-  {id:152,cat:'professional',title:'发动机常见故障排查', sections:['启动困难/抖动/异响/油耗高等故障分析'], pos:'维修技师', icon:'🎬'},
-  {id:1,  cat:'professional',title:'微课：品牌文化+服务标准', sections:['完成必修课学习及课后测验'], pos:'维修技师', icon:'🎬'},
-  {id:153,cat:'professional',title:'标准维修工艺流程', sections:['拆卸→检测→更换→装配→质检全流程'], pos:'维修技师', icon:'🎬'},
-  {id:154,cat:'professional',title:'维修质检与交车流程', sections:['三级质检规范、交车前最终确认'], pos:'维修技师', icon:'🎬'},
-  {id:14, cat:'professional',title:'微课：故障诊断+质量管理', sections:['完成专业课学习'], pos:'维修技师', icon:'🎬'},
-  {id:155,cat:'professional',title:'高压安全操作规范', sections:['纯电/混动车型高压断电、绝缘防护'], pos:'维修技师', icon:'🎬'},
-  {id:156,cat:'professional',title:'钣金修复与喷漆工艺', sections:['钣金修复流程、喷漆前处理与喷涂'], pos:'维修技师', icon:'🎬'},
-  {id:29, cat:'professional',title:'微课：新能源维修+钣喷工艺', sections:['完成专业课学习'], pos:'维修技师', icon:'🎬'},
-  {id:157,cat:'professional',title:'维修工具与设备规范使用', sections:['专业工具操作规范与维护保养'], pos:'维修技师', icon:'🎬'},
-  {id:31, cat:'professional',title:'微课：维修工具规范', sections:['完成专业课学习'], pos:'维修技师', icon:'🎬'},
-  {id:158,cat:'professional',title:'独立维修考核', sections:['限时完成1项真实维修任务，师傅评分'], pos:'维修技师', icon:'🎬'},
-  // ▸ 店长/储备干部专业课 Day3-7（15门）
-  {id:159,cat:'professional',title:'门店日周月管理节奏', sections:['早会/夕会/周例会/月总结标准化运营'], pos:'店长/储备干部', icon:'🎬'},
-  {id:160,cat:'professional',title:'KPI指标体系与追踪', sections:['进销存/人效/客户满意度等核心KPI'], pos:'店长/储备干部', icon:'🎬'},
-  {id:1,  cat:'professional',title:'微课：品牌文化+服务标准', sections:['完成必修课学习及课后测验'], pos:'店长/储备干部', icon:'🎬'},
-  {id:161,cat:'professional',title:'高效招聘与面试技巧', sections:['岗位画像、行为面试法、候选人评估'], pos:'店长/储备干部', icon:'🎬'},
-  {id:162,cat:'professional',title:'新人90天带教计划', sections:['分阶段带教内容设计、通关考核机制'], pos:'店长/储备干部', icon:'🎬'},
-  {id:163,cat:'professional',title:'带教师傅经验交流', sections:['参与老店长带教经验分享会'], pos:'店长/储备干部', icon:'🎬'},
-  {id:164,cat:'professional',title:'门店P&L利润表解读', sections:['收入/成本/费用/利润结构分析'], pos:'店长/储备干部', icon:'🎬'},
-  {id:165,cat:'professional',title:'成本结构分析与优化', sections:['采购成本/人力成本/运营费用三大管控'], pos:'店长/储备干部', icon:'🎬'},
-  {id:15, cat:'professional',title:'微课：门店运营+KPI达成', sections:['完成专业课学习'], pos:'店长/储备干部', icon:'🎬'},
-  {id:166,cat:'professional',title:'销售漏斗搭建与监控', sections:['线索到成交各阶段转化率分析'], pos:'店长/储备干部', icon:'🎬'},
-  {id:167,cat:'professional',title:'销售数据复盘方法论', sections:['战败分析、改进计划制定與PDCA闭环'], pos:'店长/储备干部', icon:'🎬'},
-  {id:16, cat:'professional',title:'微课：团队建设+客户体验', sections:['完成专业课学习'], pos:'店长/储备干部', icon:'🎬'},
-  {id:168,cat:'professional',title:'客户旅程地图绘制', sections:['全触点客户体验设计、NPS监测体系'], pos:'店长/储备干部', icon:'🎬'},
-  {id:32, cat:'professional',title:'微课：财务与销售管理', sections:['完成专业课学习'], pos:'店长/储备干部', icon:'🎬'},
-  {id:169,cat:'professional',title:'门店运营方案汇报', sections:['独立完成1份门店运营优化方案，向区域汇报'], pos:'店长/储备干部', icon:'🎬'}
-];
-
-// ── Init ──
-async function init(){
-  await detectServer();
-  switchTab(0);
+function toast(msg, type){
+  var el=document.createElement('div');
+  el.className='toast toast-'+(type||'info');
+  el.textContent=msg;
+  document.body.appendChild(el);
+  setTimeout(function(){el.remove()},3000);
 }
 
-async function detectServer(){
-  isChecking=true;
-  // 方案1：如果页面本身从 localhost 加载，用相对路径检测（避免跨域）
-  if(window.location.hostname==='localhost'||window.location.hostname==='127.0.0.1'){
-    try{
-      var r=await fetch('/api/courses',{signal:AbortSignal.timeout(3000)});
-      var j=await r.json();
-      hasServer=j.ok===true;
-      isChecking=false;
-      updateModeUI();
-      return;
-    }catch(e){/* 回退到绝对路径 */}
-  }
-  // 方案2：绝对路径（从 CloudStudio HTTPS 检测 localhost）
-  try{
-    var r2=await fetch(API+'/api/courses',{signal:AbortSignal.timeout(3000)});
-    var j2=await r2.json();
-    hasServer=j2.ok===true;
-  }catch(e){hasServer=false}
-  isChecking=false;
-  updateModeUI();
+// ── 服务器检测 ──
+function detectServer(){
+  fetch(API+'/api/camp/articles?_t='+Date.now(),{signal:AbortSignal.timeout?AbortSignal.timeout(3000):undefined})
+    .then(function(r){return r.ok?r.json():Promise.reject()})
+    .then(function(){
+      hasServer=true;
+      var bar=document.getElementById('serverBar');
+      if(bar) bar.style.display='none';
+      var tag=document.getElementById('modeTag');
+      if(tag){tag.textContent='🟢 本地服务';tag.className='mode-badge mode-local'}
+      switchTab(currentTab);
+    })
+    .catch(function(){
+      hasServer=false;
+      var bar=document.getElementById('serverBar');
+      if(bar){bar.style.display='flex';document.getElementById('serverBarText').textContent='⚠️ 本地服务未连接 — 视频上传、封面上传功能需要启动本地服务（双击"启动服务.bat"）'}
+      var tag=document.getElementById('modeTag');
+      if(tag){tag.textContent='☁️ 云端模式';tag.className='mode-badge mode-cloud'}
+      switchTab(currentTab);
+    });
 }
+function retryDetect(){ detectServer(); }
 
-function updateModeUI(){
-  var tag=document.getElementById('modeTag');
-  var serverStatus = document.getElementById('serverStatus');
-  var diagBar = document.getElementById('diagBar');
-  var quickStatus = document.getElementById('serverQuickStatus');
-  
-  if(hasServer){
-    tag.textContent='🖥 服务器模式';
-    tag.className='mode-badge mode-local';
-    document.getElementById('bannerCloud').classList.remove('show');
-    document.getElementById('bannerLocal').classList.add('show');
-    // 隐藏服务器状态提示条
-    if(serverStatus) serverStatus.style.display = 'none';
-    // 更新诊断条
-    if(diagBar) diagBar.style.background = '#D1FAE5';
-    if(quickStatus) quickStatus.innerHTML = '✅ 服务器已连接';
-  }else{
-    tag.textContent='☁️ 云端模式';
-    tag.className='mode-badge mode-cloud';
-    document.getElementById('bannerCloud').classList.add('show');
-    document.getElementById('bannerLocal').classList.remove('show');
-    // 显示服务器状态提示条
-    if(serverStatus) serverStatus.style.display = 'block';
-    // 更新诊断条
-    if(diagBar) diagBar.style.background = '#FEE2E2';
-    if(quickStatus) quickStatus.innerHTML = '❌ 服务器未连接';
-  }
-}
-
-// 手动重试检测（用户点击"重新检测"按钮）
-async function retryDetect(){
-  document.getElementById('retryBtn').textContent='⏳ 检测中...';
-  document.getElementById('retryBtn').disabled=true;
-  await detectServer();
-  renderVideoTab(); // 刷新上传区域
-  loadVideos();     // 刷新视频列表
-}
-
-// ── Toast ──
-function toast(msg,type){
-  type=type||'info';
-  var t=document.createElement('div');
-  t.className='toast toast-'+type;t.textContent=msg;document.body.appendChild(t);
-  setTimeout(function(){t.remove()},3000);
-}
-
-// ── Tab Switch ──
-var currentTab=0;
+// ── Tab 切换 ──
 function switchTab(idx){
   currentTab=idx;
   document.querySelectorAll('.tabbar button').forEach(function(b,i){b.classList.toggle('active',i===idx)});
-  if(idx===0)renderVideoTab();
-  else if(idx===1)renderMatchTab();
-  else if(idx===2)renderDataTab();
-  else if(idx===3)renderCampTab();
+  if(idx===0) renderDataTab();
+  else if(idx===1) renderVideoTab();
+  else if(idx===2) renderCampTab();
 }
 
-// ══════════════════════════════════════
-// TAB 1: 视频管理
-// ══════════════════════════════════════
+// ════════════════════════════════════════
+// 课程数据（91门，与学习地图100%对齐）
+// ════════════════════════════════════════
+var EMBED_COURSES=[
+  {id:100,cat:'required',title:'入职手续与企业概览',     sections:['HR入职办理、企业组织架构介绍（海尔→卡泰驰→区域门店）'],pos:'',icon:'🎬',dur:'45min'},
+  {id:2,  cat:'required',title:'行业法规与合规红线',      sections:['《二手车流通管理办法》核心条款、消费者权益保护'],pos:'',icon:'🎬',dur:'50min'},
+  {id:4,  cat:'required',title:'信息安全与行为规范',      sections:['客户隐私保护规范、员工行为准则'],pos:'',icon:'🎬',dur:'40min'},
+  {id:1,  cat:'required',title:'品牌文化与服务标准',      sections:['卡泰驰核心价值观、标准服务流程、接待礼仪'],pos:'',icon:'🎬',dur:'55min'},
+  {id:3,  cat:'required',title:'二手车估值逻辑与定价',    sections:['市场行情分析、品牌价值评估模型'],pos:'',icon:'🎬',dur:'60min'},
+  {id:5,  cat:'required',title:'数字化工具基础应用',      sections:['内部系统登录、库存管理系统、CRM基础操作'],pos:'',icon:'🎬',dur:'45min'},
+  {id:101,cat:'required',title:'SOP知识体系导入',         sections:['门店11大SOP业务模块全景图认知'],pos:'',icon:'🎬',dur:'90min'},
+  {id:102,cat:'required',title:'权益服务产品体系',        sections:['卡泰驰全套权益服务产品介绍'],pos:'',icon:'🎬',dur:'60min'},
+  // 销售顾问
+  {id:105,cat:'professional',title:'展厅接待标准流程',    sections:['仪容仪表规范、迎宾动线、第一印象管理'],pos:'销售顾问',icon:'🎬',dur:'50min'},
+  {id:106,cat:'professional',title:'客户需求深度挖掘',    sections:['SPIN提问技巧、需求确认、痛点挖掘'],pos:'销售顾问',icon:'🎬',dur:'55min'},
+  {id:107,cat:'professional',title:'产品讲解与价值传递',  sections:['六方位绕车法、配置亮点提炼、竞品对比'],pos:'销售顾问',icon:'🎬',dur:'60min'},
+  {id:108,cat:'professional',title:'议价谈判与成交技巧',  sections:['价格谈判心理、让步策略、临门一脚'],pos:'销售顾问',icon:'🎬',dur:'55min'},
+  {id:109,cat:'professional',title:'交车流程与客户满意度',sections:['交车仪式感、PDI标准、首保预约'],pos:'销售顾问',icon:'🎬',dur:'45min'},
+  {id:110,cat:'professional',title:'权益服务话术训练',    sections:['权益产品推荐逻辑、客户疑虑处理、成交率提升'],pos:'销售顾问',icon:'🎬',dur:'60min'},
+  // 数字化营销师
+  {id:115,cat:'professional',title:'短视频内容策划与拍摄',sections:['账号定位、内容选题、脚本写作'],pos:'数字化营销师',icon:'🎬',dur:'55min'},
+  {id:116,cat:'professional',title:'直播间话术与运营',    sections:['开播准备、讲车话术、互动技巧、直播数据分析'],pos:'数字化营销师',icon:'🎬',dur:'60min'},
+  {id:117,cat:'professional',title:'线索承接与私域转化',  sections:['线索分级管理、响应时效、跟进策略'],pos:'数字化营销师',icon:'🎬',dur:'50min'},
+  {id:118,cat:'professional',title:'数字化工具进阶应用',  sections:['DMS精准查询、报表导出、数据可视化'],pos:'数字化营销师',icon:'🎬',dur:'45min'},
+  {id:119,cat:'professional',title:'私域流量池运营',      sections:['企业微信标签管理、朋友圈规划、社群运营'],pos:'数字化营销师',icon:'🎬',dur:'55min'},
+  // 检测评估师
+  {id:125,cat:'professional',title:'车辆外观检测规范',    sections:['漆面检测、钣金判断标准、VIN识别'],pos:'检测评估师',icon:'🎬',dur:'60min'},
+  {id:126,cat:'professional',title:'机械状况检测流程',    sections:['发动机舱、底盘、四轮检测规范'],pos:'检测评估师',icon:'🎬',dur:'65min'},
+  {id:127,cat:'professional',title:'电子系统检测技巧',    sections:['OBD故障码读取、ECU版本核查、智能配置确认'],pos:'检测评估师',icon:'🎬',dur:'55min'},
+  {id:128,cat:'professional',title:'评估报告撰写规范',    sections:['检测报告结构、扣分项描述规范、客户沟通技巧'],pos:'检测评估师',icon:'🎬',dur:'45min'},
+  {id:129,cat:'professional',title:'权益车辆检测标准',    sections:['权益车检测进店流程、质量标准把控'],pos:'检测评估师',icon:'🎬',dur:'50min'},
+  // 金融专员
+  {id:135,cat:'professional',title:'汽车金融产品体系',    sections:['按揭、融租、回租等产品结构对比'],pos:'金融专员',icon:'🎬',dur:'55min'},
+  {id:136,cat:'professional',title:'征信解读与资质评估',  sections:['征信报告分析、资质判断维度、风险预警'],pos:'金融专员',icon:'🎬',dur:'60min'},
+  {id:137,cat:'professional',title:'贷款申请流程实操',    sections:['材料清单、系统录入、审批推进技巧'],pos:'金融专员',icon:'🎬',dur:'55min'},
+  {id:138,cat:'professional',title:'金融话术与异议处理',  sections:['价值讲解、利率呈现技巧、顾虑消除'],pos:'金融专员',icon:'🎬',dur:'50min'},
+  {id:145,cat:'professional',title:'金融合规操作红线',    sections:['监管合规要点、贷后管理规范'],pos:'金融专员',icon:'🎬',dur:'45min'},
+  // 维修技师
+  {id:14, cat:'professional',title:'微课：故障诊断+质量管理',sections:['完成专业课学习'],pos:'维修技师',icon:'🎬',dur:'90min'},
+  {id:146,cat:'professional',title:'快保项目规范操作',    sections:['机油更换、滤芯更换、轮胎检查标准流程'],pos:'维修技师',icon:'🎬',dur:'55min'},
+  {id:147,cat:'professional',title:'车辆改装合规规范',    sections:['国标要求、禁改项目清单、合规改装流程'],pos:'维修技师',icon:'🎬',dur:'50min'},
+  // 店长/储备干部
+  {id:155,cat:'professional',title:'团队绩效管理体系',    sections:['KPI设定、过程管理、绩效面谈技巧'],pos:'店长/储备干部',icon:'🎬',dur:'65min'},
+  {id:156,cat:'professional',title:'门店数据经营分析',    sections:['核心经营指标解读、环比同比分析、问题诊断'],pos:'店长/储备干部',icon:'🎬',dur:'60min'},
+  {id:157,cat:'professional',title:'客户投诉处理与危机公关',sections:['投诉分级处理、现场安抚技巧、升级预防'],pos:'店长/储备干部',icon:'🎬',dur:'55min'},
+  {id:158,cat:'professional',title:'标准化门店运营管理',  sections:['5S管理、晨会/夕会、作业指导书执行'],pos:'店长/储备干部',icon:'🎬',dur:'60min'},
+  {id:159,cat:'professional',title:'门店日周月管理节奏',  sections:['早会/夕会/周例会/月总结标准化运营'],pos:'店长/储备干部',icon:'🎬',dur:'50min'},
+];
+
+// SOP知识卡片模块（11大模块）
+var SOP_MODULES = [
+  {id:'sop01', name:'接待与展厅管理',   totalCards:52, icon:'🏪', color:'#4F6EF7'},
+  {id:'sop02', name:'销售流程标准化',   totalCards:48, icon:'🤝', color:'#0D9488'},
+  {id:'sop03', name:'车辆检测与评估',   totalCards:45, icon:'🔍', color:'#F5A623'},
+  {id:'sop04', name:'权益服务产品',     totalCards:38, icon:'⭐', color:'#7C3AED'},
+  {id:'sop05', name:'金融业务操作',     totalCards:42, icon:'💳', color:'#DC2626'},
+  {id:'sop06', name:'数字化营销',       totalCards:36, icon:'📱', color:'#0891b2'},
+  {id:'sop07', name:'库存与车辆管理',   totalCards:40, icon:'🚗', color:'#059669'},
+  {id:'sop08', name:'客户关系管理',     totalCards:44, icon:'👥', color:'#d97706'},
+  {id:'sop09', name:'维修与售后',       totalCards:35, icon:'🔧', color:'#7c3aed'},
+  {id:'sop10', name:'投诉处理规范',     totalCards:30, icon:'📋', color:'#be123c'},
+  {id:'sop11', name:'门店运营管理',     totalCards:39, icon:'📊', color:'#1d4ed8'},
+];
+
+// ════════════════════════════════════════
+// TAB 1：学习数据
+// ════════════════════════════════════════
+function renderDataTab(){
+  var h='';
+
+  // ── 用户信息 ──
+  var user=null,log=[];
+  try{user=JSON.parse(localStorage.getItem('kataichi_user'))}catch(e){}
+  try{log=JSON.parse(localStorage.getItem('kataichi_activity_log'))||[]}catch(e){}
+
+  if(user&&user.name){
+    h+='<div class="user-card">'+
+      '<div class="panel-hd" style="margin-bottom:10px">👤 当前设备用户</div>'+
+      '<div class="user-grid">'+
+        '<div class="user-kv"><span class="k">姓名</span><span class="v">'+escHtml(user.name)+'</span></div>'+
+        '<div class="user-kv"><span class="k">门店</span><span class="v">'+escHtml(user.store||'-')+'</span></div>'+
+        '<div class="user-kv"><span class="k">岗位</span><span class="v">'+escHtml(user.position||'-')+'</span></div>'+
+        (user.phone?'<div class="user-kv"><span class="k">手机</span><span class="v">'+escHtml(user.phone)+'</span></div>':'')+
+        '<div class="user-kv"><span class="k">最近登录</span><span class="v">'+(user.lastActive||'').slice(0,16).replace('T',' ')+'</span></div>'+
+      '</div>'+
+    '</div>';
+  }
+
+  // ── 活跃统计 ──
+  var storeSet={},nameSet={};
+  log.forEach(function(l){
+    if(l.store) storeSet[l.store]=1;
+    if(l.name)  nameSet[l.name]=1;
+  });
+
+  h+='<div class="stats">'+
+    statCard('🏪','覆盖门店',Object.keys(storeSet).length+'家','#0891b2')+
+    statCard('👥','登记人员',Object.keys(nameSet).length+'人','#4f46e5')+
+    statCard('📝','操作记录',log.length+'条','#10b981')+
+    statCard('📅','今日活跃',todayCount(log)+'次','#f59e0b')+
+  '</div>';
+
+  // ── 最近登录记录 ──
+  var recentLogins=log.filter(function(l){return l.action==='登录'||l.action==='进入'}).slice(-10).reverse();
+  if(recentLogins.length){
+    h+='<div class="panel"><div class="panel-hd">🕐 最近登录记录</div>'+
+      '<div class="vtable-wrap"><table class="vtable"><thead><tr><th>姓名</th><th>门店</th><th>岗位</th><th>操作</th><th>时间</th></tr></thead><tbody>';
+    recentLogins.forEach(function(l){
+      h+='<tr>'+
+        '<td><b>'+escHtml(l.name||'-')+'</b></td>'+
+        '<td>'+escHtml(l.store||'-')+'</td>'+
+        '<td>'+escHtml(l.position||'-')+'</td>'+
+        '<td>'+escHtml(l.action||'-')+'</td>'+
+        '<td style="font-size:11px;color:var(--g500)">'+(l.time||'').slice(0,16).replace('T',' ')+'</td>'+
+      '</tr>';
+    });
+    h+='</tbody></table></div></div>';
+  }
+
+  // ── SOP知识卡片学习进度 ──
+  var sopProgress={};
+  try{sopProgress=JSON.parse(localStorage.getItem('kataichi_sop_progress'))||{}}catch(e){}
+
+  h+='<div class="panel"><div class="panel-hd">📖 SOP知识卡片 · 学习进度</div>';
+  h+='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px">';
+
+  SOP_MODULES.forEach(function(mod){
+    var done = sopProgress[mod.id] || 0;
+    var pct = mod.totalCards>0 ? Math.round(done/mod.totalCards*100) : 0;
+    h+='<div class="sop-module" style="border-left-color:'+mod.color+'">'+
+      '<div class="sop-module-hd">'+
+        '<span class="sop-module-title">'+mod.icon+' '+mod.name+'</span>'+
+        '<span class="sop-pct" style="color:'+mod.color+'">'+done+'/'+mod.totalCards+'</span>'+
+      '</div>'+
+      '<div class="sop-bar"><div class="sop-fill" style="width:'+pct+'%;background:'+mod.color+'"></div></div>'+
+      '<div style="display:flex;justify-content:space-between;margin-top:4px">'+
+        '<span style="font-size:10px;color:var(--g400)">已学 '+pct+'%</span>'+
+        (pct>=100?'<span style="font-size:10px;color:#059669;font-weight:700">✅ 已完成</span>':
+         pct>0?'<span style="font-size:10px;color:#d97706;font-weight:700">进行中</span>':
+         '<span style="font-size:10px;color:var(--g300)">未开始</span>')+
+      '</div>'+
+    '</div>';
+  });
+  h+='</div></div>';
+
+  // ── 微课学习进度 ──
+  var microProg={};
+  try{microProg=JSON.parse(localStorage.getItem('kataichi_micro_v2'))||{}}catch(e){}
+  var total=EMBED_COURSES.length,completed=0,inprog=0;
+  EMBED_COURSES.forEach(function(c){
+    var p=microProg[c.id]||0;
+    if(p>=100) completed++;
+    else if(p>0) inprog++;
+  });
+
+  h+='<div class="panel"><div class="panel-hd">🎬 微课学习地图 · 进度概览</div>'+
+    '<div class="stats" style="margin-bottom:10px">'+
+      statCard('📚','总课程数',total+'门','#4f46e5')+
+      statCard('✅','已学完',completed+'门','#10b981')+
+      statCard('⏳','进行中',inprog+'门','#f59e0b')+
+      statCard('📌','未开始',(total-completed-inprog)+'门','#9ca3af')+
+    '</div>';
+
+  // 已完成课程列表
+  var doneCourses=EMBED_COURSES.filter(function(c){return (microProg[c.id]||0)>=100});
+  if(doneCourses.length){
+    h+='<div style="font-size:12px;font-weight:700;color:var(--g700);margin-bottom:8px">✅ 已学完课程（'+doneCourses.length+'门）：</div>'+
+      '<div style="display:flex;flex-wrap:wrap;gap:6px">';
+    doneCourses.forEach(function(c){
+      h+='<span style="background:#d1fae5;color:#065f46;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600">'+escHtml(c.title)+'</span>';
+    });
+    h+='</div>';
+  } else {
+    h+='<div class="empty-hint"><div class="ico">📭</div><p>本设备暂无学习记录</p></div>';
+  }
+  h+='</div>';
+
+  document.getElementById('content').innerHTML=h;
+}
+
+function statCard(icon,label,val,color){
+  return '<div class="stat-card" style="border-top-color:'+color+'">'+
+    '<div class="si">'+icon+'</div>'+
+    '<div class="sv" style="color:'+color+'">'+val+'</div>'+
+    '<div class="sl">'+label+'</div></div>';
+}
+function todayCount(log){
+  var today=new Date().toISOString().slice(0,10);
+  return log.filter(function(l){return (l.time||'').slice(0,10)===today}).length;
+}
+
+// ════════════════════════════════════════
+// TAB 2：学习地图（视频管理 + 课程关联）
+// ════════════════════════════════════════
+var _pickerVideoId=null;
+var _pickerBtnEl=null;
+var _selectedCourseId=null;
+var _serverMappingsCache=null;
+
 function renderVideoTab(){
   var h='';
+
+  // ── 视频上传区 ──
   if(hasServer){
-    // 服务器模式：完整上传功能
     h+='<div class="panel">'+
-      '<div class="panel-hd">📹 上传视频</div>'+
+      '<div class="panel-hd">📤 上传视频</div>'+
       '<div class="upload-zone" id="dropZone" onclick="document.getElementById(\'fileInput\').click()">'+
-        '<div class="ico">📤</div><p>点击上传或拖拽视频文件</p>'+
-        '<div class="sub">MP4 / MOV / AVI / MKV / WebM · 单文件最大 500MB</div>'+
+        '<div class="ico">🎬</div>'+
+        '<p>点击上传或拖拽视频文件</p>'+
+        '<div class="sub">MP4 / MOV / AVI · 单文件最大 500MB</div>'+
       '</div>'+
       '<input type="file" id="fileInput" accept="video/*" style="display:none" onchange="uploadVideo(this.files[0])">'+
       '<div id="uploadProgress" class="upload-progress" style="display:none">'+
@@ -478,59 +482,96 @@ function renderVideoTab(){
       '</div>'+
     '</div>';
   }else{
-    // 云端模式：提供本地访问入口
     h+='<div class="panel">'+
-      '<div class="panel-hd">📹 视频管理 <span style="font-size:11px;font-weight:400;color:#d97706;margin-left:6px">云端模式</span></div>'+
-      '<div class="upload-zone" style="cursor:default;border-color:#fde68a;background:#fffbeb;text-align:left;padding:20px">'+
-        '<div style="font-size:28px;margin-bottom:10px">💻</div>'+
-        '<p style="font-weight:700;color:#92400e;font-size:14px;margin-bottom:4px">视频上传需要本地服务</p>'+
-        '<p style="font-size:12px;color:#78350f;margin-bottom:16px;line-height:1.6">'+
-          '请确保电脑端已启动本地服务，然后通过以下方式访问：'+
-        '</p>'+
-        '<div style="display:flex;flex-direction:column;gap:8px">'+
-          '<a href="http://localhost:3000/admin_v2.html" style="display:block;text-align:center;padding:10px 16px;background:var(--pri);color:#fff;border-radius:var(--rs);font-size:13px;font-weight:600;text-decoration:none">🔗 打开本地管理后台</a>'+
-          '<button class="btn btn-out btn-sm" id="retryBtn" onclick="retryDetect()" style="justify-content:center">🔄 重新检测本地服务</button>'+
+      '<div class="panel-hd">🎬 视频管理 <span style="font-size:11px;font-weight:400;color:#d97706;margin-left:6px">需要本地服务</span></div>'+
+      '<div style="background:#fffbeb;border:1.5px dashed #fde68a;border-radius:var(--r);padding:24px;text-align:center">'+
+        '<div style="font-size:32px;margin-bottom:8px">💻</div>'+
+        '<div style="font-weight:700;color:#92400e;margin-bottom:8px">视频上传需要本地服务器</div>'+
+        '<div style="font-size:12px;color:#78350f;margin-bottom:16px">双击运行"启动服务.bat"，然后通过 http://localhost:3000/admin_v2.html 访问</div>'+
+        '<div style="display:flex;gap:8px;justify-content:center">'+
+          '<a href="http://localhost:3000/admin_v2.html" class="btn btn-pri btn-sm">🔗 打开本地管理后台</a>'+
+          '<button class="btn btn-out btn-sm" onclick="retryDetect()">🔄 重新检测</button>'+
         '</div>'+
-        '<p style="font-size:11px;color:#92400e;margin-top:12px;text-align:center">如无法打开，请确认已在 <b>kataichi-server</b> 目录运行 <code>node server.js</code></p>'+
       '</div>'+
     '</div>';
   }
 
-  // 视频列表（双模式通用）
+  // ── 视频列表 ──
   h+='<div class="panel">'+
-    '<div class="panel-hd">🎬 已管理视频 <span style="font-weight:400;color:var(--g400);font-size:12px;margin-left:6px" id="videoCount"></span></div>'+
-    '<div id="videoList">加载中...</div>'+
+    '<div class="panel-hd">🎞️ 视频库 <span style="font-weight:400;color:var(--g400);font-size:12px;margin-left:6px" id="videoCountTip"></span></div>'+
+    '<div id="videoList"><div class="empty-hint"><div class="ico">⏳</div><p>加载中...</p></div></div>'+
   '</div>';
+
+  // ── 课程关联面板 ──
+  var required=EMBED_COURSES.filter(function(c){return c.cat==='required'});
+  var positions=['销售顾问','数字化营销师','检测评估师','金融专员','维修技师','店长/储备干部'];
+  h+='<div class="panel">'+
+    '<div class="panel-hd">🔗 课程关联</div>'+
+    '<p style="font-size:12px;color:var(--g500);margin-bottom:14px">选择课程，关联对应的教学视频</p>';
+
+  h+='<div class="sec-label">🏛️ 企业文化必修课（'+required.length+'门）</div>'+
+    '<div class="course-list">';
+  required.forEach(function(c){h+=buildCourseItem(c)});
+  h+='</div>';
+
+  positions.forEach(function(pos){
+    var items=EMBED_COURSES.filter(function(c){return c.cat==='professional'&&c.pos===pos});
+    if(!items.length) return;
+    h+='<div class="sec-label">🎯 '+pos+'（'+items.length+'门）</div>'+
+      '<div class="course-list">';
+    items.forEach(function(c){h+=buildCourseItem(c)});
+    h+='</div>';
+  });
+  h+='</div><div id="matchDetail"></div>';
+
   document.getElementById('content').innerHTML=h;
 
+  // 拖拽支持
   if(hasServer){
     var zone=document.getElementById('dropZone');
     if(zone){
       zone.addEventListener('dragover',function(e){e.preventDefault();zone.classList.add('dragover')});
       zone.addEventListener('dragleave',function(){zone.classList.remove('dragover')});
-      zone.addEventListener('drop',function(e){e.preventDefault();zone.classList.remove('dragover');
-        var f=e.dataTransfer.files[0];if(f)uploadVideo(f);
-      });
+      zone.addEventListener('drop',function(e){e.preventDefault();zone.classList.remove('dragover');var f=e.dataTransfer.files[0];if(f)uploadVideo(f)});
     }
   }
+
   loadVideos();
+  if(_selectedCourseId){
+    setTimeout(function(){
+      var el=document.querySelector('.course-item[data-id="'+_selectedCourseId+'"]');
+      if(el) el.classList.add('selected');
+      renderMatchDetail();
+    },100);
+  }
+}
+
+function buildCourseItem(c){
+  var catClass=c.cat==='required'?'cb-req':'cb-pro';
+  var catLabel=c.cat==='required'?'必修':'专业课';
+  return '<div class="course-item" data-id="'+c.id+'" onclick="selectCourse('+c.id+')">'+
+    '<span class="ci">'+c.icon+'</span>'+
+    '<div class="ct-info">'+
+      '<div class="ctt">'+escHtml(c.title)+'</div>'+
+      '<div class="ctm">'+(c.pos||'全员')+' · '+c.dur+'</div>'+
+    '</div>'+
+    '<span class="cb '+catClass+'">'+catLabel+'</span>'+
+  '</div>';
 }
 
 async function uploadVideo(file){
   if(!file){toast('请选择文件','err');return}
   if(file.size>500*1024*1024){toast('文件超过500MB限制','err');return}
-
-  var pdiv=document.getElementById('uploadProgress');
+  var pd=document.getElementById('uploadProgress');
   var fill=document.getElementById('progressFill');
   var txt=document.getElementById('progressTxt');
-  pdiv.style.display='block';fill.style.width='0%';txt.textContent='上传中...';
-
+  pd.style.display='block';fill.style.width='0%';txt.textContent='上传中...';
   var fd=new FormData();fd.append('video',file);
   try{
     var r=await new Promise(function(resolve,reject){
       var xhr=new XMLHttpRequest();
       xhr.upload.addEventListener('progress',function(e){
-        if(e.lengthComputable){var pct=Math.round(e.loaded/e.total*100);fill.style.width=pct+'%';txt.textContent='上传中 '+pct+'%'}
+        if(e.lengthComputable){var p=Math.round(e.loaded/e.total*100);fill.style.width=p+'%';txt.textContent='上传中 '+p+'%'}
       });
       xhr.addEventListener('load',function(){resolve(xhr)});
       xhr.addEventListener('error',function(){reject(new Error('网络错误'))});
@@ -539,830 +580,336 @@ async function uploadVideo(file){
     var j=JSON.parse(r.responseText);
     if(j.ok){toast('上传成功','ok');loadVideos()}else{toast(j.msg||'上传失败','err')}
   }catch(e){toast('上传失败: '+e.message,'err')}
-  setTimeout(function(){pdiv.style.display='none';fill.style.width='0%'},2000);
+  setTimeout(function(){pd.style.display='none';fill.style.width='0%'},2000);
 }
 
-// ── 自定义课程选择器（body 级 portal，position:fixed 防遮挡）──
-var _pickerVideoId = null;
-var _pickerBtnEl = null;
-
-function buildCoursePickerBtn(videoId, selectedId) {
-  selectedId = selectedId || null;
-  var sel = EMBED_COURSES.find(function(c) { return c.id === selectedId; });
-  var label = sel ? (sel.icon || '') + ' ' + sel.title : '选择课程';
-  return '<div class="course-picker">' +
-    '<div class="course-picker-btn" id="cpbtn_' + videoId + '" ' +
-    'onclick="toggleCoursePicker(' + videoId + ',event)" ' +
-    'title="' + escHtml(label) + '">' +
-    '<span style="overflow:hidden;text-overflow:ellipsis">' + escHtml(label) + '</span>' +
-    '<span class="arrow">▼</span></div></div>';
-}
-
-function toggleCoursePicker(videoId, event) {
-  event.stopPropagation();
-  var drop = document.getElementById('cpDrop');
-  var backdrop = document.getElementById('cpBackdrop');
-  var btn = document.getElementById('cpbtn_' + videoId);
-  var isSame = _pickerVideoId === videoId && drop.classList.contains('show');
-
-  // 关闭当前
-  closeAllPickers();
-
-  if (isSame) return;
-
-  // 打开新的
-  _pickerVideoId = videoId;
-  _pickerBtnEl = btn;
-
-  // 查找已选中的课程ID（从按钮 label 反查）
-  var selectedId = null;
-  if (btn) {
-    var spanText = btn.querySelector('span').textContent.trim();
-    var found = EMBED_COURSES.find(function(c) {
-      return ((c.icon || '') + ' ' + c.title).trim() === spanText;
-    });
-    if (found) selectedId = found.id;
+async function loadVideos(){
+  var el=document.getElementById('videoList');
+  var countEl=document.getElementById('videoCountTip');
+  if(!el) return;
+  var videos=[];
+  if(hasServer){
+    try{
+      var r=await fetch(API+'/api/videos');var j=await r.json();
+      videos=j.data||[];
+    }catch(e){videos=[]}
+  }else{
+    try{videos=JSON.parse(localStorage.getItem('kataichi_local_videos'))||[]}catch(e){}
   }
-
-  // 构建下拉HTML
-  var h = '';
-  // 必修课
-  h += '<div class="course-picker-group"><div class="course-picker-glabel">🏛️ 企业文化必修课</div>';
-  EMBED_COURSES.filter(function(c) { return c.cat === 'required' && c.id >= 1 && c.id <= 102; }).forEach(function(c) {
-    h += '<div class="course-picker-opt' + (c.id === selectedId ? ' active' : '') +
-      '" onclick="pickCourse(' + videoId + ',' + c.id + ')">' +
-      c.icon + ' ' + c.title + '</div>';
-  });
-  h += '</div>';
-
-  // 专业课按岗位分组
-  var positions = ['销售顾问', '数字化营销师', '检测评估师', '金融专员', '维修技师', '店长/储备干部'];
-  positions.forEach(function(pos) {
-    var courses = EMBED_COURSES.filter(function(c) { return c.cat === 'professional' && c.pos === pos; });
-    if (!courses.length) return;
-    h += '<div class="course-picker-group"><div class="course-picker-glabel">🎯 ' + escHtml(pos) + '</div>';
-    courses.forEach(function(c) {
-      h += '<div class="course-picker-opt' + (c.id === selectedId ? ' active' : '') +
-        '" onclick="pickCourse(' + videoId + ',' + c.id + ')">' +
-        c.icon + ' ' + c.title + '</div>';
-    });
-    h += '</div>';
-  });
-
-  drop.innerHTML = h;
-
-  // 定位：计算按钮在视口中的位置
-  if (btn) {
-    var rect = btn.getBoundingClientRect();
-    var dropW = 320;
-    var left = rect.left;
-    if (left + dropW > window.innerWidth - 10) left = window.innerWidth - dropW - 10;
-    if (left < 10) left = 10;
-    drop.style.left = left + 'px';
-    drop.style.top = (rect.bottom + 4) + 'px';
-    drop.style.width = dropW + 'px';
-  } else {
-    drop.style.left = '20px';
-    drop.style.top = '100px';
+  if(countEl) countEl.textContent=videos.length?'共'+videos.length+'个':'';
+  if(!videos.length){
+    el.innerHTML='<div class="empty-hint"><div class="ico">🎞️</div><p>暂无视频，请先上传</p></div>';
+    return;
   }
-
-  drop.classList.add('show');
-  backdrop.classList.add('show');
-  if (btn) btn.classList.add('open');
-
-  // 阻止滚轮事件冒泡到window，避免触发scroll监听导致下拉关闭
-  drop.onwheel = function(e) { e.stopPropagation(); };
-}
-
-function closeAllPickers() {
-  var drop = document.getElementById('cpDrop');
-  var backdrop = document.getElementById('cpBackdrop');
-  if (drop) drop.classList.remove('show');
-  if (backdrop) backdrop.classList.remove('show');
-  if (_pickerBtnEl) { _pickerBtnEl.classList.remove('open'); _pickerBtnEl = null; }
-  _pickerVideoId = null;
-}
-
-function pickCourse(videoId, courseId) {
-  var c = EMBED_COURSES.find(function(x) { return x.id === courseId; });
-  var label = c ? (c.icon || '') + ' ' + c.title : '选择课程';
-  var btn = document.getElementById('cpbtn_' + videoId);
-  if (btn) {
-    btn.querySelector('span').textContent = label;
-    btn.title = label;
+  var mappings=[];
+  if(hasServer){
+    try{var rm=await fetch(API+'/api/mappings');var jm=await rm.json();mappings=jm.data||[]}catch(e){}
+  }else{
+    try{mappings=JSON.parse(localStorage.getItem('kataichi_admin_mappings'))||[]}catch(e){}
   }
-  // 存储选择
-  window['_pick_cid_' + videoId] = courseId;
-  // 更新章节下拉
-  updateChapterSelect(videoId, courseId);
-  // 关闭
-  closeAllPickers();
-}
-
-// 全局：点击 esc 关闭
-document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeAllPickers(); });
-// 全局：窗口滚动/调整时关闭
-window.addEventListener('scroll', function(e) {
-  if (_pickerVideoId) {
-    var drop = document.getElementById('cpDrop');
-    // 下拉面板内部滚动不关闭（scroll事件不冒泡，但捕获阶段会传播）
-    if (drop && (e.target === drop || drop.contains(e.target))) return;
-    closeAllPickers();
-  }
-});
-window.addEventListener('resize', function() { if (_pickerVideoId) closeAllPickers(); });
-
-// ── 章节下拉构建器（显示实际章节名）──
-function buildChapterDropdown(courseId, selectedSec){
-  var opts='<option value="">不指定章节</option>';
-  if(!courseId)return opts;
-  var c=EMBED_COURSES.find(function(x){return x.id===parseInt(courseId)});
-  if(c&&c.sections){
-    c.sections.forEach(function(s,i){
-      var label='§'+(i+1)+' '+s;
-      opts+='<option value="'+i+'"'+(i===selectedSec?' selected':'')+'>'+label+'</option>';
-    });
-  }
-  return opts;
-}
-
-function loadVideos(){
-  if(hasServer){loadVideosServer();return}
-  // 云端模式：从localStorage加载
-  var mappings=getLocalMappings();
-  var entries=[];
-  var seen={};
-  mappings.forEach(function(m){
-    if(!seen[m.videoId]){
-      seen[m.videoId]={id:m.videoId,name:m.videoName||('视频#'+m.videoId),size:m.videoSize||0,linkedCourseId:m.courseId,linkedSection:m.section};
-    }
-  });
-  // 统计关联数
-  var linkedCount={};
-  mappings.forEach(function(m){linkedCount[m.videoId]=(linkedCount[m.videoId]||0)+1});
-  Object.keys(seen).forEach(function(k){seen[k].linked=linkedCount[parseInt(k)]||0});
-  renderVideoTable(Object.values(seen));
-}
-
-async function loadVideosServer(){
-  try{
-    var r=await fetch(API+'/api/videos');var j=await r.json();
-    var videos=j.data||[];
-    var mappings=(await loadServerMappings())||[];
-    // 为每个视频匹配第一个关联的课程信息
-    videos.forEach(function(v){
-      var linkedMappings=mappings.filter(function(m){return m.videoId===v.id});
-      v.linked=linkedMappings.length;
-      if(linkedMappings.length>0){v.linkedCourseId=linkedMappings[0].courseId;v.linkedSection=linkedMappings[0].section}
-    });
-    renderVideoTable(videos.map(function(v){
-      return {id:v.id,name:v.originalName,size:v.size,time:v.uploadedAt,linked:v.linked,url:v.url,linkedCourseId:v.linkedCourseId,linkedSection:v.linkedSection};
-    }));
-  }catch(e){document.getElementById('videoList').innerHTML='<div class="empty-hint"><div class="ico">⚠️</div><p>无法加载视频列表</p></div>'}
-}
-
-function renderVideoTable(entries){
-  document.getElementById('videoCount').textContent='共 '+entries.length+' 个';
-  if(!entries.length){document.getElementById('videoList').innerHTML='<div class="empty-hint"><div class="ico">📭</div><p>暂无视频</p></div>';return}
-
-  var h='<div class="vtable-wrap"><table class="vtable"><thead><tr><th>视频</th><th>大小</th><th>上传时间</th><th>关联状态</th><th style="min-width:260px">关联到课程</th><th>操作</th></tr></thead><tbody>';
-  entries.forEach(function(v){
-    var size=v.size?(v.size/1024/1024).toFixed(1)+' MB':'未知';
-    var time=v.time?v.time.slice(0,16).replace('T',' '):(hasServer?'-':'本地记录');
-    var linked=v.linked||0;
-    var vname=safeDecode(v.name);
-    var linkedCourse=v.linkedCourseId?EMBED_COURSES.find(function(c){return c.id===v.linkedCourseId}):null;
-    var linkedTagHtml=linkedCourse
-      ?'<span class="tag tag-ok" id="linkTag_'+v.id+'" title="'+linkedCourse.title+'">'+linkedCourse.icon+' '+linkedCourse.title+'</span>'
-      :'<span class="tag tag-warn" id="linkTag_'+v.id+'">未关联</span>';
-
-    h+='<tr id="videoRow_'+v.id+'">'+
-      '<td><div class="vname" title="'+vname+'">'+vname+'</div></td>'+
-      '<td style="font-size:11px;color:var(--g400)">'+size+'</td>'+
-      '<td style="font-size:11px;color:var(--g500)">'+time+'</td>'+
-      '<td id="linkStatus_'+v.id+'">'+linkedTagHtml+'</td>'+
-      '<td><div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">'+
-        buildCoursePickerBtn(v.id, v.linkedCourseId || null)+
-        '<select class="sel-mini" id="secSel_'+v.id+'" style="flex:1;max-width:130px">'+buildChapterDropdown(v.linkedCourseId||null, v.linkedSection)+'</select>'+
-        (linkedCourse?'<button class="btn btn-xs btn-err" id="linkBtn_'+v.id+'" onclick="unlinkVideoFromTab('+v.id+','+linkedCourse.id+')" title="取消关联">取消关联</button>':'<button class="btn btn-xs btn-pri" id="linkBtn_'+v.id+'" onclick="linkVideoFromTab('+v.id+')" title="关联到所选课程">关联</button>')+
-      '</div></td>'+
-      '<td><div style="display:flex;gap:4px">';
-    if(hasServer&&v.url)h+='<a href="'+API+v.url+'" target="_blank" class="btn btn-xs btn-out">▶</a>';
-    h+='<button class="btn btn-xs btn-err" onclick="deleteVideo('+v.id+')" title="删除此视频">删除</button></div></td></tr>';
+  var h='<div class="vtable-wrap"><table class="vtable"><thead><tr>'+
+    '<th>视频名称</th><th>大小</th><th>上传时间</th><th>关联课程</th><th>操作</th>'+
+    '</tr></thead><tbody>';
+  videos.forEach(function(v){
+    var nm=safeDecode(v.originalName||v.filename||'');
+    var linked=mappings.filter(function(m){return m.videoId===v.id});
+    var courseNames=linked.map(function(m){
+      var c=EMBED_COURSES.find(function(x){return x.id===m.courseId});
+      return c?c.title:'';
+    }).filter(Boolean);
+    h+='<tr>'+
+      '<td><div class="vname" title="'+escHtml(nm)+'">🎬 '+escHtml(nm)+'</div></td>'+
+      '<td style="font-size:11px;color:var(--g500)">'+formatSize(v.size)+'</td>'+
+      '<td style="font-size:11px;color:var(--g500)">'+fmtDate(v.uploadedAt)+'</td>'+
+      '<td>'+
+        (courseNames.length
+          ? '<div style="display:flex;flex-wrap:wrap;gap:4px">'+courseNames.map(function(n){return '<span style="background:#eef2ff;color:var(--m1);padding:2px 7px;border-radius:8px;font-size:10px;font-weight:600">'+escHtml(n)+'</span>'}).join('')+'</div>'
+          : '<span style="color:var(--g300);font-size:11px">未关联</span>')+
+      '</td>'+
+      '<td>'+
+        '<div style="display:flex;gap:6px">'+
+          buildCoursePickerBtn(v.id, linked[0]?linked[0].courseId:null)+
+          '<button class="btn btn-err btn-xs" onclick="deleteVideo('+v.id+')">删除</button>'+
+        '</div>'+
+      '</td>'+
+    '</tr>';
   });
   h+='</tbody></table></div>';
-  document.getElementById('videoList').innerHTML=h;
-
-  // 章节选择器 change
-  entries.forEach(function(v){
-    var secSel = document.getElementById('secSel_' + v.id);
-    if (secSel) {
-      secSel.addEventListener('change', function() { /* 不需要额外操作，linkVideoFromTab 会读取 */ });
-    }
-  });
+  el.innerHTML=h;
 }
 
-// 根据选中的课程动态更新章节下拉（显示真实章节名）
-function updateChapterSelect(videoId,courseId){
-  var secSel=document.getElementById('secSel_'+videoId);
-  if(!secSel)return;
-  secSel.innerHTML=buildChapterDropdown(courseId?parseInt(courseId):null, null);
+// ── 课程选择器（portal） ──
+function buildCoursePickerBtn(videoId, selectedId){
+  var sel=EMBED_COURSES.find(function(c){return c.id===selectedId});
+  var label=sel?escHtml(sel.title):'选择课程';
+  return '<div class="course-picker" id="cp-'+videoId+'">'+
+    '<button class="course-picker-btn" id="cpb-'+videoId+'" onclick="openCoursePicker('+videoId+',this)">'+
+      '<span class="cp-label">'+label+'</span>'+
+      '<span class="arrow">▼</span>'+
+    '</button>'+
+  '</div>';
 }
-
-// ── 从视频管理Tab直接关联视频到课程 ──
-async function linkVideoFromTab(videoId){
-  var courseId = window['_pick_cid_' + videoId];
-  if (!courseId) { toast('请先选择目标课程', 'err'); return; }
-  var secSel = document.getElementById('secSel_' + videoId);
-  var section = secSel && secSel.value !== '' ? parseInt(secSel.value) : null;
-
-  // 显示加载中
-  var btn=document.getElementById('linkBtn_'+videoId);
-  if(btn){btn.textContent='⏳';btn.disabled=true}
-
-  var course=EMBED_COURSES.find(function(c){return c.id===courseId});
-  var courseLabel=course?course.icon+' '+course.title:('课程#'+courseId);
-
-  if(hasServer){
-    var body={videoId:videoId};
-    if(section!=null)body.section=section;
+function openCoursePicker(videoId, btn){
+  _pickerVideoId=videoId;_pickerBtnEl=btn;
+  var drop=document.getElementById('cpDrop');
+  var backdrop=document.getElementById('cpBackdrop');
+  var rect=btn.getBoundingClientRect();
+  drop.style.top=(rect.bottom+4)+'px';
+  drop.style.left=Math.max(4,rect.left)+'px';
+  var curMapping=null;
+  if(hasServer){ /* 异步获取 */ } else {
     try{
-      var r=await fetch(API+'/api/courses/'+courseId+'/videos',{
-        method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)
-      });
-      var j=await r.json();
-      if(j.ok){
-        toast(courseLabel+' 关联成功','ok');
-        serverMappingsCache=null;
-        // 即时更新该行状态（不刷新整个表格）
-        updateVideoRowStatus(videoId,courseId,courseLabel);
-      }else{toast(j.msg||'关联失败','err');if(btn){btn.textContent='关联';btn.disabled=false}}
-    }catch(e){toast('关联失败: '+e.message,'err');if(btn){btn.textContent='关联';btn.disabled=false}}
-  }else{
-    var vname = courseLabel;
-    addLocalMapping(courseId,videoId,vname||courseLabel,section,Date.now());
-    toast(courseLabel+' 关联成功','ok');
-    updateVideoRowStatus(videoId,courseId,courseLabel);
+      var mappings=JSON.parse(localStorage.getItem('kataichi_admin_mappings'))||[];
+      var m=mappings.find(function(m){return m.videoId===videoId});
+      curMapping=m?m.courseId:null;
+    }catch(e){}
   }
+  var html='<div class="course-picker-group">'+
+    '<div class="course-picker-glabel">— 必修课 —</div>';
+  EMBED_COURSES.filter(function(c){return c.cat==='required'}).forEach(function(c){
+    html+='<div class="course-picker-opt'+(curMapping===c.id?' active':'')+'" onclick="pickCourse('+c.id+')">'+c.icon+' '+escHtml(c.title)+'</div>';
+  });
+  html+='</div>';
+  ['销售顾问','数字化营销师','检测评估师','金融专员','维修技师','店长/储备干部'].forEach(function(pos){
+    var items=EMBED_COURSES.filter(function(c){return c.cat==='professional'&&c.pos===pos});
+    if(!items.length) return;
+    html+='<div class="course-picker-group">'+
+      '<div class="course-picker-glabel">— '+pos+' —</div>';
+    items.forEach(function(c){
+      html+='<div class="course-picker-opt'+(curMapping===c.id?' active':'')+'" onclick="pickCourse('+c.id+')">'+c.icon+' '+escHtml(c.title)+'</div>';
+    });
+    html+='</div>';
+  });
+  drop.innerHTML=html;
+  drop.classList.add('show');
+  backdrop.classList.add('show');
+  btn.classList.add('open');
 }
-
-// 即时更新一行的关联状态（不刷新整个表格）
-function updateVideoRowStatus(videoId,courseId,courseLabel){
-  // 更新关联状态标签
-  var statusCell=document.getElementById('linkStatus_'+videoId);
-  if(statusCell){
-    statusCell.innerHTML='<span class="tag tag-ok">'+courseLabel+'</span>';
-  }
-  // 切换按钮：关联→取消关联（用 onclick 直接绑定）
-  var btn=document.getElementById('linkBtn_'+videoId);
-  if(btn){
-    btn.textContent='取消关联';
-    btn.disabled=false;
-    btn.className='btn btn-xs btn-err';
-    btn.title='取消关联';
-    btn.setAttribute('onclick','unlinkVideoFromTab('+videoId+','+courseId+')');
-  }
-  // 短暂闪烁提示
-  var row=document.getElementById('videoRow_'+videoId);
-  if(row){row.style.background='#d1fae5';setTimeout(function(){row.style.background=''},1500)}
+function closeAllPickers(){
+  document.getElementById('cpDrop').classList.remove('show');
+  document.getElementById('cpBackdrop').classList.remove('show');
+  document.querySelectorAll('.course-picker-btn.open').forEach(function(b){b.classList.remove('open')});
 }
-
-// ── 从视频管理Tab取消关联 ──
-async function unlinkVideoFromTab(videoId,courseId){
-  if(!confirm('确定要取消此视频与课程的关联吗？'))return;
-  var btn=document.getElementById('linkBtn_'+videoId);
-  if(btn){btn.textContent='⏳';btn.disabled=true}
+async function pickCourse(courseId){
+  closeAllPickers();
+  if(!_pickerVideoId) return;
+  var videoId=_pickerVideoId;
+  var c=EMBED_COURSES.find(function(x){return x.id===courseId});
+  if(_pickerBtnEl) _pickerBtnEl.querySelector('.cp-label').textContent=c?c.title:'选择课程';
 
   if(hasServer){
     try{
-      var r=await fetch(API+'/api/courses/'+courseId+'/videos/'+videoId,{method:'DELETE'});
-      var j=await r.json();
-      if(j.ok){
-        toast('已取消关联','ok');
-        serverMappingsCache=null;
-        loadVideos();
-      }else{toast(j.msg||'操作失败','err');if(btn){btn.textContent='已关联';btn.disabled=false;btn.className='btn btn-xs btn-out'}}
-    }catch(e){toast('操作失败: '+e.message,'err');if(btn){btn.textContent='已关联';btn.disabled=false;btn.className='btn btn-xs btn-out'}}
+      await fetch(API+'/api/mappings',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({videoId:videoId,courseId:courseId})});
+      toast('关联成功','ok');loadVideos();
+    }catch(e){toast('关联失败','err')}
   }else{
-    removeLocalMapping(courseId,videoId);
-    toast('已取消关联','ok');
-    loadVideos();
+    try{
+      var mappings=JSON.parse(localStorage.getItem('kataichi_admin_mappings'))||[];
+      mappings=mappings.filter(function(m){return m.videoId!==videoId});
+      mappings.push({videoId:videoId,courseId:courseId,at:new Date().toISOString()});
+      localStorage.setItem('kataichi_admin_mappings',JSON.stringify(mappings));
+      toast('关联已保存（本地）','ok');loadVideos();
+    }catch(e){toast('保存失败','err')}
   }
 }
-
-function deleteVideo(id){
-  if(!confirm('确定要删除吗？此操作不可恢复。'))return;
+async function deleteVideo(id){
+  if(!confirm('确认删除此视频？')) return;
   if(hasServer){
-    fetch(API+'/api/videos/'+id,{method:'DELETE'}).then(function(r){return r.json()}).then(function(j){
-      if(j.ok){toast('已删除','ok');loadVideos()}else toast(j.msg||'删除失败','err')
-    }).catch(function(){toast('删除失败','err')});
+    try{await fetch(API+'/api/videos/'+id,{method:'DELETE'});toast('已删除','ok');loadVideos()}catch(e){toast('删除失败','err')}
   }else{
-    removeLocalMappingByVideo(id);
-    toast('已删除','ok');loadVideos();
+    try{
+      var videos=JSON.parse(localStorage.getItem('kataichi_local_videos'))||[];
+      videos=videos.filter(function(v){return v.id!==id});
+      localStorage.setItem('kataichi_local_videos',JSON.stringify(videos));
+      var mappings=JSON.parse(localStorage.getItem('kataichi_admin_mappings'))||[];
+      mappings=mappings.filter(function(m){return m.videoId!==id});
+      localStorage.setItem('kataichi_admin_mappings',JSON.stringify(mappings));
+      toast('已删除','ok');loadVideos();
+    }catch(e){toast('删除失败','err')}
   }
-}
-
-// ══════════════════════════════════════
-// TAB 2: 课程匹配
-// ══════════════════════════════════════
-var selectedCourseId=null;
-
-function renderMatchTab(){
-  var required=EMBED_COURSES.filter(function(c){return c.cat==='required'});
-  var professional=EMBED_COURSES.filter(function(c){return c.cat==='professional'});
-  var positions=['销售顾问','数字化营销师','检测评估师','金融专员','维修技师','店长/储备干部'];
-
-  var h='<div class="panel">'+
-    '<div class="panel-hd">🔗 为课程匹配教学视频</div>'+
-    '<p style="font-size:12px;color:var(--g500);margin-bottom:16px">选中目标课程后，从视频库中选择视频进行关联'+
-    (hasServer?'':' <span style="color:#92400e">（云端模式：使用本地记录）</span>')+'</p>';
-
-  // 必修课
-  h+='<div class="sec-label">🏛️ 企业文化必修课（'+required.length+'门）</div><div class="course-list">';
-  required.forEach(function(c){h+=courseItemHtml(c)});
-  h+='</div>';
-
-  // 专业课按岗位
-  positions.forEach(function(pos){
-    var courses=professional.filter(function(c){return c.pos===pos});
-    if(!courses.length)return;
-    h+='<div class="sec-label">🎯 '+pos+'（'+courses.length+'门）</div><div class="course-list">';
-    courses.forEach(function(c){h+=courseItemHtml(c)});
-    h+='</div>';
-  });
-  h+='</div><div id="matchDetail"></div>';
-  document.getElementById('content').innerHTML=h;
-
-  if(selectedCourseId){
-    var el=document.querySelector('.course-item[data-id="'+selectedCourseId+'"]');
-    if(el)el.classList.add('selected');
-    renderMatchDetail();
-  }
-}
-
-function courseItemHtml(c){
-  var catClass=c.cat==='required'?'cb-req':'cb-pro';
-  var catLabel=c.cat==='required'?'必修':'专业课';
-  return '<div class="course-item" data-id="'+c.id+'" onclick="selectCourse('+c.id+')">'+
-    '<span class="ci">'+c.icon+'</span>'+
-    '<div class="ct"><div class="ctt">'+c.title+'</div>'+
-    '<div class="ctm">'+(c.pos||'全员')+' · '+c.sections.length+'节 · '+c.dur+'</div></div>'+
-    '<span class="cb '+catClass+'">'+catLabel+'</span></div>';
 }
 
 function selectCourse(id){
-  selectedCourseId=id;
+  _selectedCourseId=id;
   document.querySelectorAll('.course-item').forEach(function(el){el.classList.toggle('selected',el.dataset.id===String(id))});
-  document.getElementById('matchDetail').innerHTML='<div class="empty-hint" style="padding:20px"><p>⏳ 加载中...</p></div>';
+  document.getElementById('matchDetail').innerHTML='<div class="empty-hint"><div class="ico">⏳</div><p>加载中...</p></div>';
   renderMatchDetail();
 }
-
 async function renderMatchDetail(){
-  var c=EMBED_COURSES.find(function(x){return x.id===selectedCourseId});
-  if(!c)return;
-
-  var linked=[];
-  var allVideos=[];
-
+  var c=EMBED_COURSES.find(function(x){return x.id===_selectedCourseId});
+  if(!c) return;
+  var linked=[],allVideos=[];
   if(hasServer){
     try{
-      // 强制刷新服务端数据（清除缓存保证最新）
-      serverMappingsCache=null;
-      var sr=await loadServerMappings();
-      linked=sr.filter(function(m){return m.courseId===selectedCourseId});
-      // 补充视频名称：从 videos.json 中查找 videoName
-      var r=await fetch(API+'/api/videos');var j=await r.json();
-      allVideos=j.data||[];
-      // 给 linked 补充视频名称字段
+      var r=await fetch(API+'/api/mappings');var jm=await r.json();
+      var allMappings=jm.data||[];
+      linked=allMappings.filter(function(m){return m.courseId===_selectedCourseId});
+      var rv=await fetch(API+'/api/videos');var jv=await rv.json();
+      allVideos=jv.data||[];
       linked.forEach(function(m){
         var v=allVideos.find(function(x){return x.id===m.videoId});
-        if(v)m.videoName=v.originalName||v.filename||('视频#'+m.videoId);
-        else m.videoName='视频#'+m.videoId;
+        m.videoName=v?(v.originalName||v.filename||'#'+m.videoId):'#'+m.videoId;
       });
-    }catch(e){console.error('renderMatchDetail server error:',e);allVideos=[]}
+    }catch(e){}
   }else{
-    linked=getLocalMappings().filter(function(m){return m.courseId===selectedCourseId});
-    allVideos=getLocalVideos();
+    try{
+      var mappings=JSON.parse(localStorage.getItem('kataichi_admin_mappings'))||[];
+      linked=mappings.filter(function(m){return m.courseId===_selectedCourseId});
+      allVideos=JSON.parse(localStorage.getItem('kataichi_local_videos'))||[];
+      linked.forEach(function(m){
+        var v=allVideos.find(function(x){return x.id===m.videoId});
+        m.videoName=v?(v.originalName||v.filename||'#'+m.videoId):'#'+m.videoId;
+      });
+    }catch(e){}
   }
 
-  var h='<div class="panel mp"><div class="mph">📋 ' + c.icon + ' ' + c.title +
-    '<span style="font-size:11px;color:var(--g400);font-weight:400;margin-left:8px">'+(c.pos||'全员')+' · '+c.sections.length+'节 · 已关联'+linked.length+'个</span></div>';
+  var h='<div class="panel" style="background:var(--g50)">'+
+    '<div class="panel-hd">'+c.icon+' '+escHtml(c.title)+
+      ' <span style="font-size:11px;font-weight:400;color:var(--g400)">'+escHtml(c.pos||'全员')+' · '+escHtml(c.dur)+'</span>'+
+    '</div>'+
+    '<p style="font-size:12px;color:var(--g500);margin-bottom:12px">已关联 '+linked.length+' 个视频</p>';
 
-  // 已关联视频
   if(linked.length){
-    h+='<div style="font-size:12px;font-weight:600;margin-bottom:6px;color:var(--g700)">已关联视频：</div>';
     linked.forEach(function(m){
-      var secLabel=m.section!=null?'章节'+(m.section+1):'';
-      var vname=safeDecode(m.videoName||('视频#'+m.videoId));
-      h+='<div class="cv">'+
+      h+='<div class="linked-video">'+
         '<span style="font-size:16px">▶</span>'+
-        '<span class="vt">'+vname+'</span>'+
-        (secLabel?'<span class="tag tag-ok">'+secLabel+'</span>':'')+
-        '<button class="btn btn-xs btn-err" onclick="unlinkVideo('+selectedCourseId+','+m.videoId+')">✕ 移除</button>'+
+        '<span class="vt">'+escHtml(safeDecode(m.videoName||''))+'</span>'+
+        '<button class="btn btn-err btn-xs" onclick="unlinkVideo('+m.videoId+','+c.id+')">取消关联</button>'+
       '</div>';
     });
   }else{
-    h+='<div class="empty-hint"><div class="ico">📭</div><p>该课程尚未关联视频</p></div>';
+    h+='<div class="empty-hint"><div class="ico">🔗</div><p>此课程暂无关联视频，请在上方视频库中选择</p></div>';
   }
-
-  // 添加关联（有未关联视频时）
-  var unlinked=allVideos.filter(function(v){
-    return !linked.some(function(m){return m.videoId===v.id});
-  });
-  if(unlinked.length){
-    h+='<div style="margin-top:16px;font-size:12px;font-weight:600;margin-bottom:8px;color:var(--g700)">➕ 添加视频关联（'+unlinked.length+'个可用）：</div>'+
-      '<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">'+
-      '<select id="videoSelect" style="padding:8px 10px;border:1.5px solid var(--g200);border-radius:var(--rs);font-size:12px;flex:1;min-width:140px">';
-    unlinked.forEach(function(v){
-      var vname=safeDecode(v.originalName||v.name||('视频#'+v.id));
-      h+='<option value="'+v.id+'">'+vname+'</option>';
-    });
-    h+='</select>'+
-      '<select id="sectionSelect" style="padding:8px 10px;border:1.5px solid var(--g200);border-radius:var(--rs);font-size:12px">'+
-      '<option value="">不指定章节</option>';
-    c.sections.forEach(function(s,i){
-      h+='<option value="'+i+'">章节'+(i+1)+': '+s+'</option>';
-    });
-    h+='</select>'+
-      '<button class="btn btn-pri btn-sm" onclick="linkVideo()">🔗 关联</button></div>';
-  }else if(!hasServer){
-    h+='<div class="empty-hint" style="margin-top:12px"><p>暂无可关联视频</p><p style="font-size:11px">请先在下方手动添加视频记录，或在电脑端管理后台上传视频文件</p></div>';
-  }else{
-    h+='<div class="empty-hint" style="margin-top:12px"><p>视频库为空或全部已关联</p><p style="font-size:11px">请先在"视频管理"Tab上传视频文件</p></div>';
-  }
-
-  // 手动添加视频名称（云端模式）
-  if(!hasServer){
-    h+='<div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--g200)">'+
-      '<div style="font-size:12px;font-weight:600;margin-bottom:8px;color:var(--g700)">📝 手动添加视频记录：</div>'+
-      '<div style="display:flex;gap:8px;flex-wrap:wrap">'+
-      '<input id="manualVname" placeholder="输入视频名称" style="flex:1;min-width:120px;padding:8px 10px;border:1.5px solid var(--g200);border-radius:var(--rs);font-size:12px">'+
-      '<select id="manualSec" style="padding:8px 10px;border:1.5px solid var(--g200);border-radius:var(--rs);font-size:12px">'+
-      '<option value="">不指定章节</option>';
-    c.sections.forEach(function(s,i){
-      h+='<option value="'+i+'">章节'+(i+1)+'</option>';
-    });
-    h+='</select>'+
-      '<button class="btn btn-pri btn-sm" onclick="manualAddVideo('+c.id+')">添加</button></div></div>';
-  }
-
   h+='</div>';
-  document.getElementById('matchDetail').innerHTML=h;
+  var el=document.getElementById('matchDetail');
+  if(el) el.innerHTML=h;
 }
-
-async function linkVideo(){
-  var sel=document.getElementById('videoSelect');if(!sel){toast('请先选择视频','err');return}
-  var vid=parseInt(sel.value);
-  var sec=document.getElementById('sectionSelect');var section=sec?sec.value:'';
-  if(!vid||isNaN(vid)){toast('请选择有效视频','err');return}
-
+async function unlinkVideo(videoId,courseId){
+  if(!confirm('确认取消关联？')) return;
   if(hasServer){
-    var body={videoId:vid};
-    if(section!=='')body.section=parseInt(section);
     try{
-      var r=await fetch(API+'/api/courses/'+selectedCourseId+'/videos',{
-        method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)
-      });
-      var j=await r.json();
-      if(j.ok){
-        toast('关联成功','ok');
-        serverMappingsCache=null;  // 清除缓存
-        renderMatchDetail();
-      }else toast(j.msg||'关联失败','err')
-    }catch(e){toast('关联失败: '+e.message,'err')}
+      await fetch(API+'/api/mappings',{method:'DELETE',headers:{'Content-Type':'application/json'},body:JSON.stringify({videoId:videoId,courseId:courseId})});
+      toast('已取消关联','ok');loadVideos();renderMatchDetail();
+    }catch(e){toast('操作失败','err')}
   }else{
-    var name=sel.options[sel.selectedIndex].text;
-    addLocalMapping(selectedCourseId,vid,name,section!==''?parseInt(section):null);
-    toast('关联成功','ok');renderMatchDetail();
+    try{
+      var mappings=JSON.parse(localStorage.getItem('kataichi_admin_mappings'))||[];
+      mappings=mappings.filter(function(m){return !(m.videoId===videoId&&m.courseId===courseId)});
+      localStorage.setItem('kataichi_admin_mappings',JSON.stringify(mappings));
+      toast('已取消关联','ok');loadVideos();renderMatchDetail();
+    }catch(e){toast('操作失败','err')}
   }
 }
+function formatSize(b){if(!b)return'-';if(b<1024*1024)return Math.round(b/1024)+'KB';return (b/1024/1024).toFixed(1)+'MB'}
+function fmtDate(d){if(!d)return'-';return String(d).slice(0,16).replace('T',' ')}
 
-function unlinkVideo(courseId,videoId){
-  if(!confirm('确定要移除此视频关联吗？'))return;
-  if(hasServer){
-    fetch(API+'/api/courses/'+courseId+'/videos/'+videoId,{method:'DELETE'}).then(function(r){return r.json()}).then(function(j){
-      if(j.ok){
-        toast('已移除','ok');
-        serverMappingsCache=null;  // 清除缓存
-        renderMatchDetail();
-      }else toast(j.msg||'操作失败','err')
-    }).catch(function(){toast('操作失败','err')});
-  }else{
-    removeLocalMapping(courseId,videoId);
-    toast('已移除','ok');renderMatchDetail();
-  }
-}
-
-function manualAddVideo(courseId){
-  var name=document.getElementById('manualVname').value.trim();
-  var sec=document.getElementById('manualSec').value;
-  if(!name){toast('请输入视频名称','err');return}
-  var nextId=Date.now();
-  addLocalMapping(courseId,nextId,name,sec!==''?parseInt(sec):null,Date.now());
-  toast('已添加','ok');renderMatchDetail();
-}
-
-// ── localStorage: 课程-视频映射 ──
-var LOCAL_MAP_KEY='kataichi_admin_mappings';
-
-function getLocalMappings(){
-  try{return JSON.parse(localStorage.getItem(LOCAL_MAP_KEY))||[]}catch(e){return[]}
-}
-function saveLocalMappings(arr){
-  localStorage.setItem(LOCAL_MAP_KEY,JSON.stringify(arr));
-}
-function addLocalMapping(courseId,videoId,videoName,section,size){
-  var arr=getLocalMappings();
-  arr.push({courseId:courseId,videoId:videoId,videoName:videoName||('视频#'+videoId),section:section!=null?section:null,videoSize:size||0,updatedAt:new Date().toISOString()});
-  saveLocalMappings(arr);
-}
-function removeLocalMapping(courseId,videoId){
-  var arr=getLocalMappings().filter(function(m){return !(m.courseId===courseId&&m.videoId===videoId)});
-  saveLocalMappings(arr);
-}
-function removeLocalMappingByVideo(videoId){
-  var arr=getLocalMappings().filter(function(m){return m.videoId!==videoId});
-  saveLocalMappings(arr);
-}
-function getLocalVideos(){
-  var seen={};var result=[];
-  getLocalMappings().forEach(function(m){
-    if(!seen[m.videoId]){seen[m.videoId]=true;result.push({id:m.videoId,name:m.videoName,originalName:m.videoName,size:m.videoSize})}
-  });
-  return result;
-}
-
-// Server mappings cache
-var serverMappingsCache=null;
-async function loadServerMappings(){
-  if(serverMappingsCache)return serverMappingsCache;
-  try{var r=await fetch(API+'/api/courses');var j=await r.json();
-    if(j.ok){var all=[];j.data.forEach(function(c){if(c.linkedVideos)c.linkedVideos.forEach(function(m){m.courseId=c.id;all.push(m)})});
-    serverMappingsCache=all;return all}
-    return[];
-  }catch(e){return[]}
-}
-
-// ══════════════════════════════════════
-// TAB 3: 学习数据
-// ══════════════════════════════════════
-function renderDataTab(){
-  if(hasServer){renderDataTabServer();return}
-  // 云端模式：展示localStorage中的学习数据
-  renderDataTabLocal();
-}
-
-// ── 读取用户信息及活跃日志 ──
-function getUserInfo(){
-  try{return JSON.parse(localStorage.getItem('kataichi_user'))||null}catch(e){return null}
-}
-function getActivityLog(){
-  try{return JSON.parse(localStorage.getItem('kataichi_activity_log'))||[]}catch(e){return[]}
-}
-
-function renderUserDataPanel(){
-  var u=getUserInfo();
-  var log=getActivityLog();
-  var h='';
-
-  // 当前用户
-  if(u&&u.name){
-    h+='<div class="panel" style="background:linear-gradient(135deg,rgba(99,102,241,.06),rgba(99,102,241,.02));border-left:3px solid var(--pri)">'+
-      '<div class="panel-hd">👤 当前登录用户</div>'+
-      '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;font-size:13px">'+
-        '<div><span style="color:var(--g400)">姓名：</span><b>'+u.name+'</b></div>'+
-        '<div><span style="color:var(--g400)">门店：</span>'+u.store+'</div>'+
-        '<div><span style="color:var(--g400)">岗位：</span>'+u.position+'</div>'+
-        (u.phone?'<div><span style="color:var(--g400)">手机：</span>'+u.phone+'</div>':'')+
-        '<div><span style="color:var(--g400)">登录时间：</span>'+u.loginTime.slice(0,16).replace('T',' ')+'</div>'+
-        '<div><span style="color:var(--g400)">最近活跃：</span>'+u.lastActive.slice(0,16).replace('T',' ')+'</div>'+
-      '</div></div>';
-  }
-
-  // 活跃日志统计
-  if(log.length>0){
-    // 按门店统计
-    var storeCount={};var posCount={};var nameSet={};
-    log.forEach(function(l){
-      if(l.store){storeCount[l.store]=(storeCount[l.store]||0)+1}
-      if(l.position){posCount[l.position]=(posCount[l.position]||0)+1}
-      if(l.name){nameSet[l.name]=1}
-    });
-    var stores=Object.keys(storeCount).length;
-    var people=Object.keys(nameSet).length;
-
-    var recentUsers=log.filter(function(l){return l.action==='登录'}).slice(-8).reverse();
-
-    h+='<div class="stats">'+
-      statCard('🏪','覆盖门店',stores+'家','#0891b2')+
-      statCard('👥','登记人数',people+'人','#4f46e5')+
-      statCard('📝','活跃记录',log.length+'条','#10b981')+
-    '</div>';
-
-    if(recentUsers.length){
-      h+='<div class="panel"><div class="panel-hd">🕐 最近登录记录</div>'+
-        '<table class="vtable"><thead><tr><th>姓名</th><th>门店</th><th>岗位</th><th>时间</th></tr></thead><tbody>';
-      recentUsers.forEach(function(l){
-        h+='<tr><td style="font-weight:600">'+l.name+'</td><td>'+l.store+'</td><td>'+l.position+'</td><td style="font-size:11px;color:var(--g500)">'+l.time.slice(0,16).replace('T',' ')+'</td></tr>';
-      });
-      h+='</tbody></table></div>';
-    }
-  }
-
-  return h;
-}
-
-function renderDataTabLocal(){
-  var progress={};
-  try{progress=JSON.parse(localStorage.getItem('kataichi_micro_progress'))||{}}catch(e){}
-  var total=EMBED_COURSES.length;
-  var completed=0;var inProgress=0;
-  EMBED_COURSES.forEach(function(c){var p=progress[c.id]||0;if(p>=100)completed++;else if(p>0)inProgress++});
-  var notStarted=total-completed-inProgress;
-
-  var h=renderUserDataPanel();
-
-  h+='<div style="margin-top:16px"><div class="stats">'+
-    statCard('📚','总课程数',total+'门','#4f46e5')+
-    statCard('✅','已完成',completed+'门','#10b981')+
-    statCard('⏳','进行中',inProgress+'门','#f59e0b')+
-    statCard('📋','未开始',notStarted+'门','#9ca3af')+
-  '</div>'+
-  '<div class="panel">'+
-    '<div class="panel-hd">📱 本地学习进度概览</div>'+
-    '<p style="font-size:12px;color:var(--g500);margin-bottom:4px">数据来自本地浏览器存储，完整学习数据追踪需使用服务器模式</p>'+
-  '</div></div>';
-
-  // 已完成列表
-  var doneCourses=EMBED_COURSES.filter(function(c){return (progress[c.id]||0)>=100});
-  if(doneCourses.length){
-    h+='<div class="panel"><div class="panel-hd">✅ 已学完课程（'+doneCourses.length+'门）</div>';
-    doneCourses.forEach(function(c){
-      h+='<div style="padding:6px 0;font-size:13px;border-bottom:1px solid var(--g100)">'+c.icon+' '+c.title+' <span style="color:var(--g400);font-size:11px">'+(c.pos||'全员')+'</span></div>';
-    });
-    h+='</div>';
-  }
-
-  if(!completed&&!inProgress)h+='<div class="empty-hint"><div class="ico">📭</div><p>暂无学习记录</p></div>';
-
-  document.getElementById('content').innerHTML=h;
-}
-
-async function renderDataTabServer(){
-  document.getElementById('content').innerHTML='<div style="text-align:center;padding:40px;color:var(--g400)">加载中...</div>';
-  try{
-    var r=await fetch(API+'/api/admin/overview');var j=await r.json();
-    if(!j.ok){showDataError();return}
-    var d=j.data;
-
-    var h=renderUserDataPanel();
-
-    h+='<div style="margin-top:16px"><div class="stats">'+
-      statCard('👥','学员总数',(d.studentCount||0)+'人','#4f46e5')+
-      statCard('🏪','覆盖门店',(d.storeCount||0)+'家','#0891b2')+
-      statCard('⏱','累计学习时长',formatDur(d.totalDuration||0),'#10b981')+
-      statCard('📊','测验平均分',(d.avgScore||0)+'分','#f59e0b')+
-    '</div></div>';
-
-    if(d.recentLogs&&d.recentLogs.length){
-      h+='<div class="panel"><div class="panel-hd">🕐 最近学习动态</div><table class="vtable"><thead><tr><th>学员</th><th>动作</th><th>时长</th><th>时间</th></tr></thead><tbody>';
-      d.recentLogs.forEach(function(l){
-        h+='<tr><td>'+(l.student_name||'未知')+'</td><td>'+(l.detail||'浏览')+'</td><td>'+(l.duration?formatDur(l.duration):'-')+'</td><td style="font-size:11px;color:var(--g500)">'+(l.time||'').slice(0,16).replace('T',' ')+'</td></tr>';
-      });
-      h+='</tbody></table></div>';
-    }
-
-    document.getElementById('content').innerHTML=h;
-  }catch(e){showDataError()}
-}
-
-function statCard(icon,label,val,color){
-  return '<div class="stat-card"><div class="si">'+icon+'</div><div class="sv" style="color:'+color+'">'+val+'</div><div class="sl">'+label+'</div></div>';
-}
-function formatDur(sec){
-  if(!sec)return '0分钟';
-  var h=Math.floor(sec/3600),m=Math.round((sec%3600)/60);
-  return h>0?h+'h'+m+'min':m+'min';
-}
-function showDataError(){
-  document.getElementById('content').innerHTML='<div class="empty-hint" style="padding:40px"><div class="ico">⚠️</div><p>无法连接学习数据服务</p></div>';
-}
-
-// ══════════════════════════════════════
-// TAB 4: 集训营管理
-// ══════════════════════════════════════
-var CAMP_KEY = 'kataichi_camp_articles';
-var _editingId = null; // null=新建，number=编辑
-
-function getCampArticles(){
-  try{return JSON.parse(localStorage.getItem(CAMP_KEY)||'[]')}catch(e){return[]}
-}
-function saveCampArticles(list){
-  localStorage.setItem(CAMP_KEY, JSON.stringify(list));
-  // 同步写入服务端 camp-data.json（供手机端 CloudStudio 读取）
-  try {
-    fetch('/api/camp/sync', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({articles:list})
-    }).catch(function(){ /* 服务端不可用时静默降级 */ });
-  } catch(e){}
-}
-function nextCampId(){
-  var list=getCampArticles();
-  if(!list.length) return 1;
-  return Math.max.apply(null,list.map(function(a){return a.id||0}))+1;
-}
-
+// ════════════════════════════════════════
+// TAB 3：集训营管理
+// ════════════════════════════════════════
 var CAMP_CATS=[
   {val:'all',   label:'全员通用'},
   {val:'sales', label:'销售特训'},
   {val:'tech',  label:'技师特训'},
   {val:'store', label:'管理特训'},
 ];
+var _editingCampId=null;
 
-function escH(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
-function normalizeContentUrls(content) {
-  var result = String(content||'');
-  // 移除 http://localhost:PORT/ 前缀
-  result = result.replace(/https?:\/\/localhost:\d+\//gi, '/');
-  // 移除 file:/// 绝对路径前缀（Windows 和 Unix 风格）
-  result = result.replace(/file:\/\/\/[^\s\"'>]+?\/(uploads\/covers\/[^\s\"'>]+)/gi, '/$1');
-  result = result.replace(/file:\/\/\/[^\s\"'>]+(uploads\/covers\/[^\s\"'>]+)/gi, '/$1');
-  // 清理从 Word/富文本复制时带入的多余标签
-  result = result.replace(/<!--StartFragment-->|<!--EndFragment-->/gi, '');
-  result = result.replace(/<\/?html[^>]*>|<\/?head[^>]*>|<\/?body[^>]*>/gi, '');
-  // 确保 uploads/covers/ 路径以 / 开头（绝对路径）
-  result = result.replace(/src="(?!http|https|\/)(uploads\/covers\/)/gi, 'src="/$1');
-  return result;
+function getCampArticles(){
+  if(hasServer){ return window._campServerCache||[]; }
+  try{return JSON.parse(localStorage.getItem('kataichi_camp_articles')||'[]')}catch(e){return[]}
+}
+
+async function loadCampArticles(cb){
+  if(hasServer){
+    try{
+      var r=await fetch(API+'/api/camp/articles?_t='+Date.now());
+      var j=await r.json();
+      window._campServerCache=j.data||[];
+      cb(window._campServerCache);
+    }catch(e){
+      window._campServerCache=[];
+      cb([]);
+    }
+  }else{
+    var list=[];
+    try{list=JSON.parse(localStorage.getItem('kataichi_camp_articles')||'[]')}catch(e){}
+    cb(list);
+  }
 }
 
 function renderCampTab(){
-  var h='';
-  var list=getCampArticles();
-  list.sort(function(a,b){
-    if(a.top&&!b.top)return -1;
-    if(!a.top&&b.top)return 1;
-    return (b.date||'').localeCompare(a.date||'');
-  });
+  document.getElementById('content').innerHTML='<div class="empty-hint"><div class="ico">⏳</div><p>加载中...</p></div>';
+  loadCampArticles(function(list){
+    list.sort(function(a,b){
+      if(a.top&&!b.top) return -1;
+      if(!a.top&&b.top) return 1;
+      return (b.date||'').localeCompare(a.date||'');
+    });
 
-  h+='<div class="panel">'+
-    '<div class="panel-hd" style="justify-content:space-between;flex-wrap:wrap;gap:8px">'+
-      '<span>🏕️ 集训营内容管理</span>'+
-      '<div style="display:flex;gap:8px;align-items:center">'+
-        '<a href="camp.html" target="_blank" class="btn btn-out btn-sm">👁 预览前台</a>'+
-        '<button class="btn btn-pri btn-sm" onclick="openCampEditor(null)">+ 发布新培训</button>'+
-      '</div>'+
-    '</div>';
-
-  if(!list.length){
-    h+='<div class="empty-hint" style="padding:36px"><div class="ico">🏕️</div><p style="font-size:13px;color:var(--g500)">暂无培训记录，点击"发布新培训"开始</p></div>';
-  } else {
     var totalPeople=0,totalDays=0;
     list.forEach(function(a){totalPeople+=(parseInt(a.people)||0);totalDays+=(parseInt(a.days)||0)});
-    h+='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:16px">'+
-      '<div style="background:#f3f4f6;border-radius:8px;padding:12px;text-align:center"><div style="font-size:20px;font-weight:900;color:#7C3AED">'+list.length+'</div><div style="font-size:11px;color:var(--g500)">累计期数</div></div>'+
-      '<div style="background:#f3f4f6;border-radius:8px;padding:12px;text-align:center"><div style="font-size:20px;font-weight:900;color:#7C3AED">'+(totalPeople||'-')+'</div><div style="font-size:11px;color:var(--g500)">参训人次</div></div>'+
-      '<div style="background:#f3f4f6;border-radius:8px;padding:12px;text-align:center"><div style="font-size:20px;font-weight:900;color:#7C3AED">'+(totalDays||'-')+'</div><div style="font-size:11px;color:var(--g500)">培训天数</div></div>'+
-    '</div>';
 
-    h+='<table class="vtable"><thead><tr>'+
-      '<th style="width:40%">培训标题</th><th>分类</th><th>日期</th><th>地点</th><th>人数</th><th>置顶</th><th>操作</th>'+
-    '</tr></thead><tbody>';
-    list.forEach(function(a){
-      var catLabel=CAMP_CATS.find(function(c){return c.val===a.cat});
-      h+='<tr>'+
-        '<td><div style="font-weight:600;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="'+escH(a.title)+'">'+escH(a.title)+'</div>'+
-          (a.excerpt?'<div style="font-size:11px;color:var(--g400);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:200px">'+escH(a.excerpt)+'</div>':'')+'</td>'+
-        '<td><span style="background:#F3EEFF;color:#7C3AED;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">'+(catLabel?catLabel.label:'全员通用')+'</span></td>'+
-        '<td style="font-size:12px;white-space:nowrap">'+escH(a.date||'')+'</td>'+
-        '<td style="font-size:12px;color:var(--g500);white-space:nowrap">'+escH(a.location||'-')+'</td>'+
-        '<td style="font-size:12px;text-align:center">'+(a.people!=null?a.people:'-')+'</td>'+
-        '<td style="text-align:center">'+
-          (a.top?'<span style="color:#DC2626;font-weight:700;font-size:12px">置顶</span>':'<span style="color:var(--g400);font-size:11px">否</span>')+
-        '</td>'+
-        '<td style="white-space:nowrap">'+
-          '<div style="display:flex;gap:5px">'+
-            '<button class="btn btn-out btn-xs" onclick="openCampEditor('+a.id+')">编辑</button>'+
-            '<button class="btn btn-xs" style="background:#fff;border:1.5px solid #fee2e2;color:var(--err)" onclick="deleteCampArticle('+a.id+')">删除</button>'+
-          '</div>'+
-        '</td>'+
-      '</tr>';
-    });
-    h+='</tbody></table>';
-  }
-  h+='</div>';
-  document.getElementById('content').innerHTML=h;
+    var h='<div class="panel">'+
+      '<div class="panel-hd" style="justify-content:space-between;flex-wrap:wrap;gap:8px">'+
+        '<span>🏕️ 集训营内容管理</span>'+
+        '<div style="display:flex;gap:8px">'+
+          '<a href="camp.html" target="_blank" class="btn btn-out btn-sm">👁 预览</a>'+
+          '<button class="btn btn-pri btn-sm" style="background:var(--m4)" onclick="openCampEditor(null)">+ 发布新培训</button>'+
+        '</div>'+
+      '</div>'+
+      '<div class="camp-stat-mini">'+
+        '<div class="csm-item"><div class="csm-val">'+list.length+'</div><div class="csm-label">累计期数</div></div>'+
+        '<div class="csm-item"><div class="csm-val">'+(totalPeople||0)+'</div><div class="csm-label">参训人次</div></div>'+
+        '<div class="csm-item"><div class="csm-val">'+(totalDays||0)+'</div><div class="csm-label">培训天数</div></div>'+
+        (hasServer?'<div class="csm-item" style="background:#eef2ff"><div class="csm-val" style="color:#4f46e5;font-size:14px">🟢</div><div class="csm-label" style="color:#4f46e5">服务端存储</div></div>':
+                   '<div class="csm-item" style="background:#fffbeb"><div class="csm-val" style="color:#d97706;font-size:14px">☁️</div><div class="csm-label" style="color:#d97706">本地存储</div></div>')+
+      '</div>';
+
+    if(!list.length){
+      h+='<div class="empty-hint" style="padding:36px"><div class="ico">🏕️</div><p>暂无培训记录，点击"发布新培训"开始</p></div>';
+    }else{
+      h+='<div class="vtable-wrap"><table class="vtable"><thead><tr>'+
+        '<th style="width:38%">培训标题</th><th>分类</th><th>日期</th><th>地点</th><th>人数/天数</th><th>置顶</th><th>操作</th>'+
+        '</tr></thead><tbody>';
+      list.forEach(function(a){
+        var catLabel=CAMP_CATS.find(function(c){return c.val===a.cat});
+        h+='<tr>'+
+          '<td>'+
+            '<div style="font-weight:600;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="'+escHtml(a.title)+'">'+escHtml(a.title)+'</div>'+
+            (a.excerpt?'<div style="font-size:11px;color:var(--g400);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:220px">'+escHtml(a.excerpt)+'</div>':'')+
+          '</td>'+
+          '<td><span style="background:#F3EEFF;color:#7C3AED;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">'+(catLabel?catLabel.label:'全员')+'</span></td>'+
+          '<td style="font-size:12px;white-space:nowrap">'+escHtml(a.date||'-')+'</td>'+
+          '<td style="font-size:12px;color:var(--g500)">'+escHtml(a.location||'-')+'</td>'+
+          '<td style="font-size:12px;text-align:center">'+
+            (a.people!=null&&a.people!==''?a.people+'人':'-')+
+            (a.days!=null&&a.days!==''?' / '+a.days+'天':'')+
+          '</td>'+
+          '<td style="text-align:center">'+(a.top?'<span style="color:#DC2626;font-size:12px;font-weight:700">置顶</span>':'<span style="color:var(--g300);font-size:11px">-</span>')+'</td>'+
+          '<td style="white-space:nowrap">'+
+            '<div style="display:flex;gap:5px">'+
+              '<button class="btn btn-out btn-xs" onclick="openCampEditor('+a.id+')">编辑</button>'+
+              '<button class="btn btn-err btn-xs" onclick="deleteCampArticle('+a.id+')">删除</button>'+
+            '</div>'+
+          '</td>'+
+        '</tr>';
+      });
+      h+='</tbody></table></div>';
+    }
+    h+='</div>';
+    document.getElementById('content').innerHTML=h;
+  });
 }
 
 function openCampEditor(id){
-  _editingId = id;
-  var article = null;
-  if(id!==null){
-    var list=getCampArticles();
-    article=list.find(function(a){return a.id===id})||null;
-  }
+  _editingCampId=id;
+  loadCampArticles(function(list){
+    var article=id!==null?list.find(function(a){return a.id===id})||null:null;
+    _buildCampEditorModal(article);
+  });
+}
 
+function _buildCampEditorModal(article){
   var catOpts=CAMP_CATS.map(function(c){
     var sel=(article&&article.cat===c.val)||(!article&&c.val==='all');
     return '<option value="'+c.val+'"'+(sel?' selected':'')+'>'+c.label+'</option>';
@@ -1372,74 +919,97 @@ function openCampEditor(id){
   modal.id='campEditorModal';
   modal.style.cssText='position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,.5);overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;align-items:flex-start;justify-content:center;padding:20px';
 
-  var contentVal = article ? article.content.replace(/</g,'&lt;').replace(/>/g,'&gt;') : '';
-
   modal.innerHTML=
-    '<div style="background:#fff;border-radius:14px;width:100%;max-width:760px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.25)">'+
+    '<div style="background:#fff;border-radius:14px;width:100%;max-width:800px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.25)">'+
+      // 头部
       '<div style="background:linear-gradient(135deg,#7C3AED,#4F6EF7);padding:18px 22px;display:flex;align-items:center;justify-content:space-between">'+
-        '<div style="color:#fff;font-size:16px;font-weight:800">'+(id===null?'✍️ 发布新培训':'✏️ 编辑培训内容')+'</div>'+
-        '<button onclick="closeCampEditor()" style="background:rgba(255,255,255,.2);border:none;color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center">×</button>'+
+        '<div style="color:#fff;font-size:16px;font-weight:800">'+(article===null?'✍️ 发布新培训':'✏️ 编辑培训')+'</div>'+
+        '<button onclick="closeCampEditor()" style="background:rgba(255,255,255,.2);border:none;color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:18px;line-height:32px">×</button>'+
       '</div>'+
+      // 内容
       '<div style="padding:22px;display:flex;flex-direction:column;gap:16px">'+
-        '<div><label style="font-size:12px;font-weight:700;color:var(--g600);display:block;margin-bottom:6px">培训标题 <span style="color:var(--err)">*</span></label>'+
-        '<input id="camp_title" type="text" placeholder="例：2024年Q2销售精英集训营" value="'+escH(article?article.title:'')+'\" style="width:100%;padding:10px 13px;border:1.5px solid var(--g200);border-radius:8px;font-size:14px;outline:none;font-family:inherit"></div>'+
-        '<div><label style="font-size:12px;font-weight:700;color:var(--g600);display:block;margin-bottom:6px">摘要 <span style="font-weight:400;color:var(--g400)">（显示在卡片上）</span></label>'+
-        '<input id="camp_excerpt" type="text" placeholder="一句话描述本次集训内容..." value="'+escH(article?article.excerpt:'')+'\" style="width:100%;padding:10px 13px;border:1.5px solid var(--g200);border-radius:8px;font-size:13px;outline:none;font-family:inherit"></div>'+
+        // 标题
+        '<div>'+
+          '<label style="font-size:12px;font-weight:700;color:var(--g600);display:block;margin-bottom:6px">培训标题 <span style="color:var(--err)">*</span></label>'+
+          '<input id="camp_title" type="text" placeholder="例：2024年Q2销售精英集训营" value="'+escHtml(article?article.title:'')+'\" style="width:100%;padding:10px 13px;border:1.5px solid var(--g200);border-radius:8px;font-size:14px;outline:none;font-family:inherit">'+
+        '</div>'+
+        // 摘要
+        '<div>'+
+          '<label style="font-size:12px;font-weight:700;color:var(--g600);display:block;margin-bottom:6px">摘要 <span style="font-weight:400;color:var(--g400)">（显示在列表卡片上）</span></label>'+
+          '<input id="camp_excerpt" type="text" placeholder="一句话描述本次集训内容..." value="'+escHtml(article?article.excerpt:'')+'\" style="width:100%;padding:10px 13px;border:1.5px solid var(--g200);border-radius:8px;font-size:13px;outline:none;font-family:inherit">'+
+        '</div>'+
+        // 基本信息
         '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">'+
           '<div><label style="font-size:12px;font-weight:700;color:var(--g600);display:block;margin-bottom:6px">培训分类</label>'+
-          '<select id="camp_cat" style="width:100%;padding:10px;border:1.5px solid var(--g200);border-radius:8px;font-size:13px;outline:none;font-family:inherit;background:#fff">'+catOpts+'</select></div>'+
+            '<select id="camp_cat" style="width:100%;padding:10px;border:1.5px solid var(--g200);border-radius:8px;font-size:13px;outline:none;font-family:inherit;background:#fff">'+catOpts+'</select></div>'+
           '<div><label style="font-size:12px;font-weight:700;color:var(--g600);display:block;margin-bottom:6px">培训日期</label>'+
-          '<input id="camp_date" type="date" value="'+(article?article.date:'')+'\" style="width:100%;padding:9px 10px;border:1.5px solid var(--g200);border-radius:8px;font-size:13px;outline:none;font-family:inherit"></div>'+
+            '<input id="camp_date" type="date" value="'+(article?article.date||'':'')+'\" style="width:100%;padding:9px 10px;border:1.5px solid var(--g200);border-radius:8px;font-size:13px;outline:none;font-family:inherit"></div>'+
           '<div><label style="font-size:12px;font-weight:700;color:var(--g600);display:block;margin-bottom:6px">培训天数</label>'+
-          '<input id="camp_days" type="number" min="1" placeholder="2" value="'+(article&&article.days!=null?article.days:'')+'\" style="width:100%;padding:10px 13px;border:1.5px solid var(--g200);border-radius:8px;font-size:13px;outline:none;font-family:inherit"></div>'+
+            '<input id="camp_days" type="number" min="1" placeholder="2" value="'+(article&&article.days!=null?article.days:'')+'\" style="width:100%;padding:10px 13px;border:1.5px solid var(--g200);border-radius:8px;font-size:13px;outline:none;font-family:inherit"></div>'+
         '</div>'+
+        // 地点 & 人数
         '<div style="display:grid;grid-template-columns:2fr 1fr;gap:12px">'+
           '<div><label style="font-size:12px;font-weight:700;color:var(--g600);display:block;margin-bottom:6px">培训地点</label>'+
-          '<input id="camp_location" type="text" placeholder="例：上海总部培训中心" value="'+escH(article?article.location:'')+'\" style="width:100%;padding:10px 13px;border:1.5px solid var(--g200);border-radius:8px;font-size:13px;outline:none;font-family:inherit"></div>'+
+            '<input id="camp_location" type="text" placeholder="例：上海总部培训中心" value="'+escHtml(article?article.location||'':'')+'\" style="width:100%;padding:10px 13px;border:1.5px solid var(--g200);border-radius:8px;font-size:13px;outline:none;font-family:inherit"></div>'+
           '<div><label style="font-size:12px;font-weight:700;color:var(--g600);display:block;margin-bottom:6px">参训人数</label>'+
-          '<input id="camp_people" type="number" min="1" placeholder="20" value="'+(article&&article.people!=null?article.people:'')+'\" style="width:100%;padding:10px 13px;border:1.5px solid var(--g200);border-radius:8px;font-size:13px;outline:none;font-family:inherit"></div>'+
+            '<input id="camp_people" type="number" min="0" placeholder="20" value="'+(article&&article.people!=null?article.people:'')+'\" style="width:100%;padding:10px 13px;border:1.5px solid var(--g200);border-radius:8px;font-size:13px;outline:none;font-family:inherit"></div>'+
         '</div>'+
-        '<div><label style="font-size:12px;font-weight:700;color:var(--g600);display:block;margin-bottom:6px">封面图片 <span style="font-weight:400;color:var(--g400)">（可选，点击上传本地照片）</span></label>'+
-        '<input id="camp_cover_file" type="file" accept="image/*" style="display:none" onchange="handleCampCoverChange(this)">'+
-        '<input id="camp_cover" type="hidden" value="'+escH(article?article.cover:'')+'">'+
-        '<div id="camp_cover_area" style="display:flex;align-items:center;gap:12px">'+
-          (article&&article.cover
-            ? '<img id="camp_cover_preview" src="'+escH(article.cover)+'" style="width:120px;height:68px;object-fit:cover;border-radius:8px;border:1px solid var(--g200)" onerror="this.style.display=\'none\'">'
-            : '<div id="camp_cover_placeholder" style="width:120px;height:68px;border:2px dashed var(--g300);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--g400);font-size:24px;flex-shrink:0">+</div>')+
-          '<button type="button" class="btn btn-out btn-sm" onclick="document.getElementById(\'camp_cover_file\').click()">选择图片</button>'+
-          (article&&article.cover?'<button type="button" class="btn btn-out btn-sm" style="color:var(--err);border-color:#FEE2E2" onclick="clearCampCover()">移除</button>':'')+
-        '</div></div>'+
+        // 封面图片
         '<div>'+
-          '<label style="font-size:12px;font-weight:700;color:var(--g600);display:block;margin-bottom:6px">图文正文 <span style="font-weight:400;color:var(--g400)">（Ctrl+V 粘贴HTML会自动保留格式，也可手动编写）</span></label>'+
-          '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">'+
-            '<textarea id="camp_content" rows="16" placeholder="&lt;h2&gt;培训概况&lt;/h2&gt;\n&lt;p&gt;本次集训营...&lt;/p&gt;\n\n&lt;h2&gt;培训亮点&lt;/h2&gt;\n&lt;ul&gt;&lt;li&gt;...&lt;/li&gt;&lt;/ul&gt;" style="width:100%;padding:12px;border:1.5px solid var(--g200);border-radius:8px;font-size:12px;outline:none;font-family:Consolas,monospace;resize:vertical;line-height:1.6">'+contentVal+'</textarea>'+
-            '<div style="background:#f9fafb;border:1px solid var(--g200);border-radius:8px;padding:12px;font-size:11px;color:var(--g500);line-height:2;overflow-y:auto">'+
-              '<b style="color:var(--g700)">HTML速查</b><br>'+
-              '<code style="background:#eef2ff;padding:1px 4px;border-radius:3px">&lt;h2&gt;章节标题&lt;/h2&gt;</code><br>'+
-              '<code style="background:#eef2ff;padding:1px 4px;border-radius:3px">&lt;h3&gt;小标题&lt;/h3&gt;</code><br>'+
-              '<code style="background:#eef2ff;padding:1px 4px;border-radius:3px">&lt;p&gt;段落&lt;/p&gt;</code><br>'+
-              '<code style="background:#eef2ff;padding:1px 4px;border-radius:3px">&lt;strong&gt;加粗&lt;/strong&gt;</code><br>'+
-              '<code style="background:#eef2ff;padding:1px 4px;border-radius:3px">&lt;em&gt;紫色强调&lt;/em&gt;</code><br>'+
-              '<code style="background:#eef2ff;padding:1px 4px;border-radius:3px">&lt;ul&gt;&lt;li&gt;列表&lt;/li&gt;&lt;/ul&gt;</code><br>'+
-              '<code style="background:#eef2ff;padding:1px 4px;border-radius:3px">&lt;ol&gt;&lt;li&gt;有序&lt;/li&gt;&lt;/ol&gt;</code><br>'+
-              '<code style="background:#eef2ff;padding:1px 4px;border-radius:3px">&lt;img src="图片URL"&gt;</code><br>'+
-              '<code style="background:#eef2ff;padding:1px 4px;border-radius:3px">&lt;blockquote&gt;引用&lt;/blockquote&gt;</code><br>'+
-              '<code style="background:#eef2ff;padding:1px 4px;border-radius:3px">&lt;hr&gt;</code> 分割线<br>'+
-              '<div style="margin-top:6px;background:#FFF3E0;border-radius:6px;padding:8px;color:#92400E">'+
+          '<label style="font-size:12px;font-weight:700;color:var(--g600);display:block;margin-bottom:6px">封面图片 <span style="font-weight:400;color:var(--g400)">（可选，点击上传）</span></label>'+
+          '<input id="camp_cover_file" type="file" accept="image/*" style="display:none" onchange="handleCampCoverChange(this)">'+
+          '<input id="camp_cover" type="hidden" value="'+escHtml(article?article.cover||'':'')+'">'+
+          '<div id="camp_cover_area" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">'+
+            (article&&article.cover
+              ? '<img id="camp_cover_preview" src="'+escHtml(article.cover)+'" style="width:120px;height:68px;object-fit:cover;border-radius:8px;border:1px solid var(--g200)" onerror="this.style.display=\'none\'">'
+              : '<div id="camp_cover_placeholder" style="width:120px;height:68px;border:2px dashed var(--g300);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--g400);font-size:24px;flex-shrink:0">+</div>')+
+            '<div style="display:flex;flex-direction:column;gap:8px">'+
+              '<button type="button" class="btn btn-out btn-sm" onclick="document.getElementById(\'camp_cover_file\').click()">选择图片</button>'+
+              (article&&article.cover?'<button type="button" class="btn btn-err btn-sm" onclick="clearCampCover()">移除封面</button>':'')+
+              '<div style="font-size:11px;color:var(--g400)">支持 JPG/PNG/GIF，最大10MB</div>'+
+            '</div>'+
+          '</div>'+
+        '</div>'+
+        // 图文正文
+        '<div>'+
+          '<label style="font-size:12px;font-weight:700;color:var(--g600);display:block;margin-bottom:8px">'+
+            '图文正文 '+
+            '<span style="font-weight:400;color:var(--g400)">（支持HTML格式，Ctrl+V 粘贴后自动保留图文格式）</span>'+
+          '</label>'+
+          '<div style="display:grid;grid-template-columns:1fr 280px;gap:12px">'+
+            '<textarea id="camp_content" rows="20" '+
+              'placeholder="&lt;h2&gt;培训概况&lt;/h2&gt;\n&lt;p&gt;本次集训营...&lt;/p&gt;\n\n&lt;h2&gt;培训亮点&lt;/h2&gt;\n&lt;ul&gt;&lt;li&gt;...&lt;/li&gt;&lt;/ul&gt;" '+
+              'style="width:100%;padding:12px;border:1.5px solid var(--g200);border-radius:8px;font-size:12px;outline:none;font-family:Consolas,monospace;resize:vertical;line-height:1.6">'+
+            '</textarea>'+
+            '<div style="background:var(--g50);border:1px solid var(--g200);border-radius:8px;padding:14px;font-size:11px;color:var(--g500);line-height:2.2;overflow-y:auto">'+
+              '<b style="color:var(--g700);font-size:12px">📋 HTML速查</b><br>'+
+              '<code style="background:#eef2ff;padding:1px 5px;border-radius:3px">&lt;h2&gt;章节标题&lt;/h2&gt;</code><br>'+
+              '<code style="background:#eef2ff;padding:1px 5px;border-radius:3px">&lt;h3&gt;小标题&lt;/h3&gt;</code><br>'+
+              '<code style="background:#eef2ff;padding:1px 5px;border-radius:3px">&lt;p&gt;段落文字&lt;/p&gt;</code><br>'+
+              '<code style="background:#eef2ff;padding:1px 5px;border-radius:3px">&lt;strong&gt;加粗&lt;/strong&gt;</code><br>'+
+              '<code style="background:#eef2ff;padding:1px 5px;border-radius:3px">&lt;em&gt;紫色强调&lt;/em&gt;</code><br>'+
+              '<code style="background:#eef2ff;padding:1px 5px;border-radius:3px">&lt;ul&gt;&lt;li&gt;...&lt;/li&gt;&lt;/ul&gt;</code><br>'+
+              '<code style="background:#eef2ff;padding:1px 5px;border-radius:3px">&lt;ol&gt;&lt;li&gt;...&lt;/li&gt;&lt;/ol&gt;</code><br>'+
+              '<code style="background:#eef2ff;padding:1px 5px;border-radius:3px">&lt;blockquote&gt;引用&lt;/blockquote&gt;</code><br>'+
+              '<code style="background:#eef2ff;padding:1px 5px;border-radius:3px">&lt;img src="URL"&gt;</code><br>'+
+              '<code style="background:#eef2ff;padding:1px 5px;border-radius:3px">&lt;hr&gt;</code><br>'+
+              '<div style="margin-top:8px;background:#FFF3E0;border-radius:6px;padding:8px;color:#92400E;line-height:1.7">'+
                 '🖼 图片画廊：<br>'+
-                '<code>&lt;div class="aw-gallery"&gt;<br>&lt;img src="1.jpg"&gt;&lt;img src="2.jpg"&gt;<br>&lt;/div&gt;</code>'+
+                '<code>&lt;div class="aw-gallery"&gt;<br>&lt;img src="1.jpg"&gt;<br>&lt;/div&gt;</code>'+
               '</div>'+
-              '<div style="margin-top:6px;background:#F3EEFF;border-radius:6px;padding:8px;color:#5b21b6">'+
+              '<div style="margin-top:8px;background:#F3EEFF;border-radius:6px;padding:8px;color:#5b21b6;line-height:1.7">'+
                 '✨ 高亮框：<br>'+
-                '<code>&lt;div class="highlight-box"&gt;<br>&lt;p&gt;重点内容&lt;/p&gt;&lt;/div&gt;</code>'+
+                '<code>&lt;div class="highlight-box"&gt;<br>&lt;p&gt;重点内容&lt;/p&gt;<br>&lt;/div&gt;</code>'+
               '</div>'+
             '</div>'+
           '</div>'+
         '</div>'+
+        // 置顶
         '<div style="display:flex;align-items:center;gap:10px">'+
           '<input type="checkbox" id="camp_top" '+(article&&article.top?'checked':'')+' style="width:16px;height:16px;accent-color:#7C3AED">'+
           '<label for="camp_top" style="font-size:13px;font-weight:600;color:var(--g700);cursor:pointer">置顶此培训（显示在列表最前面）</label>'+
         '</div>'+
+        // 操作按钮
         '<div style="display:flex;justify-content:flex-end;gap:10px;padding-top:8px;border-top:1px solid var(--g100)">'+
           '<button onclick="closeCampEditor()" class="btn btn-out">取消</button>'+
           '<button onclick="saveCampArticle()" class="btn btn-pri" style="background:#7C3AED">💾 保存发布</button>'+
@@ -1450,26 +1020,25 @@ function openCampEditor(id){
   document.body.appendChild(modal);
   modal.addEventListener('click',function(e){if(e.target===modal)closeCampEditor()});
 
-  // 还原textarea内的原始HTML（textarea里显示的是源码）
-  if(article && article.content){
-    document.getElementById('camp_content').value = article.content;
+  // 还原正文内容（textarea显示原始HTML源码）
+  if(article&&article.content){
+    document.getElementById('camp_content').value=article.content;
   }
-  // 拦截粘贴事件：用户从浏览器复制富文本后粘贴进textarea时，写入HTML源码而非纯文本
-  var ta = document.getElementById('camp_content');
-  ta.addEventListener('paste', function(e) {
-    var html = (e.clipboardData || window.clipboardData).getData('text/html');
-    if (html) {
+
+  // 拦截粘贴：写入HTML源码而非纯文本
+  var ta=document.getElementById('camp_content');
+  ta.addEventListener('paste',function(e){
+    var html=(e.clipboardData||window.clipboardData).getData('text/html');
+    if(html){
       e.preventDefault();
-      // 美化格式：每个标签后换行
-      html = html.replace(/(<(?!img\b)[^>]*>)(?=\s*<)/g, '$1\n');
-      html = html.replace(/>\s*</g, '>\n<');
-      // 插入到光标位置
-      var s = ta.selectionStart;
-      var v = ta.value;
-      ta.value = v.substring(0, s) + html + v.substring(ta.selectionEnd);
-      ta.selectionStart = ta.selectionEnd = s + html.length;
+      html=normalizeContentUrls(html);
+      html=html.replace(/>\s*</g,'>\n<');
+      var s=ta.selectionStart,v=ta.value;
+      ta.value=v.substring(0,s)+html+v.substring(ta.selectionEnd);
+      ta.selectionStart=ta.selectionEnd=s+html.length;
     }
   });
+
   document.getElementById('camp_title').focus();
 }
 
@@ -1478,149 +1047,142 @@ function closeCampEditor(){
   if(m) m.remove();
 }
 
+function normalizeContentUrls(content){
+  var r=String(content||'');
+  r=r.replace(/https?:\/\/localhost:\d+\//gi,'/');
+  r=r.replace(/file:\/\/\/[^\s"'>]+?\/(uploads\/covers\/[^\s"'>]+)/gi,'/$1');
+  r=r.replace(/file:\/\/\/[^\s"'>]+(uploads\/covers\/[^\s"'>]+)/gi,'/$1');
+  r=r.replace(/<!--StartFragment-->|<!--EndFragment-->/gi,'');
+  r=r.replace(/<\/?html[^>]*>|<\/?head[^>]*>|<\/?body[^>]*>/gi,'');
+  r=r.replace(/src="(?!http|https|\/)(uploads\/covers\/)/gi,'src="/$1');
+  return r;
+}
+
 function handleCampCoverChange(input){
-  console.log('=== handleCampCoverChange called ===');
-  var file = input.files && input.files[0];
-  if(!file){
-    console.log('No file selected');
-    return;
-  }
-  console.log('File selected:', file.name, 'Size:', file.size, 'Type:', file.type);
-  
-  var area = document.getElementById('camp_cover_area');
-  if(!area){
-    console.error('camp_cover_area not found');
-    toast('页面元素缺失，请刷新页面','err');
-    return;
-  }
-  
-  // 显示上传中状态
-  var ph = document.getElementById('camp_cover_placeholder');
-  var prev = document.getElementById('camp_cover_preview');
-  console.log('Placeholder found:', !!ph, 'Preview found:', !!prev);
-  
-  if(ph) ph.innerHTML = '<span style="font-size:12px;color:var(--g400)">⏳ 上传中...</span>';
-  if(prev) { prev.style.opacity = '0.4'; prev.style.filter = 'blur(1px)'; }
-  
-  // 上传到服务器
-  var form = new FormData();
-  form.append('image', file);
-  console.log('Sending upload request...');
-  
-  fetch('/api/camp/upload-image', {method:'POST',body:form})
-    .then(function(r){
-      console.log('Response status:', r.status);
-      if(!r.ok){
-        throw new Error('服务器返回错误: '+r.status);
-      }
-      return r.json();
-    })
+  var file=input.files&&input.files[0];
+  if(!file) return;
+  var area=document.getElementById('camp_cover_area');
+  if(!area){toast('页面错误，请刷新','err');return}
+
+  var ph=document.getElementById('camp_cover_placeholder');
+  var prev=document.getElementById('camp_cover_preview');
+  if(ph) ph.innerHTML='<span style="font-size:11px;color:var(--g400)">⏳ 上传中...</span>';
+  if(prev){prev.style.opacity='0.4';prev.style.filter='blur(1px)'}
+
+  var form=new FormData();
+  form.append('cover',file);
+  fetch('/api/camp/upload-image',{method:'POST',body:form})
+    .then(function(r){if(!r.ok) throw new Error('HTTP '+r.status);return r.json()})
     .then(function(data){
-      console.log('Response data:', data);
-      if(data.ok){
-        var url = data.data.url;
-        console.log('Upload success, URL:', url);
-        
-        // 更新隐藏的 input 值
-        var coverInput = document.getElementById('camp_cover');
-        if(coverInput) coverInput.value = url;
-        
-        // 更新预览 — 优先 loc 占位区，其次更新已有图片 src
-        var phNow = document.getElementById('camp_cover_placeholder');
-        var prevNow = document.getElementById('camp_cover_preview');
-        
-        if(phNow) {
-          console.log('Replacing placeholder with preview image');
-          phNow.outerHTML = '<img id="camp_cover_preview" src="'+url+'" style="width:120px;height:68px;object-fit:cover;border-radius:8px;border:1px solid var(--g200)">';
-        } else if(prevNow) {
-          console.log('Updating existing preview image');
-          prevNow.src = url;
-          prevNow.style.opacity = '1';
-          prevNow.style.filter = 'none';
-          prevNow.style.display = '';
-        } else {
-          console.log('Creating new preview image');
-          area.innerHTML = '<img id="camp_cover_preview" src="'+url+'" style="width:120px;height:68px;object-fit:cover;border-radius:8px;border:1px solid var(--g200)"> <button type="button" class="btn btn-out btn-sm" style="color:var(--err);border-color:#FEE2E2" onclick="clearCampCover()">移除</button>';
-        }
-        
-        toast('✅ 封面已上传成功','ok');
-      } else {
-        console.error('Upload failed:', data.msg);
-        toast('❌ 上传失败: '+(data.msg||'未知错误'),'err');
-        if(ph) ph.innerHTML = '+';
-        if(prev) { prev.style.opacity = '1'; prev.style.filter = 'none'; prev.style.display = ''; }
+      if(!data.ok) throw new Error(data.msg||'上传失败');
+      var url=data.url;
+      var ci=document.getElementById('camp_cover');
+      if(ci) ci.value=url;
+      var phNow=document.getElementById('camp_cover_placeholder');
+      var prevNow=document.getElementById('camp_cover_preview');
+      if(phNow){
+        phNow.outerHTML='<img id="camp_cover_preview" src="'+escHtml(url)+'" style="width:120px;height:68px;object-fit:cover;border-radius:8px;border:1px solid var(--g200)" onerror="this.style.display=\'none\'">';
+      }else if(prevNow){
+        prevNow.src=url;prevNow.style.opacity='1';prevNow.style.filter='';
       }
+      toast('封面上传成功','ok');
     })
     .catch(function(e){
-      console.error('Upload error:', e);
-      var msg = '❌ 上传失败: ';
-      if(e.message && (e.message.indexOf('fetch')>=0 || e.message.indexOf('Failed to fetch')>=0)){
-        msg += '无法连接到服务器\n请确认：\n1. 已双击 start-server.bat\n2. 通过 http://localhost:3000 访问本页面';
-      } else {
-        msg += e.message || '未知错误';
-      }
-      toast(msg,'err');
-      if(ph) ph.innerHTML = '+';
-      if(prev) { prev.style.opacity = '1'; prev.style.filter = 'none'; prev.style.display = ''; }
+      if(ph) ph.innerHTML='<span style="font-size:24px;color:var(--g400)">+</span>';
+      if(prev){prev.style.opacity='1';prev.style.filter=''}
+      toast('封面上传失败: '+e.message,'err');
     });
-  
-  input.value = '';
-  console.log('=== handleCampCoverChange end ===');
 }
 
 function clearCampCover(){
-  document.getElementById('camp_cover').value = '';
-  var prev = document.getElementById('camp_cover_preview');
-  var area = document.getElementById('camp_cover_area');
-  if(prev) prev.outerHTML = '<div id="camp_cover_placeholder" style="width:120px;height:68px;border:2px dashed var(--g300);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--g400);font-size:24px;flex-shrink:0">+</div>';
-  var btns = area.querySelectorAll('button');
-  btns.forEach(function(b){ if(b.textContent==='移除') b.remove(); });
+  var ci=document.getElementById('camp_cover');
+  if(ci) ci.value='';
+  var area=document.getElementById('camp_cover_area');
+  if(area){
+    var prev=document.getElementById('camp_cover_preview');
+    if(prev) prev.remove();
+    var ph=document.createElement('div');
+    ph.id='camp_cover_placeholder';
+    ph.style.cssText='width:120px;height:68px;border:2px dashed var(--g300);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--g400);font-size:24px;flex-shrink:0';
+    ph.textContent='+';
+    area.insertBefore(ph,area.firstChild);
+  }
 }
 
-function saveCampArticle(){
+async function saveCampArticle(){
   var title=(document.getElementById('camp_title').value||'').trim();
   if(!title){toast('请填写培训标题','err');document.getElementById('camp_title').focus();return}
 
-  var article={
-    id: _editingId===null ? nextCampId() : _editingId,
-    title: title,
-    excerpt: (document.getElementById('camp_excerpt').value||'').trim(),
-    cat:    document.getElementById('camp_cat').value||'all',
-    date:   document.getElementById('camp_date').value||'',
-    days:   parseInt(document.getElementById('camp_days').value)||0,
-    location: (document.getElementById('camp_location').value||'').trim(),
-    people:   parseInt(document.getElementById('camp_people').value)||0,
-    cover:    (document.getElementById('camp_cover').value||'').trim(),
-    content:  normalizeContentUrls(document.getElementById('camp_content').value||''),
-    top:      document.getElementById('camp_top').checked,
-    updatedAt: new Date().toISOString(),
+  var excerpt=(document.getElementById('camp_excerpt').value||'').trim();
+  var cat=document.getElementById('camp_cat').value;
+  var date=document.getElementById('camp_date').value;
+  var days=document.getElementById('camp_days').value;
+  var location=(document.getElementById('camp_location').value||'').trim();
+  var people=document.getElementById('camp_people').value;
+  var cover=(document.getElementById('camp_cover').value||'').trim();
+  var content=normalizeContentUrls(document.getElementById('camp_content').value||'');
+  var top=document.getElementById('camp_top').checked;
+
+  var payload={
+    title,excerpt,cat,date,
+    days: days!==''?Number(days):null,
+    location,
+    people: people!==''?Number(people):null,
+    cover,content,top
   };
 
-  var list=getCampArticles();
-  if(_editingId===null){
-    article.createdAt=article.updatedAt;
-    list.push(article);
-  } else {
-    var idx=list.findIndex(function(a){return a.id===_editingId});
-    if(idx>=0){article.createdAt=list[idx].createdAt;list[idx]=article}
-    else{article.createdAt=article.updatedAt;list.push(article)}
+  if(hasServer){
+    try{
+      var isNew=_editingCampId===null;
+      var url=isNew?(API+'/api/camp/articles'):(API+'/api/camp/articles/'+_editingCampId);
+      var method=isNew?'POST':'PUT';
+      var r=await fetch(url,{method,headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+      var j=await r.json();
+      if(!j.ok) throw new Error(j.msg||'保存失败');
+      toast(isNew?'发布成功':'修改已保存','ok');
+      closeCampEditor();
+      renderCampTab();
+    }catch(e){toast('保存失败: '+e.message,'err')}
+  }else{
+    // 本地存储
+    var list=[];
+    try{list=JSON.parse(localStorage.getItem('kataichi_camp_articles')||'[]')}catch(e){}
+    if(_editingCampId===null){
+      var newId=Date.now();
+      list.unshift(Object.assign({id:newId,createdAt:new Date().toISOString()},payload));
+    }else{
+      var idx=list.findIndex(function(a){return a.id===_editingCampId});
+      if(idx>=0) list[idx]=Object.assign({},list[idx],payload,{updatedAt:new Date().toISOString()});
+    }
+    try{localStorage.setItem('kataichi_camp_articles',JSON.stringify(list))}catch(e){}
+    toast('已保存（本地）','ok');
+    closeCampEditor();
+    renderCampTab();
   }
-  saveCampArticles(list);
-  closeCampEditor();
-  toast(_editingId===null?'✅ 已发布！':'✅ 已更新！','ok');
-  renderCampTab();
 }
 
-function deleteCampArticle(id){
-  if(!confirm('确定删除这条培训记录？此操作不可恢复。'))return;
-  var list=getCampArticles().filter(function(a){return a.id!==id});
-  saveCampArticles(list);
-  toast('已删除','info');
-  renderCampTab();
+async function deleteCampArticle(id){
+  if(!confirm('确认删除此培训记录？此操作不可撤销')) return;
+  if(hasServer){
+    try{
+      var r=await fetch(API+'/api/camp/articles/'+id,{method:'DELETE'});
+      var j=await r.json();
+      if(!j.ok) throw new Error(j.msg||'删除失败');
+      toast('已删除','ok');renderCampTab();
+    }catch(e){toast('删除失败: '+e.message,'err')}
+  }else{
+    var list=[];
+    try{list=JSON.parse(localStorage.getItem('kataichi_camp_articles')||'[]')}catch(e){}
+    list=list.filter(function(a){return a.id!==id});
+    localStorage.setItem('kataichi_camp_articles',JSON.stringify(list));
+    toast('已删除','ok');renderCampTab();
+  }
 }
 
-// ── Init ──
-init();
+// ════════════════════════════════════════
+// 启动
+// ════════════════════════════════════════
+detectServer();
 </script>
 </body>
 </html>
