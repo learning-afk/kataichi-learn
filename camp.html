@@ -573,25 +573,22 @@ function loadArticles(callback) {
   fetch('camp-data.json?t=' + Date.now())
     .then(function(r) { if (!r.ok) throw new Error('no static'); return r.json(); })
     .then(function(data) {
-      if (Array.isArray(data) && data.length > 0) {
+      // camp-data.json 为权威数据源：有数据用数据，无数据清空
+      if (Array.isArray(data)) {
         _articlesCache = data;
-      }
-      // 同步到 localStorage 加速后续访问
-      if (_articlesCache.length > 0) {
-        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(_articlesCache)); } catch(e) {}
+        // 同步到 localStorage（含空数组清空旧缓存）
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch(e) {}
+      } else {
+        _articlesCache = [];
       }
       callback();
       // 后台尝试 API 获取更新数据（仅 localhost 环境有效）
       tryLoadFromAPI();
     })
     .catch(function() {
-      // camp-data.json 不可用，回退 localStorage
+      // camp-data.json 不可用（网络错误），回退 localStorage
       var local = getLocalArticles();
-      if (local && local.length > 0) {
-        _articlesCache = local;
-      } else {
-        _articlesCache = [];
-      }
+      _articlesCache = (local && local.length > 0) ? local : [];
       callback();
     });
 }
@@ -600,8 +597,8 @@ function tryLoadFromAPI() {
   fetch('/api/camp/articles?_t=' + Date.now())
     .then(function(r) { if (!r.ok) throw new Error('no api'); return r.json(); })
     .then(function(j) {
-      if (j && j.ok && Array.isArray(j.data) && j.data.length > 0) {
-        // API 数据更新 → 刷新缓存
+      if (j && j.ok && Array.isArray(j.data)) {
+        // API 数据为权威：直接覆盖缓存（含空数组清空旧数据）
         _articlesCache = j.data;
         try { localStorage.setItem(STORAGE_KEY, JSON.stringify(j.data)); } catch(e) {}
         renderList(); // 静默刷新列表
