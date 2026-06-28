@@ -955,29 +955,11 @@ function _buildCampEditorModal(article){
           '<div><label style="font-size:12px;font-weight:700;color:var(--g600);display:block;margin-bottom:6px">参训人数</label>'+
             '<input id="camp_people" type="number" min="0" placeholder="20" value="'+(article&&article.people!=null?article.people:'')+'\" style="width:100%;padding:10px 13px;border:1.5px solid var(--g200);border-radius:8px;font-size:13px;outline:none;font-family:inherit"></div>'+
         '</div>'+
-        // 封面图片
-        '<div>'+
-          '<label style="font-size:12px;font-weight:700;color:var(--g600);display:block;margin-bottom:6px">封面图片 <span style="font-weight:400;color:var(--g400)">（可选，点击上传）</span></label>'+
-          '<input id="camp_cover_file" type="file" accept="image/*" style="display:none" onchange="handleCampCoverChange(this)">'+
-          '<input id="camp_cover" type="hidden" value="'+escHtml(article?article.cover||'':'')+'">'+
-          '<div id="camp_cover_area" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">'+
-            (article&&article.cover
-              ? '<img id="camp_cover_preview" src="'+escHtml(article.cover)+'" style="width:120px;height:68px;object-fit:cover;border-radius:8px;border:1px solid var(--g200)" onerror="this.style.display=\'none\'">'
-              : '<div id="camp_cover_placeholder" style="width:120px;height:68px;border:2px dashed var(--g300);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--g400);font-size:24px;flex-shrink:0">+</div>')+
-            '<div style="display:flex;flex-direction:column;gap:8px">'+
-              (hasServer
-                ? '<button type="button" class="btn btn-out btn-sm" onclick="document.getElementById(\'camp_cover_file\').click()">选择图片</button>'
-                : '<span style="font-size:11px;color:#d97706;background:#fffbeb;padding:4px 8px;border-radius:4px">⚠️ 云端模式不支持上传封面</span>')+
-              (article&&article.cover?'<button type="button" class="btn btn-err btn-sm" onclick="clearCampCover()">移除封面</button>':'')+
-              '<div style="font-size:11px;color:var(--g400)">支持任意格式和大小</div>'+
-            '</div>'+
-          '</div>'+
-        '</div>'+
         // 图文正文
         '<div>'+
           '<label style="font-size:12px;font-weight:700;color:var(--g600);display:block;margin-bottom:8px">'+
             '图文正文 '+
-            '<span style="font-weight:400;color:var(--g400)">（支持HTML格式，Ctrl+V 粘贴后自动保留图文格式）</span>'+
+            '<span style="font-weight:400;color:var(--g400)">（支持HTML格式，Ctrl+V 粘贴后自动保留图文格式。正文中第一张图片将自动作为封面图）</span>'+
           '</label>'+
           '<div style="display:grid;grid-template-columns:1fr 280px;gap:12px">'+
             '<textarea id="camp_content" rows="20" '+
@@ -1061,62 +1043,10 @@ function normalizeContentUrls(content){
   return r;
 }
 
-function handleCampCoverChange(input){
-  var file=input.files&&input.files[0];
-  if(!file) return;
-
-  if(!hasServer){
-    toast('⚠️ 云端模式不支持上传，请用电脑启动本地服务（双击"启动服务.bat"）后访问 localhost 管理后台','err');
-    input.value='';
-    return;
-  }
-
-  var area=document.getElementById('camp_cover_area');
-  if(!area){toast('页面错误，请刷新','err');return}
-
-  var ph=document.getElementById('camp_cover_placeholder');
-  var prev=document.getElementById('camp_cover_preview');
-  if(ph) ph.innerHTML='<span style="font-size:11px;color:var(--g400)">⏳ 上传中...</span>';
-  if(prev){prev.style.opacity='0.4';prev.style.filter='blur(1px)'}
-
-  var form=new FormData();
-  form.append('cover',file);
-  fetch('/api/camp/upload-image',{method:'POST',body:form})
-    .then(function(r){if(!r.ok) throw new Error('HTTP '+r.status);return r.json()})
-    .then(function(data){
-      if(!data.ok) throw new Error(data.msg||'上传失败');
-      var url=data.url;
-      var ci=document.getElementById('camp_cover');
-      if(ci) ci.value=url;
-      var phNow=document.getElementById('camp_cover_placeholder');
-      var prevNow=document.getElementById('camp_cover_preview');
-      if(phNow){
-        phNow.outerHTML='<img id="camp_cover_preview" src="'+escHtml(url)+'" style="width:120px;height:68px;object-fit:cover;border-radius:8px;border:1px solid var(--g200)" onerror="this.style.display=\'none\'">';
-      }else if(prevNow){
-        prevNow.src=url;prevNow.style.opacity='1';prevNow.style.filter='';
-      }
-      toast('封面上传成功','ok');
-    })
-    .catch(function(e){
-      if(ph) ph.innerHTML='<span style="font-size:24px;color:var(--g400)">+</span>';
-      if(prev){prev.style.opacity='1';prev.style.filter=''}
-      toast('封面上传失败: '+e.message,'err');
-    });
-}
-
-function clearCampCover(){
-  var ci=document.getElementById('camp_cover');
-  if(ci) ci.value='';
-  var area=document.getElementById('camp_cover_area');
-  if(area){
-    var prev=document.getElementById('camp_cover_preview');
-    if(prev) prev.remove();
-    var ph=document.createElement('div');
-    ph.id='camp_cover_placeholder';
-    ph.style.cssText='width:120px;height:68px;border:2px dashed var(--g300);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--g400);font-size:24px;flex-shrink:0';
-    ph.textContent='+';
-    area.insertBefore(ph,area.firstChild);
-  }
+function extractFirstImage(html){
+  if(!html) return '';
+  var m=html.match(/<img[^>]+src\s*=\s*["']([^"']+)["']/i);
+  return m?m[1]:'';
 }
 
 // ── 一键同步到前端 camp-data.json ──
@@ -1153,8 +1083,8 @@ async function saveCampArticle(){
   var days=document.getElementById('camp_days').value;
   var location=(document.getElementById('camp_location').value||'').trim();
   var people=document.getElementById('camp_people').value;
-  var cover=(document.getElementById('camp_cover').value||'').trim();
   var content=normalizeContentUrls(document.getElementById('camp_content').value||'');
+  var cover=extractFirstImage(content);
   var top=document.getElementById('camp_top').checked;
 
   var payload={
@@ -1193,7 +1123,26 @@ async function saveCampArticle(){
       toast(isNew?'发布成功（已同步）':'修改已保存（已同步）','ok');
       closeCampEditor();
       renderCampTab();
-    }catch(e){toast('保存失败: '+e.message,'err')}
+    }catch(e){
+      // 服务端失败，降级到本地存储
+      hasServer=false;
+      var modeTag=document.getElementById('modeTag');
+      if(modeTag){modeTag.textContent='☁️ 云端模式';modeTag.className='mode-badge mode-cloud'}
+      // 本地存储兜底
+      var list=[];
+      try{list=JSON.parse(localStorage.getItem('kataichi_camp_articles')||'[]')}catch(e2){}
+      if(_editingCampId===null){
+        var newId=Date.now();
+        list.unshift(Object.assign({id:newId,createdAt:new Date().toISOString()},payload));
+      }else{
+        var idx=list.findIndex(function(a){return a.id===_editingCampId});
+        if(idx>=0) list[idx]=Object.assign({},list[idx],payload,{updatedAt:new Date().toISOString()});
+      }
+      try{localStorage.setItem('kataichi_camp_articles',JSON.stringify(list))}catch(e2){}
+      toast('服务端不可达（'+e.message+'），已保存到本地浏览器','warn');
+      closeCampEditor();
+      renderCampTab();
+    }
   }else{
     // 本地存储
     var list=[];
@@ -1214,31 +1163,30 @@ async function saveCampArticle(){
 
 async function deleteCampArticle(id){
   if(!confirm('确认删除此培训记录？此操作不可撤销')) return;
+  var list=[];
+  try{list=JSON.parse(localStorage.getItem('kataichi_camp_articles')||'[]')}catch(e){}
+  list=list.filter(function(a){return a.id!==id});
+  localStorage.setItem('kataichi_camp_articles',JSON.stringify(list));
+
   if(hasServer){
     try{
       var r=await fetch(API+'/api/camp/articles/'+id,{method:'DELETE'});
+      if(!r.ok) throw new Error('HTTP '+r.status);
       var j=await r.json();
       if(!j.ok) throw new Error(j.msg||'删除失败');
-
-      // 同步 localStorage
-      try{
-        var localList=JSON.parse(localStorage.getItem('kataichi_camp_articles')||'[]');
-        localList=localList.filter(function(a){return a.id!==id});
-        localStorage.setItem('kataichi_camp_articles',JSON.stringify(localList));
-      }catch(e){}
-
       // 自动同步 camp-data.json
       try{ await fetch(API+'/api/camp/sync',{method:'POST'}); }catch(e){}
-
-      toast('已删除（已同步）','ok');renderCampTab();
-    }catch(e){toast('删除失败: '+e.message,'err')}
+      toast('已删除（已同步）','ok');
+    }catch(e){
+      hasServer=false;
+      document.getElementById('modeTag').textContent='☁️ 云端模式';
+      document.getElementById('modeTag').className='mode-badge mode-cloud';
+      toast('服务端删除失败（'+e.message+'），已从本地存储中删除','warn');
+    }
   }else{
-    var list=[];
-    try{list=JSON.parse(localStorage.getItem('kataichi_camp_articles')||'[]')}catch(e){}
-    list=list.filter(function(a){return a.id!==id});
-    localStorage.setItem('kataichi_camp_articles',JSON.stringify(list));
-    toast('已删除','ok');renderCampTab();
+    toast('已删除','ok');
   }
+  renderCampTab();
 }
 
 // ════════════════════════════════════════
