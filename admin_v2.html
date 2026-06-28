@@ -1134,7 +1134,7 @@ async function syncCampToCloud(){
     var r2=await fetch(API+'/api/camp/sync',{method:'POST'});
     var j2=await r2.json();
     if(j2.ok){
-      toast('✅ 已同步 '+j2.count+' 篇文章到 camp-data.json，请 git push 推送','ok');
+      toast(j2.msg||('✅ 已同步 '+j2.count+' 篇'),'ok');
     }else{
       toast('同步失败: '+(j2.msg||'未知错误'),'err');
     }
