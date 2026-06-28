@@ -1063,14 +1063,19 @@ async function syncCampToCloud(){
     // 导出 camp-data.json
     var r2=await fetch(API+'/api/camp/sync',{method:'POST'});
     var j2=await r2.json();
-    if(j2.ok){
-      toast(j2.msg||('✅ 已同步 '+j2.count+' 篇'),'ok');
-    }else{
-      toast('同步失败: '+(j2.msg||'未知错误'),'err');
-    }
+    if(!j2.ok){ toast('同步失败: '+(j2.msg||'未知错误'),'err'); return; }
+    // 推送到 GitHub
+    var r3=await fetch(API+'/api/camp/push',{method:'POST'});
+    var j3=await r3.json();
+    toast('✅ 已同步 '+(j2.count||'')+' 篇 — '+(j3.ok?j3.msg:j3.msg||'推送未执行'),j3.ok?'ok':'warn');
   }catch(e){
     toast('同步失败: 服务端不可达','err');
   }
+}
+
+async function doSyncPush(){
+  try{ await fetch(API+'/api/camp/sync',{method:'POST'}); }catch(e){}
+  try{ await fetch(API+'/api/camp/push',{method:'POST'}); }catch(e){}
 }
 
 async function saveCampArticle(){
@@ -1117,8 +1122,8 @@ async function saveCampArticle(){
         localStorage.setItem('kataichi_camp_articles',JSON.stringify(localList));
       }catch(e){}
 
-      // 自动同步 camp-data.json（推送到前端静态文件）
-      try{ await fetch(API+'/api/camp/sync',{method:'POST'}); }catch(e){}
+      // 自动同步 + 推送 camp-data.json
+      doSyncPush();
 
       toast(isNew?'发布成功（已同步）':'修改已保存（已同步）','ok');
       closeCampEditor();
@@ -1174,8 +1179,8 @@ async function deleteCampArticle(id){
       if(!r.ok) throw new Error('HTTP '+r.status);
       var j=await r.json();
       if(!j.ok) throw new Error(j.msg||'删除失败');
-      // 自动同步 camp-data.json
-      try{ await fetch(API+'/api/camp/sync',{method:'POST'}); }catch(e){}
+      // 自动同步 + 推送 camp-data.json
+      doSyncPush();
       toast('已删除（已同步）','ok');
     }catch(e){
       hasServer=false;
