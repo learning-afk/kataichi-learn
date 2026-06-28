@@ -965,7 +965,9 @@ function _buildCampEditorModal(article){
               ? '<img id="camp_cover_preview" src="'+escHtml(article.cover)+'" style="width:120px;height:68px;object-fit:cover;border-radius:8px;border:1px solid var(--g200)" onerror="this.style.display=\'none\'">'
               : '<div id="camp_cover_placeholder" style="width:120px;height:68px;border:2px dashed var(--g300);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--g400);font-size:24px;flex-shrink:0">+</div>')+
             '<div style="display:flex;flex-direction:column;gap:8px">'+
-              '<button type="button" class="btn btn-out btn-sm" onclick="document.getElementById(\'camp_cover_file\').click()">选择图片</button>'+
+              (hasServer
+                ? '<button type="button" class="btn btn-out btn-sm" onclick="document.getElementById(\'camp_cover_file\').click()">选择图片</button>'
+                : '<span style="font-size:11px;color:#d97706;background:#fffbeb;padding:4px 8px;border-radius:4px">⚠️ 云端模式不支持上传封面</span>')+
               (article&&article.cover?'<button type="button" class="btn btn-err btn-sm" onclick="clearCampCover()">移除封面</button>':'')+
               '<div style="font-size:11px;color:var(--g400)">支持任意格式和大小</div>'+
             '</div>'+
@@ -1062,6 +1064,13 @@ function normalizeContentUrls(content){
 function handleCampCoverChange(input){
   var file=input.files&&input.files[0];
   if(!file) return;
+
+  if(!hasServer){
+    toast('⚠️ 云端模式不支持上传，请用电脑启动本地服务（双击"启动服务.bat"）后访问 localhost 管理后台','err');
+    input.value='';
+    return;
+  }
+
   var area=document.getElementById('camp_cover_area');
   if(!area){toast('页面错误，请刷新','err');return}
 
