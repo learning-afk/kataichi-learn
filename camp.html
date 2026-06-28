@@ -532,20 +532,28 @@ function getCatBadge(cat) {
 // 本地测试或同源部署时留空即可（使用相对路径）
 var API_BASE = '';
 
-// 解析资源 URL（自动拼接 API_BASE）
+// 解析资源 URL（自动拼接 API_BASE，并归一化路径）
 function resolveUrl(url) {
   if (!url) return url;
   if (url.match(/^https?:\/\//i)) return url; // 已是绝对 URL
-  if (API_BASE) return API_BASE + (url.charAt(0) === '/' ? '' : '/') + url;
-  return url; // 相对 URL，同源使用
+  // 去掉开头的 /（兼容服务端绝对路径）
+  var clean = url.replace(/^\/+/, '');
+  if (API_BASE) return API_BASE + '/' + clean;
+  return clean;
 }
 
-// 处理正文 HTML 中的图片相对路径
+// 处理正文 HTML 中的图片路径（归一化 + API_BASE拼接）
 function processContent(html) {
-  if (!API_BASE || !html) return html;
-  // 将相对路径的图片 URL 转为绝对 URL
-  return html.replace(/src="\/uploads\//g, 'src="' + API_BASE + '/uploads/')
-            .replace(/src="uploads\//g, 'src="' + API_BASE + '/uploads/');
+  if (!html) return html;
+  // 归一化：去掉 /uploads/ 开头的绝对路径
+  html = html.replace(/src="\/uploads\//g, 'src="uploads/');
+  html = html.replace(/src=\\"\/uploads\//g, 'src=\\"uploads/');
+  // 如果有 API_BASE，拼接
+  if (API_BASE) {
+    html = html.replace(/src="uploads\//g, 'src="' + API_BASE + '/uploads/');
+    html = html.replace(/src=\\"uploads\//g, 'src=\\"' + API_BASE + '/uploads/');
+  }
+  return html;
 }
 
 // ── 数据同步状态管理 ──
@@ -645,7 +653,7 @@ function renderList() {
       // 大图卡（首条）
       h += '<div class="article-card-hero" onclick="openArticle(' + a.id + ')">';
       if (a.cover) {
-        h += '<img class="card-cover" src="' + escHtml(a.cover) + '" alt="" onerror="this.style.display=\'none\'">';
+        h += '<img class=\"card-cover\" src=\"' + escHtml(resolveUrl(a.cover)) + '\" alt=\"\" onerror=\"this.style.display=\\'none\\'\">';
       } else {
         h += '<div class="card-cover-placeholder">🏕️</div>';
       }
@@ -670,7 +678,7 @@ function renderList() {
       h += '<div class="article-card" onclick="openArticle(' + a.id + ')">';
       h += '<div class="ac-thumb">';
       if (a.cover) {
-        h += '<img class="ac-thumb-img" src="' + escHtml(a.cover) + '" alt="" onerror="this.style.display=\'none\'">';
+        h += '<img class="ac-thumb-img" src="' + escHtml(resolveUrl(a.cover)) + '" alt="" onerror="this.style.display=\'none\'">';
       } else {
         h += '<div class="ac-thumb-placeholder">🏕️</div>';
       }
@@ -754,7 +762,7 @@ function openArticle(id) {
   // 封面
   var coverEl = document.getElementById('awCoverArea');
   if (a.cover) {
-    coverEl.innerHTML = '<img class="aw-cover" src="' + escHtml(a.cover) + '" alt="" onerror="this.parentNode.innerHTML=\'<div class=\\\'aw-cover-placeholder\\\'>🏕️</div>\'">';
+    coverEl.innerHTML = '<img class="aw-cover" src="' + escHtml(resolveUrl(a.cover)) + '" alt="" onerror="this.parentNode.innerHTML=\'<div class=\\\'aw-cover-placeholder\\\'>🏕️</div>\'">';
   } else {
     coverEl.innerHTML = '<div class="aw-cover-placeholder">🏕️</div>';
   }
@@ -772,7 +780,7 @@ function openArticle(id) {
 
   // 正文（直接使用服务器返回的相对URL，自动适配）
   var content = a.content || '';
-  document.getElementById('awContent').innerHTML = content;
+  document.getElementById('awContent').innerHTML = processContent(content);
 
   // 给正文内图片绑定灯箱
   document.querySelectorAll('#awContent img').forEach(function(img){
