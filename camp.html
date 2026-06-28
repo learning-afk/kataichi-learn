@@ -568,48 +568,46 @@ function showSyncBar() {
 var _articlesCache = null;
 
 function loadArticles(callback) {
-  // 先尝试服务端 API（同源部署时可用）
-  fetch('/api/camp/articles?_t=' + Date.now())
-    .then(function(r) {
-      if (!r.ok) throw new Error('api not available');
-      return r.json();
-    })
-    .then(function(j) {
-      if (j && j.ok && Array.isArray(j.data) && j.data.length > 0) {
-        _articlesCache = j.data;
-        // 同步到 localStorage，确保管理后台也能看到
-        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(j.data)); } catch(e) {}
-        callback();
-        return;
+  // 主数据源：camp-data.json（管理后台 sync 后自动更新的静态文件）
+  // CloudStudio 和 localhost 均可用，不受服务端限制
+  fetch('camp-data.json?t=' + Date.now())
+    .then(function(r) { if (!r.ok) throw new Error('no static'); return r.json(); })
+    .then(function(data) {
+      if (Array.isArray(data) && data.length > 0) {
+        _articlesCache = data;
       }
-      throw new Error('no data');
+      // 同步到 localStorage 加速后续访问
+      if (_articlesCache.length > 0) {
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(_articlesCache)); } catch(e) {}
+      }
+      callback();
+      // 后台尝试 API 获取更新数据（仅 localhost 环境有效）
+      tryLoadFromAPI();
     })
     .catch(function() {
-      // API 不可达，先检查 localStorage（管理后台云端模式编辑的数据）
+      // camp-data.json 不可用，回退 localStorage
       var local = getLocalArticles();
       if (local && local.length > 0) {
         _articlesCache = local;
-        callback();
-        return;
+      } else {
+        _articlesCache = [];
       }
-      // localStorage 也没有，回退到静态 camp-data.json
-      fetch('camp-data.json?t=' + Date.now())
-        .then(function(r) { if (!r.ok) throw new Error('no static data'); return r.json(); })
-        .then(function(data) {
-          if (Array.isArray(data) && data.length > 0) {
-            _articlesCache = data;
-            // 初始化 localStorage
-            try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch(e) {}
-          } else {
-            _articlesCache = [];
-          }
-          callback();
-        })
-        .catch(function() {
-          _articlesCache = [];
-          callback();
-        });
+      callback();
     });
+}
+
+function tryLoadFromAPI() {
+  fetch('/api/camp/articles?_t=' + Date.now())
+    .then(function(r) { if (!r.ok) throw new Error('no api'); return r.json(); })
+    .then(function(j) {
+      if (j && j.ok && Array.isArray(j.data) && j.data.length > 0) {
+        // API 数据更新 → 刷新缓存
+        _articlesCache = j.data;
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(j.data)); } catch(e) {}
+        renderList(); // 静默刷新列表
+      }
+    })
+    .catch(function() { /* API 不可用，保持 camp-data.json 数据 */ });
 }
 
 function getArticles() {
