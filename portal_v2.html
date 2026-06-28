@@ -218,7 +218,7 @@ body{
 }
 </style>
 <script>
-var __P_BUILD__='20260625v7';
+var __P_BUILD__='20260628v9';
 var __p_cached__=localStorage.getItem('_portal_build');
 if(__p_cached__&&__p_cached__!==__P_BUILD__){
   localStorage.setItem('_portal_build',__P_BUILD__);
@@ -315,7 +315,7 @@ if(__p_cached__&&__p_cached__!==__P_BUILD__){
         </svg>
       </div>
       <div class="card-badge">MODULE 03</div>
-      <h2 class="card-title">门店晨会<span class="hl">途伴计划</span></h2>
+      <h2 class="card-title">晨会<span class="hl">途伴计划</span></h2>
       <p class="card-slogan">途伴同行，每日一卡，步步进阶</p>
       <p class="card-desc">门店全员早会培训体系，覆盖6大业务模块30张知识卡片，每天5-8分钟碎片化学习，持续提升团队专业能力。</p>
       <ul class="card-features">
@@ -349,8 +349,8 @@ if(__p_cached__&&__p_cached__!==__P_BUILD__){
         <li>理论+实操+考核一体化</li>
         <li>结业认证持续跟踪辅导</li>
       </ul>
-      <button class="card-btn card-btn-disabled" style="width:100%">
-        暂未开放
+      <button class="card-btn card-btn-purple" style="width:100%" onclick="event.stopPropagation();goModule('camp.html')">
+        进入查看
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M5 12h14M12 5l7 7-7 7"/>
         </svg>
@@ -388,27 +388,39 @@ var adminUrl='admin_v2.html';
 (function detectAdmin(){
   var hint=document.getElementById('adminHint');
   var label=document.getElementById('adminLabel');
-  try{
-    var xhr=new XMLHttpRequest();
-    xhr.open('GET','http://localhost:3000/api/courses',true);
-    xhr.timeout=2000;
-    xhr.onload=function(){
-      if(xhr.status===200){try{var j=JSON.parse(xhr.responseText);if(j&&j.ok){
-        adminUrl='http://localhost:3000/admin_v2.html';
-        if(label)label.textContent='管理后台（本地直连）';
-        if(hint){hint.textContent='🟢 本地服务已连接 · 支持视频上传';hint.style.color='#16a34a'}
-        return
-      }}catch(e2){}}
+  // 尝试检测本地服务（3000-3005端口）
+  var ports=[3000,3001,3002,3003,3004,3005];
+  var tried=0;
+
+  function tryPort(idx){
+    if(idx>=ports.length){
       showCloudFallback();
+      return;
+    }
+    var url='http://localhost:'+ports[idx]+'/api/camp/articles';
+    var xhr=new XMLHttpRequest();
+    xhr.open('GET',url,true);
+    xhr.timeout=1500;
+    xhr.onload=function(){
+      try{var j=JSON.parse(xhr.responseText);if(j&&j.ok){
+        var base='http://localhost:'+ports[idx];
+        adminUrl=base+'/admin_v2.html';
+        if(label)label.textContent='管理后台（本地直连）';
+        if(hint){hint.textContent='🟢 本地服务已连接 · 支持视频上传/课程关联';hint.style.color='#16a34a'}
+        return;
+      }}catch(e2){}
+      tryPort(idx+1);
     };
-    xhr.onerror=function(){showCloudFallback()};
-    xhr.ontimeout=function(){showCloudFallback()};
-    xhr.send();
-  }catch(e){showCloudFallback()}
+    xhr.onerror=function(){tryPort(idx+1)};
+    xhr.ontimeout=function(){tryPort(idx+1)};
+    try{xhr.send()}catch(e){tryPort(idx+1)}
+  }
+  tryPort(0);
 
   function showCloudFallback(){
-    if(label)label.textContent='管理后台';
-    if(hint){hint.textContent='云端模式 · 上传视频请用电脑访问 localhost:3000';hint.style.color='#d97706'}
+    adminUrl='admin_v2.html';
+    if(label)label.textContent='管理后台（云端模式）';
+    if(hint){hint.textContent='云端模式 · 视频上传请启动本地服务';hint.style.color='#d97706'}
   }
 })();
 
