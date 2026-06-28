@@ -559,17 +559,33 @@ function showSyncBar() {
 // ── 读取文章（优先服务端 API，回退 camp-data.json）──
 var _articlesCache = null;
 
-// ── 读取文章（优先服务端 camp-data.json，回退 localStorage）──
 function loadArticles(callback) {
-  fetch('camp-data.json?t=' + Date.now())
-    .then(function(r) { if (!r.ok) throw new Error('no data'); return r.json(); })
-    .then(function(data) {
-      _articlesCache = (Array.isArray(data) && data.length > 0) ? data : getLocalArticles();
-      callback();
+  // 先尝试服务端 API（同源部署时可用）
+  fetch('/api/camp/articles?_t=' + Date.now())
+    .then(function(r) {
+      if (!r.ok) throw new Error('api not available');
+      return r.json();
+    })
+    .then(function(j) {
+      if (j && j.ok && Array.isArray(j.data) && j.data.length > 0) {
+        _articlesCache = j.data;
+        callback();
+        return;
+      }
+      throw new Error('no data');
     })
     .catch(function() {
-      _articlesCache = getLocalArticles();
-      callback();
+      // API 不可达，回退到静态 JSON 文件
+      fetch('camp-data.json?t=' + Date.now())
+        .then(function(r) { if (!r.ok) throw new Error('no static data'); return r.json(); })
+        .then(function(data) {
+          _articlesCache = (Array.isArray(data) && data.length > 0) ? data : getLocalArticles();
+          callback();
+        })
+        .catch(function() {
+          _articlesCache = getLocalArticles();
+          callback();
+        });
     });
 }
 
