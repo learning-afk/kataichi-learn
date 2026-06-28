@@ -1077,14 +1077,14 @@ async function syncCampToCloud(){
     if(j1&&j1.ok&&Array.isArray(j1.data)){
       localStorage.setItem('kataichi_camp_articles',JSON.stringify(j1.data));
     }
-    // 导出 camp-data.json
+    // 导出 camp-data.json + camp-meta.json
     var r2=await fetch(API+'/api/camp/sync',{method:'POST'});
     var j2=await r2.json();
     if(!j2.ok){ toast('同步失败: '+(j2.msg||'未知错误'),'err'); return; }
     // 推送到 GitHub
     var r3=await fetch(API+'/api/camp/push',{method:'POST'});
     var j3=await r3.json();
-    toast('✅ 已同步 '+(j2.count||'')+' 篇 — '+(j3.ok?j3.msg:j3.msg||'推送未执行'),j3.ok?'ok':'warn');
+    toast('✅ 已同步 '+j2.count+' 篇（版本 '+j2.version+'）'+(j3.ok?' 已推送 CloudStudio':' 推送待重试'),j3.ok?'ok':'warn');
   }catch(e){
     toast('同步失败: 服务端不可达','err');
   }
@@ -1161,6 +1161,7 @@ async function saveCampArticle(){
         if(idx>=0) list[idx]=Object.assign({},list[idx],payload,{updatedAt:new Date().toISOString()});
       }
       try{localStorage.setItem('kataichi_camp_articles',JSON.stringify(list))}catch(e2){}
+      try{localStorage.setItem('kataichi_camp_version',String(Date.now()))}catch(e2){}
       toast('服务端不可达（'+e.message+'），已保存到本地浏览器','warn');
       closeCampEditor();
       renderCampTab();
@@ -1177,6 +1178,8 @@ async function saveCampArticle(){
       if(idx>=0) list[idx]=Object.assign({},list[idx],payload,{updatedAt:new Date().toISOString()});
     }
     try{localStorage.setItem('kataichi_camp_articles',JSON.stringify(list))}catch(e){}
+    // 云端模式版本追踪：camp.html 据此判断 localStorage 数据是否更新
+    try{localStorage.setItem('kataichi_camp_version',String(Date.now()))}catch(e){}
     toast('已保存（本地）','ok');
     closeCampEditor();
     renderCampTab();
@@ -1189,6 +1192,8 @@ async function deleteCampArticle(id){
   try{list=JSON.parse(localStorage.getItem('kataichi_camp_articles')||'[]')}catch(e){}
   list=list.filter(function(a){return a.id!==id});
   localStorage.setItem('kataichi_camp_articles',JSON.stringify(list));
+  // 云端模式版本追踪
+  try{localStorage.setItem('kataichi_camp_version',String(Date.now()))}catch(e){}
 
   if(hasServer){
     try{

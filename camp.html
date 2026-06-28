@@ -569,32 +569,48 @@ function showSyncBar() {
 var _articlesCache = null;
 
 function loadArticles(callback) {
-  // 先获取元数据（版本号用于缓存刷新）
+  // 先获取元数据（版本号用于缓存刷新 + 云端模式版本比较）
   fetch('camp-meta.json?t=' + Date.now())
     .then(function(r) { return r.ok ? r.json() : null; })
     .catch(function(){ return null; })
     .then(function(meta) {
-      var version = meta ? meta.version : Date.now();
-      // 主数据源：camp-data.json（管理后台 sync 后自动更新的静态文件）
-      // 使用版本号强制刷新缓存
-      return fetch('camp-data.json?v=' + version);
-    })
-    .then(function(r) { if (!r.ok) throw new Error('no static'); return r.json(); })
-    .then(function(data) {
-      // camp-data.json 为权威数据源：有数据用数据，无数据清空
-      if (Array.isArray(data)) {
-        _articlesCache = data;
-        // 同步到 localStorage（含空数组清空旧缓存）
-        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch(e) {}
-      } else {
-        _articlesCache = [];
-      }
-      callback();
-      // 后台尝试 API 获取更新数据（仅 localhost 环境有效）
-      tryLoadFromAPI();
+      var metaVersion = (meta && meta.version) ? meta.version : 0;
+      var version = metaVersion || Date.now();
+      // 主数据源：camp-data.json
+      return fetch('camp-data.json?v=' + version)
+        .then(function(r) { if (!r.ok) throw new Error('no static'); return r.json(); })
+        .then(function(data) {
+          // 读取云端版本（管理后台云端模式编辑时写入）
+          var cloudVersion = parseInt(localStorage.getItem('kataichi_camp_version') || '0');
+          var localData = getLocalArticles();
+
+          // 云端模式版本更新 → localStorage 数据为权威（管理员在云端编辑过）
+          if (cloudVersion > metaVersion && localData && localData.length > 0) {
+            console.log('☁️ 云端模式：localStorage 版本 (' + cloudVersion + ') > camp-data.json 版本 (' + metaVersion + ')，使用本地数据');
+            _articlesCache = localData;
+            callback();
+            tryLoadFromAPI();
+            return;
+          }
+
+          // camp-data.json 为权威数据源
+          if (Array.isArray(data)) {
+            _articlesCache = data;
+            // 仅在 camp-data.json 版本 ≥ 云端版本时同步到 localStorage
+            if (metaVersion >= cloudVersion) {
+              try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch(e) {}
+              // 清除过期云端版本标记
+              if (cloudVersion > 0) { localStorage.removeItem('kataichi_camp_version'); }
+            }
+          } else {
+            _articlesCache = [];
+          }
+          callback();
+          tryLoadFromAPI();
+        });
     })
     .catch(function() {
-      // camp-data.json 不可用（网络错误），回退 localStorage
+      // camp-data.json / camp-meta.json 不可用，回退 localStorage
       var local = getLocalArticles();
       _articlesCache = (local && local.length > 0) ? local : [];
       callback();
